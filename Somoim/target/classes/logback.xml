@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configration>
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+	<logger name="jdbc.sqlonly" lavel="DEBUG"/>
+	<logger name="jdbc.audit" lavel="WARN"/>
+	<logger name="jdbc.sqltiming" lavel="INFO"/>
+	<logger name="jdbc.resultset" lavel="ERROR"/>
+	<logger name="jdbc.resultsettable" lavel="ERROR"/>
+	<logger name="jdbc.connection" lavel="INFO"/>
+</configration>
