@@ -23,30 +23,17 @@ public class CrewController {
 	@Inject
 	private CrewService service;
 	
-<<<<<<< HEAD
 	@RequestMapping(value="/gallery_create", method=RequestMethod.GET)
 	public void gallery_create() throws Exception{
 	}
 	
-	
-=======
->>>>>>> branch 'pjh' of https://github.com/somoim/project
 	@RequestMapping(value="/list_create", method=RequestMethod.GET)
 	public void list_create() throws Exception{
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-<<<<<<< HEAD
 		List<CrewVO> list = service.crew_list(cri);
-=======
-		
-		System.out.println("+++++++++++++");
-		System.out.println(cri);
-		
-		List<CrewVO> list=service.crew_list(cri);
-		//List<CrewVO> list = service.crew_list(cri);
->>>>>>> branch 'pjh' of https://github.com/somoim/project
 		model.addAttribute("list", list);
 	}
 	
