@@ -50,3 +50,10 @@
 
 /* mobile */
 #container { min-height:960px; margin-bottom:65px; margin-top:55px; background-color:bisque;}
+
+/* intro */
+.login_form { padding: 20px 20px 5px 20px; border-radius: 10px; background-color: #ffffff; border: 2px solid #493334;box-shadow: 0px 0px 10px #493334;}
+.login_form label { height:34px; line-height:34px; margin-bottom:0;}
+.login_form button { margin-left:15px;}
+.join textarea { width: 100%;}
+
