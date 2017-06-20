@@ -50,3 +50,8 @@
 
 /* mobile */
 #container { min-height:960px; margin-bottom:65px; margin-top:55px; background-color:bisque;}
+
+
+
+/* intro */
+.login_form { background-color:red;}

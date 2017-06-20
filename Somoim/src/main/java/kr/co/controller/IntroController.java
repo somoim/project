@@ -20,5 +20,4 @@ public class IntroController {
 	public void join() throws Exception{
 	}
 	
-
 }
