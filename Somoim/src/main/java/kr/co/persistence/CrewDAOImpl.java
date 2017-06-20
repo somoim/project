@@ -27,7 +27,7 @@ public class CrewDAOImpl implements CrewDAO {
 	@Override
 	public List<CrewVO> crew_list(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return session.selectList(NAMESPACE+".crew_list", cri);
 	}
 
 	@Override
