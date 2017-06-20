@@ -7,7 +7,7 @@
 <style type="text/css">
 	#header { display:none;}
 	#footer { display:none;}
-	#container { height:100%; margin-top:0; margin-bottom:0;}
+	#container { height:100%; margin-top:95px; margin-bottom:0;}
 	.sub_tab { display:table; width:100%; position: fixed; top:55px;}
 	.sub_tab li { display: table-cell; width:25%; text-align:center; height:40px; line-height:39px; background-color: #ffffff; font-size:14px; font-weight:bold; color:#929292; border-bottom:1px solid #929292;}
 	.sub_tab li a { display:block; color:inherit;}
@@ -38,6 +38,13 @@
 		<li><a href="../crew/tab_chat">채팅</a></li>
 	</ul>
 	<div id="container">
+		
+		<!-- 버튼 레이아웃 -->		
+		<a href="#" class="fixedBtn">
+			<span><span class="glyphicon glyphicon-pencil"></span></span>
+			<span>글쓰기</span>
+		</a>
+	
 
 	</div>
 </div>

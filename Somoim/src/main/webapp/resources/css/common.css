@@ -46,3 +46,10 @@ img{border:0}
 #footer .btn_list {display: flex; flex-direction: column; height: 65px;}
 #footer .btn_list .btn_ico { display: flex; flex: 1; justify-content: center; align-items: flex-end; font-size:20px;}
 #footer .btn_list .btn_txt { display: flex; flex: 1; justify-content: center; align-items: center; font-size:12px;}
+
+/* 공통버튼 */
+.fixedBtn { display:flex; position: fixed;bottom: 20px;right: 20px;width: 55px;height: 55px;background-color: rgba(246, 96, 96, 0.8);flex-direction: column;border-radius: 28px;color:#ffffff;padding:7px;}
+.fixedBtn:hover { color:#ffffff; text-decoration:none;}
+.fixedBtn>span:first-child { flex:1;display: flex; justify-content: center; align-items: center; font-size:16px;}
+.fixedBtn>span:last-child { flex: 1; display: flex; justify-content: center; align-items: center; font-size:11px;} 
+
