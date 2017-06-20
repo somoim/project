@@ -7,6 +7,5 @@ import kr.co.domain.Criteria;
 
 public interface CrewDAO {
 	public abstract List<CrewVO> crew_list(Criteria cri) throws Exception;
-	
-}
 
+}

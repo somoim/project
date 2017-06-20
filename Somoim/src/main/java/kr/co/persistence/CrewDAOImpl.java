@@ -22,6 +22,7 @@ public class CrewDAOImpl implements CrewDAO {
 	public List<CrewVO> crew_list(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE+".crew_list", cri);
+
 	}
 
 }

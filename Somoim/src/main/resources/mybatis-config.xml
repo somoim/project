@@ -5,5 +5,5 @@
 		<typeAlias alias="CrewVO" type="kr.co.domain.CrewVO"/>
 		<typeAlias alias="sGalleryVO" type="kr.co.domain.sGalleryVO"/>
 	</typeAliases>
-	
+
 </configuration>

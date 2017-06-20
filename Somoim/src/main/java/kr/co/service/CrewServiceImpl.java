@@ -13,9 +13,11 @@ import kr.co.persistence.CrewDAO;
 @Service
 public class CrewServiceImpl implements CrewService {
 
+
 	@Inject
 	CrewDAO dao;
 	
+
 	@Override
 	public List<CrewVO> crew_list(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
