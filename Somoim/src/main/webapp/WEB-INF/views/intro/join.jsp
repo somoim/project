@@ -18,7 +18,7 @@
 		<!-- 여기서부터 시작 -->
 		<div class="row">
 			<div class="col-xs-12 loginBox">
-				<div>소모임</div>
+				<div>회원가입</div>
 				<form class="form-horizontal login_form" action="/user/loginPost" method="post">
 				
 					<div class="form-group">
@@ -37,7 +37,7 @@
 	
 					<div class="form-group">
 						<div class="col-xs-offset-2">
-						<button class="btn btn-default" type="submit">로그인</button>
+						<button class="btn btn-default" type="submit">회원가입</button>
 						<button class="btn bnt-danger" type="reset">취소</button>
 						</div>
 					</div>

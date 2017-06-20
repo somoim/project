@@ -12,7 +12,7 @@
 	<script src="../resources/bs/js/bootstrap.min.js" type="text/javascript"></script>
 	<title>Somoim</title>
 </head>
-<body>	
+<body onload="javascript:window_onload()">	
 	
 	<!-- 공통 Layout -->
 	<div id="common">
