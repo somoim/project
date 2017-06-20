@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="../resources/bs/css/bootstrap.min.css?ver='modifiedTimeStamp'" type="text/css">
 	<script src="../resources/js/jquery.js" type="text/javascript"></script>
 	<script src="../resources/bs/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../resources/dist/js/bootstrap-select.min.js" ></script>
 	<title>Somoim</title>
 </head>
 <body>	

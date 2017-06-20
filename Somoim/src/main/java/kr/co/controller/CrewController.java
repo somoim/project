@@ -2,12 +2,17 @@ package kr.co.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
 @Controller
 @RequestMapping("/crew")
 public class CrewController {
+	
+	@RequestMapping(value="/list_create", method=RequestMethod.GET)
+	public void list_create() throws Exception{
+	}
 	
 	@RequestMapping(value="/list")
 	public void list() throws Exception {
