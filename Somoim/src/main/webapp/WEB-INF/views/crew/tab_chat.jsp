@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="../index.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,7 @@
 	.sub_tab li a:hover { color:inherit; text-decoration: none;}
     .sub_tab li:hover { height:40px; line-height:38px; color:#493334; border-bottom: 2px solid #493334;}
     .sub_tab li.act { height:40px; line-height:38px; color:#493334; border-bottom: 2px solid #493334;}
+    .msg{background-color: white;}
 </style>
 </head>
 <body>
@@ -37,8 +39,25 @@
 		<li><a href="../crew/tab_gallery">사진첩</a></li>
 		<li class="act"><a href="../crew/tab_chat">채팅</a></li>
 	</ul>
-	<div id="container">
-
+	<div id="container" class="container">
+		<div class="row">
+			<div class="form-group"><br><br><br><br><br>
+				<p class="col-xs-12">------------------------------------------------ 0000년00월00일------------------------------------------------</p>
+				<c:forEach items="${list}" var="list">
+				<h6>${list.mid}</h6>
+				<label class="msg">${list.msg}</label><label style="font-size: x-small; margin-left: 5px;">${list.ch_date}</label>
+				</c:forEach>
+			</div>
+			
+			<form method="post">
+			    <div class="input-group">
+			      <input type="text" class="form-control" placeholder="메세지를 입력해 주세요">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">입력</button>
+			      </span>
+			    </div><!-- /input-group -->
+		    </form>
+		</div>
 	</div>
 </div>
 

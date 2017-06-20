@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.chattingMapper">
+	<insert id="insert_msg">
+		insert into chatting(ch_no, mid, cno, ch_date, msg) values(seq_ch_no.nextval , #{mid}, #{cno}, null, #{msg})
+	</insert>
+	
+	<select id="msg_list" resultType="ChattingVO">
+		select * from chatting where cno = #{cno}
+	</select>
+</mapper>
