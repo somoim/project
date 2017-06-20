@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/crew")
 public class CrewController {
 	
-	@RequestMapping(value="/gallery_list", method=RequestMethod.GET)
-	public void gallery_list() throws Exception{
-	}
+	
 	
 	@RequestMapping(value="/gallery_create", method=RequestMethod.GET)
 	public void gallery_create() throws Exception{
@@ -38,6 +36,7 @@ public class CrewController {
 		
 	}
 	
+	/*갤러리 리스트(사진 썸네일 보여지는 페이지*/
 	@RequestMapping(value="/tab_gallery")
 	public void sGallery() throws Exception {
 		
