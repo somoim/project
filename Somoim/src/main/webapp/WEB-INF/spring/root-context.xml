@@ -39,6 +39,10 @@
 		<property ref="dataSource" name="dataSource"></property>
 	</bean>
 	
+	<tx:annotation-driven/>
+
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
 	<context:component-scan base-package="kr.co.*" />
 	
 </beans>

@@ -86,7 +86,7 @@
 
 
 				<!-- 버튼 레이아웃 -->
-				<a href="#" class="fixedBtn"> 
+				<a href="gallery_create" class="fixedBtn"> 
 				<span><span class="glyphicon glyphicon-pencil"></span></span> 	
 				<span>글쓰기</span>
 				</a>

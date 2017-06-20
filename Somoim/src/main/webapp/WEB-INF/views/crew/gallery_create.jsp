@@ -5,6 +5,37 @@
 <html>
 <head>
 <style type="text/css">
+	iframe{
+		width: 0px;
+		height: 0px;
+		border: 0px;
+	}
+	 .filebox{
+		margin-top: 20px;
+	} 
+ 	.filebox label{
+		display: inline-block; 
+		padding: .5em .75em;
+		color: #fff; 
+		font-size: inherit; 
+		line-height: normal; 
+		vertical-align: middle; 
+		background-color: #337ab7; 
+		cursor: pointer; 
+		border: 1px solid #2e6da4; 
+		border-bottom-color: #e2e2e2; 
+		border-radius: .25em;
+	}
+	 .filebox input[type="file"]{
+		position: absolute; 
+		width: 1px; 
+		height: 1px; 
+		padding: 0; 
+		margin: -1px; 
+		overflow: hidden; 
+		clip:rect(0,0,0,0); 
+		border: 0;
+	}  
 </style>
 </head>
 <body>
@@ -13,48 +44,47 @@
 		<div id="container">
 			<!-- 여기서부터 시작 -->
 			<div class="container">
+
 				<div class="row">
 					<div class="page-header">
 						<h1>
-							사진작성하기 <small>글을 작성합니다</small>
+							사진올리기 <small>사진을 업로드합니다.</small>
 						</h1>
 					</div>
 				</div>
+
 				<div class="row">
 					<form action="" method="post">
-
-						<input value="${cri.page}" name="page" type="hidden"> <input
-							value="${cri.perPageNum}" name="perPageNum" type="hidden">
-
 						<div class="form-group">
-							<label for="title">제목</label> <input name="title" id="title"
-								class="form-control">
+							<label for="title">아이디</label> <input name="mid" id="mid"	class="form-control" placeholder="아이디받아오기" readonly="readonly">
 						</div>
-					
-
-					<div class="row">
-						<div class="form-group">
-							<label>업로드할 파일을 드랍시키세요</label>
-							<div class="fileDrop">drag & drop</div>
-						</div>
-
-						<ul class="clearfix uploadedList">
-
-						</ul>
-					</div>
-
-					<div class="form-group">
-						<button class="btn btn-primary" type="submit" id="submit_form">
-							<span class="glyphicon glyphicon-check"></span> 등록
-						</button>
-						<button class="btn btn-danger" type="reset">
-							<span class="glyphicon glyphicon-remove"></span> 초기화
-						</button>
-						<button class="btn btn-info" type="submit" id="list_form">
-							<span class="glyphicon glyphicon-align-justify"></span> 목록
-						</button>
-					</div>
+					</form>
 				</div>
+
+				<div class="row">
+					<form target="zeroframe" enctype="multipart/form-data" id="form1" action="gallery_create" method="post">
+						<div class="filebox">
+							<label for="fileUpload">업로드</label>
+							<input id="fileUpload" type="file" name="file"> 
+							<input type="submit" class="btn btn-primary" value="ddd">
+							
+						 </div>
+					</form>
+				</div>
+				
+				
+				<iframe name="zeroframe"></iframe>
+
+				<script type="text/javascript">
+					$(document).ready(function() {
+						function addFilePath(msg) {
+							 alert(msg);
+						
+							document.getElementById("form1").reset();
+						}			 
+					});
+					
+				</script>
 			</div>
 		</div>
 	</div>
