@@ -10,6 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/crew")
 public class CrewController {
 	
+	@RequestMapping(value="/gallery_list", method=RequestMethod.GET)
+	public void gallery_list() throws Exception{
+	}
+	
+	@RequestMapping(value="/gallery_create", method=RequestMethod.GET)
+	public void gallery_create() throws Exception{
+	}
+	
+	
 	@RequestMapping(value="/list_create", method=RequestMethod.GET)
 	public void list_create() throws Exception{
 	}

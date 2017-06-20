@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.mappers.sGalleryMapper">
+
+	<insert id="sgallery_create">
+		insert into sGallery(sg_no, cno, mid, sg_picture) values (#{sg_no}, #{cno}, #{mid}, #{sg_picture})
+	</insert>
+	
+	<select id="sgallery_list" resultType="sGalleryVO">
+		select * from sGallery where cno=#{cno}
+	</select>
+	
+	<delete id="sgallery_delete">
+		delete * from sGallery where sg_no=#{sg_no}
+	</delete>
+	
+</mapper>
