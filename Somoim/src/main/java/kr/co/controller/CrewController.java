@@ -1,8 +1,20 @@
 package kr.co.controller;
 
+import java.io.File;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+
+import kr.co.util.UploadFileUtils;
 
 
 
@@ -14,8 +26,49 @@ public class CrewController {
 	public void gallery_list() throws Exception{
 	}
 	
+//	@Resource(name="uploadPath")
+//	private String uploadPath;
+	
+/*	@RequestMapping(value="/uploadAjax", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception{
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		System.out.println("originalFilename: "+file.getOriginalFilename());
+		System.out.println("size: "+file.getSize());
+		System.out.println("contentType: "+file.getContentType());
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+	
+		String uploadedFileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+		return new ResponseEntity<String>(uploadedFileName, HttpStatus.CREATED);
+	}
+	
+		
+	@RequestMapping(value="/uploadAjax", method=RequestMethod.GET)
+	public void uploadAjax(){
+	}
+	
+	
+	@RequestMapping(value="/gallery_create", method=RequestMethod.POST)
+	public String gallery_create_post(MultipartFile file, Model model) throws Exception{
+		System.out.println("+++++++++++++++++++++++++++++");
+		System.out.println("originalFilename: "+file.getOriginalFilename());
+		//파일 이름이 같을 경우 그냥 덮어씌워버림
+		System.out.println("size: "+file.getSize());
+		System.out.println("contentType: "+file.getContentType());
+		System.out.println("+++++++++++++++++++++++++++++");
+	
+		UUID uid = UUID.randomUUID();
+		String savedName = uid.toString()+"_"+file.getOriginalFilename();
+		
+		File target = new File(uploadPath, savedName);
+		//파일 객체 생성 - 완벽하게 unique하지는 않지만 비슷하게 나옴
+		FileCopyUtils.copy(file.getBytes(), target);
+		model.addAttribute("savedName", savedName);
+		
+		return "uploadResult";
+	}*/
+	
 	@RequestMapping(value="/gallery_create", method=RequestMethod.GET)
-	public void gallery_create() throws Exception{
+	public void gallery_create(){
 	}
 	
 	
@@ -24,7 +77,7 @@ public class CrewController {
 	}
 	
 	@RequestMapping(value="/list")
-	public void list() throws Exception {
+	public void crew_list() throws Exception {
 		
 	}
 	
