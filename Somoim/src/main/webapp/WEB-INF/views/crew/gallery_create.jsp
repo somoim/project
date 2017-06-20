@@ -30,16 +30,7 @@
 							<label for="title">제목</label> <input name="title" id="title"
 								class="form-control">
 						</div>
-						<div class="form-group">
-							<label for="writer">작가</label> <input name="writer" id="writer"
-								class="form-control">
-						</div>
-
-						<div class="form-group">
-							<label for="content">내용</label>
-							<textarea name="content" id="content" class="form-control"></textarea>
-						</div>
-					</form>
+					
 
 					<div class="row">
 						<div class="form-group">
