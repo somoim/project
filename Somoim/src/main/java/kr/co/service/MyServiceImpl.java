@@ -14,18 +14,18 @@ import kr.co.persistence.MyDAO;
 public class MyServiceImpl implements MyService {
 
 	@Inject
-	MyDAO dao;
+	MyDAO my_dao;
 	
 	@Override
 	public List<CrewVO> crew_sel_list(Criteria cri, String category, String region, String mid) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.crew_sel_list(cri, category, region, mid);
+		return my_dao.crew_sel_list(cri, category, region, mid);
 	}
 
 	@Override
 	public List<CrewVO> attend_crew_list(String mid) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.attend_crew_list(mid);
+		return my_dao.attend_crew_list(mid);
 	}
 
 }

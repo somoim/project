@@ -21,7 +21,7 @@ import kr.co.service.CrewService;
 public class CrewController {
 	
 	@Inject
-	private CrewService service;
+	private CrewService crew_service;
 	
 	@RequestMapping(value="/gallery_create", method=RequestMethod.GET)
 	public void gallery_create() throws Exception{
@@ -33,7 +33,7 @@ public class CrewController {
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-		List<CrewVO> list = service.crew_list(cri);
+		List<CrewVO> list = crew_service.crew_list(cri);
 	
 		model.addAttribute("list", list);
 	}

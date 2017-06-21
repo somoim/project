@@ -18,15 +18,15 @@ import kr.co.service.MyService;
 @RequestMapping("/my")
 public class MyController {
 	@Inject
-	private MyService service;
+	private MyService my_service;
 	
 	@RequestMapping(value="/mylist", method=RequestMethod.GET)
 	public void mylist(@ModelAttribute("cri") Criteria cri, Model model, String category, String region, String mid) throws Exception {
 		mid="user03";
-		List<CrewVO> sel_list = service.crew_sel_list(cri, category, region, mid);
+		List<CrewVO> sel_list = my_service.crew_sel_list(cri, category, region, mid);
 		model.addAttribute("sel_list", sel_list);
 		
-		List<CrewVO> join_list = service.attend_crew_list(mid);
+		List<CrewVO> join_list = my_service.attend_crew_list(mid);
 		model.addAttribute("join_list", join_list);
 	}
 
