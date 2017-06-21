@@ -2,9 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="CrewVO" type="kr.co.domain.CrewVO"/>
-		<typeAlias alias="sGalleryVO" type="kr.co.domain.sGalleryVO"/>
 		<typeAlias alias="MemberVO" type="kr.co.domain.MemberVO"/>
+		<typeAlias alias="CrewVO" type="kr.co.domain.CrewVO"/>
+		<typeAlias alias="sListVO" type="kr.co.domain.sListVO"/>
+		<typeAlias alias="sGalleryVO" type="kr.co.domain.sGalleryVO"/>
 		<typeAlias alias="ChattingVO" type="kr.co.domain.ChattingVO"/>
 	</typeAliases>
 	

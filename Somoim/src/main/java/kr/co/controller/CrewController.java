@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.domain.ChattingVO;
 import kr.co.domain.CrewVO;
@@ -24,7 +23,8 @@ import kr.co.service.CrewService;
 public class CrewController {
 	
 	@Inject
-	private CrewService service;
+	private CrewService crew_service;
+	
 	@Inject
 	private ChattingService ch_service;
 	
@@ -34,12 +34,7 @@ public class CrewController {
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-		
-		System.out.println("+++++++++++++");
-		System.out.println(cri);
-		
-		List<CrewVO> list=service.crew_list(cri);
-		//List<CrewVO> list = service.crew_list(cri);
+		List<CrewVO> list = crew_service.crew_list(cri);
 		model.addAttribute("list", list);
 	}
 	
