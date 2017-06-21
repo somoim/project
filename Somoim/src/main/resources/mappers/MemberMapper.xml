@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.MemberMapper">
+	
+	<!-- 게시글 작성 -->
+	<insert id="member_join">
+		insert into member
+		(mid, password, name, gender, birth, address, phone, category)
+		values
+		(#{mid},#{password},#{name},#{gender},#{birth},#{address},#{phone},#{category})
+	</insert>
+	
+	<select id="member_list" resultType="MemberVO">
+		select * from crew
+	</select>
+	
+</mapper>

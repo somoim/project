@@ -3,7 +3,11 @@
 <mapper namespace="kr.co.mapper.CrewMapper">
 
 	<select id="crew_list" resultType="CrewVO">
-		select * from crew
+		select * from crew order by cno desc
+	</select>
+	
+	<select id="crew_join_cnt" resultType="Integer">
+		select count(distinct(mid)) from Status where cno=#{cno}
 	</select>
 	
 </mapper>

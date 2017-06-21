@@ -14,12 +14,12 @@ import kr.co.persistence.CrewDAO;
 public class CrewServiceImpl implements CrewService {
 
 	@Inject
-	CrewDAO dao;
+	CrewDAO crew_dao;
 	
 	@Override
 	public List<CrewVO> crew_list(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.crew_list(cri);
+		return crew_dao.crew_list(cri);
 	}
 
 }
