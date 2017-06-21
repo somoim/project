@@ -272,8 +272,8 @@
 						    <option value="019">019</option>
 						    <option value="010">010</option>
 						</select>
-						<input type="tel" id="txtMobile2" size="4" maxlength="4" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" onkeypress="onlyNumber();" />
-						<input type="tel" id="txtMobile3" size="4" maxlength="4" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" />
+						<input type="tel" id="txtMobile2" size="4" maxlength="4"  onkeypress="onlyNumber();" />
+						<input type="tel" id="txtMobile3" size="4" maxlength="4"  />
 					</div>
 				</div>
 				

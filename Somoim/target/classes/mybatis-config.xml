@@ -4,6 +4,7 @@
 	<typeAliases>
 		<typeAlias alias="CrewVO" type="kr.co.domain.CrewVO"/>
 		<typeAlias alias="sGalleryVO" type="kr.co.domain.sGalleryVO"/>
+		<typeAlias alias="MemberVO" type="kr.co.domain.MemberVO"/>
 	</typeAliases>
 	
 </configuration>
