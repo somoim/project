@@ -7,9 +7,11 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.domain.ChattingVO;
 import kr.co.domain.CrewVO;
@@ -58,16 +60,27 @@ public class CrewController {
 		
 	}
 	
-	@RequestMapping(value="/tab_chat", method=RequestMethod.GET)
+	@RequestMapping(value="/tab_chat")
 	public void sChat_GET(Model model) throws Exception {
-		
-		if(ch_service.msg_list(1)==null){return ;}
 		List<ChattingVO> list = ch_service.msg_list(1);
 		model.addAttribute("list", list);
 	}
+	@ResponseBody
+	@RequestMapping(value="/tab_chat/{cno}")
+	public List<ChattingVO> send_Chat(@PathVariable("cno")int cno ,Model model) throws Exception {
+		List<ChattingVO> list = ch_service.msg_list(cno);
+		model.addAttribute("list", list);
+		return list;
+	}
+	
 	@RequestMapping(value="/tab_chat", method=RequestMethod.POST)
-	public String sChat_POST(ChattingVO vo, Model model) throws Exception {
-		ch_service.insert_msg(vo);
+	public String sChat_POST(ChattingVO chat_vo) throws Exception {
+		System.out.println("##########################");
+		System.out.println(chat_vo.getCno());
+		System.out.println(chat_vo.getMid());
+		System.out.println(chat_vo.getMsg());
+		System.out.println("##########################");
+		ch_service.insert_msg(chat_vo);
 		
 		return "redirect:/crew/tab_chat";
 	}

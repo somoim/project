@@ -19,12 +19,46 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var cno = 1;
+		getChatList(cno);
+		
 		$(".send").click(function(){
-			$("form").attr("action", "tab_chat");
-			$("form").attr("method", "post");
-			$("form").get(0).submit(); 
+			var mid = $("#mid").val();
+			var cno = $("#cno").val();
+			var msg = $("#msg").val();
+			$.ajax({	//- 폴더에서도 삭제할 경우
+				type:"post",
+				url:"/crew/tab_chat",
+				data:{
+					mid : mid,
+					cno : cno,
+					msg : msg
+				},
+				dataType: "text",
+				success: function(result) {
+						alert("댓글 입력 성공");
+						getChatList(cno);
+				}
+			});
 		});
 	});
+	function getChatList(cno) {
+		$.getJSON("/crew/tab_chat/"+cno, function(data) {
+			console.log(data);
+			var source = $("#source").html();
+			var template = Handlebars.compile(source);
+			
+			$("#replies").html(template(data));
+			
+		});
+	}
+</script>
+
+<script id="source" type="text/x-handlebars-template">
+{{#each.}}
+	<p>{{mid}}</p>
+	<label class="msg">{{msg}}</label><h6>{{ch_date}}</h6>
+{{/each}}
 </script>
 </head>
 <body>
@@ -51,25 +85,23 @@
 	<div id="container" class="container">
 		
 			<div class="row">
-				<div class="form-group"><br><br><br><br>
-				<c:forEach items="${list}" var="x">
-					<p>${x.mid}</p>
-					<label class="msg">${x.msg}</label><h6>${x.ch_date}</h6>
-				</c:forEach>
+				<div class="form-group"><br><br><br><br><br>
+					<div id="replies">
+					</div>
 				</div>
 			</div>
-		<form action="/crew/tab_chat" method="post">
+		
 			<div class="row">
 				<div class="input-group">
 					<input name="mid" id="mid" value="m001" hidden="hidden">
 					<input name="cno" id="cno" value="1" hidden="hidden">
 					<input type="text" class="form-control" placeholder="메세지를 입력하세요" name="msg" id="msg">
 					<span class="input-group-btn">
-					<button class="btn btn-default send" type="submit">보내기</button>
+					<button class="btn btn-default send" type="button">보내기</button>
 					</span>
 				</div><!-- /input-group -->
 			</div>
-		</form>
+		
 	</div>
 </div>
 

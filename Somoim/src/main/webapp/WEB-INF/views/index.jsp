@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="../resources/css/common.css?ver='modifiedTimeStamp'" type="text/css">
 	<link rel="stylesheet" href="../resources/css/content.css?ver='modifiedTimeStamp'" type="text/css">
 	<link rel="stylesheet" href="../resources/bs/css/bootstrap.min.css?ver='modifiedTimeStamp'" type="text/css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js" type="text/javascript"></script>
 	<script src="../resources/js/jquery.js" type="text/javascript"></script>
 	<script src="../resources/bs/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="../resources/dist/js/bootstrap-select.min.js" ></script>

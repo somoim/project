@@ -39,6 +39,13 @@ public class ChattingVO {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+	
+	public ChattingVO(String mid, int cno, String msg) {
+		super();
+		this.mid = mid;
+		this.cno = cno;
+		this.msg = msg;
+	}
 	public ChattingVO(int ch_no, String mid, int cno, String ch_date, String msg) {
 		super();
 		this.ch_no = ch_no;

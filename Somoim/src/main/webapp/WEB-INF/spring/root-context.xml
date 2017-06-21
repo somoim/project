@@ -43,8 +43,6 @@
 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
-	<context:component-scan base-package="kr.co.aop"></context:component-scan>
-	<context:component-scan base-package="kr.co.persistence" />
-	<context:component-scan base-package="kr.co.service" />
+	
 	
 </beans>
