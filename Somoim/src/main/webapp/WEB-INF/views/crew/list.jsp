@@ -15,14 +15,15 @@
 <div id="mobile">
 	<div id="container">
 		<!-- 여기서부터 시작 -->
-		<div class="panel panel-success" id="crew_list">
+		<div class="panel panel-warning" id="crew_list">
 			<c:forEach items="${list}" var="crewVO">
 				<div class="panel-heading">
-					<span>No. ${crewVO.cno} </span> &nbsp;&nbsp; <span>${crewVO.attend_cnt} 명</span>
+					<span>No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="text-right">${crewVO.join_cnt} / ${crewVO.attend_cnt} 명</span>
 				</div>
 				<div class="panel-body">
 					<p>${crewVO.region}</p>
 					<p>${crewVO.title}</p>
+					<p>정모날짜/장소 ... c:if로 정모날짜 확인 후 표시???</p>
 				</div>
 			</c:forEach>
 		</div>

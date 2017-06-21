@@ -3,6 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="CrewVO" type="kr.co.domain.CrewVO"/>
+		<typeAlias alias="sListVO" type="kr.co.domain.sListVO"/>
 		<typeAlias alias="sGalleryVO" type="kr.co.domain.sGalleryVO"/>
 	</typeAliases>
 

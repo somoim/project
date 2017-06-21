@@ -34,6 +34,7 @@ public class CrewController {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		List<CrewVO> list = service.crew_list(cri);
+	
 		model.addAttribute("list", list);
 	}
 	
