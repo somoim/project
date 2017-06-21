@@ -3,7 +3,7 @@
 <mapper namespace="kr.co.mapper.CrewMapper">
 
 	<select id="crew_list" resultType="CrewVO">
-		select * from crew order by cno desc
+		select * from crew order by read_cnt desc
 	</select>
 	
 	<select id="crew_join_cnt" resultType="Integer">

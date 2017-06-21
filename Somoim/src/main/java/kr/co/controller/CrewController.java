@@ -35,12 +35,6 @@ public class CrewController {
 	public void list_create() throws Exception{
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-		List<CrewVO> list = crew_service.crew_list(cri);
-		model.addAttribute("list", list);
-	}
-	
 	@RequestMapping(value="/tab_list")
 	public void slist() throws Exception {
 		
@@ -79,6 +73,19 @@ public class CrewController {
 		ch_service.insert_msg(chat_vo);
 		
 		return "redirect:/crew/tab_chat";
+	}
+	
+	///////////////////////// 정림
+	
+	
+	
+	
+	
+	///////////////////////// 진희
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+		List<CrewVO> list = crew_service.crew_list(cri);
+		model.addAttribute("list", list);
 	}
 	
 }
