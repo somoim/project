@@ -196,7 +196,7 @@
 			<br>
 			<br>
 				
-			<form >	
+			<form class="formLayout">	
 				<div class="form-group">
 					<label class="">이름</label>
 					<input class="form-control" type="text" name="name" id="name" placeholder="본인이름">
@@ -226,7 +226,7 @@
 				
 				<div class="form-group">
 					<label>비밀번호 확인</label>
-					<input class="form-control" name="password">
+					<input class="form-control">
 				</div>
 	
 				<div class="form-group">
@@ -256,7 +256,7 @@
 					<label>거주지역</label>
 					<div class="input-control">
 						<select name="address" id="sido1"></select>
-						<select name="address" id="gugun1"></select>
+						<!-- <select name="address" id="gugun1"></select> -->
 					</div>
 				</div>
 				
@@ -264,7 +264,7 @@
 				<div class="form-group">
 					<label>핸드폰번호</label>
 					<div class="input-control">
-						<select id="txtMobile1" name="pNum">
+						<select id="txtMobile1" name="phone1">
 						    <option value="">선택</option>
 						    <option value="011">011</option>
 						    <option value="016">016</option>
@@ -272,8 +272,8 @@
 						    <option value="019">019</option>
 						    <option value="010">010</option>
 						</select>
-						<input type="tel" id="txtMobile2" size="4" maxlength="4"  onkeypress="onlyNumber();" />
-						<input type="tel" id="txtMobile3" size="4" maxlength="4"  />
+						<input type="tel" name="phone2" id="txtMobile2" size="4" maxlength="4"  onkeypress="onlyNumber();" />
+						<input type="tel" name="phone3" id="txtMobile3" size="4" maxlength="4"  />
 					</div>
 				</div>
 				
@@ -365,7 +365,7 @@
 			$selsido.next().append("<option value=''>구/군 선택</option>");
 		});
 		
-		$("select[name^=address]").change(function() {
+		/* $("select[name^=address]").change(function() {
 			var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
 			var $gugun = $(this).next(); // 선택영역 군구 객체
 			$("option",$gugun).remove(); // 구군 초기화
@@ -376,13 +376,13 @@
 					$gugun.append("<option value='"+this+"'>"+this+"</option>");
 				});
 			}
-		});
+		}); */
 	
 		// 폼 버튼제어
-		var $form = $(".form-group");
+		var $form = $(".formLayout");
 		$("#joinBtn").click(function() {
-			$form.attr("action", "/intro/join");
-			$form.attr("method", "get");
+			$form.attr("action", "join_post");
+			$form.attr("method", "post");
 			CheckForm();
 			$form.submit();
 		});

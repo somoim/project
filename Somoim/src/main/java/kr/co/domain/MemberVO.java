@@ -6,6 +6,7 @@ public class MemberVO {
 	private String name;
 	private int gender;
 	private String birth;
+	
 	private String address;
 	private String phone;
 	private String category;

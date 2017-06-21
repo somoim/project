@@ -16,7 +16,7 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public void member_join(MemberVO member_vo) throws Exception {
-		session.insert(NAMESPACE+".member_list", member_vo);
+		session.insert(NAMESPACE+".member_join", member_vo);
 	}
 	
 	

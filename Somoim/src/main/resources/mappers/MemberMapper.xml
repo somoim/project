@@ -4,10 +4,10 @@
 	
 	<!-- 게시글 작성 -->
 	<insert id="member_join">
-		insert into memeber
-		(mid, password, name, gender, birth, address, phone, category, power)
+		insert into member
+		(mid, password, name, gender, birth, address, phone, category)
 		values
-		(#{mid},#{password},#{name},#{gender},#{birth},#{address},#{phone},#{category},#{power})
+		(#{mid},#{password},#{name},#{gender},#{birth},#{address},#{phone},#{category})
 	</insert>
 	
 	<select id="member_list" resultType="MemberVO">
