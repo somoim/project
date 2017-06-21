@@ -13,7 +13,6 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-
 import kr.co.util.UploadFileUtils;
 
 
@@ -37,7 +36,6 @@ public class CrewController {
 		String uploadedFileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
 		return new ResponseEntity<String>(uploadedFileName, HttpStatus.CREATED);
 	}
-	
 		
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.GET)
 	public void uploadAjax(){
@@ -62,10 +60,9 @@ public class CrewController {
 		
 		return "tab_gallery";
 	}*/
-	
 
 	@RequestMapping(value="/gallery_create", method=RequestMethod.GET)
-	public void gallery_create() throws Exception{
+	public void gallery_create(){
 	}
 	
 	
@@ -74,7 +71,7 @@ public class CrewController {
 	}
 	
 	@RequestMapping(value="/list")
-	public void list() throws Exception {
+	public void crew_list() throws Exception {
 		
 	}
 	

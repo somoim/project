@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 
 public class UploadFileUtils {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(UploadFileUtils.class);
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(UploadFileUtils.class);
+	
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception{
 		UUID uid = UUID.randomUUID();
 		String savedName = uid.toString()+"_"+originalName;
@@ -47,13 +47,13 @@ public class UploadFileUtils {
 		Calendar cal = Calendar.getInstance();
 		
 		String yearPath = File.separator+cal.get(Calendar.YEAR);
-		LOGGER.info("연도: "+yearPath);
+		LOGGER.info("�뿰�룄: "+yearPath);
 		
 		String monthPath = yearPath+File.separator+new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
-		LOGGER.info("월: "+monthPath);
+		LOGGER.info("�썡: "+monthPath);
 		
 		String datePath = monthPath+File.separator+new DecimalFormat("00").format(cal.get(Calendar.DATE));
-		LOGGER.info("일: "+datePath);
+		LOGGER.info("�씪: "+datePath);
 		
 		makeDir(uploadPath, yearPath, monthPath, datePath);
 		
@@ -74,18 +74,19 @@ public class UploadFileUtils {
 		}
 	}
 	
-	private static String makeThumbnail(String uploadPath, String path, String sg_picture) throws Exception{
+	private static String makeThumbnail(String uploadPath, String path, String fileName) throws Exception{
 		
-		File sF = new File(uploadPath+path, sg_picture);
+		File sF = new File(uploadPath+path, fileName);
 		BufferedImage sourceImg = ImageIO.read(sF);
 		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT,100);
-		String thumbnailName = uploadPath+path+File.separator+"s_"+sg_picture;
+		String thumbnailName = uploadPath+path+File.separator+"s_"+fileName;
 		File newFile = new File(thumbnailName);
-		String formatName = sg_picture.substring(sg_picture.lastIndexOf(".")+1);
+		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
 		
 		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
 		
 		String re = thumbnailName.substring(uploadPath.length()).replace(File.separatorChar,'/');
+		
 		return re;
 	}
 	

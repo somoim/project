@@ -26,7 +26,7 @@
 	</beans:bean>
 	
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg value="C:\\zzz\\upload"></beans:constructor-arg>
+		<beans:constructor-arg value="C:\\somoim_gallery\\upload"></beans:constructor-arg>
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.co.*" />
