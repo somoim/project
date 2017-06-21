@@ -21,7 +21,6 @@
 <!-- 모바일 Layout -->
 	<div id="mobile">
 	
-		
 		<header id="header2">
 			<div class="backCont">
 				<span class="glyphicon glyphicon-chevron-left"></span>
@@ -40,8 +39,8 @@
 		</ul>
 		
 		 <div id="container"> 
-		 	<!-- 여기서부터 시작 -->
-			<div class="container">
+		 	여기서부터 시작
+		<!-- 	<div class="container">
 				<div class="row thumbnail_list">
 					<div class="col-sm-2 col-xs-3">
 						<a href="#" class="thumbnail"> <img src="..." alt="...">
@@ -85,13 +84,17 @@
 				</div>
 
 
-				<!-- 버튼 레이아웃 -->
+				버튼 레이아웃
 				<a href="gallery_create" class="fixedBtn"> 
 				<span><span class="glyphicon glyphicon-pencil"></span></span> 	
 				<span>글쓰기</span>
-				</a>
+				</a> -->
 				
-			</div>
+				<script type="text/javascript">
+						parent.addFilePath('${savedName}');
+				</script>
+					
+			<!-- </div> -->
 		</div>
 	</div>
 </body>

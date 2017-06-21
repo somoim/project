@@ -23,7 +23,7 @@ public class UploadFileUtils {
 		String savedPath = calcPath(uploadPath);
 		File target = new File(uploadPath+savedPath, savedName);
 		FileCopyUtils.copy(fileData, target);
-		
+			
 		
 		String formatname = originalName.substring(originalName.lastIndexOf(".")+1);
 		
@@ -47,13 +47,13 @@ public class UploadFileUtils {
 		Calendar cal = Calendar.getInstance();
 		
 		String yearPath = File.separator+cal.get(Calendar.YEAR);
-		LOGGER.info("�뿰�룄: "+yearPath);
+		LOGGER.info("연도: "+yearPath);
 		
 		String monthPath = yearPath+File.separator+new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
-		LOGGER.info("�썡: "+monthPath);
+		LOGGER.info("월: "+monthPath);
 		
 		String datePath = monthPath+File.separator+new DecimalFormat("00").format(cal.get(Calendar.DATE));
-		LOGGER.info("�씪: "+datePath);
+		LOGGER.info("일: "+datePath);
 		
 		makeDir(uploadPath, yearPath, monthPath, datePath);
 		
