@@ -25,8 +25,11 @@
 		<beans:property name="maxUploadSize" value="10485760"></beans:property>
 	</beans:bean>
 	
-	<context:component-scan base-package="kr.co.*" />
+	<beans:bean class="java.lang.String" id="uploadPath">
+		<beans:constructor-arg value="C:\\zzz\upload"></beans:constructor-arg>
+	</beans:bean>
 	
-	
+	<context:component-scan base-package="kr.co.green" />
+	<context:component-scan base-package="kr.co.controller" />
 	
 </beans:beans>

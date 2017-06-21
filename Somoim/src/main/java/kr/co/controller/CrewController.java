@@ -1,30 +1,70 @@
 package kr.co.controller;
 
-import java.util.List;
+import java.io.File;
+import java.util.UUID;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.domain.CrewVO;
-import kr.co.domain.Criteria;
-import kr.co.service.CrewService;
+import kr.co.util.UploadFileUtils;
 
 
 
 @Controller
 @RequestMapping("/crew")
 public class CrewController {
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
-	@Inject
-	private CrewService service;
 	
+	@RequestMapping(value="/uploadAjax", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception{
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		String originalFileName	= new String(file.getOriginalFilename().getBytes("8859_1"),"UTF-8");
+		System.out.println("originalFilename: "+originalFileName);
+		System.out.println("size: "+file.getSize());
+		System.out.println("contentType: "+file.getContentType());
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+	
+		String uploadedFileName = UploadFileUtils.uploadFile(uploadPath, originalFileName, file.getBytes());
+		return new ResponseEntity<String>(uploadedFileName, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="/uploadAjax", method=RequestMethod.GET)
+	public void uploadAjax(){
+	}
+	
+	@RequestMapping(value="/gallery_create", method=RequestMethod.POST)
+	public String gallery_create_post(MultipartFile file, Model model) throws Exception{
+		
+		String originalFileName	= new String(file.getOriginalFilename().getBytes("8859_1"),"UTF-8");
+		
+		System.out.println("+++++++++++++++++++++++++++++");
+		System.out.println("originalFilename: "+originalFileName);
+		System.out.println("size: "+file.getSize());
+		System.out.println("contentType: "+file.getContentType());
+		System.out.println("+++++++++++++++++++++++++++++");
+	
+		UUID uid = UUID.randomUUID();
+		String savedName = uid.toString()+"_"+originalFileName;
+		
+		File target = new File(uploadPath, savedName);
+		FileCopyUtils.copy(file.getBytes(), target);
+		model.addAttribute("savedName", savedName);
+		
+		return "tab_gallery";
+	}
+
 	@RequestMapping(value="/gallery_create", method=RequestMethod.GET)
-	public void gallery_create() throws Exception{
+	public void gallery_create(){
 	}
 	
 	
@@ -32,10 +72,9 @@ public class CrewController {
 	public void list_create() throws Exception{
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-		List<CrewVO> list = service.crew_list(cri);
-		model.addAttribute("list", list);
+	@RequestMapping(value="/list")
+	public void crew_list() throws Exception {
+		
 	}
 	
 	@RequestMapping(value="/tab_list")
