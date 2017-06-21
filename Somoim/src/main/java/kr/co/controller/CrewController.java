@@ -14,32 +14,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.util.UploadFileUtils;
+
 
 
 @Controller
 @RequestMapping("/crew")
 public class CrewController {
-	/*
+	@Resource(name="uploadPath")
+	private String uploadPath;
+	
+	
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception{
 		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-		System.out.println("originalFilename: "+file.getOriginalFilename());
+		String originalFileName	= new String(file.getOriginalFilename().getBytes("8859_1"),"UTF-8");
+		System.out.println("originalFilename: "+originalFileName);
 		System.out.println("size: "+file.getSize());
 		System.out.println("contentType: "+file.getContentType());
 		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 	
-		String uploadedFileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+		String uploadedFileName = UploadFileUtils.uploadFile(uploadPath, originalFileName, file.getBytes());
 		return new ResponseEntity<String>(uploadedFileName, HttpStatus.CREATED);
 	}
-		
+	
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.GET)
 	public void uploadAjax(){
-	}*/
- 	
-
-	@Resource(name="uploadPath")
-	private String uploadPath;
-	
+	}
 	
 	@RequestMapping(value="/gallery_create", method=RequestMethod.POST)
 	public String gallery_create_post(MultipartFile file, Model model) throws Exception{

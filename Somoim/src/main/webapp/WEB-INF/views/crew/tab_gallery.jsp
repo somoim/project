@@ -84,11 +84,11 @@
 				</div>
 
 
-				버튼 레이아웃
+				버튼 레이아웃-->
 				<a href="gallery_create" class="fixedBtn"> 
 				<span><span class="glyphicon glyphicon-pencil"></span></span> 	
 				<span>글쓰기</span>
-				</a> -->
+				</a> 
 				
 				<script type="text/javascript">
 						parent.addFilePath('${savedName}');
