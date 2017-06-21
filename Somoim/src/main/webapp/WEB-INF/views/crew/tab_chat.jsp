@@ -8,7 +8,7 @@
 <style type="text/css">
 	#header { display:none;}
 	#footer { display:none;}
-	#container { height:100%; margin-top:0; margin-bottom:0;}
+	#container { height:100%; margin-top:95px; margin-bottom:0;}
 	.sub_tab { display:table; width:100%; position: fixed; top:55px;}
 	.sub_tab li { display: table-cell; width:25%; text-align:center; height:40px; line-height:39px; background-color: #ffffff; font-size:14px; font-weight:bold; color:#929292; border-bottom:1px solid #929292;}
 	.sub_tab li a { display:block; color:inherit;}
@@ -36,7 +36,7 @@
 				},
 				dataType: "text",
 				success: function(result) {
-						alert("댓글 입력 성공");
+						$("#msg").val("");
 						getChatList(cno);
 				}
 			});
@@ -85,7 +85,7 @@
 	<div id="container" class="container">
 		
 			<div class="row">
-				<div class="form-group"><br><br><br><br><br>
+				<div class="form-group">
 					<div id="replies">
 					</div>
 				</div>
