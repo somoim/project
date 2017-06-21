@@ -7,18 +7,20 @@ public class CrewVO {
 	private String title;
 	private String content;
 	private int attend_cnt;
+	private int join_cnt;
 	private String writeday;
 	private int read_cnt;
 	private String role;
 	private String picture;
 	private String category;
+	
 
 	public CrewVO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CrewVO(int cno, String mid, String region, String title, String content, int attend_cnt, String writeday,
-			int read_cnt, String role, String picture, String category) {
+	public CrewVO(int cno, String mid, String region, String title, String content, int attend_cnt, int join_cnt,
+			String writeday, int read_cnt, String role, String picture, String category) {
 		super();
 		this.cno = cno;
 		this.mid = mid;
@@ -26,13 +28,14 @@ public class CrewVO {
 		this.title = title;
 		this.content = content;
 		this.attend_cnt = attend_cnt;
+		this.join_cnt = join_cnt;
 		this.writeday = writeday;
 		this.read_cnt = read_cnt;
 		this.role = role;
 		this.picture = picture;
 		this.category = category;
 	}
-
+	
 	public int getCno() {
 		return cno;
 	}
@@ -79,6 +82,14 @@ public class CrewVO {
 
 	public void setAttend_cnt(int attend_cnt) {
 		this.attend_cnt = attend_cnt;
+	}
+
+	public int getJoin_cnt() {
+		return join_cnt;
+	}
+
+	public void setJoin_cnt(int join_cnt) {
+		this.join_cnt = join_cnt;
 	}
 
 	public String getWriteday() {
