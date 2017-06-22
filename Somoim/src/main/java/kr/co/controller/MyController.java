@@ -22,11 +22,11 @@ public class MyController {
 	private MyService my_service;
 	
 	@RequestMapping(value="/mylist", method=RequestMethod.GET)
-	public void mylist(@ModelAttribute("cri") Criteria cri, Model model, String category, String region, String mid) throws Exception {
+	public void mylist(@ModelAttribute("cri") Criteria cri, Model model, String mid) throws Exception {
 		// 세션에서 로그인정보 mid 넘겨주세요
 		mid="user10";
 		
-		List<CrewVO> sel_list = my_service.crew_sel_list(cri, category, region, mid);
+		List<CrewVO> sel_list = my_service.crew_sel_list(cri, mid);
 		model.addAttribute("sel_list", sel_list);
 		
 		List<CrewVO> join_list = my_service.attend_crew_list(mid);

@@ -1,5 +1,6 @@
 package kr.co.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.domain.ChattingVO;
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
+import kr.co.domain.sListVO;
 import kr.co.service.ChattingService;
 import kr.co.service.CrewService;
+import kr.co.service.sListService;
 
 
 
@@ -30,6 +33,9 @@ public class CrewController {
 	
 	@Inject
 	private ChattingService ch_service;
+	
+	@Inject
+	private sListService sList_service;
 	
 	@RequestMapping(value="/list_create", method=RequestMethod.GET)
 	public void list_create() throws Exception{
@@ -86,9 +92,23 @@ public class CrewController {
 	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model, String mid) throws Exception {
 		// 로그인 한 mid 넘겨주세요
 		mid = "user10";
-		
 		List<CrewVO> list = crew_service.crew_list(cri, mid);
 		model.addAttribute("list", list);
+		List<sListVO> sList= new ArrayList<>();
+		for(int i=0;i<list.size();i++){
+			int cno = list.get(i).getCno();
+			sListVO vo= sList_service.slist_list(cno);
+			sList.add(vo);
+		}
+		model.addAttribute("sList", sList);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/list_sList/{cno}")
+	public sListVO crew_sList(@PathVariable("cno")int cno, Model model)throws Exception{
+		sListVO sList_vo=sList_service.slist_list(cno);
+		return sList_vo;
+		
 	}
 	
 }

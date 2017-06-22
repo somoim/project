@@ -19,7 +19,7 @@ public class MyDAOImpl implements MyDAO {
 	private SqlSession session;
 	
 	@Override
-	public List<CrewVO> crew_sel_list(Criteria cri, String category, String region, String mid) throws Exception {
+	public List<CrewVO> crew_sel_list(Criteria cri, String mid) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE+".crew_sel_list", mid);
 	}

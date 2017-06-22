@@ -17,9 +17,9 @@ public class MyServiceImpl implements MyService {
 	MyDAO my_dao;
 	
 	@Override
-	public List<CrewVO> crew_sel_list(Criteria cri, String category, String region, String mid) throws Exception {
+	public List<CrewVO> crew_sel_list(Criteria cri, String mid) throws Exception {
 		// TODO Auto-generated method stub
-		return my_dao.crew_sel_list(cri, category, region, mid);
+		return my_dao.crew_sel_list(cri, mid);
 	}
 
 	@Override
