@@ -49,7 +49,7 @@
 						<span><img alt="첨부파일" src="{{imgsrc}}"></span> 
 					<div> 
 						<a href="{{getLink}}">{{fileName}}</a> 
-						<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"> 
+						<a href="{{sg_picture}}" class="btn btn-default btn-xs pull-right delbtn"> 
 						<span class="glyphicon glyphicon-remove-circle"></span> </a> 
 					</div> 
 					</li> 
@@ -92,11 +92,9 @@
 
 							var form = $("#myForm");
 							var str = "";
-							
-							$(".delbtn").each(function() {
-								str += "<input value='"+$(this).attr("href")+"' name='file' type='hidden'>";
-							});
-							
+
+							str += "<input value='"+$(".delbtn").attr("href")+"' name='sg_picture' type='hidden'>";
+								
 							form.append(str);
 							form.get(0).submit();
 						}); 

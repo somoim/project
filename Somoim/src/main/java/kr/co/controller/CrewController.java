@@ -46,13 +46,15 @@ import kr.co.util.UploadFileUtils;
 	@Inject 
 	private sGalleryService sgallery_service; 
 	
-	
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.POST) 
-	public void sgallery_create_post(sGalleryVO sgallery_vo) throws Exception{ 
+	public void sgallery_create_post(sGalleryVO sgallery_vo) throws Exception{ 	
+		
+		
 		
 		sgallery_vo.setCno(1);
 		sgallery_vo.setMid("aaa");
-		sgallery_vo.setSg_picture("sg_picture");
+
+		
 		sgallery_service.sgallery_create(sgallery_vo); 
 	} 
 	
