@@ -23,7 +23,9 @@ public class MyController {
 	
 	@RequestMapping(value="/mylist", method=RequestMethod.GET)
 	public void mylist(@ModelAttribute("cri") Criteria cri, Model model, String category, String region, String mid) throws Exception {
-		mid="user03";
+		// 세션에서 로그인정보 mid 넘겨주세요
+		mid="user10";
+		
 		List<CrewVO> sel_list = my_service.crew_sel_list(cri, category, region, mid);
 		model.addAttribute("sel_list", sel_list);
 		
