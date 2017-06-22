@@ -28,7 +28,7 @@
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
 		<property ref="dataSource" name="dataSource"></property>
 		<property value="classpath:/mybatis-config.xml" name="configLocation"></property>
-		<property value="classpath:mappers/**/*Mapper.xml" name="mapperLocations"></property>
+		<property value="classpath:mappers/*Mapper.xml" name="mapperLocations"></property>
 	</bean>
 	
 	<bean destroy-method="clearCache" class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
@@ -43,8 +43,9 @@
 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
-
-	<context:component-scan base-package="kr.co.*" />
+	<context:component-scan base-package="kr.co.aop"></context:component-scan>
+	<context:component-scan base-package="kr.co.persistence" />
+	<context:component-scan base-package="kr.co.service" />
 
 	
 </beans>
