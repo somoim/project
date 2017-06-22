@@ -64,6 +64,7 @@ public class CrewController {
 	@ResponseBody
 	@RequestMapping(value="/tab_chat/{cno}")
 	public List<ChattingVO> send_Chat(@PathVariable("cno")int cno ,Model model) throws Exception {
+		
 		List<ChattingVO> list = ch_service.msg_list(cno);
 		model.addAttribute("list", list);
 		return list;

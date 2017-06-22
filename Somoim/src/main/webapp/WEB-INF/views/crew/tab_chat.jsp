@@ -21,7 +21,7 @@
 	$(document).ready(function(){
 		var cno = 1;
 		getChatList(cno);
-		
+		setInterval("getChatList("+cno+")", 5000);
 		$(".send").click(function(){
 			var mid = $("#mid").val();
 			var cno = $("#cno").val();
@@ -49,6 +49,9 @@
 			var template = Handlebars.compile(source);
 			
 			$("#replies").html(template(data));
+			
+
+			
 			
 		});
 	}
