@@ -119,8 +119,11 @@ import kr.co.util.UploadFileUtils;
 	
 	///////////////////////// 진희
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-		List<CrewVO> list = crew_service.crew_list(cri);
+	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model, String mid) throws Exception {
+		// 로그인 한 mid 넘겨주세요
+		mid = "user10";
+		
+		List<CrewVO> list = crew_service.crew_list(cri, mid);
 		model.addAttribute("list", list);
 	}
 	

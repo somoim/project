@@ -3,7 +3,9 @@
 <mapper namespace="kr.co.mapper.CrewMapper">
 
 	<select id="crew_list" resultType="CrewVO">
-		select * from crew order by read_cnt desc
+		select * from crew 
+		 where cno not in (select distinct(c.cno) from status s join crew c on s.cno = c.cno where s.mid=#{mid}) 
+		 order by read_cnt desc
 	</select>
 	
 	<select id="crew_join_cnt" resultType="Integer">

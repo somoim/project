@@ -30,17 +30,17 @@
 			<div class="panel-heading">
 				<p>맞춤 추천 모임</p>
 			</div>
-			<div class="panel-body">
-				<c:forEach items="${sel_list}" var="sel">
-					<p>정모 요일/날짜/시간</p>
-					<p>
-						<span>${sel.region}</span> |  
-						<span>${sel.title}</span> | 
-						<span>정모장소</span>
-					</p>
-					<p><span class="text-right">${sel.join_cnt} / ${sel.attend_cnt} 명</span></p>
-				</c:forEach>
-			</div>
+			<c:forEach items="${sel_list}" var="sel">
+				<div class="panel-body" style="border: 1px dotted gray;">
+						<p>정모 요일/날짜/시간</p>
+						<p>
+							<span>${sel.region}</span> |  
+							<span>${sel.title}</span> | 
+							<span>정모장소</span>
+						</p>
+						<p><span class="text-right">${sel.join_cnt} / ${sel.attend_cnt} 명</span></p>
+				</div>
+			</c:forEach>
 		</div>
 		<!--  -->
 	</div>

@@ -1,6 +1,8 @@
 package kr.co.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -19,9 +21,12 @@ public class CrewDAOImpl implements CrewDAO {
 	private SqlSession session;
 	
 	@Override
-	public List<CrewVO> crew_list(Criteria cri) throws Exception {
+	public List<CrewVO> crew_list(Criteria cri, String mid) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE+".crew_list", cri);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cri", cri);
+		map.put("mid", mid);
+		return session.selectList(NAMESPACE+".crew_list", map);
 	}
 
 }

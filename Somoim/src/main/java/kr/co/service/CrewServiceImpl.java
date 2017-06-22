@@ -17,9 +17,9 @@ public class CrewServiceImpl implements CrewService {
 	CrewDAO crew_dao;
 	
 	@Override
-	public List<CrewVO> crew_list(Criteria cri) throws Exception {
+	public List<CrewVO> crew_list(Criteria cri, String mid) throws Exception {
 		// TODO Auto-generated method stub
-		return crew_dao.crew_list(cri);
+		return crew_dao.crew_list(cri, mid);
 	}
 
 }
