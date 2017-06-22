@@ -4,7 +4,7 @@
 <mapper namespace="kr.co.mappers.sGalleryMapper">
 
 	<insert id="sgallery_create">
-		insert into sGallery(sg_no, cno, mid, sg_picture) values (#{sg_no}, #{cno}, #{mid}, #{sg_picture})
+		insert into sGallery(sg_no, cno, mid, sg_picture) values (seq_sg_no.nextval, #{cno}, #{mid}, #{sg_picture})
 	</insert>
 	
 	<select id="sgallery_list" resultType="sGalleryVO">

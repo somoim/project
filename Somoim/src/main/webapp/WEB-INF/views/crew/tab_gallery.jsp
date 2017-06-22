@@ -39,52 +39,52 @@
 		</ul>
 		
 		 <div id="container"> 
-		 	여기서부터 시작
-		<!-- 	<div class="container">
+		 	<!-- 여기서부터 시작 -->
+		 	<div class="container">
 				<div class="row thumbnail_list">
-					<div class="col-sm-2 col-xs-3">
+					<div class="col-sm-3 col-xs-4">
+						<a href="#" class="thumbnail"> <img src="/displayFile?fileName=/2017/06/22/eef1773e-8654-4eea-b995-1f83da081eaf_back.jpg" alt="...">
+						</a>
+					</div>
+
+					<div class="col-sm-3 col-xs-4">
 						<a href="#" class="thumbnail"> <img src="..." alt="...">
 						</a>
 					</div>
 
-					<div class="col-sm-2 col-xs-3">
+					<div class="col-sm-3 col-xs-4">
 						<a href="#" class="thumbnail"> <img src="..." alt="...">
 						</a>
 					</div>
 
-					<div class="col-sm-2 col-xs-3">
+					<div class="col-sm-3 col-xs-4">
 						<a href="#" class="thumbnail"> <img src="..." alt="...">
 						</a>
 					</div>
 
-					<div class="col-sm-2 col-xs-3">
+					<div class="col-sm-3 col-xs-4">
 						<a href="#" class="thumbnail"> <img src="..." alt="...">
 						</a>
 					</div>
 
-					<div class="col-sm-2 col-xs-3">
+					<div class="col-sm-3 col-xs-4">
 						<a href="#" class="thumbnail"> <img src="..." alt="...">
 						</a>
 					</div>
 
-					<div class="col-sm-2 col-xs-3">
+					<div class="col-sm-3 col-xs-4">
 						<a href="#" class="thumbnail"> <img src="..." alt="...">
 						</a>
 					</div>
 
-					<div class="col-sm-2 col-xs-3">
-						<a href="#" class="thumbnail"> <img src="..." alt="...">
-						</a>
-					</div>
-
-					<div class="col-sm-2 col-xs-3">
+					<div class="col-sm-3 col-xs-4" >
 						<a href="#" class="thumbnail"> <img src="..." alt="...">
 						</a>
 					</div>
 				</div>
 
 
-				버튼 레이아웃-->
+				<!-- 버튼 레이아웃 -->
 				<a href="gallery_create" class="fixedBtn"> 
 				<span><span class="glyphicon glyphicon-pencil"></span></span> 	
 				<span>글쓰기</span>
@@ -93,8 +93,7 @@
 				<script type="text/javascript">
 						parent.addFilePath('${savedName}');
 				</script>
-					
-			<!-- </div> -->
+			</div>
 		</div>
 	</div>
 </body>
