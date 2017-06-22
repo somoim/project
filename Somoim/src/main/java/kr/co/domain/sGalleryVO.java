@@ -4,12 +4,12 @@ package kr.co.domain;
 public class sGalleryVO {
 
 	private int sg_no;
-	private  int	cno;
+	private int	cno;
 	private String mid;
 	private String sg_picture;
 	private String sg_writeday;
 
-	/*sg_no, cno, sg_picture 동일하면 같은 것으로 취급*/
+	/*sg_no, cno, sg_picture*/
 	
 	@Override
 	public int hashCode() {

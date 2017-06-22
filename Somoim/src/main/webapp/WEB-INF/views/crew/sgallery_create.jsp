@@ -29,7 +29,7 @@
 					</form>
 				</div>
 
-				<form id="myForm" action="gallery_create" method="post">
+				<form id="myForm" action="sgallery_create" method="post">
 					<div class="filebox">
 						<!-- <label class="form-control" class="fileUpload" for="fileUpload">업로드할 파일 선택하기</label>  -->
 						<input id="fileUpload" type="file" id="file">
@@ -86,15 +86,15 @@
 
 						 $("#submit_btn").on("click", function(event) {
 							event.preventDefault();
-							var file = event.originalEvent.dataTransfer.files;
+							var files = event.target.files; 
 							var formData = new FormData();
-							formData.append("file",	file);
+							formData.append("file",	files);
 
 							var form = $("#myForm");
 							var str = "";
 							
-							$(".delbtn").each(function(index) {
-								str += "<input value='"+$(this).attr("href")+"' name='files["+index+"]' type='hidden'>";
+							$(".delbtn").each(function() {
+								str += "<input value='"+$(this).attr("href")+"' name='file' type='hidden'>";
 							});
 							
 							form.append(str);
