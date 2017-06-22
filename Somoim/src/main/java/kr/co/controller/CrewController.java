@@ -49,11 +49,8 @@ import kr.co.util.UploadFileUtils;
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.POST) 
 	public void sgallery_create_post(sGalleryVO sgallery_vo) throws Exception{ 	
 		
-		
-		
 		sgallery_vo.setCno(1);
 		sgallery_vo.setMid("aaa");
-
 		
 		sgallery_service.sgallery_create(sgallery_vo); 
 	} 
@@ -61,6 +58,16 @@ import kr.co.util.UploadFileUtils;
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.GET) 
 	public void sgallery_create(){ 
 	} 
+	
+	
+	@ResponseBody
+	@RequestMapping(value="sgallery_list/{cno}")
+	public List<sGalleryVO> sgallery_list(@PathVariable("cno") int cno) throws Exception{
+	//@PathVariable("bno") int bno : path에 있는 bno를 가지고 와서 int bno에 넣어줌
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("controller"+cno);
+		return sgallery_service.sgallery_list(cno);
+	}
 	
 	
 	@RequestMapping(value="/list_create", method=RequestMethod.GET) 

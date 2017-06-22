@@ -34,26 +34,26 @@
 						<!-- <label class="form-control" class="fileUpload" for="fileUpload">업로드할 파일 선택하기</label>  -->
 						<input id="fileUpload" type="file" id="file">
 						<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
-						<button class="btn btn-danger form-control reset_btn" id="reset_btn" type="reset">취소</button>
+						<a href="crew/tab_gallery">
+						<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button></a>
 					</div>
 
 					<div class="row">
 						<ul class="clearfix uploadedList"></ul>
 					</div>
-
 				</form>
 
 
-				<script id="source" type="text/x-handlebars-template"> 
-					<li class="col-xs-3"> 
-						<span><img alt="첨부파일" src="{{imgsrc}}"></span> 
-					<div> 
-						<a href="{{getLink}}">{{fileName}}</a> 
-						<a href="{{sg_picture}}" class="btn btn-default btn-xs pull-right delbtn"> 
-						<span class="glyphicon glyphicon-remove-circle"></span> </a> 
-					</div> 
-					</li> 
-				</script>
+					<script id="source" type="text/x-handlebars-template"> 
+						<li class="col-xs-3"> 
+							<span><img alt="첨부파일" src="{{imgsrc}}"></span> 
+						<div> 
+							<a href="{{getLink}}">{{fileName}}</a> 
+							<a href="{{sg_picture}}" class="btn btn-default btn-xs pull-right delbtn"> 
+							<span class="glyphicon glyphicon-remove-circle"></span> </a> 
+						</div> 
+						</li> 
+					</script>
 
 
 				<script type="text/javascript">
@@ -93,15 +93,51 @@
 							var form = $("#myForm");
 							var str = "";
 
-							str += "<input value='"+$(".delbtn").attr("href")+"' name='sg_picture' type='hidden'>";
+								str += "<input value='"+$(".delbtn").attr("href")+"' name='sg_picture' type='hidden'>";
+						
+							
+							if(str.value == undefined){
+								alert("사진을 선택해주세요.");
 								
-							form.append(str);
+							} else if (str.value != null) {
+								alert("사진이 업로드되었습니다.");
+							}
+/* 							form.append(str);
 							form.get(0).submit();
-						}); 
-					});
+							alert("사진이 업로드되었습니다.");
+							
+ */							
+							/* location.href="/crew/tab_gallery?cno=${sgallery_vo.cno}"; */
+							console.log(str);
+							console.log(str.value);
+						});
+						 
+							
+						$(".uploadedList").on("click", "li div .delbtn", function(event) {
+							event.preventDefault();
+							var delBtn = $(this);
+							var delLi = $(this).parent("div").parent("li");
+							
+							$.ajax({
+								type:"post",
+								url:"/deleteFile",
+								data:{
+									fileName : delBtn.attr("href")
+								},
+								dataType: "text",
+								success: function(result) {
+									if(result == "DELETE_SUCCESS"){
+										delLi.remove();
+										alert("취소되었습니다.");	
+										$("input[type=file]").val("");
+									}
+								}
+							});
+						});
+				});
 				</script>
 
-			</div>
-		</div>
-	</div>
+			</div> <!-- class: container -->
+		</div> <!-- id: container -->
+	</div> <!-- mobile -->
 </body>

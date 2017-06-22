@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="sgallery_list" resultType="sGalleryVO">
-		select * from sGallery where cno=#{cno}
+		select * from sGallery where cno=#{cno} order by sg_writeday
 	</select>
 	
 	<delete id="sgallery_delete">

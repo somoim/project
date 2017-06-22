@@ -27,8 +27,8 @@
 			</div>
 			<div class="titleCont">사진첩탭</div>
 			<div class="snsCont">
-				<span class="glyphicon glyphicon-new-window"></span> <span
-					class="glyphicon glyphicon-option-vertical"></span>
+				<span class="glyphicon glyphicon-new-window"></span> 
+				<span class="glyphicon glyphicon-option-vertical"></span>
 			</div>
 		</header>
 		<ul class="sub_tab">
@@ -42,59 +42,81 @@
 		 	<!-- 여기서부터 시작 -->
 		 	<div class="container">
 				<div class="row thumbnail_list">
-					<div class="col-sm-3 col-xs-4">
-						<a href="#" class="thumbnail"> <img src="/displayFile?fileName=/2017/06/22/eef1773e-8654-4eea-b995-1f83da081eaf_back.jpg" alt="...">
-						</a>
-					</div>
-
-					<div class="col-sm-3 col-xs-4">
-						<a href="#" class="thumbnail"> <img src="..." alt="...">
-						</a>
-					</div>
-
-					<div class="col-sm-3 col-xs-4">
-						<a href="#" class="thumbnail"> <img src="..." alt="...">
-						</a>
-					</div>
-
-					<div class="col-sm-3 col-xs-4">
-						<a href="#" class="thumbnail"> <img src="..." alt="...">
-						</a>
-					</div>
-
-					<div class="col-sm-3 col-xs-4">
-						<a href="#" class="thumbnail"> <img src="..." alt="...">
-						</a>
-					</div>
-
-					<div class="col-sm-3 col-xs-4">
-						<a href="#" class="thumbnail"> <img src="..." alt="...">
-						</a>
-					</div>
-
-					<div class="col-sm-3 col-xs-4">
-						<a href="#" class="thumbnail"> <img src="..." alt="...">
-						</a>
-					</div>
-
-					<div class="col-sm-3 col-xs-4" >
-						<a href="#" class="thumbnail"> <img src="..." alt="...">
-						</a>
-					</div>
+				<div class="form-group">
+					<label for="uploadedList">첨부파일</label>
+						<ul id="uploadedList" class="clearfix uploadedList">
+						
+						</ul>
 				</div>
-
-
+								
+				
+					<script id="uploaded_picture" type="text/x-handlebars-template"> 
+						{{#each.}}
+							<li class="col-sm-3 col-xs-4" data-src="{{sg_picture}}">
+								<span> 
+									<a href="{{getLink}}" class="thumbnail largeShow">{{fileName}} 
+										<img src="{{imgsrc}}"  alt="사진">
+									</a>
+								</span>
+							</li>
+						{{/each}}
+					</script>
+					
+					
+						<div class="col-sm-3 col-xs-4" data-src="{{sg_picture}}">
+							<span> 
+								<a href="{{getLink}}" class="thumbnail largeShow">{{fileName}} 
+									<img src="{{imgsrc}}"  alt="사진">
+								</a>
+							</span>
+						</div>
+						<div class="col-sm-3 col-xs-4" data-src="{{sg_picture}}">
+							<span> 
+								<a href="{{getLink}}" class="thumbnail largeShow">{{fileName}} 
+									<img src="{{imgsrc}}"  alt="사진">
+								</a>
+							</span>
+						</div>
+						<div class="col-sm-3 col-xs-4" data-src="{{sg_picture}}">
+							<span> 
+								<a href="{{getLink}}" class="thumbnail largeShow">{{fileName}} 
+									<img src="{{imgsrc}}"  alt="사진">
+								</a>
+							</span>
+						</div> 
+						
+					
 				<!-- 버튼 레이아웃 -->
-				<a href="gallery_create" class="fixedBtn"> 
-				<span><span class="glyphicon glyphicon-pencil"></span></span> 	
-				<span>글쓰기</span>
+				<a href="sgallery_create" class="fixedBtn"> 
+					<span><span class="glyphicon glyphicon-pencil"></span></span> 	
+					<span>글쓰기</span>
 				</a> 
 				
+				
+				
 				<script type="text/javascript">
-						parent.addFilePath('${savedName}');
+					$(document).ready(function() {
+						var cno=1;
+						
+						ShowAllPicture(cno);
+						
+						function ShowAllPicture(cno) {
+							$.getJSON("/tab_gallery"+cno, function(result) {
+								var source = $("#uploaded_picture").html();
+								var template = Handlebars.compile(source);
+								
+								$(result).each(function() {
+									var fileInfo = getFileInfo(this);
+									var ht = template(fileInfo);
+									$("#uploadedList").append(ht);
+								});
+							});
+						});
+					});
 				</script>
-			</div>
-		</div>
-	</div>
+				
+			</div><!-- class="container" -->
+		</div><!-- id="container" -->
+	</div> <!-- mobile -->
 </body>
 
