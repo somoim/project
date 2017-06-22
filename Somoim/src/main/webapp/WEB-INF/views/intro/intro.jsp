@@ -30,7 +30,7 @@
 	    }
 	 
 		function go_url(){
-		   location.href="login"  // 페이지 이동...
+		   location.href="intro/login"  // 페이지 이동...
 		}
 	</script>
 </div>
