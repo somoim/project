@@ -35,12 +35,6 @@ public class CrewController {
 	public void list_create() throws Exception{
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-		List<CrewVO> list = crew_service.crew_list(cri);
-		model.addAttribute("list", list);
-	}
-	
 	@RequestMapping(value="/tab_list")
 	public void slist() throws Exception {
 		
@@ -64,7 +58,6 @@ public class CrewController {
 	@ResponseBody
 	@RequestMapping(value="/tab_chat/{cno}")
 	public List<ChattingVO> send_Chat(@PathVariable("cno")int cno ,Model model) throws Exception {
-		
 		List<ChattingVO> list = ch_service.msg_list(cno);
 		model.addAttribute("list", list);
 		return list;
@@ -80,6 +73,12 @@ public class CrewController {
 		ch_service.insert_msg(chat_vo);
 		
 		return "redirect:/crew/tab_chat";
+	}
+
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+		List<CrewVO> list = crew_service.crew_list(cri);
+		model.addAttribute("list", list);
 	}
 	
 }

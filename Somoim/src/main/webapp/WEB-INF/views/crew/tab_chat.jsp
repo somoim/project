@@ -26,7 +26,7 @@
 			var mid = $("#mid").val();
 			var cno = $("#cno").val();
 			var msg = $("#msg").val();
-			$.ajax({	//- 폴더에서도 삭제할 경우
+			$.ajax({	
 				type:"post",
 				url:"/crew/tab_chat",
 				data:{
