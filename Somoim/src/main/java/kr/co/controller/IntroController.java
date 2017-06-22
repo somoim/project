@@ -2,10 +2,15 @@ package kr.co.controller;
 
 import javax.inject.Inject;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.domain.MemberVO;
 import kr.co.service.MemberService;
@@ -22,14 +27,30 @@ public class IntroController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public void login() throws Exception{
+	public void member_loginGet() throws Exception{
+		
+	}
+	
+	@RequestMapping(value="/login_post", method=RequestMethod.POST)
+	public String member_loginPost(MemberVO member_vo, Model model) throws Exception{
+		MemberVO vo = service.member_login(member_vo);
+		if (vo == null) {
+			return "redirect:/intro/login"; 
+		}
+		model.addAttribute("MemberVO", vo);
+		return "redirect:/crew/list";
+	}
+	
+	@RequestMapping(value="/loginfail", method=RequestMethod.GET)
+	public void member_loginFalse() throws Exception{
+		
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public void member_joinGet() throws Exception{
 		
 	}
-	
+	@ResponseBody
 	@RequestMapping(value="/join_post", method=RequestMethod.POST)
 	public String member_joinPost(MemberVO member_vo, @RequestParam("birth1") String birth1, @RequestParam("birth2") String birth2, @RequestParam("birth3") String birth3,
 			@RequestParam("phone1") String phone1, @RequestParam("phone2") String phone2, @RequestParam("phone3") String phone3) throws Exception{
@@ -40,7 +61,7 @@ public class IntroController {
 		System.out.println(member_vo);
 		System.out.println("가입되었습니다");
 		System.out.println("===================================================================");
-		return "redirect:/crew/list";
+		return "redirect:/intro/login";
 	}
 	
 

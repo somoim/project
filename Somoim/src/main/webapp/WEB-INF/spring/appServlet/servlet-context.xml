@@ -31,6 +31,15 @@
 	
 	<context:component-scan base-package="kr.co.*" />
 	<context:component-scan base-package="kr.co.controller" />
+	
+	<beans:bean class="kr.co.interceptor.LoginInterceptor" id="loginInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/intro/login_post"/>
+			<beans:ref bean="loginInterceptor"/>	
+		</interceptor>
+	</interceptors>
 
 	
 </beans:beans>
