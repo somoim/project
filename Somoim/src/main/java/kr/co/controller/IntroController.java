@@ -2,16 +2,13 @@ package kr.co.controller;
 
 import javax.inject.Inject;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import kr.co.domain.MemberVO;
 import kr.co.service.MemberService;
 
@@ -35,7 +32,7 @@ public class IntroController {
 	public String member_loginPost(MemberVO member_vo, Model model) throws Exception{
 		MemberVO vo = service.member_login(member_vo);
 		if (vo == null) {
-			return "redirect:/intro/login"; 
+			return "redirect:/intro/loginfail"; 
 		}
 		model.addAttribute("MemberVO", vo);
 		return "redirect:/crew/list";
@@ -50,7 +47,16 @@ public class IntroController {
 	public void member_joinGet() throws Exception{
 		
 	}
-	@ResponseBody
+	
+	@RequestMapping(value="/midcheck", method=RequestMethod.POST)
+	public @ResponseBody Object mid_check(@ModelAttribute("MemberVO") MemberVO memberVO) throws Exception{
+		MemberVO resultVO = service.member_select(memberVO);
+		System.out.println("===================================================================");
+		System.out.println(resultVO);
+		return resultVO;
+		
+	}
+	
 	@RequestMapping(value="/join_post", method=RequestMethod.POST)
 	public String member_joinPost(MemberVO member_vo, @RequestParam("birth1") String birth1, @RequestParam("birth2") String birth2, @RequestParam("birth3") String birth3,
 			@RequestParam("phone1") String phone1, @RequestParam("phone2") String phone2, @RequestParam("phone3") String phone3) throws Exception{

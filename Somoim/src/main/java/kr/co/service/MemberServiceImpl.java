@@ -23,6 +23,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO member_login(MemberVO member_vo) throws Exception {
 		return dao.member_login(member_vo);
 	}
+
+	@Override
+	public MemberVO member_select(MemberVO member_vo) throws Exception {
+		return dao.member_select(member_vo);
+	}
 	
 
 }

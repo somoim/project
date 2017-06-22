@@ -14,4 +14,8 @@
 		select * from member where mid = #{mid} and password = #{password}
 	</select>
 	
+	<select id="member_select" resultType="MemberVO">
+		select * from member where mid = #{mid}
+	</select>
+	
 </mapper>
