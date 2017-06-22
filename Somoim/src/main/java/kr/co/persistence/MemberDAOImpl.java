@@ -28,6 +28,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO member_select(MemberVO member_vo) throws Exception {
 		return session.selectOne(NAMESPACE+".member_select", member_vo);
 	}
-
+	
 	
 }

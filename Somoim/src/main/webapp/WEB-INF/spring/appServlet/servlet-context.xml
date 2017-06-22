@@ -34,7 +34,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.co.somoim" />
-	<context:component-scan base-package="kr.co.controller" />
+	<context:component-scan base-package="kr.co.*" />
 	
 	<beans:bean class="kr.co.interceptor.LoginInterceptor" id="loginInterceptor"></beans:bean>
 	
