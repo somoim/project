@@ -1,9 +1,6 @@
 package kr.co.persistence;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,10 +11,9 @@ import kr.co.domain.sGalleryVO;
 @Repository
 public class sGalleryDAOImpl implements sGalleryDAO {
 	
-	private static final int HashMap = 0;
 	@Inject
 	private SqlSession session;
-	private final String NAMESPACE="kr.co.mapper.sGalleryMapper";
+	private final String NAMESPACE="kr.co.mappers.sGalleryMapper";
 
 	@Override
 	public void sgallery_create(sGalleryVO sgallery_vo) throws Exception {

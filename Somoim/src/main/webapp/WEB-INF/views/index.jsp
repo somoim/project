@@ -12,6 +12,9 @@
 	<script src="../resources/js/jquery.js" type="text/javascript"></script>
 	<script src="../resources/bs/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="../resources/dist/js/bootstrap-select.min.js" ></script>
+	
+	<script src="../resources/js/upload.js" type="text/javascript"></script> 
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js" type="text/javascript"></script> 
 	<title>Somoim</title>
 </head>
 <body>	

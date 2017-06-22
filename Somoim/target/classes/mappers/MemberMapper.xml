@@ -10,8 +10,12 @@
 		(#{mid},#{password},#{name},#{gender},#{birth},#{address},#{phone},#{category})
 	</insert>
 	
-	<select id="member_list" resultType="MemberVO">
-		select * from crew
+	<select id="member_login" resultType="MemberVO">
+		select * from member where mid = #{mid} and password = #{password}
+	</select>
+	
+	<select id="member_select" resultType="MemberVO">
+		select * from member where mid = #{mid}
 	</select>
 	
 </mapper>

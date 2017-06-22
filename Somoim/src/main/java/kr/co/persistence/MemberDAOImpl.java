@@ -18,8 +18,16 @@ public class MemberDAOImpl implements MemberDAO {
 	public void member_join(MemberVO member_vo) throws Exception {
 		session.insert(NAMESPACE+".member_join", member_vo);
 	}
-	
-	
+
+	@Override
+	public MemberVO member_login(MemberVO member_vo) throws Exception {
+		return session.selectOne(NAMESPACE+".member_login", member_vo);
+	}
+
+	@Override
+	public MemberVO member_select(MemberVO member_vo) throws Exception {
+		return session.selectOne(NAMESPACE+".member_select", member_vo);
+	}
 	
 	
 }

@@ -3,10 +3,12 @@ package kr.co.controller;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.domain.MemberVO;
 import kr.co.service.MemberService;
 
@@ -22,11 +24,36 @@ public class IntroController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public void login() throws Exception{
+	public void member_loginGet() throws Exception{
+		
+	}
+	
+	@RequestMapping(value="/login_post", method=RequestMethod.POST)
+	public String member_loginPost(MemberVO member_vo, Model model) throws Exception{
+		MemberVO vo = service.member_login(member_vo);
+		if (vo == null) {
+			return "redirect:/intro/loginfail"; 
+		}
+		model.addAttribute("MemberVO", vo);
+		return "redirect:/crew/list";
+	}
+	
+	@RequestMapping(value="/loginfail", method=RequestMethod.GET)
+	public void member_loginFalse() throws Exception{
+		
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public void member_joinGet() throws Exception{
+		
+	}
+	
+	@RequestMapping(value="/midcheck", method=RequestMethod.POST)
+	public @ResponseBody Object mid_check(@ModelAttribute("MemberVO") MemberVO memberVO) throws Exception{
+		MemberVO resultVO = service.member_select(memberVO);
+		System.out.println("===================================================================");
+		System.out.println(resultVO);
+		return resultVO;
 		
 	}
 	
@@ -40,7 +67,7 @@ public class IntroController {
 		System.out.println(member_vo);
 		System.out.println("가입되었습니다");
 		System.out.println("===================================================================");
-		return "redirect:/crew/list";
+		return "redirect:/intro/login";
 	}
 	
 

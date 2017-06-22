@@ -22,17 +22,13 @@
 				<form class="form-horizontal login_form" action="/user/loginPost" method="post">
 				
 					<div class="form-group">
-						<label class="col-xs-2 control-label" for="id">ID</label>
-						<div class="col-xs-10 id_form">
-							<input class="form-control" name="mid" id="mid" placeholder="아이디를 입력하세요">
+						<div class="col-xs-12 text-center">
+							<img src="../resources/img/mobile/warring_ico.png" alt="" width="60px;" height="auto">
 						</div>
 					</div>
 	
-					<div class="form-group">
-						<label class="col-xs-2 control-label" for="upw">PW</label> 
-						<div class="col-xs-10 upw_form">
-							<input class="form-control" name="password" id="password" placeholder="비밀번호를 입력하세요">
-						</div>
+					<div class="form-group text-center">
+						<div class="col-xs-12">로그인 정보를 확인해주세요.</div>
 					</div>
 	
 					<div class="form-group">
@@ -64,8 +60,8 @@
 			$form.submit();
 		});
 		$("#loginBtn").on("click", function() {
-			$form.attr("method", "POST");
-			$form.attr("action", "/intro/login_post");
+			$form.attr("method", "get");
+			$form.attr("action", "/intro/login");
 			$form.submit();
 		});
 		

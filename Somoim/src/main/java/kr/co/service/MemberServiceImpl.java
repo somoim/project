@@ -15,9 +15,18 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void member_join(MemberVO member_vo) throws Exception {
-		System.err.println("#####################################################################");
-		System.out.println(member_vo);
+		
 		dao.member_join(member_vo);
+	}
+	
+	@Override
+	public MemberVO member_login(MemberVO member_vo) throws Exception {
+		return dao.member_login(member_vo);
+	}
+
+	@Override
+	public MemberVO member_select(MemberVO member_vo) throws Exception {
+		return dao.member_select(member_vo);
 	}
 	
 
