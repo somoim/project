@@ -31,14 +31,15 @@ img{border:0}
 #header .userCont span:last-child { flex:8;}
 #header .searchCont { flex:7; background-color:#422b2c; margin:10px; height:35px; line-height:34px; padding:0 10px; color:#ddc5c6; font-size:12px; border-radius: 5px;}
 #header .searchCont span { vertical-align:middle}
-#header2 { display:flex; position:fixed; top:0; width:100%; height:auto; background-color:#493334;}
+#header2 { display:flex; position:fixed; top:0; width:100%; height:auto; background-color:#493334; z-index:100;}
 #header2 div { display:flex; height:55px;  }
 #header2 .backCont { flex:1; color:#ffffff; font-size:20px; justify-content:center; align-items:center;}
 #header2 .backCont span { top:0;}
 #header2 .titleCont { flex:7; color:#ffffff; justify-content:flex-start; align-items:center;}
 #header2 .snsCont { flex:2; color:#ffffff;}
 #header2 .snsCont span { flex:1; height:55px; text-align:center; line-height:55px; color:#ffffff; font-size:16px; opacity:0.7; top:0;}
-#footer { width:100%; height:auto; position:fixed; bottom:0; background-color:#ffffff; border-top:2px solid #dadada; box-sizing:border-box; }
+.sub_tab {z-index: 100;}
+#footer { width:100%; height:auto; position:fixed; bottom:0; background-color:#ffffff; border-top:2px solid #dadada; box-sizing:border-box; z-index: 100;}
 #footer .nav { display:flex;}
 #footer .nav li { flex:1; text-align: center; color:#929292;}
 #footer .nav li:hover { color:#493334; }
