@@ -1,7 +1,6 @@
 package kr.co.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -147,21 +146,25 @@ public class CrewController {
 		mid = "user10";
 		List<CrewVO> list = crew_service.crew_list(cri, mid);
 		model.addAttribute("list", list);
-		List<sListVO> sList= new ArrayList<>();
-		for(int i=0;i<list.size();i++){
-			int cno = list.get(i).getCno();
-			sListVO vo= sList_service.slist_list(cno);
-			sList.add(vo);
-		}
-		model.addAttribute("sList", sList);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/list_sList/{cno}")
 	public sListVO crew_sList(@PathVariable("cno")int cno, Model model)throws Exception{
 		sListVO sList_vo=sList_service.slist_list(cno);
-		return sList_vo;
 		
+		String attend_date = sList_vo.getAttend_date();
+		
+		String year = attend_date.substring(0, 4);
+		String month = attend_date.substring(4, 6);
+		String day = attend_date.substring(6, 8);
+		String hour = attend_date.substring(8, 10);
+		String minute = attend_date.substring(10, 12);
+		
+		attend_date = year + "/" + month + "/" + day + " " + hour + "시" + minute + "분";
+		sList_vo.setAttend_date(attend_date);
+
+		return sList_vo;
 	}
 	
 }
