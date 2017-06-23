@@ -29,4 +29,10 @@ public class CrewDAOImpl implements CrewDAO {
 		return session.selectList(NAMESPACE+".crew_list", map);
 	}
 
+	@Override
+	public CrewVO crew_tab_list(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE+".crew_tab_list", cno);
+	}
+
 }

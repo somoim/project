@@ -1,5 +1,7 @@
 package kr.co.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,6 +29,12 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberVO member_select(MemberVO member_vo) throws Exception {
 		return session.selectOne(NAMESPACE+".member_select", member_vo);
+	}
+
+	@Override
+	public List<MemberVO> member_tab_list(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE+".member_tab_list", cno);
 	}
 	
 	

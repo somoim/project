@@ -18,4 +18,8 @@
 		select * from member where mid = #{mid}
 	</select>
 	
+	<select id="member_tab_list" resultType="MemberVO">
+		select m.mid, m.name, m.POWER from member m join status s on m.mid = s.mid where cno = #{cno}
+	</select>
+	
 </mapper>

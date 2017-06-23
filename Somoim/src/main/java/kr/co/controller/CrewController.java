@@ -5,25 +5,32 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.domain.ChattingVO;
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
+import kr.co.domain.MemberVO;
 import kr.co.domain.sListVO;
 import kr.co.domain.sGalleryVO;
 import kr.co.service.ChattingService;
 import kr.co.service.CrewService;
+import kr.co.service.MemberService;
 import kr.co.service.sListService;
 import kr.co.service.sGalleryService;
 import kr.co.util.MediaUtils;
@@ -46,6 +53,9 @@ public class CrewController {
 	
 	@Inject 
 	private sGalleryService sgallery_service; 
+	
+	@Inject
+	private MemberService member_service;
 	
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.POST) 
 	public void sgallery_create_post(sGalleryVO sgallery_vo) throws Exception{ 	
@@ -77,11 +87,6 @@ public class CrewController {
 	
 	@RequestMapping(value="/list") 
 	public void crew_list() throws Exception { 
-	
-	} 
-	
-	@RequestMapping(value="/tab_list") 
-	public void slist() throws Exception { 
 	
 	} 
 	
@@ -139,14 +144,36 @@ public class CrewController {
 		return "redirect:/crew/tab_chat";
 	} 
 	
+	@RequestMapping(value="/tab_list") 
+	public void slist(Model model) throws Exception { 
+		int cno=1;
+		CrewVO crewVO=crew_service.crew_tab_list(cno);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(crewVO);
+		List<sListVO> sList_list=sList_service.slist_tab_list(cno);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(sList_list);
+		List<MemberVO> member_list=member_service.member_tab_list(cno);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(member_list);
+		model.addAttribute("crewVO", crewVO);
+		model.addAttribute("sList_list", sList_list);
+		model.addAttribute("member_list", member_list);
+	} 
+	
+	
 	///////////////////////// 진희
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model, String mid) throws Exception {
-		// 로그인 한 mid 넘겨주세요
-		mid = "user10";
+	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model, String mid, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		mid = memberVO.getMid();
+
 		List<CrewVO> list = crew_service.crew_list(cri, mid);
 		model.addAttribute("list", list);
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/list_sList/{cno}")

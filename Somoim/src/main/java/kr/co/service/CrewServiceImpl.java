@@ -22,4 +22,10 @@ public class CrewServiceImpl implements CrewService {
 		return crew_dao.crew_list(cri, mid);
 	}
 
+	@Override
+	public CrewVO crew_tab_list(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		return crew_dao.crew_tab_list(cno);
+	}
+
 }

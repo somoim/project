@@ -56,4 +56,10 @@
 .login_form label { height:34px; line-height:34px; margin-bottom:0;}
 .login_form button { margin-left:15px;}
 .terms .textarea { width: 100%;}
+.formLayout input[type=checkbox] { vertical-align:middle; margin:0 5px 0 0; }
+.formLayout .input-group label { margin:0 10px 5px 0; font-weight:normal;}
+.formLayout .checkbox label { padding:0 5px 0 0;}
+.formLayout .checkbox input[type=radio] { margin:0 15px 0 0; vertical-align:middle;}
+.formLayout select { height: 34px; border-radius: 4px; border: 1px solid #d2d2d2;}
+.formLayout input[type=tel] { height: 34px; border-radius: 4px; border: 1px solid #d2d2d2; padding:0 10px; width:55px}
 
