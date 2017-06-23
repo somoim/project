@@ -12,4 +12,7 @@
 		select count(distinct(mid)) from Status where cno=#{cno}
 	</select>
 	
+	<select id="crew_tab_list" resultType="CrewVO">
+		select * from crew where cno = #{cno} 
+	</select>
 </mapper>

@@ -1,5 +1,7 @@
 package kr.co.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,6 +20,12 @@ public class sListDAOImpl implements sListDAO {
 	@Override
 	public sListVO slist_list(int cno) throws Exception {
 		return session.selectOne(NAMESPACE+".slist_list", cno);
+	}
+
+	@Override
+	public List<sListVO> slist_tab_list(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE+".slist_tab_list", cno);
 	}
 
 }
