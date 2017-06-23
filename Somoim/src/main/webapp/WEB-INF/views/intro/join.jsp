@@ -5,6 +5,7 @@
 <html>
 <head>
 <style type="text/css">
+	.formLayout { padding:20px 0;}
 	.idcheck1 { display: none; color:blue;}
 	.idcheck2 { display: none; color:red;}
 </style>
@@ -205,8 +206,8 @@
 				<div class="form-group">
 					<label class="">성별</label>
 					<div class="checkbox">
-						<label>남성</label><input type="radio" name="gender" id="gender" value="1" checked="checked">
-						<label>여성</label><input type="radio" name="gender" id="gender" value="2">
+						<label for="gender1">남성</label><input type="radio" name="gender" id="gender1" value="1" checked="checked">
+						<label for="gender2">여성</label><input type="radio" name="gender" id="gender2" value="2">
 					</div>
 				</div>
 				
@@ -237,19 +238,19 @@
 					<div class="row">
 						<div class="col-sm-12">
 							 <select name="birth1">
-							 	<option value="">년도 선택</option>
+							 	<option value="">년도</option>
 						        <%for(int i=2017; i>=1900; i--){ %>
 						        <option value="<%=i %>"><%=i %></option>
 						        <%} %>
 						     </select>년&nbsp;
 						     <select name="birth2">
-						     	<option value="">월 선택</option>
+						     	<option value="">월</option>
 						        <%for(int i=1; i<=12; i++){ %>
 						        <option value="<%=i %>"><%=i %></option>
 						        <%} %>
 						     </select>월
 						     <select name="birth3">
-						     	<option value="">일 선택</option>
+						     	<option value="">일</option>
 						        <%for(int i=1; i<=31; i++){ %>
 						        <option value="<%=i %>"><%=i %></option>
 						        <%} %>
@@ -262,7 +263,7 @@
 					<label>거주지역</label>
 					<div class="input-control">
 						<select name="address" id="sido1">
-							<option value="">시/도 선택</option>
+							<option value="">시/도</option>
 						</select>
 						<!-- <select name="address" id="gugun1"></select> -->
 					</div>
@@ -280,7 +281,9 @@
 						    <option value="017">017</option>
 						    <option value="019">019</option>
 						</select>
+						-
 						<input type="tel" name="phone2" id="txtMobile2" size="4" maxlength="4"  />
+						-
 						<input type="tel" name="phone3" id="txtMobile3" size="4" maxlength="4"  />
 					</div>
 				</div>
@@ -309,7 +312,7 @@
 					</div>
 				</div>
 				
-				<div class="form-group">
+				<div class="form-group clearfix">
 					
 					<div class="col-xs-6 col-sm-6">
 						<button class="col-sm-6 form-control btn btn-primary" id="joinBtn" type="button" onclick="javascript:writeCheck()">회원가입</button>
@@ -325,83 +328,75 @@
 </div>
 	<script type="text/javascript">
 		
+		
+		var check = 0;
+		
 		// 폼체크
 		function writeCheck() { 
 			
 			// 폼을 변수에 담는다
 			var form = document.joinform;
 			
-			// name 값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.terms_ok.checked )  { 
 				alert( "이용약관에 동의해주세요." ); 
 				form.terms_ok.focus();
 		   		return ;
 			} 
 			
-			// name 값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.name.value )  { 
 				alert( "이름를 입력해주세요" ); 
 				form.name.focus();
 		   		return ;
 			} 
 			
-			// id 값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.mid.value )  { 
 				alert( "id를 입력해주세요" ); 
 				form.mid.focus();
 		   		return ;
 			} 
 			
-			// password 값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.password.value )  { 
 				alert( "비밀번호를 입력해주세요" ); 
 				form.password.focus();
 		   		return ;
 			} 
 			
-			// rePassword 값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.rePassword.value ) { 
 				alert( "비밀번호 체크를 입력해주세요" ); 
 				form.rePassword.focus(); 
 				return ; 
 			} 
 			
-			// 비밀번호와 비밀번호를 비교체크하여 리턴을 실행시켜 함수를 종료시킨다
 			if ( form.password.value != form.rePassword.value ){
 				alert( "비밀번호를 동일하게 입력하세요" ); 
 				form.rePassword.focus();
 		   		return ;
 			}
 			
-			//  값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.birth1.value ) { 
 				alert( "년도를 선택하세요." ); 
 				form.birth1.focus(); 
 				return ; 
 			} 
 			
-			//  값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.birth2.value ) { 
 				alert( "월을 선택하세요." ); 
 				form.birth2.focus(); 
 				return ; 
 			} 
 			
-			//  값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.birth3.value ) { 
 				alert( "일자를 선택하세요." ); 
 				form.birth3.focus(); 
 				return ; 
 			}
 			
-			//  값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.address.value ) { 
 				alert( "거주지역을 선택하세요." ); 
 				form.address.focus(); 
 				return ; 
 			} 
 			
-			// nickname 값이 없을경우 메시지를 출력시킨후 리턴을 실행시켜 함수를 종료시킨다
 			if( !form.phone1.value ) { 
 				alert( "휴대번호 앞자리를 선택해주세요." ); 
 				form.phone1.focus(); 
@@ -420,6 +415,12 @@
 				return ; 
 			}
 			
+			if( check == 1 ) { 
+				alert( "아이디 중복을 확인해주세요." ); 
+				form.mid.focus(); 
+				return ; 
+			}
+
 			form.submit(); 
 		}
 		
@@ -433,22 +434,29 @@
 	        }
 	    }
 		
+		
+		
+		
 		// 아이디체크
 		$(".checkID").click(function() {
+			
 			$.ajax({
 				url : "/intro/midcheck",
 				type : "post",
 				data : $("form").serialize(),
-				success : function(data) {
-					console.log(data);
-					if (data.mid != null) {
-						$(".idcheck").hide();
-						$(".idcheck2").css("display","block");
-						
-					} else if (data.mid == null) {
-						$(".idcheck").hide();
-						$(".idcheck1").css("display","block");
-					}
+				success : function isID(data) {
+				
+				    if(data.mid != null){
+				    	$(".idcheck").hide();
+						$(".idcheck2").css("display","block");	// 다른 아이디를 사용해주세요.
+						check = 1;
+				    } else {
+				    	$(".idcheck").hide();
+						$(".idcheck1").css("display","block");	// 사용가능한 아이디입니다.
+						check = 0;
+				    }
+				    console.log(check);
+				
 				},
 				error : function(error) {
 					alert(error.statusText);
@@ -456,14 +464,14 @@
 			});
 			return false;
 		});
+		
+		
 
 		$(document).ready(function(){
 
 			// 버튼제어
 			$("#backBtn").on("click", function() {
-				$form.attr("method", "get");
-				$form.attr("action", "/intro/login");
-				$form.submit();
+				self.location="/intro/login";
 			});
 			
 			// 거주지역
