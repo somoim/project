@@ -15,4 +15,8 @@
 		 ]]>
 	</select>
 	
+	<select id="slist_tab_list" resultType="sListVO">
+		select * from slist where cno = #{cno}
+	</select>
+	
 </mapper>
