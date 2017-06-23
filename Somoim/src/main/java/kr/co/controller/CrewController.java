@@ -164,11 +164,11 @@ public class CrewController {
 	
 	///////////////////////// 진희
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest request,  HttpServletResponse response, ModelAndView modelAndView) throws Exception {
+	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model, String mid, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
-		String mid = memberVO.getMid();
+		mid = memberVO.getMid();
 
 		List<CrewVO> list = crew_service.crew_list(cri, mid);
 		model.addAttribute("list", list);

@@ -35,6 +35,7 @@ public class IntroController {
 			return "redirect:/intro/loginfail"; 
 		}
 		model.addAttribute("MemberVO", vo);
+		System.out.println("К║°Й╥╦Л²╦Л└╠ЙЁ╣");
 		return "redirect:/crew/list";
 	}
 	
@@ -71,7 +72,7 @@ public class IntroController {
 		service.member_join(member_vo);
 		System.out.println("===================================================================");
 		System.out.println(member_vo);
-		System.out.println("╟║ют╣г╬З╫ю╢о╢ы");
+		System.out.println("О©╫О©╫О©╫т╣г╬О©╫О©╫О©╫О©╫о╢О©╫");
 		System.out.println("===================================================================");
 		return "redirect:/intro/login";
 	}
