@@ -8,13 +8,14 @@ public class sListVO {
 	private String attend_region;
 	private int attend_cnt;
 	private int attend_money;
+	private int s_join_cnt;
 
 	public sListVO() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public sListVO(int sl_no, int cno, String attend_title, String attend_date, String attend_region, int attend_cnt,
-			int attend_money) {
+			int attend_money, int s_join_cnt) {
 		super();
 		this.sl_no = sl_no;
 		this.cno = cno;
@@ -23,8 +24,9 @@ public class sListVO {
 		this.attend_region = attend_region;
 		this.attend_cnt = attend_cnt;
 		this.attend_money = attend_money;
+		this.s_join_cnt = s_join_cnt;
 	}
-
+	
 	public int getSl_no() {
 		return sl_no;
 	}
@@ -79,6 +81,14 @@ public class sListVO {
 
 	public void setAttend_money(int attend_money) {
 		this.attend_money = attend_money;
+	}
+
+	public int getS_join_cnt() {
+		return s_join_cnt;
+	}
+
+	public void setS_join_cnt(int join_cnt) {
+		this.s_join_cnt = join_cnt;
 	}
 
 	@Override
