@@ -18,7 +18,7 @@
     .sub_tab li.act { height:40px; line-height:38px; color:#493334; border-bottom: 2px solid #493334;}
     .panel{margin-bottom: auto;}
     .role{color: lime;}
-    .pager{}
+    .power{color: red;}
 </style>
 </head>
 <body>
@@ -67,7 +67,6 @@
 			  <c:forEach items="${sList_list}" var="sList">
 			  <div class="panel-heading">${sList.attend_title}</div>
 			  <!-- List group -->
-			  
 			  <ul class="list-group">
 			    <li class="list-group-item">${sList.attend_date}</li>
 			    <li class="list-group-item">${sList.attend_region}</li>
@@ -79,13 +78,17 @@
 		</div>
 		<div class="row" >
 			<c:forEach items="${member_list}" var="member">
-			<nav>
-			  <ul class="pager" style="background-color: rgb(255,126,126);">
-			    <li class="mid ">${member.name}</li>
-			    <li class="role col-xs-offset-10">${member.power}</li>
-			  </ul>
-			  
-			</nav>
+				<h5 class="col-xs-12 col-xs-offset-1">${member.name} 
+					<c:if test="${crewVO.role == member.mid}">
+					<span class="col-xs-offset-8 power">운영자</span>
+					</c:if>
+					<c:if test="${crewVO.mid == member.mid}">
+					<span class="col-xs-offset-8 power">모임장</span>
+					</c:if>
+					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
+					<button class="btn btn-success col-xs-offset-8">운영자위임</button>
+					</c:if>
+				</h5>
 			</c:forEach>
 		</div>
 	</div>
