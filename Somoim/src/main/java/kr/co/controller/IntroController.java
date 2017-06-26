@@ -72,7 +72,7 @@ public class IntroController {
 		service.member_join(member_vo);
 		System.out.println("===================================================================");
 		System.out.println(member_vo);
-		System.out.println("���ԵǾ����ϴ�");
+		System.out.println("가입되었습니다.");
 		System.out.println("===================================================================");
 		return "redirect:/intro/login";
 	}

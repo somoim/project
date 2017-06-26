@@ -3,6 +3,8 @@ package kr.co.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +27,11 @@ public class SettingController {
 	private SettingService setting_service;
 	
 	@RequestMapping(value="/info", method=RequestMethod.GET)
-	public void info(@ModelAttribute("cri") Criteria cri, Model model, String mid) throws Exception {
-		// mid 주세요~
-		mid = "user03";
+	public void info(@ModelAttribute("cri") Criteria cri, Model model, String mid, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		mid = memberVO.getMid();
 		
 		MemberVO memberVo = getMemberInfo(mid);
 		model.addAttribute("memberVo", memberVo);
