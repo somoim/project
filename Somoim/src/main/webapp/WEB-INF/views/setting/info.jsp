@@ -21,6 +21,22 @@
 	}
 	
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".attendDate").each(function(idx){
+			var date = $(this).attr("data-date");
+			
+			var year = date.substring(0, 4);
+			var month = date.substring(4, 6);
+			var day = date.substring(6, 8);
+			var hour = date.substring(8, 10);
+			var minute =date.substring(10, 12);
+			
+			var str = year + "/" + month + "/" + day + " " + hour + "시" + minute + "분";
+			$(".date"+date).html(str);
+		});
+	});
+</script>
 </head>
 <body>
 <!-- 모바일 Layout -->
@@ -54,7 +70,7 @@
 				<div class="panel-heading" role="tab" id="headingOne">
 					<h4 class="panel-title">
 						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-							개설 소모임 리스트(모임장만)</a>
+							개설 소모임 리스트</a>
 					</h4>
 				</div>
 				<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
@@ -62,17 +78,21 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>번호</th>
-									<th>소모임제목</th>
-									<th>소모임인원</th>
+									<th>제목</th>
+									<th>지역</th>
+									<th>카테고리</th>
+									<th>인원</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>aaa</td>
-									<td>aaa</td>
-									<td>aaa</td>
-								</tr>
+								<c:forEach items="${openCrewList}" var="openCrew">
+									<tr>
+										<td>${openCrew.title}</td>
+										<td>${openCrew.region}</td>
+										<td>${openCrew.category}</td>
+										<td>${openCrew.join_cnt}/${openCrew.attend_cnt}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -136,7 +156,8 @@
 										<td>${joinSlist.join_cnt}/${joinSlist.crew_attend_cnt}</td>
 										<td>${joinSlist.attend_title}</td>
 										<td>${joinSlist.attend_region}</td>
-										<td>${joinSlist.attend_date}</td>
+										<td data-date="${joinSlist.attend_date}" class="attendDate">
+											<span class="date${joinSlist.attend_date}"></span> </td>
 										<td>${joinSlist.attend_money}</td>
 										<td>${joinSlist.s_join_cnt}/${joinSlist.slist_attend_cnt}</td>
 									</tr>

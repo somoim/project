@@ -32,6 +32,9 @@ public class SettingController {
 		MemberVO memberVo = getMemberInfo(mid);
 		model.addAttribute("memberVo", memberVo);
 		
+		List<CrewVO> openCrewList = getOpenCrew(cri, mid);
+		model.addAttribute("openCrewList", openCrewList);
+		
 		List<CrewVO> joinCrewList = getJoinCrew(cri, mid);
 		model.addAttribute("joinCrewList", joinCrewList);
 		
@@ -54,8 +57,8 @@ public class SettingController {
 	}
 	
 	private List<CrewVO> getOpenCrew(Criteria cri, String mid) throws Exception {
-		
-		return null;
+		List<CrewVO> openCrewList = setting_service.openCrew(cri, mid);
+		return openCrewList;
 	}
 
 	private List<CrewVO> getJoinCrew(Criteria cri, String mid) throws Exception {
