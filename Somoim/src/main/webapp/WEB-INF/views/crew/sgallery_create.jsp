@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="../index.jsp"></jsp:include>
@@ -31,7 +32,6 @@
 
 				<form id="myForm" action="sgallery_create" method="post">
 					<div class="filebox">
-						<!-- <label class="form-control" class="fileUpload" for="fileUpload">업로드할 파일 선택하기</label>  -->
 						<input id="fileUpload" type="file" id="file">
 						<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
 						<a href="crew/tab_gallery">
@@ -80,6 +80,7 @@
 									var data = getFileInfo(result);
 									var ht = template(data);
 									$(".uploadedList").html(ht);
+									alert(ht);
 								}
 							});
 						});
@@ -95,21 +96,10 @@
 
 								str += "<input value='"+$(".delbtn").attr("href")+"' name='sg_picture' type='hidden'>";
 						
-							
-							if(str.value == undefined){
-								alert("사진을 선택해주세요.");
-								
-							} else if (str.value != null) {
-								alert("사진이 업로드되었습니다.");
-							}
-/* 							form.append(str);
+							form.append(str);
 							form.get(0).submit();
 							alert("사진이 업로드되었습니다.");
 							
- */							
-							/* location.href="/crew/tab_gallery?cno=${sgallery_vo.cno}"; */
-							console.log(str);
-							console.log(str.value);
 						});
 						 
 							

@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.domain.ChattingVO;
 import kr.co.domain.CrewVO;
@@ -58,27 +60,59 @@ public class CrewController {
 	private MemberService member_service;
 	
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.POST) 
-	public void sgallery_create_post(sGalleryVO sgallery_vo) throws Exception{ 	
+	public String sgallery_create_POST(sGalleryVO sgallery_vo, RedirectAttributes rttr) throws Exception{ 	
 		
 		sgallery_vo.setCno(1);
-		sgallery_vo.setMid("aaa");
+		sgallery_vo.setMid("m001");
 		
 		sgallery_service.sgallery_create(sgallery_vo); 
+		rttr.addAttribute("cno", sgallery_vo.getCno());
+		
+		return "redirect:/crew/tab_gallery";
 	} 
 	
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.GET) 
-	public void sgallery_create(){ 
+	public void sgallery_create_GET(){ 
 	} 
 	
-	
 	@ResponseBody
-	@RequestMapping(value="sgallery_list/{cno}")
-	public List<sGalleryVO> sgallery_list(@PathVariable("cno") int cno) throws Exception{
-	//@PathVariable("bno") int bno : path에 있는 bno를 가지고 와서 int bno에 넣어줌
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("controller"+cno);
-		return sgallery_service.sgallery_list(cno);
+	@RequestMapping(value="/tab_gallery/{cno}")
+	public  List<sGalleryVO> sGallery(@PathVariable("cno") int cno, Model model) throws Exception{
+		
+		List<sGalleryVO> list = sgallery_service.sgallery_list(cno);
+		model.addAttribute("list", list);
+
+		return list;
 	}
+	
+	@RequestMapping(value="/tab_gallery")
+	public void tab_gallery_GET(Model model) throws Exception {
+		List<sGalleryVO> list = sgallery_service.sgallery_list(1);
+		model.addAttribute("list", list);
+	}
+	
+	
+	
+	@RequestMapping(value="/sgallery_detail")
+	public void sgallery_detail() throws Exception {
+		
+	}
+	
+	
+
+	
+	
+	/*@RequestMapping(value="/sgallery_detail/{sg_no}")
+	public void sgallery_detail(@PathVariable("sg_no") int sg_no, Model model) throws Exception {
+	}
+	
+	@RequestMapping(value="/sgallery_detail/")
+	public void sgallery_detail_GET(Model model) throws Exception {
+		List<sGalleryVO> list = sgallery_service.sgallery_list(1);
+		model.addAttribute("list", list);
+	}*/
+	
+	
 	
 	
 	@RequestMapping(value="/list_create", method=RequestMethod.GET) 
@@ -92,11 +126,6 @@ public class CrewController {
 	
 	@RequestMapping(value="/tab_board") 
 	public void sBoard() throws Exception { 
-	
-	} 
-	
-	@RequestMapping(value="/tab_gallery") 
-	public void sGallery() throws Exception { 
 	
 	} 
 	
