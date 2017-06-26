@@ -7,7 +7,7 @@
 	</select>
 
 	<select id="openCrew" resultType="CrewVO">
-		
+		select * from crew where mid=#{mid}
 	</select>
 	
 	<select id="joinCrew" resultType="CrewVO">

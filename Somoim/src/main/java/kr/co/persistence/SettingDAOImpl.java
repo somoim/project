@@ -32,7 +32,10 @@ public class SettingDAOImpl implements SettingDAO {
 	@Override
 	public List<CrewVO> openCrew(Criteria cri, String mid) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cri", cri);
+		map.put("mid", mid);
+		return session.selectList(NAMESPACE+".openCrew", map);
 	}
 
 	@Override

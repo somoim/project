@@ -27,7 +27,7 @@ public class SettingServiceImpl implements SettingService {
 	@Override
 	public List<CrewVO> openCrew(Criteria cri, String mid) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return setting_dao.openCrew(cri, mid);
 	}
 
 	@Override
