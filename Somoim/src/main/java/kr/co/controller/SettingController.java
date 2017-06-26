@@ -3,6 +3,8 @@ package kr.co.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,12 +27,17 @@ public class SettingController {
 	private SettingService setting_service;
 	
 	@RequestMapping(value="/info", method=RequestMethod.GET)
-	public void info(@ModelAttribute("cri") Criteria cri, Model model, String mid) throws Exception {
-		// mid 주세요~
-		mid = "user03";
+	public void info(@ModelAttribute("cri") Criteria cri, Model model, String mid, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		mid = memberVO.getMid();
 		
 		MemberVO memberVo = getMemberInfo(mid);
 		model.addAttribute("memberVo", memberVo);
+		
+		List<CrewVO> openCrewList = getOpenCrew(cri, mid);
+		model.addAttribute("openCrewList", openCrewList);
 		
 		List<CrewVO> joinCrewList = getJoinCrew(cri, mid);
 		model.addAttribute("joinCrewList", joinCrewList);
@@ -54,8 +61,8 @@ public class SettingController {
 	}
 	
 	private List<CrewVO> getOpenCrew(Criteria cri, String mid) throws Exception {
-		
-		return null;
+		List<CrewVO> openCrewList = setting_service.openCrew(cri, mid);
+		return openCrewList;
 	}
 
 	private List<CrewVO> getJoinCrew(Criteria cri, String mid) throws Exception {

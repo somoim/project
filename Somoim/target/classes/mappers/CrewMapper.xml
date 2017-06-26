@@ -15,4 +15,8 @@
 	<select id="crew_tab_list" resultType="CrewVO">
 		select * from crew where cno = #{cno} 
 	</select>
+	
+	<update id="">
+		update crew set role=#{mid} where cno = #{cno}
+	</update>
 </mapper>
