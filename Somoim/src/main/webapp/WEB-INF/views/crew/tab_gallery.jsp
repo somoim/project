@@ -109,7 +109,8 @@
 				<c:forEach items="${list}"	var="sgallery_vo">
 					<div class="col-xs-6 col-sm-4">
 						<form role="form" method="post">
-							<input value="${sgallery_vo.sg_no}" name="sg_no" >
+							<input value="${sgallery_vo.sg_no}" name="sg_no"  type="hidden">
+							<input value="${sgallery_vo.cno}" name="cno"  type="hidden">
 						</form>
 						<a href="sgallery_detail" class="thumbnail">
 							<img alt="sgallery"	src="/displayFile?fileName=${sgallery_vo.sg_picture}">
@@ -117,8 +118,6 @@
 					</div>
 					</c:forEach>
 				</div>
-
-
 
 
 				<!-- 버튼 레이아웃 -->
@@ -131,11 +130,15 @@
 					$(document).ready(function() {
 						$(".thumbnail img").on("click", function(event) {
 							event.preventDefault();
-							var sg_picture = $(this).attr("src");
-							alert(sg_picture);
+							var sg_no = $("input[name=sg_no]").val();
+							var cno = $("input[name=cno]").val();
+							alert(sg_no); 	
+							alert(cno); 	
 
-							self.location="/crew/sgallery_detail";
+							self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;
 						});
+						
+						
 					});
 					
 					// 뒤로가기

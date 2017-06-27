@@ -10,4 +10,6 @@ public interface sGalleryService {
 	abstract List<sGalleryVO> sgallery_list(int cno) throws Exception;
 	abstract void sgallery_delete(int sg_no) throws Exception;
 
+	
+	abstract sGalleryVO sgallery_detail(int sg_no) throws Exception;
 }

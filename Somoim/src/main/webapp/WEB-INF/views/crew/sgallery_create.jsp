@@ -80,7 +80,6 @@
 									var data = getFileInfo(result);
 									var ht = template(data);
 									$(".uploadedList").html(ht);
-									alert(ht);
 								}
 							});
 						});
