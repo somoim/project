@@ -31,6 +31,13 @@ public class sGalleryServiceImpl implements sGalleryService {
 	public void sgallery_delete(int sg_no) throws Exception {
 		// TODO Auto-generated method stub
 		sgallery_dao.sgallery_delete(sg_no);
+		
+	}
+
+	@Override
+	public sGalleryVO sgallery_detail(int sg_no) throws Exception {
+		// TODO Auto-generated method stub
+		return sgallery_dao.sgallery_detail(sg_no);
 	}
 
 }

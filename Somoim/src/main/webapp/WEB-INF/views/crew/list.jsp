@@ -52,7 +52,20 @@
 				</div>
 			</c:forEach>
 		</div>
+		<!-- 버튼 레이아웃 -->		
+		<div class="fixedBtn2">
+			<span><span class="glyphicon glyphicon-plus"></span></span>
+			<span>방개설</span>
+		</div>
 		<!--  -->
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".fixedBtn2").click(function() {
+		self.location="crew/create";
+	});
+});
+</script>
 </body>

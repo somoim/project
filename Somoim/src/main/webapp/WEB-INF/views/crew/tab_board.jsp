@@ -42,5 +42,13 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	//뒤로가기
+	$(".backCont").click(function() {
+		self.location="/crew/list";
+	});
+});
+</script>
 </body>
 

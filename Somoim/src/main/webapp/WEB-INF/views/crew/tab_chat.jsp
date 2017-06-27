@@ -51,6 +51,11 @@
 			});
 		});
 		
+		// 뒤로가기
+		$(".backCont").click(function() {
+			self.location="/crew/list";
+		});
+		
 		
 	});
 	function getChatList(cno) {

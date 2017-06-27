@@ -33,4 +33,10 @@ public class sGalleryDAOImpl implements sGalleryDAO {
 		session.delete(NAMESPACE+".sgallery_delete", sg_no);
 	}
 
+	@Override
+	public sGalleryVO sgallery_detail(int sg_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE+".sgallery_detail", sg_no);
+	}
+
 }
