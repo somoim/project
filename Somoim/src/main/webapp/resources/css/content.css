@@ -73,6 +73,7 @@
 .userInfo .userName { font-size: 18px; color:#493334; margin:0 5px 0 0;}
 .userInfo .userName span { margin:0 5px 0 0}
 .userInfo .userBirth { font-size: 13px; letter-spacing: -0.5px; font-weight: normal;}
+.userInfo .userAddress { margin:3px 0 0 0;}
 .userInfo .category { font-size: 12px; color:cadetblue; letter-spacing:-0.5px; font-weight: bold;}
 .userInfo .category b { font-size: 13px; color:#555555;}
 #accordion img { margin:0 10px 0 0;}

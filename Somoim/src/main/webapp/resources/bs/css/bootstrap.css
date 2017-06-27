@@ -199,7 +199,7 @@ th {
             box-shadow: none !important;
   }
   a,
-  a:visited {
+  a:visited {	
     text-decoration:none;
   }
   a[href]:after {

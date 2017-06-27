@@ -137,6 +137,11 @@
 							self.location="/crew/sgallery_detail";
 						});
 					});
+					
+					// 뒤로가기
+					$(".backCont").click(function() {
+						self.location="/crew/list";
+					});
 				</script>
 
 			</div>

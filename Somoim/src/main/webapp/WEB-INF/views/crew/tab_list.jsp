@@ -21,6 +21,12 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		// 뒤로가기
+		$(".backCont").click(function() {
+			self.location="/crew/list";
+		});
+		
 		var cno = $(".getCno").val();
 		$(".role").on("click","button",function(){
 			var mid=$(this).attr("data-mid");
@@ -37,6 +43,7 @@
 				}
 			});
 		});
+		
 	});
 </script>
 </head>
