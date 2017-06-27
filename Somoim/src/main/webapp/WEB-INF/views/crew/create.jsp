@@ -44,13 +44,21 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="content">소모임 지역</label>
-						<input name="content" id="content" class="form-control">
+						<label for="region">소모임 지역</label>
+						<input name="region" id="region" class="form-control">
 					</div>
 					
 					<div class="form-group">
-						<label for="content">소모임 인원</label>
-						<input name="content" id="content" class="form-control">
+						<label for="attend_cnt">소모임 인원</label>
+						<div class="input-group">
+						     <select name="attend_cnt" id="attend_cnt">
+						     	<option value="">최대인원</option>
+						        <%for(int i=1; i<=20; i++){ %>
+						        <option value="<%=i %>"><%=i %></option>
+						        <%} %>
+						     </select>
+						</div>
+						
 					</div>
 					
 					<div class="form-group">
@@ -109,5 +117,137 @@
 	
 	</div>
 </div>
+<script id="source" type="text/x-handlebars-template">
+	<li class="col-xs-3">
+		<span>
+			<img alt="첨부파일" src="{{imgsrc}}">
+		</span>
+		<div>
+			<a href="{{getLink}}">{{fileName}}</a>
+			<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn">
+				<span class="glyphicon glyphicon-remove-circle"></span>
+			</a>
+		</div>
+	</li>
+</script>
+	
+<script type="text/javascript">
+	$(document).ready(function() {
+		var source =$("#source").html();
+		var template = Handlebars.compile(source);
+			
+		$(".fileDrop").on("dragenter dragover", function(event) {
+			event.preventDefault();
+		});
+		
+		$(".fileDrop").on("drop", function(event) {
+			event.preventDefault();
+			var files = event.originalEvent.dataTransfer.files;
+						
+			var file = null;
+			for(var j=0; j<files.length;j++){
+				file = files[j];
+				var formData = new FormData();
+				formData.append("file", file);
+					
+				$.ajax({
+					type:"post",
+					url: "/uploadAjax",
+					data: formData,
+					dataType: "text",
+					processData: false,
+					contentType: false,
+					success: function(result){
+						var data = getFileInfo(result);
+						var ht = template(data);
+						$(".uploadedList").append(ht);
+					}
+				});
+			}
+			
+			/* $(files).each(function(index) {
+			var file = files[index];
+			var formData = new FormData();
+			formData.append("file", file);
+				
+			$.ajax({
+				type:"post",
+				url: "/uploadAjax",
+				data: formData,
+				dataType: "text",
+				processData: false,
+				contentType: false,
+				success: function(result){
+					var data = getFileInfo(result);
+					var ht = template(data);
+					$(".uploadedList").append(ht);
+				}
+			});
+		}); */
+			
+	});
+		
+		
+		$(".uploadedList").on("click", "li div .delbtn", function(event) {
+			event.preventDefault();
+			var delBtn = $(this);
+			var delLi = $(this).parent("div").parent("li");
+			
+			$.ajax({
+				type:"post",
+				url:"/deleteFile",
+				data:{
+					fileName : delBtn.attr("href")
+				},
+				dataType: "text",
+				success: function(result) {
+					if(result == "DELETE_SUCCESS"){
+						delLi.remove();
+						alert("삭제가 완료 되었습니다.");	
+					}
+				}
+			});
+		});
+		 
+		$("#submit_form").on("click",function(event){
+			//$("form").submit();
+			event.preventDefault();
+			var form = $("#myForm");
+			var str = "";
+			
+			$(".delbtn").each(function(index) {
+				str += "<input value='"+$(this).attr("href")+"' name='files["+index+"]' type='hidden'>";
+			});
+				form.append(str);
+				form.get(0).submit();
+				//중요함!!!!!!!!!!!!! ; 전송과 관련된 것은 원형 그대로 사용할 수 있게끔 하기 위한 작업
+		});
+				
+		
+		/* $("form").attr("method", "post");
+		$("form").attr("action", "/board/read");
+		$("form").submit(); */
+ 	
+		
+		/* 	$('.btn-danger').click(function() {	
+			$("form").each(function() {
+				this.reset();
+			});
+		}); */
+		
+		/* $('.btn-danger').click(function() {	
+			$("form")[0].reset();
+		}); */
+		
+		$("button[type='reset']").click(function() {
+			location.href="/board/create?page=${cri.page}&perPageNum=${cri.perPageNum}";
+		});
+		
+		
+		$("#list_form").click(function() {
+			location.href="/board/listCriteria?page=${cri.page}&perPageNum=${cri.perPageNum}";
+		});
+	});
+</script>
 </body>
 </html>
