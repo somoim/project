@@ -3,6 +3,8 @@ package kr.co.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
+import kr.co.domain.MemberVO;
 import kr.co.service.SearchService;
 
 @Controller
@@ -28,13 +31,18 @@ public class SearchController {
 		System.out.println("searchCategory... path:search/search.jsp");
 	}
 	
-//	@ResponseBody
 	@RequestMapping(value="/searchCrew")
-	public void searchCrew(@ModelAttribute("cri") Criteria cri, Model model, @RequestParam("category") String category) throws Exception{
+	public void searchCrew(@ModelAttribute("cri") Criteria cri, Model model, @RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		String mid = memberVO.getMid();
+		
 		System.out.println("################################");
-		System.out.println("category :: " + category);
+		System.out.println("searchType :: " + searchType);
+		System.out.println("keyword :: " + keyword);
 		System.out.println("################################");
-		List<CrewVO> searchCrewList = search_service.searchCategory(cri, category);
+		List<CrewVO> searchCrewList = search_service.searchCrew(cri, mid, searchType, keyword);
 		model.addAttribute("searchCrewList", searchCrewList);
 	}
 	
