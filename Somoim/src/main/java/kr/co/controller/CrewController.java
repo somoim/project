@@ -59,6 +59,13 @@ public class CrewController {
 	@Inject
 	private MemberService member_service;
 	
+	
+	/*---------------------------------------------------------------------------------------*/
+	
+	@RequestMapping(value="/sgallery_create", method=RequestMethod.GET) 
+	public void sgallery_create_GET(){ 
+	} 
+	
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.POST) 
 	public String sgallery_create_POST(sGalleryVO sgallery_vo, RedirectAttributes rttr) throws Exception{ 	
 		
@@ -66,22 +73,22 @@ public class CrewController {
 		sgallery_vo.setMid("m001");
 		
 		sgallery_service.sgallery_create(sgallery_vo); 
-		rttr.addAttribute("cno", sgallery_vo.getCno());
 		
+		rttr.addAttribute("cno", sgallery_vo.getCno());
+	
 		return "redirect:/crew/tab_gallery";
 	} 
 	
-	@RequestMapping(value="/sgallery_create", method=RequestMethod.GET) 
-	public void sgallery_create_GET(){ 
-	} 
+	/*---------------------------------------------------------------------------------------*/
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/tab_gallery/{cno}")
-	public  List<sGalleryVO> sGallery(@PathVariable("cno") int cno, Model model) throws Exception{
+	public List<sGalleryVO> sGallery(@PathVariable("cno") int cno, Model model) throws Exception{
 		
 		List<sGalleryVO> list = sgallery_service.sgallery_list(cno);
 		model.addAttribute("list", list);
-
+		
 		return list;
 	}
 	
@@ -92,29 +99,49 @@ public class CrewController {
 	}
 	
 	
+	/*---------------------------------------------------------------------------------------*/
 	
-	@RequestMapping(value="/sgallery_detail")
-	public void sgallery_detail() throws Exception {
+	
+	@ResponseBody
+	@RequestMapping(value="/sgallery_detail/{cno}/{sg_no}")
+	public sGalleryVO read(@PathVariable("cno") int cno, @PathVariable("sg_no") int sg_no, Model model) throws Exception{
+		
+		sGalleryVO vo = sgallery_service.sgallery_detail(sg_no);
+		model.addAttribute("vo", vo);
+		
+		return vo;
+	}
+	
+	
+	
+	@RequestMapping(value="/sgallery_detail", method=RequestMethod.GET)
+	public void sgallery_detail_GET(Model model) throws Exception {
+		
+		sGalleryVO vo = sgallery_service.sgallery_detail(85);
+		model.addAttribute("vo", vo);
+	}
+	
+	/*---------------------------------------------------------------------------------------*/
+	
+	@RequestMapping(value="/sgallery_delete", method=RequestMethod.POST)
+	public String delete(@RequestParam("sg_no") int sg_no, @RequestParam("cno") int cno, RedirectAttributes rttr) throws Exception{
+		sGalleryVO vo = sgallery_service.sgallery_detail(sg_no);
+		sgallery_service.sgallery_delete(sg_no);
+
+		String prefix = vo.getSg_picture().substring(0, 12);
+		String suffix = vo.getSg_picture().substring(14);
+		
+		File f = new File(uploadPath+(prefix+suffix).replace('/', File.separatorChar));
+		f.delete();
+		File s = new File(uploadPath+vo.getSg_picture().replace('/', File.separatorChar));
+		s.delete();
+		
+		return "redirect:/crew/tab_gallery?cno="+cno;
 		
 	}
-	
-	
 
-	
-	
-	/*@RequestMapping(value="/sgallery_detail/{sg_no}")
-	public void sgallery_detail(@PathVariable("sg_no") int sg_no, Model model) throws Exception {
-	}
-	
-	@RequestMapping(value="/sgallery_detail/")
-	public void sgallery_detail_GET(Model model) throws Exception {
-		List<sGalleryVO> list = sgallery_service.sgallery_list(1);
-		model.addAttribute("list", list);
-	}*/
-	
-	
-	
-	
+	/*---------------------------------------------------------------------------------------*/
+
 	@RequestMapping(value="/list_create", method=RequestMethod.GET) 
 	public void list_create() throws Exception{ 
 	} 
