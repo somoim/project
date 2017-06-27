@@ -7,7 +7,7 @@
 <html>
 <head>
 <style type="text/css">
-	#container { padding-bottom:20px; min-height:0;}
+	#container { padding-bottom:20px;}
 	.info_detail{ height: 200px; }
 	#birth{ color: gray; }
 	.panel-heading{ border-bottom: solid 1px #ddd;}
@@ -35,6 +35,16 @@
             $(this).next("div").slideUp("fast");
             } else {
                 $(".accordion_banner .accordion_sub").slideUp("fast");
+                $(this).next("div").slideToggle("fast");
+            }
+        });
+		
+		// 아코디언2
+		$(".accordion_banner .basicTitle").click(function() {
+            if($(this).next("div").is(":visible")){
+           		$(this).next("div").slideUp("fast");
+            } else {
+                $(".accordion_banner .basicSub").slideUp("fast");
                 $(this).next("div").slideToggle("fast");
             }
         });
@@ -189,7 +199,7 @@
 				<div class="panel-heading basicTitle">
 					<p>기본정보</p>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body basicSub collapse">
 				
 					<div class="">
 						<h4 class="panel-heading panel-title accordion_title">공지사항</h4>
@@ -217,7 +227,7 @@
 				<div class="panel-heading basicTitle">
 					<p>알림설정</p>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body basicSub collapse">
 					
 					<div class="">
 						<h4 class="panel-heading panel-title accordion_title">채팅 알림 설정</h4>

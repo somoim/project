@@ -44,4 +44,38 @@ public class CrewDAOImpl implements CrewDAO {
 		session.update(NAMESPACE+".crew_update_role",map);
 	}
 
+	@Override
+	public void crew_create(CrewVO crew_vo) throws Exception {
+		session.insert(NAMESPACE+".crew_create", crew_vo);
+	}
+
+	@Override
+	public int getCno() throws Exception {
+		Integer maxCno = session.selectOne(NAMESPACE+".getCno");
+		if (maxCno == null) {
+			maxCno = 0;
+		}
+		return maxCno+1;
+	}
+	
+	private int getId(){
+		Integer id = session.selectOne(NAMESPACE+".getId");
+		if(id == null){
+			id=0;
+		}
+		return ++id; //id++은 실행되지 않음
+	}
+
+	@Override
+	public void addAttach(String fullName, int cno) {
+		// TODO Auto-generated method stub
+		int id = getId();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("fullName", fullName);
+		map.put("cno", cno);
+		map.put("id", id);
+		session.insert(NAMESPACE+".addAttach", map);
+		
+	}
+
 }

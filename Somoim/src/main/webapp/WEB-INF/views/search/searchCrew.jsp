@@ -15,7 +15,7 @@
 	$(document).ready(function(){
 		$(".getCno").each(function(idx){
 			var cno = $(this).attr("data-cno");	
-			// getsList(cno);
+			getsList(cno);
 		});
 	});
 	

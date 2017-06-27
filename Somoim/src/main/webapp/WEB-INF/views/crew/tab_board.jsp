@@ -100,36 +100,18 @@
 			<li><a href="../crew/tab_chat">채팅</a></li>
 		</ul>
 
-		<div id="container">
-			<!-- 여기서부터 시작 -->
-			<div class="container">
-		
-		<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">이름 작성일</h3>
-  </div>
-  <div class="panel-body">
-   제목 내용
-  </div>
-</div>
-		
 
 
-				
+		
 				<!-- 버튼 레이아웃 -->
 				<a href="sboard_create" class="fixedBtn"> <span><span
-						class="glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
+						class="glyphicon glyphicon-pencil"></span></span> 
+						<span>글쓰기</span>
 				</a>
 
-
 				<script type="text/javascript">
-					});
+					
 				</script>
 
-			</div>
-			<!-- class="container" -->
-		</div>
-		<!-- id="container" -->
-	</div>
-	<!-- mobile -->
+	</div> <!-- mobile -->
 </body>

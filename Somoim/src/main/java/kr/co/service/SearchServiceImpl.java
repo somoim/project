@@ -17,9 +17,9 @@ public class SearchServiceImpl implements SearchService {
 	SearchDAO search_dao;
 	
 	@Override
-	public List<CrewVO> searchCategory(Criteria cri, String category) throws Exception {
+	public List<CrewVO> searchCrew(Criteria cri, String mid, String searchType, String keyword) throws Exception {
 		// TODO Auto-generated method stub
-		return search_dao.searchCategory(cri, category);
+		return search_dao.searchCrew(cri, mid, searchType, keyword);
 	}
 
 }
