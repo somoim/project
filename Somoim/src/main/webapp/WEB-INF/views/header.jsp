@@ -9,9 +9,11 @@
 			<span>${login.mid}</span>
 		</div>
 	</a>
-	<div class="searchCont">
-		<span class="glyphicon glyphicon-search"></span>
-		<span>모임을 검색해보세요</span>
-	</div>
+	<a href="/search/search" class="searchCont">
+		<div>
+			<span class="glyphicon glyphicon-search"></span>
+			<span>모임을 검색해보세요</span>
+		</div>
+	</a>
 </header>
 

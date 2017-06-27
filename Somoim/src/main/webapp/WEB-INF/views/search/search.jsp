@@ -10,12 +10,25 @@
 
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){	
+	$(document).ready(function(){
+		var keyword=$("#keyword").val();
+		
 		$("#searchBtn").on("click", function() {
-			var keyword=$("#keyword").val();
-			
 			self.location="/search/searchCrew?searchType=title&keyword="+keyword;
 		});
+		
+		// 카테고리 리스트 가리기
+		$("#category_list").hide();
+		$("#keyword").keyup(function() {
+			if ( keyword == $("#keyword").val()) {
+				$("#category_list").slideUp("slow");
+			}	
+		});
+		
+		// 카테고리 리스트보이기
+		$("#keyword").keypress(function() {
+			$("#category_list").slideDown("slow");
+		})
 	});
 	
 	function searchCategory(categoryKey) {
