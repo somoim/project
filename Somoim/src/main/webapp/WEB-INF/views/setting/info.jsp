@@ -83,6 +83,7 @@
 						</h4>
 					</div>
 				</a>
+
 				<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 					<div class="panel-body">
 						<table class="table">
@@ -240,15 +241,7 @@
 					</div>
 
 				</div>
-				<!-- 
-				<div class="panel-body">
-					<p>채팅 알림 설정</p>
-					<hr>
-					<p>게시글 알림 설정</p>
-					<hr>
-					<p>태그 메시지 알림 설정</p>
-				</div>
-				 -->
+				
 			</div>
 		</div>
 			

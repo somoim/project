@@ -28,8 +28,8 @@ public class SettingController {
 	
 	@RequestMapping(value="/info", method=RequestMethod.GET)
 	public void info(@ModelAttribute("cri") Criteria cri, Model model, String mid, HttpServletRequest request) throws Exception {
-		
 		HttpSession session = request.getSession();
+		
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		mid = memberVO.getMid();
 		
@@ -72,18 +72,6 @@ public class SettingController {
 	
 	private List<JoinSlistVO> getJoinSlist(Criteria cri, String mid) throws Exception {
 		List<JoinSlistVO> joinSlist = setting_service.joinSlist(cri, mid);
-		
-//		String attend_date = joinSlist.getAttend_date();
-//		
-//		String year = attend_date.substring(0, 4);
-//		String month = attend_date.substring(4, 6);
-//		String day = attend_date.substring(6, 8);
-//		String hour = attend_date.substring(8, 10);
-//		String minute = attend_date.substring(10, 12);
-//		
-//		attend_date = year + "/" + month + "/" + day + " " + hour + "시" + minute + "분";
-//		sList_vo.setAttend_date(attend_date);
-		
 		return joinSlist;
 	}
 	

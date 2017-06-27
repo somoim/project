@@ -34,8 +34,8 @@ public class MyController {
 	
 	@RequestMapping(value="/mylist", method=RequestMethod.GET)
 	public void mylist(@ModelAttribute("cri") Criteria cri, Model model, String mid, HttpServletRequest request) throws Exception {
-		
 		HttpSession session = request.getSession();
+		
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		mid = memberVO.getMid();
 		
