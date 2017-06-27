@@ -35,4 +35,13 @@ public class CrewDAOImpl implements CrewDAO {
 		return session.selectOne(NAMESPACE+".crew_tab_list", cno);
 	}
 
+	@Override
+	public void crew_update_role(int cno, String mid) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cno", cno);
+		map.put("mid", mid);
+		session.update(NAMESPACE+".crew_update_role",map);
+	}
+
 }

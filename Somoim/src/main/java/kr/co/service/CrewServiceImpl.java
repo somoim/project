@@ -28,4 +28,11 @@ public class CrewServiceImpl implements CrewService {
 		return crew_dao.crew_tab_list(cno);
 	}
 
+	@Override
+	public void crew_update_role(int cno, String mid) throws Exception {
+		// TODO Auto-generated method stub
+		crew_dao.crew_update_role(cno, mid);
+		
+	}
+
 }

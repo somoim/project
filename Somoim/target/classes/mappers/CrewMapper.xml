@@ -16,7 +16,7 @@
 		select * from crew where cno = #{cno} 
 	</select>
 	
-	<update id="">
+	<update id="crew_update_role">
 		update crew set role=#{mid} where cno = #{cno}
 	</update>
 </mapper>
