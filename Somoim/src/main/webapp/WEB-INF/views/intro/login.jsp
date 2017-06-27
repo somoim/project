@@ -37,7 +37,7 @@
 	
 					<div class="form-group">
 						<div class="col-xs-12">
-						<button class="btn bnt-danger pull-right" id="joinBtn" type="submit">회원가입</button>
+						<button class="btn bnt-danger pull-right" id="joinBtn" type="button">회원가입</button>
 						<button class="btn btn-default pull-right" id="loginBtn" type="submit">로그인</button>
 						</div>
 					</div>
@@ -59,9 +59,7 @@
 		// 폼 버튼제어
 		var $form = $(".login_form");
 		$("#joinBtn").click(function() {
-			$form.attr("action", "/intro/join");
-			$form.attr("method", "get");
-			$form.submit();
+			self.location="/intro/join";
 		});
 		$("#loginBtn").on("click", function() {
 			$form.attr("method", "POST");

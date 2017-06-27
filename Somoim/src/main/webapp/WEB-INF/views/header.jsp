@@ -3,7 +3,9 @@
     
 <header id="header">
 	<div class="userCont">
-		<span class="glyphicon glyphicon-user"></span>
+		<span class="glyphicon glyphicon-th-list">	
+			
+		</span>
 		<span>${login.mid}</span>
 	</div>
 	<div class="searchCont">

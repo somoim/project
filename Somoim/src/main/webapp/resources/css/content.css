@@ -63,3 +63,25 @@
 .formLayout select { height: 34px; border-radius: 4px; border: 1px solid #d2d2d2;}
 .formLayout input[type=tel] { height: 34px; border-radius: 4px; border: 1px solid #d2d2d2; padding:0 10px; width:55px}
 
+
+/* setting */
+.managerMail { position:relative;}
+.managerMail h4 { font-weight: bold;}
+.managerMail small { font-size:11px;}
+.managerMail span{ font-size: 24px; position: absolute; right: 4%; top: 50%; margin: -12px 0 0 0;}
+.infobar {height:20px; width:100%; background-color:#493334; }
+.userInfo .userName { font-size: 18px; color:#493334; margin:0 5px 0 0;}
+.userInfo .userName span { margin:0 5px 0 0}
+.userInfo .userBirth { font-size: 13px; letter-spacing: -0.5px; font-weight: normal;}
+.userInfo .category { font-size: 12px; color:cadetblue; letter-spacing:-0.5px; font-weight: bold;}
+.userInfo .category b { font-size: 13px; color:#555555;}
+#accordion img { margin:0 10px 0 0;}
+#accordion h4 { font-weight:bold; font-size:13px}
+#accordion .panel { border:0;}
+#accordion .panel-default>.panel-heading { border-top:1px solid #dddddd}
+#accordionEtc .basicTitle { font-weight:bold; font-size:14px; }
+#accordionEtc .basicTitle p { margin:0;}
+#accordionEtc .accordion_title { font-size: 13px; font-weight: bold}
+#accordionEtc .accordion_sub { font-size: 12px;}
+.panel-heading{ border-bottom: solid 1px #ddd; }
+

@@ -7,19 +7,12 @@
 <html>
 <head>
 <style type="text/css">
-	
-	.info_detail{
-		 height: 200px;
-	}
-	
-	#birth{
-		color: gray;
-	}
-	
-	.panel-heading{
-		border-bottom: solid 1px black;
-	}
-	
+	#container { padding-bottom:20px; min-height:0;}
+	.info_detail{ height: 200px; }
+	#birth{ color: gray; }
+	.panel-heading{ border-bottom: solid 1px #ddd;}
+	.table { font-size:11px; text-align: center;}
+	.table th { text-align: center;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -35,6 +28,17 @@
 			var str = year + "/" + month + "/" + day + " " + hour + "시" + minute + "분";
 			$(".date"+date).html(str);
 		});
+		
+		// 아코디언
+		$(".accordion_banner .accordion_title").click(function() {
+            if($(this).next("div").is(":visible")){
+            $(this).next("div").slideUp("fast");
+            } else {
+                $(".accordion_banner .accordion_sub").slideUp("fast");
+                $(this).next("div").slideToggle("fast");
+            }
+        });
+		
 	});
 </script>
 </head>
@@ -42,37 +46,44 @@
 <!-- 모바일 Layout -->
 <div id="mobile">
 	<div id="container">
-		<div class="panel panel-info"> 
-			<div class="panel-heading">
-				<h4 class="panel-title"><a href="#">운영자 e-mail</a></h4>
-				<small> 소모임 삭제를 원하면 메일주세요</small>
-			</div>
+		<div class="panel panel-info managerMail"> 
+			<a href="mailto:name@email.com" class="panel-info">
+				<div class="panel-heading">
+					<h4 class="panel-title">운영자 e-mail</h4>
+					<small> 소모임 삭제를 원하면 메일주세요.</small>
+					<span class="glyphicon glyphicon-envelope"></span>
+				</div>
+			</a>
 		</div>
-		<div class="panel">
+		<div class="infobar"></div>
+		<div class="panel userInfo">
 			<div class="panel-heading">
-				<label>${memberVo.name}</label>
-				<label id="birth"><small>${memberVo.birth}</small></label>
-			 	<label class="pull-right">${memberVo.address}</label>
+				<label class="userName"><span class="glyphicon glyphicon-user"></span>${memberVo.name}</label>
+				<label class="userBirth" id="birth"><small>${memberVo.birth}</small></label>
+			 	<label class="pull-right userAddress">${memberVo.address}</label>
 			</div>
 			<div class="panel-body">
 				<div class="category">
-					<span>관심 카테고리 : ${memberVo.category}</span> 
-					<button class="btn btn-primary pull-right">설정</button>
+					<span><b>관심 카테고리</b> &nbsp;:&nbsp; ${memberVo.category}</span> 
+					<button class="pull-right">설정</button>
 				</div>
 			</div>
 		</div>
 		
+		<div class="infobar"></div>
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			<div class="panel panel-default">
 
 				<c:if test="">
 				</c:if>
-				<div class="panel-heading" role="tab" id="headingOne">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-							개설 소모임 리스트</a>
-					</h4>
-				</div>
+				<a data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					<div class="" role="tab" id="headingOne">
+						<h4 class="panel-title">
+							<img src="../resources/img/mobile/Games.png" alt="" width="25px">개설 소모임 리스트
+						</h4>
+					</div>
+				</a>
+
 				<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 					<div class="panel-body">
 						<table class="table">
@@ -97,13 +108,14 @@
 						</table>
 					</div>
 				</div>
-		
-				<div class="panel-heading" role="tab" id="headingTwo">
+				
+				<a data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+				<div class="" role="tab" id="headingTwo">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-							가입 소모임 리스트</a>
+						<img src="../resources/img/mobile/Clock.png" alt="" width="25px">가입 소모임 리스트
 					</h4>
 				</div>
+				</a>
 				<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 					<div class="panel-body">
 						<table class="table">
@@ -128,13 +140,14 @@
 						</table>
 					</div>
 				</div>
-
-				<div class="panel-heading" role="tab" id="headingThree">
+				
+				<a data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+				<div class="" role="tab" id="headingThree">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-							참여 정모 리스트</a>
+						<img src="../resources/img/mobile/Heart.png" alt="" width="25px">참여 정모 리스트
 					</h4>
 				</div>
+				</a>
 				<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 					<div class="panel-body">
 						<table class="table">
@@ -170,86 +183,65 @@
 			</div>
 		</div>
 		
-		<div class="panel-group" id="accordionEtc" role="tablist" aria-multiselectable="true">	
-			<div class="panel panel-default">
-				<div class="panel-heading">
+		<div class="infobar"></div>
+		<div class="panel-group" id="accordionEtc" >	
+			<div class="panel panel-default accordion_banner">
+				<div class="panel-heading basicTitle">
 					<p>기본정보</p>
 				</div>
 				<div class="panel-body">
-					<div class="panel-heading" role="tab" id="etc_notice_head">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordionEtc" href="#etc_notice" aria-expanded="true" aria-controls="etc_notice">
-								공지사항</a>
-						</h4>
-					</div>
-					<div id="etc_notice" class="panel-collapse collapse" role="tabpanel" aria-labelledby="etc_notice_head">
-						<div class="panel-body">공지사항 내용 입니다</div>
+				
+					<div class="">
+						<h4 class="panel-heading panel-title accordion_title">공지사항</h4>
+						<div id="etc_notice" class="panel-collapse collapse accordion_sub">
+							<div class="panel-body">공지사항 내용 입니다</div>
+						</div>
 					</div>
 					
-					<div class="panel-heading" role="tab" id="etc_info_head">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordionEtc" href="#etc_info" aria-expanded="true" aria-controls="etc_info">
-								도움말</a>
-						</h4>
-					</div>
-					<div id="etc_info" class="panel-collapse collapse" role="tabpanel" aria-labelledby="etc_info_head">
-						<div class="panel-body">도움말 내용 입니다</div>
+					<div class="">
+						<h4 class="panel-heading panel-title accordion_title">도움말</h4>
+						<div id="etc_info" class="panel-collapse collapse accordion_sub">
+							<div class="panel-body">도움말 내용입니다</div>
+						</div>
 					</div>
 					
-					<div class="panel-heading" role="tab" id="etc_version_head">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordionEtc" href="#etc_version" aria-expanded="true" aria-controls="etc_version">
-								버전정보</a>
-						</h4>
+					<div class="">
+						<h4 class="panel-heading panel-title accordion_title">버전정보</h4>
+						<div id="etc_version" class="panel-collapse collapse accordion_sub">
+							<div class="panel-body">버전정보 : 1.0.0</div>
+						</div>
 					</div>
-					<div id="etc_version" class="panel-collapse collapse" role="tabpanel" aria-labelledby="etc_version_head">
-						<div class="panel-body">버전정보 : 1.0.0 </div>
-					</div>
+					
 				</div>
 				
-				<div class="panel-heading">
+				<div class="panel-heading basicTitle">
 					<p>알림설정</p>
 				</div>
 				<div class="panel-body">
-					<div class="panel-heading" role="tab" id="etc_chat_head">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordionEtc" href="#etc_chat" aria-expanded="true" aria-controls="etc_chat">
-								채팅 알림 설정</a>
-						</h4>
-					</div>
-					<div id="etc_chat" class="panel-collapse collapse" role="tabpanel" aria-labelledby="etc_chat_head">
-						<div class="panel-body">채팅 알림 설정 내용 입니다</div>
+					
+					<div class="">
+						<h4 class="panel-heading panel-title accordion_title">채팅 알림 설정</h4>
+						<div id="etc_chat" class="panel-collapse collapse accordion_sub">
+							<div class="panel-body">채팅 알림 설정 내용 입니다</div>
+						</div>
 					</div>
 					
-					<div class="panel-heading" role="tab" id="etc_board_head">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordionEtc" href="#etc_board" aria-expanded="true" aria-controls="etc_board">
-								게시글 알림 설정</a>
-						</h4>
-					</div>
-					<div id="etc_board" class="panel-collapse collapse" role="tabpanel" aria-labelledby="etc_board_head">
-						<div class="panel-body">게시글 알림 설정 내용 입니다</div>
+					<div class="">
+						<h4 class="panel-heading panel-title accordion_title">게시글 알림 설정</h4>
+						<div id="etc_board" class="panel-collapse collapse accordion_sub">
+							<div class="panel-body">게시글 알림 설정 내용 입니다</div>
+						</div>
 					</div>
 					
-					<div class="panel-heading" role="tab" id="etc_tag_head">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordionEtc" href="#etc_tag" aria-expanded="true" aria-controls="etc_tag">
-								태그 메시지 알림 설정</a>
-						</h4>
+					<div class="">
+						<h4 class="panel-heading panel-title accordion_title">태그 메시지 알림 설정</h4>
+						<div id="etc_tag" class="panel-collapse collapse accordion_sub">
+							<div class="panel-body">태그 메시지 알림 설정 내용 입니다</div>
+						</div>
 					</div>
-					<div id="etc_tag" class="panel-collapse collapse" role="tabpanel" aria-labelledby="etc_tag_head">
-						<div class="panel-body">태그 메시지 알림 설정 내용 입니다</div>
-					</div>
+
 				</div>
-				<!-- 
-				<div class="panel-body">
-					<p>채팅 알림 설정</p>
-					<hr>
-					<p>게시글 알림 설정</p>
-					<hr>
-					<p>태그 메시지 알림 설정</p>
-				</div>
-				 -->
+				
 			</div>
 		</div>
 			
