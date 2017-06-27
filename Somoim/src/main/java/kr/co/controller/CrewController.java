@@ -250,4 +250,18 @@ public class CrewController {
 		return sList_vo;
 	}
 	
+	// 현근
+	@RequestMapping(value="/create", method=RequestMethod.GET)
+	public void crew_createGet() throws Exception {
+		
+		
+	}
+	
+	@RequestMapping(value="/create_post", method=RequestMethod.POST)
+	public void crew_createPost() throws Exception {
+		
+		
+	}
+	
+	
 }
