@@ -13,6 +13,7 @@ public class CrewVO {
 	private String role;
 	private String picture;
 	private String category;
+	private String files;
 	
 
 	public CrewVO() {
@@ -131,6 +132,15 @@ public class CrewVO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	public String getFiles() {
+		return files;
+	}
+
+	public void setFiles(String files) {
+		this.files = files;
+	}
+	
 
 	@Override
 	public int hashCode() {

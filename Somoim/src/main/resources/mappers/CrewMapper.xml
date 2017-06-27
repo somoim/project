@@ -19,4 +19,19 @@
 	<update id="crew_update_role">
 		update crew set role=#{mid} where cno = #{cno}
 	</update>
+	
+	<insert id="crew_create">
+		insert into crew
+		(cno, mid, region, title, content, attend_cnt, picture, category)
+		values
+		(#{cno},#{mid},#{region},#{title},#{content},#{attend_cnt},#{picture},#{category})
+	</insert>
+	
+	<select id="getCno" resultType="Integer">
+  		select max(cno) from crew
+  	</select>
+  	
+  	<select id="getId" resultType="Integer">
+  		select max(picture) from crew
+  	</select>
 </mapper>

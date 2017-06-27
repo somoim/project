@@ -17,6 +17,11 @@
 			var cno = $(this).attr("data-cno");	
 			getsList(cno);
 		});
+		
+		// 소모임 개설버튼
+		$(".fixedBtn2").click(function() {
+			self.location="/crew/create";
+		});
 	});
 	
 	function getsList(cno){
@@ -61,11 +66,4 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	$(".fixedBtn2").click(function() {
-		self.location="crew/create";
-	});
-});
-</script>
 </body>
