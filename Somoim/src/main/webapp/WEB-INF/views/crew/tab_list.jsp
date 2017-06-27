@@ -27,10 +27,13 @@
 			self.location="/crew/list";
 		});
 		
+		$(".sList").click(function(){
+			self.location="#"
+		});
+		
 		var cno = $(".getCno").val();
 		$(".role").on("click","button",function(){
 			var mid=$(this).attr("data-mid");
-			alert(mid);
 			$.ajax({
 				type : "get",
 				url : "/crew/update_Role/"+cno,
@@ -89,6 +92,7 @@
 			</div>
 		</div>
 		<div class="row">
+			<button class="form-control sList"><span class="glyphicon glyphicon-plus"></span>새로운 정모 만들기</button>
 			<div class="panel panel-default">
 			  <!-- Default panel contents -->
 			  <c:forEach items="${sList_list}" var="sList">
