@@ -28,11 +28,13 @@ import kr.co.domain.ChattingVO;
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
 import kr.co.domain.MemberVO;
+import kr.co.domain.sBoardVO;
 import kr.co.domain.sListVO;
 import kr.co.domain.sGalleryVO;
 import kr.co.service.ChattingService;
 import kr.co.service.CrewService;
 import kr.co.service.MemberService;
+import kr.co.service.sBoardService;
 import kr.co.service.sListService;
 import kr.co.service.sGalleryService;
 import kr.co.util.MediaUtils;
@@ -41,8 +43,15 @@ import kr.co.util.MediaUtils;
 @RequestMapping("/crew")
 public class CrewController {
 	
-	@Resource(name="uploadPath") 
-	private String uploadPath; 
+	@Resource(name="sgallery_uploadPath")
+	private String sgallery_uploadPath;
+	
+	@Resource(name="sboard_uploadPath")
+	private String sboard_uploadPath;
+	
+	@Resource(name="crew_uploadPath")
+	private String crew_uploadPath;
+	
 
 	@Inject
 	private CrewService crew_service;
@@ -59,6 +68,8 @@ public class CrewController {
 	@Inject
 	private MemberService member_service;
 	
+	@Inject
+	private sBoardService sboard_service;
 	
 	/*---------------------------------------------------------------------------------------*/
 	
@@ -117,12 +128,13 @@ public class CrewController {
 	@RequestMapping(value="/sgallery_detail", method=RequestMethod.GET)
 	public void sgallery_detail_GET(Model model) throws Exception {
 		
-		sGalleryVO vo = sgallery_service.sgallery_detail(85);
+		sGalleryVO vo = sgallery_service.sgallery_detail(92);
 		model.addAttribute("vo", vo);
 	}
 	
 	/*---------------------------------------------------------------------------------------*/
 	
+	@ResponseBody
 	@RequestMapping(value="/sgallery_delete", method=RequestMethod.POST)
 	public String delete(@RequestParam("sg_no") int sg_no, @RequestParam("cno") int cno, RedirectAttributes rttr) throws Exception{
 		sGalleryVO vo = sgallery_service.sgallery_detail(sg_no);
@@ -131,16 +143,40 @@ public class CrewController {
 		String prefix = vo.getSg_picture().substring(0, 12);
 		String suffix = vo.getSg_picture().substring(14);
 		
-		File f = new File(uploadPath+(prefix+suffix).replace('/', File.separatorChar));
+		File f = new File(sgallery_uploadPath+(prefix+suffix).replace('/', File.separatorChar));
 		f.delete();
-		File s = new File(uploadPath+vo.getSg_picture().replace('/', File.separatorChar));
+		File s = new File(sgallery_uploadPath+vo.getSg_picture().replace('/', File.separatorChar));
 		s.delete();
 		
 		return "redirect:/crew/tab_gallery?cno="+cno;
-		
+	
 	}
 
+	/*--------------------------------------SBOARD------------------------------------*/
+	
+	
+	@RequestMapping(value="/sboard_create", method=RequestMethod.GET) 
+	public void sboard_create_GET(){ 
+	} 
+	
+	@RequestMapping(value="/sboard_create", method=RequestMethod.POST) 
+	public String sboard_create_POST(sBoardVO sboard_vo, RedirectAttributes rttr) throws Exception{ 	
+		
+		sboard_vo.setCno(1);
+		sboard_vo.setMid("m001");	
+		
+		sboard_service.sboard_create(sboard_vo); 
+		
+		rttr.addAttribute("cno", sboard_vo.getCno());
+	
+		return "redirect:/crew/tab_board";
+	} 
+	
+	
 	/*---------------------------------------------------------------------------------------*/
+	
+	
+	
 
 	@RequestMapping(value="/list_create", method=RequestMethod.GET) 
 	public void list_create() throws Exception{ 
@@ -156,27 +192,6 @@ public class CrewController {
 	
 	} 
 	
-	@ResponseBody
-	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
-	public ResponseEntity<String> deleteFile(String fileName){
-		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
-		MediaType mType = MediaUtils.getMediaType(formatName);
-		
-		if(mType != null){	// 이미지 파일이면
-			
-			String prefix = fileName.substring(0, 12);
-			String suffix = fileName.substring(14);
-			
-			File f = new File(uploadPath+(prefix+suffix).replace('/', File.separatorChar));
-			// '/'를 '\'로 바꾸는 작업
-			f.delete();
-		}
-		File s = new File(uploadPath+fileName.replace('/', File.separatorChar));
-		// 이미지 파일이 아닌 파일들 삭제
-		s.delete();
-		
-		return new ResponseEntity<String>("DELETE_SUCCESS", HttpStatus.OK);
-	}
 	///////////////////////// 정림
 	
 	///////////////////////// 명재

@@ -6,6 +6,7 @@
 		<typeAlias alias="CrewVO" type="kr.co.domain.CrewVO"/>
 		<typeAlias alias="sListVO" type="kr.co.domain.sListVO"/>
 		<typeAlias alias="sGalleryVO" type="kr.co.domain.sGalleryVO"/>
+		<typeAlias alias="sBoardVO" type="kr.co.domain.sBoardVO"/>
 		<typeAlias alias="ChattingVO" type="kr.co.domain.ChattingVO"/>
 		<typeAlias alias="JoinSlistVO" type="kr.co.domain.JoinSlistVO"/>
 		<typeAlias alias="VisitorVO" type="kr.co.domain.VisitorVO"/>

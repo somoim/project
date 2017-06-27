@@ -26,8 +26,14 @@ import kr.co.util.UploadFileUtils;
 @Controller
 public class UploadController {
 	
-	@Resource(name="uploadPath")
-	private String uploadPath;
+	@Resource(name="sgallery_uploadPath")
+	private String sgallery_uploadPath;
+	
+	@Resource(name="sboard_uploadPath")
+	private String sboard_uploadPath;
+	
+	@Resource(name="crew_uploadPath")
+	private String crew_uploadPath;
 	
 	@ResponseBody
 	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
@@ -40,16 +46,18 @@ public class UploadController {
 			String prefix = fileName.substring(0, 12);
 			String suffix = fileName.substring(14);
 			
-			File f = new File(uploadPath+(prefix+suffix).replace('/', File.separatorChar));
+			File f = new File(sgallery_uploadPath+(prefix+suffix).replace('/', File.separatorChar));
 			// '/'를 '\'로 바꾸는 작업
 			f.delete();
 		}
-		File s = new File(uploadPath+fileName.replace('/', File.separatorChar));
+		File s = new File(sgallery_uploadPath+fileName.replace('/', File.separatorChar));
 		// 이미지 파일이 아닌 파일들 삭제
 		s.delete();
 		
 		return new ResponseEntity<String>("DELETE_SUCCESS", HttpStatus.OK);
 	}
+	
+	/*---------------------------------------------------------------------------------------*/
 	
 	@ResponseBody
 	@RequestMapping(value="/displayFile")
@@ -61,7 +69,38 @@ public class UploadController {
 			MediaType mType = MediaUtils.getMediaType(formatName);
 			
 			HttpHeaders headers = new HttpHeaders();
-			in = new FileInputStream(uploadPath+fileName);
+			in = new FileInputStream(sgallery_uploadPath+fileName);
+			
+			if(mType != null){	//이미지 파일이면,	
+				headers.setContentType(mType);
+			} else {
+				fileName = fileName.substring(fileName.indexOf("_")+1);
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+				headers.add("Content-Disposition", "attachment; filename = \""+ new String (fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
+			}
+			
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally{
+			if(in != null) in.close();
+		}
+		return entity;
+	}
+	/*---------------------------------------------------------------------------------------*/
+	
+	@RequestMapping(value="/displayFile/sboard")
+	public ResponseEntity<byte[]> displayFile_sboard(String fileName) throws Exception{
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		try {
+			String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+			MediaType mType = MediaUtils.getMediaType(formatName);
+			
+			HttpHeaders headers = new HttpHeaders();
+			in = new FileInputStream(sboard_uploadPath+fileName);
 			
 			if(mType != null){	//이미지 파일이면,	
 				headers.setContentType(mType);
@@ -83,6 +122,8 @@ public class UploadController {
 	}
 	
 	
+	
+	/*---------------------------------------------------------------------------------------*/
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception{
 		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
@@ -91,14 +132,33 @@ public class UploadController {
 		System.out.println("contentType: "+file.getContentType());
 		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 	
-		String uploadedFileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+		String uploadedFileName = UploadFileUtils.uploadFile(sgallery_uploadPath, file.getOriginalFilename(), file.getBytes());
 		return new ResponseEntity<String>(uploadedFileName, HttpStatus.CREATED);
 	}
 	
-		
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.GET)
 	public void uploadAjax(){
 	}
+	/*---------------------------------------------------------------------------------------*/
+
+	@RequestMapping(value="/uploadAjax/sboard", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	public ResponseEntity<String> uploadAjax_sboard(MultipartFile file) throws Exception{
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		System.out.println("originalFilename: "+file.getOriginalFilename());
+		System.out.println("size: "+file.getSize());
+		System.out.println("contentType: "+file.getContentType());
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+	
+		String uploadedFileName = UploadFileUtils.uploadFile(sboard_uploadPath, file.getOriginalFilename(), file.getBytes());
+		return new ResponseEntity<String>(uploadedFileName, HttpStatus.CREATED);
+	}
+	
+	
+		
+	@RequestMapping(value="/uploadAjax/sboard", method=RequestMethod.GET)
+	public void uploadAjax_sboard(){
+	}
+ 	
  	
  	
 /*	@RequestMapping(value="/uploadForm", method=RequestMethod.POST)

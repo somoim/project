@@ -14,34 +14,40 @@
 		<div id="container">
 			<!-- 여기서부터 시작 -->
 			<div class="container">
-
 				<div class="row">
 					<div class="page-header">
 						<h1>
-							사진올리기 <small>사진을 업로드합니다.</small>
+							게시글 올리기 <small>글을 작성합니다.</small>
 						</h1>
 					</div>
 				</div>
 
 				<div class="row">
-					<form class="form-group">
-						<label>아이디</label> <input class="form-control" type="text"
-							name="name" id="name" readonly="readonly" placeholder="아이디가져오기">
+					<form id="myForm" action="" method="post">
+						<div class="form-group">
+							<label>아이디</label>
+							<input class="form-control" name="mid" id="mid" readonly="readonly" placeholder="아이디가져오기">
+						</div>
+						<div class="form-group">
+							<label>제목</label>
+							<input class="form-control" name="sb_title" id="sb_title"  placeholder="제목(10자)">
+						</div>
+						<div class="form-group">
+							<label>내용</label>
+							<textarea rows="10" cols="3" class="form-control" name="sb_content" id="sb_content"  placeholder="글을 작성해주세요"></textarea>
+						</div>
+	
+						<div class="filebox">
+							<input id="fileUpload" type="file" id="file">
+							<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
+							<a href="crew/tab_board">
+							<button class="btn btn-danger form-control list_btn" id="list_btn">게시판으로 이동</button></a>
+						</div>
+		
+						<div class="row">
+							<ul class="clearfix uploadedList"></ul>
+						</div>
 					</form>
-				</div>
-
-				<form id="myForm" action="sgallery_create" method="post">
-					<div class="filebox">
-						<input id="fileUpload" type="file" id="file">
-						<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
-						<a href="crew/tab_gallery">
-						<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button></a>
-					</div>
-
-					<div class="row">
-						<ul class="clearfix uploadedList"></ul>
-					</div>
-				</form>
 
 
 					<script id="source" type="text/x-handlebars-template"> 
@@ -49,7 +55,7 @@
 							<span><img alt="첨부파일" src="{{imgsrc}}"></span> 
 						<div> 
 							<a href="{{getLink}}">{{fileName}}</a> 
-							<a href="{{sg_picture}}" class="btn btn-default btn-xs pull-right delbtn"> 
+							<a href="{{sb_picture}}" class="btn btn-default btn-xs pull-right delbtn"> 
 							<span class="glyphicon glyphicon-remove-circle"></span> </a> 
 						</div> 
 						</li> 
@@ -71,13 +77,13 @@
 							
 							$.ajax({
 								type : 'post',
-								url : '/uploadAjax',
+								url : '/uploadAjax/sboard',
 								data : formData,
 								dataType : 'text',
 								processData : false,
 								contentType : false,
 								success : function(result) {
-									var data = sGallery_getFileInfo(result);
+									var data = sBoard_getFileInfo(result);
 									var ht = template(data);
 									$(".uploadedList").html(ht);
 								}
@@ -93,8 +99,8 @@
 							var form = $("#myForm");
 							var str = "";
 
-								str += "<input value='"+$(".delbtn").attr("href")+"' name='sg_picture' type='hidden'>";
-						
+								str += "<input value='"+$(".delbtn").attr("href")+"' name='sb_picture' type='hidden'>";
+								
 							form.append(str);
 							form.get(0).submit();
 							alert("사진이 업로드되었습니다.");
