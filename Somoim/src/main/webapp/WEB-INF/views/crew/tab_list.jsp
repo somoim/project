@@ -17,9 +17,28 @@
     .sub_tab li:hover { height:40px; line-height:38px; color:#493334; border-bottom: 2px solid #493334;}
     .sub_tab li.act { height:40px; line-height:38px; color:#493334; border-bottom: 2px solid #493334;}
     .panel{margin-bottom: auto;}
-    .role{color: lime;}
     .power{color: red;}
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var cno = $(".getCno").val();
+		$(".role").on("click","button",function(){
+			var mid=$(this).attr("data-mid");
+			alert(mid);
+			$.ajax({
+				type : "get",
+				url : "/crew/update_Role/"+cno,
+				data : {
+					mid : mid
+				},
+				dataType : "text",
+				success:function(result){
+					self.location="/crew/tab_list";
+				}
+			});
+		});
+	});
+</script>
 </head>
 <body>
 <!-- 모바일 Layout -->
@@ -54,6 +73,7 @@
 			 <div class="input-group">
 				  <span class="input-group-addon" id="basic-addon1" style="background-color: white;">${crewVO.category}</span>
 				  <input type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
+				  <input class="getCno" value="${crewVO.cno}" type="hidden">
 			</div>
 		</div>
 		<div class="row">
@@ -76,7 +96,7 @@
 			</div>
 			
 		</div>
-		<div class="row" >
+		<div class="row role" >
 			<c:forEach items="${member_list}" var="member">
 				<h5 class="col-xs-12 col-xs-offset-1">${member.name} 
 					<c:if test="${crewVO.role == member.mid}">
@@ -86,7 +106,7 @@
 					<span class="col-xs-offset-8 power">모임장</span>
 					</c:if>
 					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
-					<button class="btn btn-success col-xs-offset-8">운영자위임</button>
+					<button class="btn btn-success col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
 					</c:if>
 				</h5>
 			</c:forEach>
