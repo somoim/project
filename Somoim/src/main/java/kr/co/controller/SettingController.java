@@ -80,4 +80,11 @@ public class SettingController {
 	public void mypage() throws Exception{
 	}
 	
+	@RequestMapping(value="/member_update", method=RequestMethod.POST)
+	public void member_update(MemberVO member_vo) throws Exception{
+		setting_service.memberUpdate(member_vo);
+		System.out.println("수정되었습니다.");
+		System.out.println(member_vo);
+	}
+	
 }

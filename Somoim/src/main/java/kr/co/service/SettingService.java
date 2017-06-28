@@ -12,5 +12,6 @@ public interface SettingService {
 	public abstract List<CrewVO> openCrew(Criteria cri, String mid) throws Exception;
 	public abstract List<CrewVO> joinCrew(Criteria cri, String mid) throws Exception;
 	public abstract List<JoinSlistVO> joinSlist(Criteria cri, String mid) throws Exception;
+	public abstract void memberUpdate(MemberVO member_vo) throws Exception;
 
 }

@@ -22,4 +22,9 @@
 		 where s.SL_NO in (select sl_no from status where mid = #{mid})
 	</select>
 	
+	<update id="memberUpdate">
+		update member set password=#{password}, gender=#{gender}, birth=#{birth}, address=#{address}, phone=#{phone}, category=#{category} where mid=#{mid}
+	</update>
+	
+	
 </mapper>

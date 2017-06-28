@@ -8,7 +8,7 @@
 	html, body, #mobile { height:100%; }
 	#header { display:none}
 	#footer { display:none}
-	#container { min-height:100%; height:100%; margin-top:0; margin-bottom:0;}
+	#container { min-height:100%; height:100%; padding-top:0; margin-bottom:0;}
 </style>
 </head>
 <body>
