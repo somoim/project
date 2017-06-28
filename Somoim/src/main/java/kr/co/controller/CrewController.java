@@ -80,10 +80,15 @@ public class CrewController {
 	
 	@ResponseBody
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.POST) 
-	public String sgallery_create_POST(sGalleryVO sgallery_vo, RedirectAttributes rttr) throws Exception{ 	
+	public String sgallery_create_POST(sGalleryVO sgallery_vo, String mid, RedirectAttributes rttr, HttpServletRequest request) throws Exception{ 	
 		
 		sgallery_vo.setCno(1);
-		sgallery_vo.setMid("m001");
+		
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		mid = memberVO.getMid();
+		sgallery_vo.setMid(mid);
 		
 		sgallery_service.sgallery_create(sgallery_vo); 
 		
@@ -163,10 +168,14 @@ public class CrewController {
 	
 	@ResponseBody
 	@RequestMapping(value="/sboard_create", method=RequestMethod.POST) 
-	public String sboard_create_POST(sBoardVO sboard_vo, RedirectAttributes rttr) throws Exception{ 	
+	public String sboard_create_POST(sBoardVO sboard_vo, String mid, RedirectAttributes rttr, HttpServletRequest request) throws Exception{ 	
 		
 		sboard_vo.setCno(1);
-		sboard_vo.setMid("m001");	
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		mid = memberVO.getMid();
+		sboard_vo.setMid(mid);	
 		
 		sboard_service.sboard_create(sboard_vo); 
 		

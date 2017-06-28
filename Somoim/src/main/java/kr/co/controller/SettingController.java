@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
@@ -81,7 +82,16 @@ public class SettingController {
 	}
 	
 	@RequestMapping(value="/member_update", method=RequestMethod.POST)
-	public void member_update(MemberVO member_vo) throws Exception{
+	public void member_update(MemberVO member_vo,@RequestParam("birth1") String birth1, @RequestParam("birth2") String birth2, @RequestParam("birth3") String birth3,
+			@RequestParam("phone1") String phone1, @RequestParam("phone2") String phone2, @RequestParam("phone3") String phone3) throws Exception{
+		if (Integer.parseInt(birth2) < 10) {
+			birth2 = "0"+birth2;
+		}
+		if (Integer.parseInt(birth3) < 10) {
+			birth3 = "0"+birth3;
+		}
+		member_vo.setBirth(birth1+birth2+birth3);
+		member_vo.setPhone(phone1+phone2+phone3);
 		setting_service.memberUpdate(member_vo);
 		System.out.println("수정되었습니다.");
 		System.out.println(member_vo);

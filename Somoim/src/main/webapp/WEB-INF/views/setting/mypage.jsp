@@ -16,6 +16,8 @@
 			
 		<div class="container">
 			<form class="formLayout" action="/setting/member_update" method="post" name="joinform">
+			
+				<input type="hidden" value="${login.mid}" name="mid">
 
 				<div class="form-group">
 					<label class="">이름</label>
