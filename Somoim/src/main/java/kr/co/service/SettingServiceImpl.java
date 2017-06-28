@@ -42,4 +42,11 @@ public class SettingServiceImpl implements SettingService {
 		return setting_dao.joinSlist(cri, mid);
 	}
 
+	@Override
+	public void memberUpdate(MemberVO member_vo) throws Exception {
+		// TODO Auto-generated method stub
+		setting_dao.memberUpdate(member_vo);
+		
+	}
+
 }
