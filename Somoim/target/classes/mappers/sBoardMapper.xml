@@ -16,9 +16,15 @@
 	</select>
 
 	<update id="sboard_update">
-		update sBoard set sb_title,=#{sb_title}, sb_content=#{sb_content}, sb_picture=#{sb_picture} where sb_no=#{sb_no}
+		update sBoard set sb_title=#{sb_title}, sb_content=#{sb_content}, sb_picture=#{sb_picture} where sb_no=#{sb_no}
 	
 	</update>
+	
+	<select id="sboard_detail_picture" resultType="String">
+		select sb_picture sBoard where sb_no=#{sb_no} 
+	</select>
+	
+	
 	
 	<delete id="sboard_delete">
 		delete from sBoard where sb_no=#{sb_no}	

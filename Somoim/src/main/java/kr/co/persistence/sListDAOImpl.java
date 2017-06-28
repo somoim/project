@@ -1,12 +1,15 @@
 package kr.co.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.domain.StatusVO;
 import kr.co.domain.sListVO;
 
 @Repository
@@ -32,6 +35,22 @@ public class sListDAOImpl implements sListDAO {
 	public void update_s_join_cnt(int sl_no) throws Exception {
 		// TODO Auto-generated method stub
 		session.update(NAMESPACE+".update_s_join_cnt", sl_no);
+	}
+
+	@Override
+	public void join_sList_insert(int cno, int sl_no, String mid) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cno", cno);
+		map.put("sl_no", sl_no);
+		map.put("mid", mid);
+		session.insert(NAMESPACE+".join_sList_insert", map);
+	}
+
+	@Override
+	public List<StatusVO> join_sList_select(int sl_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE+".join_sList_select", sl_no);
 	}
 
 }

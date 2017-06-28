@@ -10,6 +10,7 @@
 		<typeAlias alias="ChattingVO" type="kr.co.domain.ChattingVO"/>
 		<typeAlias alias="JoinSlistVO" type="kr.co.domain.JoinSlistVO"/>
 		<typeAlias alias="VisitorVO" type="kr.co.domain.VisitorVO"/>
+		<typeAlias alias="StatusVO" type="kr.co.domain.StatusVO"/>
 	</typeAliases>
 	
 </configuration>

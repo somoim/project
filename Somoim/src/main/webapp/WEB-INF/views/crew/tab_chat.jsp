@@ -59,11 +59,11 @@
 		
 	});
 	function getChatList(cno) {
+		console.log(cno);
 		$.getJSON("/crew/tab_chat/"+cno, function(data) {
-			console.log(data);
+			
 			var source = $("#source").html();
 			var template = Handlebars.compile(source);
-			
 			$("#replies").html(template(data));
 
 		});

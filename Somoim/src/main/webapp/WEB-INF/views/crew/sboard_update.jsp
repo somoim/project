@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="../index.jsp"></jsp:include>
@@ -13,11 +12,18 @@
 	<div id="mobile">
 		<div id="container">
 			<!-- 여기서부터 시작 -->
+			<form role="form" method="post">
+				<input value="${vo.cno}" name="cno"  type="hidden" >
+				<input value="${vo.sb_no}" name="sb_no"  type="hidden" >
+				<input value="${vo.sb_picture}" name="sb_picture"  type="hidden">
+			</form>
+			
+			
 			<div class="container">
 				<div class="row">
 					<div class="page-header">
 						<h1>
-							게시글 올리기 <small>글을 작성합니다.</small>
+							게시글 수정하기 <small>글을 수정합니다.</small>
 						</h1>
 					</div>
 				</div>
@@ -28,25 +34,39 @@
 							<label>아이디</label>
 							<input class="form-control" name="mid" id="mid" readonly="readonly" placeholder="아이디가져오기">
 						</div>
+						
 						<div class="form-group">
 							<label>제목</label>
-							<input class="form-control" name="sb_title" id="sb_title"  placeholder="제목(10자)">
+							<input class="form-control" name="sb_title" id="sb_title" value="${vo.sb_title}">
 						</div>
+						
 						<div class="form-group">
 							<label>내용</label>
-							<textarea rows="10" cols="3" class="form-control" name="sb_content" id="sb_content"  placeholder="글을 작성해주세요"></textarea>
+							<textarea rows="10" cols="3" class="form-control" name="sb_content" id="sb_content">${vo.sb_content}</textarea>
 						</div>
-	
-						<div class="filebox">
-							<input id="fileUpload" type="file" id="file">
-							<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
-							<a href="crew/tab_board">
-							<button class="btn btn-danger form-control list_btn" id="list_btn">게시판으로 이동</button></a>
+
+
+						<div class="form-group">
+							<label for="uploadedList">첨부파일</label>
+							<ul id="uploadedList" class="clearfix uploadedList">
+							</ul>
 						</div>
-		
+
+
+
+						<div class="row">
+							<div class="filebox">
+								<input id="fileUpload" type="file" id="file">
+								<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
+								<a href="crew/tab_board">
+								<button class="btn btn-danger form-control list_btn" id="list_btn">게시판으로 이동</button></a>
+							</div>
+						</div>
+						
 						<div class="row">
 							<ul class="clearfix uploadedList"></ul>
 						</div>
+						
 					</form>
 
 
@@ -64,8 +84,17 @@
 
 				<script type="text/javascript">
 					$(document).ready(function() {
+						
+						var sb_no = ${vo.sb_no};
+						sboard_detail_picture(sb_no);
+						
+						console.log(sb_no);
+						
+						
 						var source = $("#source").html();
 						var template = Handlebars.compile(source);
+						
+						
 
 						$("input[type=file]").change(function(event) {
 							event.preventDefault();
@@ -129,6 +158,25 @@
 								}
 							});
 						});
+						
+
+						
+						function sboard_detail_picture(sb_no) {
+							console.log(sb_no);
+							$.getJSON("/crew/sboard_detail_picture/"+sb_no, function(result) {
+								var source = $("#source").html();
+								var template = Handlebars.compile(source);
+									
+								$(result).each(function() {
+									var fileInfo = sBoard_getFileInfo(this);
+									var ht = template(fileInfo);
+									$(".uploadedList").html(ht);
+								});
+							});
+						}
+						
+						
+						
 				});
 				</script>
 				

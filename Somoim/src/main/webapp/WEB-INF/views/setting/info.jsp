@@ -55,6 +55,11 @@
             }
         });
 		
+		// 마이페이지이동
+		$(".mypageGo").click(function () {
+			self.location="/setting/mypage";
+		});
+		
 	});
 </script>
 </head>
@@ -81,7 +86,7 @@
 			<div class="panel-body">
 				<div class="category">
 					<span><b>관심 카테고리</b> &nbsp;:&nbsp; ${memberVo.category}</span> 
-					<button class="pull-right">설정</button>
+					<button class="pull-right mypageGo">설정</button>
 				</div>
 			</div>
 		</div>

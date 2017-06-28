@@ -26,7 +26,7 @@ public class sBoardDAOImpl implements sBoardDAO {
 	@Override
 	public List<sBoardVO> sboard_list(int cno) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE+".aboard_list", cno);
+		return session.selectList(NAMESPACE+".sboard_list", cno);
 	}
 
 	@Override
@@ -45,6 +45,12 @@ public class sBoardDAOImpl implements sBoardDAO {
 	public sBoardVO sboard_detail(int sb_no) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectOne(NAMESPACE+".sboard_detail", sb_no);
+	}
+
+	@Override
+	public String sboard_detail_picture(int sb_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE+".sboard_detail_picture", sb_no);
 	}
 
 }
