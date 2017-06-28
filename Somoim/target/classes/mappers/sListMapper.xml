@@ -22,5 +22,12 @@
 	<update id="update_s_join_cnt">
 		update slist set s_join_cnt = s_join_cnt + 1 where sl_no = #{sl_no}
 	</update>
-
+	
+	<insert id="join_sList_insert">
+		insert into status (sno,cno,sl_no,mid) values(seq_sno.nextval,#{cno},#{sl_no},#{mid})
+	</insert>
+	
+	<select id="join_sList_select" resultType="StatusVO">
+		select * from status where sl_no = #{sl_no}
+	</select>
 </mapper>

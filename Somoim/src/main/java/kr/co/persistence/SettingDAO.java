@@ -14,5 +14,6 @@ public interface SettingDAO {
 	public abstract List<CrewVO> joinCrew(Criteria cri, String mid) throws Exception;
 	public abstract List<JoinSlistVO> joinSlist(Criteria cri, String mid) throws Exception;
 	public abstract void memberUpdate(MemberVO member_vo) throws Exception;
+	public abstract void memberDelete(String mid) throws Exception;
 
 }
