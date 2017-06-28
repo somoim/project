@@ -49,8 +49,7 @@
 
 
 /* mobile */
-html, body { height:100%; }
-#mobile { background-color:bisque; height:100%;}
+html, body, #mobile { min-height:100%; background-color:bisque; }
 #container { margin-bottom:65px; padding-top:55px; }
 
 /* intro */

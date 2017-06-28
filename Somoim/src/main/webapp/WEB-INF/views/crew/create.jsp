@@ -103,7 +103,7 @@
 						<button class="btn btn-primary" type="submit" id="submit_form">
 							<span class="glyphicon glyphicon-check"></span> 등록
 						</button>
-						<button class="btn btn-info" type="submit" id="list_form">
+						<button class="btn btn-info" type="button" id="list_form">
 							<span class="glyphicon glyphicon-list"></span> 목록
 						</button>
 					</div>
