@@ -40,6 +40,12 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return admin_dao.crewMemberCnt();
 	}
+	
+	@Override
+	public List<MemberVO> memberList() throws Exception {
+		// TODO Auto-generated method stub
+		return admin_dao.memberList();
+	}
 
 	@Override
 	public int visitorCnt() throws Exception {

@@ -18,6 +18,10 @@
 		select * from crew
 	</select>
 	
+	<select id="memberList" resultType="MemberVO">
+		select * from member where power not in (2, 3)
+	</select>
+	
 	<select id="visitorCnt" resultType="Integer">
 		select sum(count) from visitor
 	</select>

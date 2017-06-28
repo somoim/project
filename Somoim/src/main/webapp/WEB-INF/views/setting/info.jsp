@@ -254,6 +254,11 @@
 				
 			</div>
 		</div>
+		
+		<div class="infobar"></div>
+		<div class="">
+			<button class="btn btn-block">회원 탈퇴</button>
+		</div>
 			
 	</div>
 </div>
