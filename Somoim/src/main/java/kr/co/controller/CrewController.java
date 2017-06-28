@@ -290,8 +290,8 @@ public class CrewController {
 	}
 	
 	@RequestMapping(value="/create_post", method=RequestMethod.POST)
-	public void crew_createPost() throws Exception {
-		
+	public void crew_createPost(CrewVO crew_vo) throws Exception {
+		crew_service.crew_create(crew_vo);
 		
 	}
 	
