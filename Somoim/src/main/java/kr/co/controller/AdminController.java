@@ -32,21 +32,31 @@ public class AdminController {
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		mid = memberVO.getMid();
 		
+		// 로그인 정보
 		MemberVO memberVo = getMemberInfo(mid);
 		model.addAttribute("memberVo", memberVo);
 		
+		// 총 회원수
 		int memberCnt = admin_service.memberCnt();
 		model.addAttribute("memberCnt", memberCnt);
 		
+		// 소모임 수
 		int crewCnt = admin_service.crewCnt();
 		model.addAttribute("crewCnt", crewCnt);
 		
+		// 소모임별 회원수
 		List<CrewVO> crewList = admin_service.crewMemberCnt();
 		model.addAttribute("crewList", crewList);
 		
+		// 회원 정보
+		List<MemberVO> memberList = admin_service.memberList();
+		model.addAttribute("memberList", memberList);
+		
+		// 누적 방문자 수
 		int visitorCnt = admin_service.visitorCnt();
 		model.addAttribute("visitorCnt", visitorCnt);
 		
+		// 일별 방문자 수
 		List<VisitorVO> visitorList = admin_service.visitorList();
 		model.addAttribute("visitorList", visitorList);
 	}

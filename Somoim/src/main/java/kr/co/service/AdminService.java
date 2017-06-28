@@ -11,6 +11,7 @@ public interface AdminService {
 	public abstract int memberCnt() throws Exception;
 	public abstract int crewCnt() throws Exception;
 	public abstract List<CrewVO> crewMemberCnt() throws Exception;
+	public abstract List<MemberVO> memberList() throws Exception;
 	public abstract int visitorCnt() throws Exception;
 	public abstract List<VisitorVO> visitorList() throws Exception;
 
