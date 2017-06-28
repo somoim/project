@@ -30,6 +30,11 @@
 			$(".date"+date).html(str);
 		});
 		
+		// 회원 탈퇴
+		$("#memberDelete").on("click", function() {
+			var mid = ${login.mid};
+		});
+		
 		// 아코디언
 		$(".accordion_banner .accordion_title").click(function() {
             if($(this).next("div").is(":visible")){
@@ -257,8 +262,8 @@
 		</div>
 		
 		<div class="infobar"></div>
-		<div class="">
-			<button class="btn btn-block">회원 탈퇴</button>
+		<div class="row">
+			<button class="btn btn-block" id="memberDelete">회원 탈퇴</button>
 		</div>
 			
 	</div>

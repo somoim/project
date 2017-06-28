@@ -31,16 +31,54 @@
 		});
 		
 		// 소모임 삭제
-		$(".crewDeleteBtn").on("click", function() {
+		$(".allCrew").on("click", ".crewDeleteBtn", function(){
 			var cno = $(this).attr("data-cno");
 			// alert(cno);
+			
+			var crewDelChack = confirm("정말로 삭제하시겠습니까?");
+			if(crewDelChack) {
+				$.ajax({
+					type: "delete"
+					, url: "/admin/crewDelete/"+cno
+					, headers: {
+						"Content-Type": "application/json"
+						, "X-HTTP-Method-Override": "DELETE"
+					}
+					, dataType: "text"
+					, success: function(result) {
+						if(result=="DELETE_SUCCESS") {
+							alert("소모임 삭제 완료");
+							getCrewList();
+						}
+					}
+				});
+			}
 			
 		});
 		
 		// 회원 탈퇴
-		$(".memberDeleteBtn").on("click", function() {
+		$(".allMember").on("click", ".memberDeleteBtn", function(){
 			var mid = $(this).attr("data-mid");
 			// alert(mid);
+			
+			var memberDelChack = confirm("정말로 "+mid+" 회원을 삭제하시겠습니까?");
+			if(memberDelChack) {
+				$.ajax({
+					type: "delete"
+					, url: "/admin/memberDelete/"+mid
+					, headers: {
+						"Content-Type": "application/json"
+						, "X-HTTP-Method-Override": "DELETE"
+					}
+					, dataType: "text"
+					, success: function(result) {
+						if(result=="DELETE_SUCCESS") {
+							alert("회원 삭제 완료");
+							getMerberList();
+						}
+					}
+				}); 
+			}
 			
 		});
 		
@@ -65,6 +103,49 @@
         });
 		
 	});
+	
+	function getCrewList() {
+		$.getJSON("/admin/getCrewList", function(data) {			
+			var source = $("#sourceCrew").html();
+			var template = Handlebars.compile(source);
+			$(".allCrew").html(template(data)); 
+		});
+	}
+	
+	function getMerberList() {
+		$.getJSON("/admin/getMerberList", function(data) {			
+			var source = $("#sourceMember").html();
+			var template = Handlebars.compile(source);
+			$(".allMember").html(template(data)); 
+		});
+	}
+</script>
+<script id="sourceCrew" type="text/x-handlebars-template">
+{{#each.}}
+	<tr>
+		<td>{{cno}}</td>
+		<td>{{title}}</td>
+		<td>{{mid}}</td>
+		<td>{{region}}</td>
+		<td>{{category}}</td>
+		<td>{{join_cnt}}/{{attend_cnt}}</td>
+		<c:if test="${login.power==2}">
+			<td><button class="btn active crewDeleteBtn" data-cno="{{cno}}">삭제</button></td> 
+		</c:if>
+	</tr>
+{{/each}}
+</script>
+<script id="sourceMember" type="text/x-handlebars-template">
+{{#each.}}
+	<tr>
+		<td>{{mid}}</td>
+		<td>{{name}}</td>
+		<td>{{gender}}</td>
+		<td>{{birth}}</td>
+		<td>{{address}}</td>
+		<td><button class="btn active memberDeleteBtn" data-mid="{{mid}}">삭제</button></td> 
+	</tr>
+{{/each}}
 </script>
 </head>
 <body>
@@ -134,7 +215,9 @@
 						<table class="table">
 							<thead>
 								<tr>
+									<th>No.</th>
 									<th>소모임 제목</th>
+									<th>모임장</th>
 									<th>지역</th>
 									<th>카테고리</th>
 									<th>소모임 인원</th>
@@ -144,10 +227,12 @@
 									</c:if>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="allCrew">
 								<c:forEach items="${crewList}" var="crewVo">
 									<tr>
+										<td>${crewVo.cno}</td>
 										<td>${crewVo.title}</td>
+										<td>${crewVo.mid}</td>
 										<td>${crewVo.region}</td>
 										<td>${crewVo.category}</td>
 										<td>${crewVo.join_cnt}/${crewVo.attend_cnt}</td>
@@ -182,7 +267,7 @@
 										<th>삭제</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody class="allMember">
 									<c:forEach items="${memberList}" var="memberVo">
 										<tr>
 											<td>${memberVo.mid}</td>
