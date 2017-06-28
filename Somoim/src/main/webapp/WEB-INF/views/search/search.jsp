@@ -25,11 +25,13 @@
 			}	
 		});
 		
-		// 카테고리 리스트보이기
-		$("#keyword").keypress(function() {
-			$("#category_list").slideDown("slow");
-		})
 	});
+	
+	// 카테고리 리스트보이기
+	$("#keyword").onkeydown = function() {myFunction()};
+	function myFunction() {
+		$("#category_list").slideDown("slow");
+	}
 	
 	function searchCategory(categoryKey) {
 		event.preventDefault();
@@ -44,7 +46,7 @@
 	<div id="container">
 		<!-- 여기서부터 시작 -->
 		<div class="input-group">
-			<input class="form-control" id="keyword" name="keyword" placeholder="모임명을 입력하세요">
+			<input class="form-control" id="keyword" name="keyword" placeholder="모임명을 입력하세요" onkeydown="myFunction()">
 			<span class="input-group-addon" id="searchBtn">
 				검색 <span class="glyphicon glyphicon-search"></span>
 			</span>

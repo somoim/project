@@ -31,7 +31,7 @@
 					<div class="form-group">
 						<label class="col-xs-2 control-label" for="upw">PW</label> 
 						<div class="col-xs-10 upw_form">
-							<input class="form-control" name="password" id="password" placeholder="비밀번호를 입력하세요">
+							<input class="form-control" name="password" id="password" type="password" placeholder="비밀번호를 입력하세요">
 						</div>
 					</div>
 	
