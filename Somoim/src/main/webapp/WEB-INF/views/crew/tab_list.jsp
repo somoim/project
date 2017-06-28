@@ -22,6 +22,11 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var sList=$("btn-danger").attr("data-sl_no");
+		var cnt = $("btn-danger").attr("data-cnt");
+		var join = $("btn-danger").attr("data-join");
+		var mid = $("btn-danger").attr("data-mid");	
+	
 		// 뒤로가기
 		$(".backCont").click(function() {
 			self.location="/crew/list";
@@ -53,7 +58,7 @@
 			var sList=$(this).attr("data-sl_no");
 			var cnt = $(this).attr("data-cnt");
 			var join = $(this).attr("data-join");
-			var mid = $(this.attr("data-mid");
+			var mid = $(this).attr("data-mid");
 			if(cnt <= join){
 				alert("참석인원이 초과 하였습니다.");
 				return;
@@ -72,7 +77,26 @@
 				}
 			});
 		});
+		$(".btn-default").on("click",function(){
+			var sl_no = $(this).attr("data-sl_no");
+			console.log(sl_no);
+			$.getJSON("/crew/tab_list/"+sl_no, function(data) {
+				console.log(data);
+				var source = $("#source").html();
+				var template = Handlebars.compile(source);
+				$(".well").append(template(data));
+			});
+
+		});
+			
 	});
+</script>
+<script id="source" type="text/x-handlebars-template">
+{{#each.}}
+	<ul class="list-group">
+		<li class="list-group-item">{{mid}}</li>		  
+	</ul>
+{{/each}}
 </script>
 </head>
 <body>
@@ -132,8 +156,13 @@
 			    <li class="list-group-item">정모 날자: ${sList.attend_date}</li>
 			    <li class="list-group-item">정모 장소: ${sList.attend_region}</li>
 			    <li class="list-group-item">회비 : ${sList.attend_money}</li>
-			    <li class="list-group-item collapse">참석인원 : ${sList.s_join_cnt}</li>
 			  </ul>
+			  <button class="btn btn-default form-control" type="button" data-toggle="collapse" data-target="#midshow${sList.sl_no}" aria-expanded="false" aria-controls="midshow${sList.sl_no}" data-sl_no="${sList.sl_no}">참석 인원 보기</button>
+			  	<div class="collapse" id="midshow${sList.sl_no}">
+				  <div class="well">
+				  	
+				  </div>
+				</div>
 			  <hr>
 			  </c:forEach>
 			</div>

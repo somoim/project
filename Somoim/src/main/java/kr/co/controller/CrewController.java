@@ -28,6 +28,7 @@ import kr.co.domain.ChattingVO;
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
 import kr.co.domain.MemberVO;
+import kr.co.domain.StatusVO;
 import kr.co.domain.sBoardVO;
 import kr.co.domain.sListVO;
 import kr.co.domain.sGalleryVO;
@@ -245,10 +246,19 @@ public class CrewController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/update_s_join_cnt") //정모 참석 누르기
-	public void update_MemberPower(int sl_no)throws Exception{
+	public void update_MemberPower(int sl_no,int cno,String mid)throws Exception{
 		sList_service.update_s_join_cnt(sl_no);
+		sList_service.join_sList_insert(cno, sl_no, mid);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/tab_list/{sl_no}")
+	public List<StatusVO> status_list(@PathVariable("sl_no")int sl_no,Model model )throws Exception{
+		List<StatusVO> status_list=sList_service.join_sList_select(sl_no);
+		model.addAttribute("status_list", status_list);
+		return status_list;
+		
+	}
 	
 	///////////////////////// 진희
 	@RequestMapping(value="/list", method=RequestMethod.GET)
