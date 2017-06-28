@@ -49,7 +49,29 @@
 		$(".role").on("click", function(){
 			location.href="#"
 		});
-		
+		$(".btn-danger").on("click", function(){
+			var sList=$(this).attr("data-sl_no");
+			var cnt = $(this).attr("data-cnt");
+			var join = $(this).attr("data-join");
+			var mid = $(this.attr("data-mid");
+			if(cnt <= join){
+				alert("참석인원이 초과 하였습니다.");
+				return;
+			}
+			$.ajax({
+				type : "get",
+				url : "/crew/update_s_join_cnt",
+				data : {
+					sl_no : sl_no,
+					cno : cno,
+					mid : mid
+				},
+				dataType : "text",
+				success:function(result){
+					self.location="/crew/tab_list";
+				}
+			});
+		});
 	});
 </script>
 </head>
@@ -101,13 +123,18 @@
 			<div class="panel panel-default">
 			  <!-- Default panel contents -->
 			  <c:forEach items="${sList_list}" var="sList">
-			  <div class="panel-heading">${sList.attend_title} (${sList.attend_cnt}명)</div>
+			  <div class="panel-heading">
+				  <span>${sList.attend_title} (${sList.attend_cnt}명)</span> 
+				  <button class="btn btn-danger col-xs-offset-8" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
+			  </div>
 			  <!-- List group -->
 			  <ul class="list-group">
 			    <li class="list-group-item">정모 날자: ${sList.attend_date}</li>
 			    <li class="list-group-item">정모 장소: ${sList.attend_region}</li>
 			    <li class="list-group-item">회비 : ${sList.attend_money}</li>
+			    <li class="list-group-item collapse">참석인원 : ${sList.s_join_cnt}</li>
 			  </ul>
+			  <hr>
 			  </c:forEach>
 			</div>
 			

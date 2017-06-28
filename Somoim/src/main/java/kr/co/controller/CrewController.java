@@ -239,9 +239,14 @@ public class CrewController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/update_Role/{cno}")
+	@RequestMapping(value="/update_Role/{cno}")	//소모임의 운영자 권한 주기
 	public void update_MemberPower(@PathVariable("cno")int cno,String mid)throws Exception{
 		crew_service.crew_update_role(cno, mid);
+	}
+	@ResponseBody
+	@RequestMapping(value="/update_s_join_cnt") //정모 참석 누르기
+	public void update_MemberPower(int sl_no)throws Exception{
+		sList_service.update_s_join_cnt(sl_no);
 	}
 	
 	
