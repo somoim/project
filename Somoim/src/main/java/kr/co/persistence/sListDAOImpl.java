@@ -28,4 +28,10 @@ public class sListDAOImpl implements sListDAO {
 		return session.selectList(NAMESPACE+".slist_tab_list", cno);
 	}
 
+	@Override
+	public void update_s_join_cnt(int sl_no) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".update_s_join_cnt", sl_no);
+	}
+
 }

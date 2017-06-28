@@ -27,4 +27,11 @@ public class sListServiceImpl implements sListService {
 		return sList_dao.slist_tab_list(cno);
 	}
 
+	@Override
+	public void update_s_join_cnt(int sl_no) throws Exception {
+		// TODO Auto-generated method stub
+		sList_dao.update_s_join_cnt(sl_no);
+		
+	}
+
 }

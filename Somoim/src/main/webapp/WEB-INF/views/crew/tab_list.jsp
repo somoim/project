@@ -9,7 +9,7 @@
 <style type="text/css">
 	#header { display:none;}
 	#footer { display:none;}
-	#container { height:100%; margin-top:95px; margin-bottom:0;}
+	#container { height:100%; padding-top:95px; margin-bottom:0;}
 	.sub_tab { display:table; width:100%; position: fixed; top:55px;}
 	.sub_tab li { display: table-cell; width:25%; text-align:center; height:40px; line-height:39px; background-color: #ffffff; font-size:14px; font-weight:bold; color:#929292; border-bottom:1px solid #929292;}
 	.sub_tab li a { display:block; color:inherit;}
@@ -18,17 +18,17 @@
     .sub_tab li.act { height:40px; line-height:38px; color:#493334; border-bottom: 2px solid #493334;}
     .panel{margin-bottom: auto;}
     .power{color: red;}
+    .horizon{border: solid 1px rgb(255,151,220);}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
 		// 뒤로가기
 		$(".backCont").click(function() {
 			self.location="/crew/list";
 		});
 		
 		$(".sList").click(function(){
-			self.location="#"
+			location.href="#"
 		});
 		
 		var cno = $(".getCno").val();
@@ -46,7 +46,32 @@
 				}
 			});
 		});
-		
+		$(".role").on("click", function(){
+			location.href="#"
+		});
+		$(".btn-danger").on("click", function(){
+			var sList=$(this).attr("data-sl_no");
+			var cnt = $(this).attr("data-cnt");
+			var join = $(this).attr("data-join");
+			var mid = $(this.attr("data-mid");
+			if(cnt <= join){
+				alert("참석인원이 초과 하였습니다.");
+				return;
+			}
+			$.ajax({
+				type : "get",
+				url : "/crew/update_s_join_cnt",
+				data : {
+					sl_no : sl_no,
+					cno : cno,
+					mid : mid
+				},
+				dataType : "text",
+				success:function(result){
+					self.location="/crew/tab_list";
+				}
+			});
+		});
 	});
 </script>
 </head>
@@ -92,17 +117,24 @@
 			</div>
 		</div>
 		<div class="row">
+			<c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
 			<button class="form-control sList"><span class="glyphicon glyphicon-plus"></span>새로운 정모 만들기</button>
+			</c:if>
 			<div class="panel panel-default">
 			  <!-- Default panel contents -->
 			  <c:forEach items="${sList_list}" var="sList">
-			  <div class="panel-heading">${sList.attend_title}</div>
+			  <div class="panel-heading">
+				  <span>${sList.attend_title} (${sList.attend_cnt}명)</span> 
+				  <button class="btn btn-danger col-xs-offset-8" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
+			  </div>
 			  <!-- List group -->
 			  <ul class="list-group">
-			    <li class="list-group-item">${sList.attend_date}</li>
-			    <li class="list-group-item">${sList.attend_region}</li>
-			    <li class="list-group-item">${sList.attend_money}</li>
+			    <li class="list-group-item">정모 날자: ${sList.attend_date}</li>
+			    <li class="list-group-item">정모 장소: ${sList.attend_region}</li>
+			    <li class="list-group-item">회비 : ${sList.attend_money}</li>
+			    <li class="list-group-item collapse">참석인원 : ${sList.s_join_cnt}</li>
 			  </ul>
+			  <hr>
 			  </c:forEach>
 			</div>
 			
@@ -120,6 +152,7 @@
 					<button class="btn btn-success col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
 					</c:if>
 				</h5>
+				<hr class="horizon">
 			</c:forEach>
 		</div>
 	</div>
