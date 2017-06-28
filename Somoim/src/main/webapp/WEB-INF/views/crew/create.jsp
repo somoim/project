@@ -8,10 +8,10 @@
 	.formLayout { padding:20px 10px 0;}
 	.formLayout textarea { min-height:200px }
 	.fileDrop{
-		width:80%;
+		width:100%;
 		height:100px;
 		border: 1px dotted gray;
-		background-color: lightslategray;
+		background-color: gainsboro;
 		margin: auto;
 	}
 </style>

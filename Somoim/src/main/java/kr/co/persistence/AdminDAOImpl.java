@@ -52,6 +52,12 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
+	public List<MemberVO> memberList() throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE+".memberList");
+	}
+
+	@Override
 	public int visitorCnt() throws Exception {
 		// TODO Auto-generated method stub
 		Integer visitorCnt = session.selectOne(NAMESPACE+".visitorCnt");
@@ -66,6 +72,5 @@ public class AdminDAOImpl implements AdminDAO {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE+".visitorList");
 	}
-
 
 }

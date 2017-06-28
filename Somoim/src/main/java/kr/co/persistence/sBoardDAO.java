@@ -14,4 +14,5 @@ public interface sBoardDAO {
 	
 	abstract sBoardVO sboard_detail(int sb_no) throws Exception;
 	
+	abstract String sboard_detail_picture(int sb_no) throws Exception;
 }

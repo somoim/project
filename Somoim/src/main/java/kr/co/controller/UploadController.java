@@ -59,6 +59,30 @@ public class UploadController {
 	
 	/*---------------------------------------------------------------------------------------*/
 	
+	@RequestMapping(value="/deleteFile/sboard", method=RequestMethod.POST)
+	public ResponseEntity<String> deleteFile_sBoard(String fileName){
+		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+		MediaType mType = MediaUtils.getMediaType(formatName);
+		
+		if(mType != null){	// 이미지 파일이면
+			
+			String prefix = fileName.substring(0, 12);
+			String suffix = fileName.substring(14);
+			
+			File f = new File(sboard_uploadPath+(prefix+suffix).replace('/', File.separatorChar));
+			// '/'를 '\'로 바꾸는 작업
+			f.delete();
+		}
+		File s = new File(sboard_uploadPath+fileName.replace('/', File.separatorChar));
+		// 이미지 파일이 아닌 파일들 삭제
+		s.delete();
+		
+		return new ResponseEntity<String>("DELETE_SUCCESS", HttpStatus.OK);
+	}
+	
+	
+	
+	
 	@ResponseBody
 	@RequestMapping(value="/displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
@@ -92,7 +116,7 @@ public class UploadController {
 	/*---------------------------------------------------------------------------------------*/
 	
 	@RequestMapping(value="/displayFile/sboard")
-	public ResponseEntity<byte[]> displayFile_sboard(String fileName) throws Exception{
+	public ResponseEntity<byte[]> displayFile_sBoard(String fileName) throws Exception{
 		InputStream in = null;
 		ResponseEntity<byte[]> entity = null;
 		try {

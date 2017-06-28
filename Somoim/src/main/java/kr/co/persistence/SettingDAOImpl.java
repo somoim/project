@@ -56,4 +56,9 @@ public class SettingDAOImpl implements SettingDAO {
 		return session.selectList(NAMESPACE+".joinSlist", map);
 	}
 
+	@Override
+	public void memberUpdate(MemberVO member_vo) throws Exception {
+		session.update(NAMESPACE+".memberUpdate", member_vo);
+	}
+
 }
