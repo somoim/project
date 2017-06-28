@@ -137,8 +137,6 @@
 
 							self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;
 						});
-						
-						
 					});
 					
 					// 뒤로가기

@@ -7,14 +7,14 @@
 <html>
 <head>
 <style type="text/css">
-.thumbnail{
-	width:200px;
-	height:200px;
-} 
+.thumbnail {
+	width: 200px;
+	height: 200px;
+}
 
-.thumbnail img{
-	width:100%;
-	height:100%;
+.thumbnail img {
+	width: 100%;
+	height: 100%;
 }
 
 .thumbnail_list {
@@ -100,18 +100,55 @@
 			<li><a href="../crew/tab_chat">채팅</a></li>
 		</ul>
 
-
-
+	<div id="container">
+		<div class="container">
 		
-				<!-- 버튼 레이아웃 -->
-				<a href="sboard_create" class="fixedBtn"> <span><span
-						class="glyphicon glyphicon-pencil"></span></span> 
-						<span>글쓰기</span>
-				</a>
-
-				<script type="text/javascript">
+			<div class="row">
+				
+					<div class="list-group">
 					
-				</script>
+					<c:forEach items="${list}" var="sboard_vo">
+						<form role="form" method="post">
+							<input value="${sboard_vo.sb_no}" name="sb_no" 	>
+							<input value="${sboard_vo.cno}" name="cno"  type="hidden">
+						</form>
+						
+					<a herf="crew/sboard_detail" class="list-group-item">
+						<h4 class="list-group-item-heading">
+							<p>${sboard_vo.mid}</p>
+							<p>${sboard_vo.sb_writeday}</p>
+						</h4>
+						<hr>
+						<p class="list-group-item-text">
+							<p>${sboard_vo.sb_title}</p>
+							<p>${sboard_vo.sb_content}</p>
+						</p>
+					</a>	
+						</c:forEach>
+					</div>
+			</div>
+	
+		<!-- 버튼 레이아웃 -->
+		<a href="sboard_create" class="fixedBtn"> <span><span
+				class="glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
+		</a>
 
-	</div> <!-- mobile -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$(".list-group-item").on("click", function(event) {
+					event.preventDefault();
+					var sb_no = $("input[name=sb_no]").val();
+					var cno = $("input[name=cno]").val();
+					alert(sb_no); 	
+					alert(cno); 	
+	
+					self.location="/crew/sboard_detail?cno="+cno+"&sb_no="+sb_no;
+				});
+			});
+		
+		</script>
+				
+			</div>
+		</div>
+	</div>	<!-- mobile -->
 </body>

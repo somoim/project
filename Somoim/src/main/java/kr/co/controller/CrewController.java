@@ -77,6 +77,7 @@ public class CrewController {
 	public void sgallery_create_GET(){ 
 	} 
 	
+	@ResponseBody
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.POST) 
 	public String sgallery_create_POST(sGalleryVO sgallery_vo, RedirectAttributes rttr) throws Exception{ 	
 		
@@ -115,7 +116,7 @@ public class CrewController {
 	
 	@ResponseBody
 	@RequestMapping(value="/sgallery_detail/{cno}/{sg_no}")
-	public sGalleryVO read(@PathVariable("cno") int cno, @PathVariable("sg_no") int sg_no, Model model) throws Exception{
+	public sGalleryVO sgallery_detail(@PathVariable("cno") int cno, @PathVariable("sg_no") int sg_no, Model model) throws Exception{
 		
 		sGalleryVO vo = sgallery_service.sgallery_detail(sg_no);
 		model.addAttribute("vo", vo);
@@ -136,7 +137,7 @@ public class CrewController {
 	
 	@ResponseBody
 	@RequestMapping(value="/sgallery_delete", method=RequestMethod.POST)
-	public String delete(@RequestParam("sg_no") int sg_no, @RequestParam("cno") int cno, RedirectAttributes rttr) throws Exception{
+	public String sgallery_delete(@RequestParam("sg_no") int sg_no, @RequestParam("cno") int cno, RedirectAttributes rttr) throws Exception{
 		sGalleryVO vo = sgallery_service.sgallery_detail(sg_no);
 		sgallery_service.sgallery_delete(sg_no);
 
@@ -159,6 +160,7 @@ public class CrewController {
 	public void sboard_create_GET(){ 
 	} 
 	
+	@ResponseBody
 	@RequestMapping(value="/sboard_create", method=RequestMethod.POST) 
 	public String sboard_create_POST(sBoardVO sboard_vo, RedirectAttributes rttr) throws Exception{ 	
 		
@@ -177,7 +179,99 @@ public class CrewController {
 	
 	
 	
+	@ResponseBody
+	@RequestMapping(value="/tab_board/{cno}")
+	public List<sBoardVO> sBoard(@PathVariable("cno") int cno, Model model) throws Exception{
+		
+		List<sBoardVO> list = sboard_service.sboard_list(cno);
+		model.addAttribute("list", list);
+		
+		return list;
+	}
+	
+	@RequestMapping(value="/tab_board")
+	public void tab_board_GET(Model model) throws Exception {
+		List<sBoardVO> list = sboard_service.sboard_list(1);
+		model.addAttribute("list", list);
+	}
+	
+	
+	/*---------------------------------------------------------------------------------------*/
+	
+	@ResponseBody
+	@RequestMapping(value="/sboard_detail/{cno}/{sb_no}")
+	public sBoardVO sboard_detail(@PathVariable("cno") int cno, @PathVariable("sb_no") int sb_no, Model model) throws Exception{
+		
+		sBoardVO vo = sboard_service.sboard_detail(sb_no);
+		model.addAttribute("vo", vo);
+		
+		return vo;
+	}
+	
+	
+	
+	@RequestMapping(value="/sboard_detail", method=RequestMethod.GET)
+	public void sboard_detail_GET(Model model) throws Exception {
+		
+		sBoardVO vo = sboard_service.sboard_detail(16);
+		model.addAttribute("vo", vo);
+	}
+	
+	/*---------------------------------------------------------------------------------------*/
+	
+	@ResponseBody
+	@RequestMapping(value="/sboard_delete", method=RequestMethod.POST)
+	public String sboard_delete(@RequestParam("sb_no") int sb_no, @RequestParam("cno") int cno, RedirectAttributes rttr) throws Exception{
+		sBoardVO vo = sboard_service.sboard_detail(sb_no);
+		sboard_service.sboard_delete(sb_no);
 
+		String prefix = vo.getSb_picture().substring(0, 12);
+		String suffix = vo.getSb_picture().substring(14);
+		
+		File f = new File(sboard_uploadPath+(prefix+suffix).replace('/', File.separatorChar));
+		f.delete();
+		File s = new File(sboard_uploadPath+vo.getSb_picture().replace('/', File.separatorChar));
+		s.delete();
+		
+		return "redirect:/crew/tab_board?cno="+cno;
+	
+	}
+	
+	/*---------------------------------------------------------------------------------------*/
+	
+	@RequestMapping(value="sboard_update", method=RequestMethod.GET)
+	public void sboard_update_GET(@RequestParam("sb_no") int sb_no, Model model) throws Exception{
+		sBoardVO vo = sboard_service.sboard_detail(sb_no);
+		model.addAttribute("vo", vo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="sboard_update", method=RequestMethod.POST)
+	public String sboard_update_POST(sBoardVO sboard_vo, RedirectAttributes rttr) throws Exception{
+		sboard_service.sboard_update(sboard_vo);
+		
+		rttr.addFlashAttribute("msg", "UPDATE");
+		
+		rttr.addAttribute("cno", sboard_vo.getCno());
+		rttr.addAttribute("sb_no", sboard_vo.getSb_no());
+	
+		return "redirect:/crew/sboard_detail";
+	}
+	
+	/*---------------------------------------------------------------------------------------*/
+	
+	@ResponseBody
+	@RequestMapping(value="sboard_datail_picture/{sb_no}")
+	public String sboard_detail_picture(@PathVariable("sb_no") int sb_no) throws Exception{
+		String sg_pictue = sboard_service.sboard_detail_picture(sb_no);
+		return sg_pictue;
+	}
+	
+	
+	/*---------------------------------------------------------------------------------------*/
+	
+	
+	
 	@RequestMapping(value="/list_create", method=RequestMethod.GET) 
 	public void list_create() throws Exception{ 
 	} 
@@ -185,11 +279,7 @@ public class CrewController {
 	@RequestMapping(value="/list") 
 	public void crew_list() throws Exception { 
 	
-	} 
-	
-	@RequestMapping(value="/tab_board") 
-	public void sBoard() throws Exception { 
-	
+		
 	} 
 	
 	///////////////////////// 정림

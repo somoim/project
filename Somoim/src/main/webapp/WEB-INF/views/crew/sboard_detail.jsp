@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="../index.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
@@ -27,7 +29,7 @@
 				<div class="row">
 					<div class="page-header">
 						<h1>
-							사진보기 <small>사진을 확인합니다.</small>
+							게시글보기 <small>게시글을 확인합니다.</small>
 						</h1>
 					</div>
 				</div>
@@ -37,12 +39,28 @@
 				<div class="row">
 					<div class="panel panel-warning">
 						<div class="panel-heading">
-							<h3 class="panel-title">이름 작성일</h3>
+							<h3 class="panel-title">
+								<span>${vo.mid}</span><br>
+								<span> ${vo.sb_writeday}</span>
+							</h3>
 						</div>
 						<div class="panel-body">
-							<div class="show_img">
-								<img src="/displayFile?fileName=${vo.sb_picture}" alt="사진사진">
+							<div class="show_title">
+								${vo.sb_title}
 							</div>
+							<br>
+							<br>
+								<div class="show_content">
+								${vo.sb_content}
+							</div>
+							
+							<%-- <c:if test="/displayFile/sboard?fileName=${vo.sb_picture} != /displayFile/sboard?fileName=undefined"> --%>  
+								<div class="show_img">
+									<img src="/displayFile/sboard?fileName=${vo.sb_picture}" alt="사진사진">
+								</div>
+							<%-- </c:if> --%> 
+							 
+							
 						</div>
 					</div>
 
@@ -53,7 +71,10 @@
 								<span class="glyphicon glyphicon-pencil"></span> 댓글
 							</button>
 
-
+							<button type="submit" class="btn btn-warning" id="update_form">
+								<span class="glyphicon glyphicon-edit"></span> 수정
+							</button>
+							
 							<button type="submit" class="btn btn-danger" id="delete_form">
 								<span class="glyphicon glyphicon-trash"></span> 삭제
 							</button>
@@ -82,6 +103,14 @@
 								$form.attr("action", "/crew/sboard_delete"); //위에 들어가 있으므로 안해도 됨
 								$form.submit();
 						});
+						
+						$("#update_form").click(function() {
+							$form.attr("action", "/crew/sboard_update");
+							$form.attr("method", "get");
+							$form.submit();
+						});
+
+						
 					});
 					
 					
