@@ -18,17 +18,17 @@
     .sub_tab li.act { height:40px; line-height:38px; color:#493334; border-bottom: 2px solid #493334;}
     .panel{margin-bottom: auto;}
     .power{color: red;}
+    .horizon{border: solid 1px rgb(255,151,220);}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
 		// 뒤로가기
 		$(".backCont").click(function() {
 			self.location="/crew/list";
 		});
 		
 		$(".sList").click(function(){
-			self.location="#"
+			location.href="#"
 		});
 		
 		var cno = $(".getCno").val();
@@ -45,6 +45,9 @@
 					self.location="/crew/tab_list";
 				}
 			});
+		});
+		$(".role").on("click", function(){
+			location.href="#"
 		});
 		
 	});
@@ -92,16 +95,18 @@
 			</div>
 		</div>
 		<div class="row">
+			<c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
 			<button class="form-control sList"><span class="glyphicon glyphicon-plus"></span>새로운 정모 만들기</button>
+			</c:if>
 			<div class="panel panel-default">
 			  <!-- Default panel contents -->
 			  <c:forEach items="${sList_list}" var="sList">
-			  <div class="panel-heading">${sList.attend_title}</div>
+			  <div class="panel-heading">${sList.attend_title} (${sList.attend_cnt}명)</div>
 			  <!-- List group -->
 			  <ul class="list-group">
-			    <li class="list-group-item">${sList.attend_date}</li>
-			    <li class="list-group-item">${sList.attend_region}</li>
-			    <li class="list-group-item">${sList.attend_money}</li>
+			    <li class="list-group-item">정모 날자: ${sList.attend_date}</li>
+			    <li class="list-group-item">정모 장소: ${sList.attend_region}</li>
+			    <li class="list-group-item">회비 : ${sList.attend_money}</li>
 			  </ul>
 			  </c:forEach>
 			</div>
@@ -120,6 +125,7 @@
 					<button class="btn btn-success col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
 					</c:if>
 				</h5>
+				<hr class="horizon">
 			</c:forEach>
 		</div>
 	</div>
