@@ -221,6 +221,18 @@ public class CrewController {
 		CrewVO crewVO=crew_service.crew_tab_list(cno);
 		List<sListVO> sList_list=sList_service.slist_tab_list(cno);
 		List<MemberVO> member_list=member_service.member_tab_list(cno);
+		int i = 0;
+		for(sListVO list: sList_list){
+			String str1=list.getAttend_date().substring(0, 4)+"년";
+			String str2=list.getAttend_date().substring(4, 6)+"월";
+			String str3=list.getAttend_date().substring(6, 8)+"일";
+			String str4=list.getAttend_date().substring(8, 10)+":";
+			String str5=list.getAttend_date().substring(10);
+			String str = str1+str2+str3+str4+str5;
+			list.setAttend_date(str);
+			i++;
+		}	// 정모 날자 잘라서 년월일 : 붙여주는 코드
+
 		model.addAttribute("crewVO", crewVO);
 		model.addAttribute("sList_list", sList_list);
 		model.addAttribute("member_list", member_list);
