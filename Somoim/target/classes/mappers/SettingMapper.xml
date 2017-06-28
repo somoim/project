@@ -26,5 +26,8 @@
 		update member set password=#{password}, gender=#{gender}, birth=#{birth}, address=#{address}, phone=#{phone}, category=#{category} where mid=#{mid}
 	</update>
 	
+	<delete id="memberDelete">
+		delete from member where mid=#{mid}
+	</delete>
 	
 </mapper>

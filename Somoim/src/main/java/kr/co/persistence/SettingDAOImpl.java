@@ -13,7 +13,6 @@ import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
 import kr.co.domain.JoinSlistVO;
 import kr.co.domain.MemberVO;
-import kr.co.domain.sListVO;
 
 @Repository
 public class SettingDAOImpl implements SettingDAO {
@@ -59,6 +58,12 @@ public class SettingDAOImpl implements SettingDAO {
 	@Override
 	public void memberUpdate(MemberVO member_vo) throws Exception {
 		session.update(NAMESPACE+".memberUpdate", member_vo);
+	}
+
+	@Override
+	public void memberDelete(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		session.delete(NAMESPACE+".memberDelete", mid);
 	}
 
 }

@@ -9,9 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
@@ -76,7 +79,6 @@ public class SettingController {
 		return joinSlist;
 	}
 	
-	
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
 	public void mypage() throws Exception{
 	}
@@ -95,6 +97,12 @@ public class SettingController {
 		setting_service.memberUpdate(member_vo);
 		System.out.println("수정되었습니다.");
 		System.out.println(member_vo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/memberDelete/{mid}")
+	public void memberDelete(@PathVariable("mid") String mid)throws Exception{
+		setting_service.memberDelete(mid);
 	}
 	
 }

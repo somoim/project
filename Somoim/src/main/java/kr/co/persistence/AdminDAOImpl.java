@@ -73,4 +73,46 @@ public class AdminDAOImpl implements AdminDAO {
 		return session.selectList(NAMESPACE+".visitorList");
 	}
 
+	@Override
+	public void crewDelete(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		session.delete(NAMESPACE+".crewDelete", cno);
+	}
+
+	@Override
+	public void memberDelete(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		session.delete(NAMESPACE+".memberDelete", mid);
+	}
+
+	@Override
+	public void slistJoincntUpdate(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".slistJoincntUpdate", mid);
+	}
+
+	@Override
+	public void crewJoincntUpdate(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".crewJoincntUpdate", mid);
+	}
+
+	@Override
+	public void chattingMidUpdate(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".chattingMidUpdate", mid);
+	}
+
+	@Override
+	public void sboardDeleteByMid(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".sboardDeleteByMid", mid);
+	}
+
+	@Override
+	public void sgalleryDeleteByMid(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".sgalleryDeleteByMid", mid);
+	}
+
 }

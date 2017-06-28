@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.domain.CrewVO;
 import kr.co.domain.MemberVO;
@@ -57,6 +58,26 @@ public class AdminServiceImpl implements AdminService {
 	public List<VisitorVO> visitorList() throws Exception {
 		// TODO Auto-generated method stub
 		return admin_dao.visitorList();
+	}
+
+	@Override
+	public void crewDelete(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		admin_dao.crewDelete(cno);
+	}
+
+	@Transactional
+	@Override
+	public void memberDelete(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		// 트렌젝션 처리
+		admin_dao.slistJoincntUpdate(mid);
+		admin_dao.crewJoincntUpdate(mid);
+		admin_dao.chattingMidUpdate(mid);
+		admin_dao.sboardDeleteByMid(mid);
+		admin_dao.sgalleryDeleteByMid(mid);
+		// 실제 회원 탈퇴
+		admin_dao.memberDelete(mid);
 	}
 
 }
