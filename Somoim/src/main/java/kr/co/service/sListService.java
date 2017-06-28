@@ -7,5 +7,6 @@ import kr.co.domain.sListVO;
 public interface sListService {
 	sListVO slist_list(int cno) throws Exception;
 	List<sListVO> slist_tab_list(int cno) throws Exception;
+	void update_s_join_cnt(int sl_no) throws Exception;
 
 }

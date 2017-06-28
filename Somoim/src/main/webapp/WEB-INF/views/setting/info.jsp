@@ -7,6 +7,7 @@
 <html>
 <head>
 <style type="text/css">
+	.navAct04 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 	#container { padding-bottom:20px;}
 	.info_detail{ height: 200px; }
 	#birth{ color: gray; }
@@ -253,6 +254,11 @@
 				</div>
 				
 			</div>
+		</div>
+		
+		<div class="infobar"></div>
+		<div class="">
+			<button class="btn btn-block">회원 탈퇴</button>
 		</div>
 			
 	</div>

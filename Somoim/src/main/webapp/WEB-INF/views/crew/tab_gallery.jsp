@@ -31,7 +31,7 @@
 
 #container {
 	height: 100%;
-	margin-top: 95px;
+	padding-top: 95px;
 	margin-bottom: 0;
 }
 

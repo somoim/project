@@ -7,6 +7,7 @@
 <html>
 <head>
 <style type="text/css">
+	.navAct04 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 	#container { padding-bottom:20px;}
 	.info_detail{ height: 200px; }
 	#birth{ color: gray; }
@@ -27,6 +28,20 @@
 			
 			var str = year + "/" + month + "/" + day + " " + hour + "시" + minute + "분";
 			$(".date"+date).html(str);
+		});
+		
+		// 소모임 삭제
+		$(".crewDeleteBtn").on("click", function() {
+			var cno = $(this).attr("data-cno");
+			// alert(cno);
+			
+		});
+		
+		// 회원 탈퇴
+		$(".memberDeleteBtn").on("click", function() {
+			var mid = $(this).attr("data-mid");
+			// alert(mid);
+			
 		});
 		
 		// 아코디언
@@ -97,31 +112,6 @@
 						</h4>
 					</div>
 				</div>
-
-				<%-- <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-					<div class="panel-body">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>제목</th>
-									<th>지역</th>
-									<th>카테고리</th>
-									<th>인원</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${openCrewList}" var="openCrew">
-									<tr>
-										<td>${openCrew.title}</td>
-										<td>${openCrew.region}</td>
-										<td>${openCrew.category}</td>
-										<td>${openCrew.join_cnt}/${openCrew.attend_cnt}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</div> --%>
 				
 				<div data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 				<div class="" role="tab" id="headingTwo">
@@ -131,30 +121,6 @@
 					</h4>
 				</div>
 				</div>
-				<%-- <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-					<div class="panel-body">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>제목</th>
-									<th>지역</th>
-									<th>카테고리</th>
-									<th>인원</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${joinCrewList}" var="joinCrew">
-									<tr>
-										<td>${joinCrew.title}</td>
-										<td>${joinCrew.region}</td>
-										<td>${joinCrew.category}</td>
-										<td>${joinCrew.join_cnt}/${joinCrew.attend_cnt}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</div> --%>
 				
 				<a data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
 				<div class="" role="tab" id="headingThree">
@@ -172,6 +138,10 @@
 									<th>지역</th>
 									<th>카테고리</th>
 									<th>소모임 인원</th>
+									<!-- 운영자만 보이게 -->
+									<c:if test="${login.power==2}">
+										<th>소모임 삭제</th> 
+									</c:if>
 								</tr>
 							</thead>
 							<tbody>
@@ -181,6 +151,9 @@
 										<td>${crewVo.region}</td>
 										<td>${crewVo.category}</td>
 										<td>${crewVo.join_cnt}/${crewVo.attend_cnt}</td>
+										<c:if test="${login.power==2}">
+											<td><button class="btn active crewDeleteBtn" data-cno="${crewVo.cno}">삭제</button></td> 
+										</c:if>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -188,15 +161,53 @@
 					</div>
 				</div>
 				
+				<!-- 운영자만 보이게 -->
+				<c:if test="${login.power==2}">
+					<div class="panel-heading" role="tab" id="headingFour">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+								회원 정보 <small>(관리자/경영자의 정보는 보이지 않습니다.)</small> </a>
+						</h4>
+					</div>
+					<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+						<div class="panel-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>이름</th>
+										<th>성별</th>
+										<th>생년월일</th>
+										<th>주소</th>
+										<th>삭제</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${memberList}" var="memberVo">
+										<tr>
+											<td>${memberVo.mid}</td>
+											<td>${memberVo.name}</td>
+											<td>${memberVo.gender}</td>
+											<td>${memberVo.birth}</td>
+											<td>${memberVo.address}</td>
+											<td><button class="btn active memberDeleteBtn" data-mid="${memberVo.mid}">삭제</button></td> 
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</c:if>		
+				
 				<!-- 경영자만 보이게 -->
 				<c:if test="${login.power==3}">
-					<div class="panel-heading" role="tab" id="headingTwo">
+					<div class="panel-heading" role="tab" id="headingFive">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
 								총 방문자 수<span class="pull-right"> ${visitorCnt} 명</span> </a>
 						</h4>
 					</div>
-					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+					<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
 						<div class="panel-body">
 							<table class="table">
 								<thead>

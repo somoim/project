@@ -8,15 +8,15 @@
 
 <nav id="footer">
 	<ul class="nav">
-		<li>
-			<a href="/around/list">
+		<li class="navAct01">
+			<a href="/around/member_info">
 				<div class="btn_list">
 					<span class="glyphicon glyphicon-home btn_ico"></span>
 					<span class="btn_txt">홈</span>
 				</div>
 			</a>
 		</li>
-		<li>
+		<li class="navAct02">
 			<a href="/crew/list">
 				<div class="btn_list">
 					<span class="glyphicon glyphicon-search btn_ico"></span>
@@ -24,7 +24,7 @@
 				</div>
 			</a>
 		</li>
-		<li>
+		<li class="navAct03">
 			<a href="/my/mylist">
 				<div class="btn_list">
 					<span class="glyphicon glyphicon-comment btn_ico"></span>
@@ -32,7 +32,7 @@
 				</div>
 			</a>
 		</li>
-		<li>
+		<li class="navAct04">
 			<c:if test="${login.power==1}">
 				<a href="/setting/info">
 					<div class="btn_list">
