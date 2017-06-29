@@ -32,6 +32,6 @@
 	</select>
 	
 	<select id="join_sList_member" resultType="StatusVO">
-		select sl_no,mid from status where cno = #{cno} and sl_no is not null order by sl_no
+		select s.SL_NO, m.NAME, m.mid from member m join (select sl_no,mid from status where cno = #{cno} and sl_no is not null order by sl_no) s on s.mid = m.mid
 	</select>
 </mapper>
