@@ -45,14 +45,14 @@
 							<textarea rows="10" cols="3" class="form-control" name="sb_content" id="sb_content">${vo.sb_content}</textarea>
 						</div>
 
-
-						<div class="form-group">
-							<label for="uploadedList">첨부파일</label>
-							<ul id="uploadedList" class="clearfix uploadedList">
-							</ul>
+						<div class="row"></div>
+							<div class="form-group">
+								<label for="uploaded_picture">첨부파일</label>
+								<ul id="uploaded_picture" class="clearfix uploaded_picture">
+								
+								</ul>
+							</div>
 						</div>
-
-
 
 						<div class="row">
 							<div class="filebox">
@@ -87,8 +87,6 @@
 						
 						var sb_no = ${vo.sb_no};
 						sboard_detail_picture(sb_no);
-						
-						console.log(sb_no);
 						
 						
 						var source = $("#source").html();
@@ -162,21 +160,17 @@
 
 						
 						function sboard_detail_picture(sb_no) {
-							console.log(sb_no);
 							$.getJSON("/crew/sboard_detail_picture/"+sb_no, function(result) {
+								
+								console.log(result);
+								
 								var source = $("#source").html();
 								var template = Handlebars.compile(source);
 									
-								$(result).each(function() {
-									var fileInfo = sBoard_getFileInfo(this);
-									var ht = template(fileInfo);
-									$(".uploadedList").html(ht);
+								var fileInfo = sBoard_getFileInfo(this);
+								$(".uploaded_picture").html(template(fileInfo));
 								});
-							});
 						}
-						
-						
-						
 				});
 				</script>
 				

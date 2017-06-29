@@ -21,9 +21,8 @@
 	</update>
 	
 	<select id="sboard_detail_picture" resultType="String">
-		select sb_picture sBoard where sb_no=#{sb_no} 
+		select sb_picture from sBoard where sb_no=#{sb_no} 
 	</select>
-	
 	
 	
 	<delete id="sboard_delete">

@@ -47,7 +47,7 @@
 					</div>
 
 
-
+						<!-- 버튼 -->
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary" id="reply_form">
 								<span class="glyphicon glyphicon-pencil"></span> 댓글
@@ -63,12 +63,55 @@
 							</button>
 						</div>
 				</div>
+				
+				
+			<!-- 댓글 작성 -->		
+			<div class="row collapse" id="myCollapsible" >
+				<div class="form-group">
+					<label for="name">작성자 이름</label>
+					<input id="name" class="form-control" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label for="re_content">내용</label>
+					<input id="re_content" class="form-control">
+				</div>
+				<div class="form-group">
+					<button id="replyInsertBtn" class="btn btn-default">등록</button>
+					<button id="replyResetBtn"  class="btn btn-danger">초기화</button>
+				</div>
+			</div>
+			
+			
+					
+			<div style="border: 1px solid red; height: 10px;" id="replies" class="row jump">
+				
+			</div>
+				
+			
+			
+			<script id="source" type="text/x-handlebars-template">
+				{{#each.}}
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span>{{mid}}</span><span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
+						</div>
+			
+						<div class="panel-body input-group">
+							<p data-re_no="{{re_no}}" id="showReplyText" class="input-group-addon">{{re_content}}</p>
+							<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
+								<span class="glyphicon glyphicon-check"></span> 수정/삭제
+								<span class="glyphicon glyphicon-trash"></span> </button>
+						</div>
+					</div>
+				{{/each}}
+			</script>
 
 				<script type="text/javascript">
 					$(document).ready(function() {
 						
 						var $form = $("form[role='form']");
-					
+						AllReplyLlst(1, 1);
+						
 						$("#tab_gallery_form").on("click", function() {
 							$form.attr("method", "get");
 							$form.attr("action", "/crew/tab_gallery");
@@ -82,14 +125,47 @@
 								$form.attr("action", "/crew/sgallery_delete"); //위에 들어가 있으므로 안해도 됨
 								$form.submit();
 						});
-					});
-					
-					
-					
-					
-			
-				</script>
+						
+						
 
+						$("#reply_form").click(function() {
+							$("#myCollapsible").collapse("toggle");
+						});
+						
+					
+						$("#replyInsertBtn").on("click", function() {
+							var re_content = $("#re_content").val();
+							
+							$.ajax({
+								type : "post",
+								url : "/replies/",
+								data : {
+									re_content : re_content
+								},
+								dataType : "text",
+								success : function(result) {
+									alert("댓글 입력 성공");
+									$("#re_content").val("");
+									$("#myCollapsible").collapse("toggle");
+									AllReplyLlst(1, 1);
+								}
+							});
+						});
+						
+						
+						function AllReplyLlst(cno, sg_no) {
+							$.getJSON("/replies/"+cno+"/"+ sg_no, function(data) {
+								var source = $("#source").html();
+								var template = Handlebars.compile(source);
+								var gab = data.list;
+								
+								$("#replies").html(template(gab));
+								
+							});
+						}
+						
+					});
+				</script>
 			</div> <!-- class: container -->
 		</div> <!-- id: container -->
 	</div> <!-- mobile -->
