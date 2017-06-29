@@ -21,11 +21,18 @@
     .horizon{border: solid 1px rgb(255,151,220);}
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){
-		var sl_no=$("btn-danger").attr("data-sl_no");
-		var cnt = $("btn-danger").attr("data-cnt");
-		var join = $("btn-danger").attr("data-join");
-		var mid = $("btn-danger").attr("data-mid");	
+	$(document).ready(function(){	
+		$(".btn-primary").hide();
+		var log = $("#log").val();
+		alert(log);
+		$(".sl_no").each(function(idx){
+			var mid=$(this).attr("data-mid");
+			if(log == mid){
+				alert(mid);
+				$(".btn-danger").hide();
+				$(".btn-primary").show();		
+			}
+		});
 		
 		
 		// 뒤로가기
@@ -78,30 +85,10 @@
 				}
 			});
 		});
-		/* $(".btn-default").on("click",function(){
-			var sl_no = $(this).attr("data-sl_no");
-			console.log(sl_no);
-			$.getJSON("/crew/tab_list/"+sl_no, function(data) {
-				console.log(data);
-				var source = $("#source").html();
-				var template = Handlebars.compile(source);
-				$(".well").html(template(data));
-			});
-
-		}); */
 		
-		
-	
-			
 	});
 </script>
-<script id="source" type="text/x-handlebars-template">
-{{#each.}}
-	<ul class="list-group">
-		<li class="list-group-item sl_no" data-mid="{{mid}}">{{mid}}</li>		  
-	</ul>
-{{/each}}
-</script>
+
 </head>
 <body>
 <!-- 모바일 Layout -->
@@ -134,6 +121,7 @@
 		</div>
 		<div class="row">
 			 <div class="input-group">
+			 	  <input type="hidden" value="${login.mid}" class="log">
 				  <span class="input-group-addon" id="basic-addon1" style="background-color: white;">${crewVO.category}</span>
 				  <input type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
 				  <input class="getCno" value="${crewVO.cno}" type="hidden">
@@ -154,6 +142,7 @@
 			  <div class="panel-heading">
 				  <span>${sList.attend_title} (${sList.attend_cnt}명)</span> 
 				  <button class="btn btn-danger col-xs-offset-8" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
+				  <button class="btn btn-primary col-xs-offset-8">참석취소</button>
 			  </div>
 			  <!-- List group -->
 			  <ul class="list-group">
@@ -161,13 +150,13 @@
 			    <li class="list-group-item">정모 장소: ${sList.attend_region}</li>
 			    <li class="list-group-item">회비 : ${sList.attend_money}</li>
 			  </ul>
-			  <button class="btn btn-default form-control" type="button" data-toggle="collapse" data-target="#midshow${sList.sl_no}" aria-expanded="false" aria-controls="midshow${sList.sl_no}" data-sl_no="${sList.sl_no}">참석 인원 보기</button>
+			  <button class="btn btn-default form-control" type="button" data-toggle="collapse" data-target="#midshow${sList.sl_no}" aria-expanded="false" aria-controls="midshow${sList.sl_no}" data-sl_no="${sList.sl_no}">참석 인원 보기(현재 참석인원${sList.s_join_cnt}/${sList.attend_cnt})</button>
 			  	<div class="collapse" id="midshow${sList.sl_no}">
 				  <div class="well">
 				  	<ul class="list-group">
 				  	<c:forEach items="${status}" var="status">
 				  		<c:if test="${sList.sl_no==status.sl_no}">
-							<li class="list-group-item sl_no" data-mid="">${status.mid}</li>
+							<li class="list-group-item sl_no" data-mid="${status.mid}">${status.mid}</li>
 						</c:if>		  
 				  	</c:forEach>
 				  	</ul>
