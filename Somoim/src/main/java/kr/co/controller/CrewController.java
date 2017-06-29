@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -274,7 +275,7 @@ public class CrewController {
 	/*---------------------------------------------------------------------------------------*/
 	
 	@ResponseBody
-	@RequestMapping(value="/sboard_detail_picture/{sb_no}")
+	@RequestMapping(value="sboard_detail_picture/{sb_no}")
 	public String sboard_detail_picture(@PathVariable("sb_no") int sb_no) throws Exception{
 		String sg_picture = sboard_service.sboard_detail_picture(sb_no);
 		
@@ -329,6 +330,8 @@ public class CrewController {
 		CrewVO crewVO=crew_service.crew_tab_list(cno);
 		List<sListVO> sList_list=sList_service.slist_tab_list(cno);
 		List<MemberVO> member_list=member_service.member_tab_list(cno);
+		List<StatusVO> status = sList_service.join_sList_member(cno);
+		System.out.println(member_list);
 		int i = 0;
 		for(sListVO list: sList_list){
 			String str1=list.getAttend_date().substring(0, 4)+"년";
@@ -340,7 +343,7 @@ public class CrewController {
 			list.setAttend_date(str);
 			i++;
 		}	// 정모 날자 잘라서 년월일 : 붙여주는 코드
-
+		model.addAttribute("status", status);
 		model.addAttribute("crewVO", crewVO);
 		model.addAttribute("sList_list", sList_list);
 		model.addAttribute("member_list", member_list);
@@ -351,6 +354,7 @@ public class CrewController {
 	public void update_MemberPower(@PathVariable("cno")int cno,String mid)throws Exception{
 		crew_service.crew_update_role(cno, mid);
 	}
+	@Transactional
 	@ResponseBody
 	@RequestMapping(value="/update_s_join_cnt") //정모 참석 누르기
 	public void update_MemberPower(int sl_no,int cno,String mid)throws Exception{
