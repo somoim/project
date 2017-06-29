@@ -297,14 +297,16 @@ public class CrewController {
 	
 	///////////////////////// 명재
 	@RequestMapping(value="/tab_chat")
-	public void sChat_GET(Model model) throws Exception {
-		List<ChattingVO> list = ch_service.msg_list(1);
+	public void sChat_GET(@RequestParam("cno")int cno,Model model) throws Exception {
+		List<ChattingVO> list = ch_service.msg_list(cno);
+		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}
 	@ResponseBody
 	@RequestMapping(value="/tab_chat/{cno}")
 	public List<ChattingVO> send_Chat(@PathVariable("cno")int cno ,Model model) throws Exception {
 		List<ChattingVO> list = ch_service.msg_list(cno);
+		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 		return list;
 	}
@@ -341,11 +343,12 @@ public class CrewController {
 		model.addAttribute("member_list", member_list);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/update_Role/{cno}")	//소모임의 운영자 권한 주기
-	public void update_MemberPower(@PathVariable("cno")int cno,String mid)throws Exception{
+	
+	@RequestMapping(value="/update_Role")	//소모임의 운영자 권한 주기
+	public void update_MemberPower(@RequestParam("cno") int cno,@RequestParam("mid")String mid)throws Exception{
 		crew_service.crew_update_role(cno, mid);
 	}
+	
 	@Transactional
 	@ResponseBody
 	@RequestMapping(value="/update_s_join_cnt") //정모 참석 누르기

@@ -73,9 +73,11 @@
 
 <script id="source" type="text/x-handlebars-template">
 {{#each.}}
+	
 	<p>{{mid}}</p>
 	<label class="msg">{{msg}}</label>
 	<h6>{{ch_date}}</h6>
+	
 {{/each}}
 </script>
 </head>
@@ -107,6 +109,7 @@
 			<div class="row">
 				<div class="form-group col-xs-10">
 					<div id="replies">
+						
 					</div>
 				</div>
 			</div>
@@ -116,8 +119,8 @@
 	</div>
 	
 	<div class="input-group chattingBar">
-		<input name="mid" id="mid" value="m001" hidden="hidden">
-		<input name="cno" id="cno" value="1" hidden="hidden">
+		<input name="mid" id="mid" value="${login.mid}" hidden="hidden">
+		<input name="cno" id="cno" value="${cno}" hidden="hidden">
 		<input type="text" class="form-control" placeholder="메세지를 입력하세요" name="msg" id="msg">
 		<span class="input-group-btn">
 		<button class="btn btn-default send" type="button">보내기</button>
