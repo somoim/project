@@ -167,7 +167,7 @@
 								var source = $("#source").html();
 								var template = Handlebars.compile(source);
 									
-								var fileInfo = sBoard_getFileInfo(this);
+								var fileInfo = sBoard_getFileInfo(result); // 원래 this였습니다.
 								$(".uploaded_picture").html(template(fileInfo));
 								});
 						}
