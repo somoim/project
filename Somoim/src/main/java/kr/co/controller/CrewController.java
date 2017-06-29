@@ -316,9 +316,9 @@ public class CrewController {
 		return "redirect:/crew/tab_chat";
 	} 
 	
+	
 	@RequestMapping(value="/tab_list") 
-	public void slist(Model model) throws Exception {
-		int cno =1;
+	public void slist(@RequestParam("cno") int cno ,Model model) throws Exception {
 		CrewVO crewVO=crew_service.crew_tab_list(cno);
 		List<sListVO> sList_list=sList_service.slist_tab_list(cno);
 		List<MemberVO> member_list=member_service.member_tab_list(cno);
@@ -354,14 +354,6 @@ public class CrewController {
 		sList_service.join_sList_insert(cno, sl_no, mid);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/tab_list/{sl_no}")
-	public List<StatusVO> status_list(@PathVariable("sl_no")int sl_no,Model model )throws Exception{
-		List<StatusVO> status_list=sList_service.join_sList_select(sl_no);
-		model.addAttribute("status_list", status_list);
-		return status_list;
-		
-	}
 	
 	///////////////////////// 진희
 	@RequestMapping(value="/list", method=RequestMethod.GET)
