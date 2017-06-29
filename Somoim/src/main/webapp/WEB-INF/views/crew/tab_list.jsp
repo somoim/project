@@ -22,11 +22,12 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var sList=$("btn-danger").attr("data-sl_no");
+		var sl_no=$("btn-danger").attr("data-sl_no");
 		var cnt = $("btn-danger").attr("data-cnt");
 		var join = $("btn-danger").attr("data-join");
 		var mid = $("btn-danger").attr("data-mid");	
-	
+		
+		
 		// 뒤로가기
 		$(".backCont").click(function() {
 			self.location="/crew/list";
@@ -55,7 +56,7 @@
 			location.href="#"
 		});
 		$(".btn-danger").on("click", function(){
-			var sList=$(this).attr("data-sl_no");
+			var sl_no =$(this).attr("data-sl_no");
 			var cnt = $(this).attr("data-cnt");
 			var join = $(this).attr("data-join");
 			var mid = $(this).attr("data-mid");
@@ -77,24 +78,27 @@
 				}
 			});
 		});
-		$(".btn-default").on("click",function(){
+		/* $(".btn-default").on("click",function(){
 			var sl_no = $(this).attr("data-sl_no");
 			console.log(sl_no);
 			$.getJSON("/crew/tab_list/"+sl_no, function(data) {
 				console.log(data);
 				var source = $("#source").html();
 				var template = Handlebars.compile(source);
-				$(".well").append(template(data));
+				$(".well").html(template(data));
 			});
 
-		});
+		}); */
+		
+		
+	
 			
 	});
 </script>
 <script id="source" type="text/x-handlebars-template">
 {{#each.}}
 	<ul class="list-group">
-		<li class="list-group-item">{{mid}}</li>		  
+		<li class="list-group-item sl_no" data-mid="{{mid}}">{{mid}}</li>		  
 	</ul>
 {{/each}}
 </script>
@@ -160,7 +164,13 @@
 			  <button class="btn btn-default form-control" type="button" data-toggle="collapse" data-target="#midshow${sList.sl_no}" aria-expanded="false" aria-controls="midshow${sList.sl_no}" data-sl_no="${sList.sl_no}">참석 인원 보기</button>
 			  	<div class="collapse" id="midshow${sList.sl_no}">
 				  <div class="well">
-				  	
+				  	<ul class="list-group">
+				  	<c:forEach items="${status}" var="status">
+				  		<c:if test="${sList.sl_no==status.sl_no}">
+							<li class="list-group-item sl_no" data-mid="">${status.mid}</li>
+						</c:if>		  
+				  	</c:forEach>
+				  	</ul>
 				  </div>
 				</div>
 			  <hr>
@@ -170,7 +180,7 @@
 		</div>
 		<div class="row role" >
 			<c:forEach items="${member_list}" var="member">
-				<h5 class="col-xs-12 col-xs-offset-1">${member.name} 
+				<h5 class="col-xs-12 col-xs-offset-1 ">${member.name} 
 					<c:if test="${crewVO.role == member.mid}">
 					<span class="col-xs-offset-8 power">운영자</span>
 					</c:if>

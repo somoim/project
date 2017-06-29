@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="slist_tab_list" resultType="sListVO">
-		select * from slist where cno = #{cno}
+		select * from slist where cno = #{cno} order by sl_no
 	</select>
 	
 	<update id="update_s_join_cnt">
@@ -28,6 +28,10 @@
 	</insert>
 	
 	<select id="join_sList_select" resultType="StatusVO">
-		select * from status where sl_no = #{sl_no}
+		select * from status where sl_no = #{sl_no} order by sl_no
+	</select>
+	
+	<select id="join_sList_member" resultType="StatusVO">
+		select sl_no,mid from status where cno = #{cno} and sl_no is not null order by sl_no
 	</select>
 </mapper>
