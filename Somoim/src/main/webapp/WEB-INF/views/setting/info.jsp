@@ -26,8 +26,8 @@
 			var hour = date.substring(8, 10);
 			var minute =date.substring(10, 12);
 			
-			var str = year + "/" + month + "/" + day + " " + hour + "시" + minute + "분";
-			$(".date"+date).html(str);
+			var newDate = year + "/" + month + "/" + day + " " + hour + "시" + minute + "분";
+			$(".date"+date).html(newDate);
 		});
 		
 		// 회원 탈퇴

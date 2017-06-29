@@ -15,6 +15,19 @@
 			var cno = $(this).attr("data-cno");	
 			getsList(cno);
 		});
+		
+		// 상세보기 - 가입list
+		$(".joinCrewList").click(function() {
+			var cno = $(this).attr("data-cno");	
+			self.location="/crew/tab_list/"+cno;
+		});
+		
+		// 상세보기 - 추천list
+		$(".selCrewList").click(function() {
+			var cno = $(this).attr("data-cno");	
+			self.location="/crew/tab_list/"+cno;
+		});
+		
 	});
 	
 	function getsList(cno){
@@ -40,9 +53,9 @@
 				<p>가입한 모임</p>
 			</div>
 			<c:forEach items="${attend_list}" var="join">
-				<div class="panel-body" style="border: 1px dotted gray;">
-						<p data-cno="${join.cno}" class="getCno"><span>${join.title}</span> <span class="text-right">${join.join_cnt} / ${join.attend_cnt} 명</span></p>
-						<div class="next_sList${join.cno}"></div>
+				<div class="panel-body joinCrewList" data-cno="${join.cno}" style="border: 1px dotted gray;">
+					<p data-cno="${join.cno}" class="getCno"><span>${join.title}</span> <span class="pull-right">${join.join_cnt} / ${join.attend_cnt} 명</span></p>
+					<div class="next_sList${join.cno}"></div>
 				</div>
 			</c:forEach>
 		</div>
@@ -51,7 +64,7 @@
 				<p>맞춤 추천 모임</p>
 			</div>
 			<c:forEach items="${sel_list}" var="sel">
-				<div class="panel-body" style="border: 1px dotted gray;">
+				<div class="panel-body selCrewList" data-cno="${sel.cno}" style="border: 1px dotted gray;">
 						<div class="next_sList${sel.cno}"></div>
 						<p data-cno="${sel.cno}" class="getCno">
 							<span>${sel.region}</span> |  
