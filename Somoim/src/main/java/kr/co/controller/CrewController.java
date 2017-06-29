@@ -83,12 +83,14 @@ public class CrewController {
 	public String sgallery_create_POST(sGalleryVO sgallery_vo, String mid, RedirectAttributes rttr, HttpServletRequest request) throws Exception{ 	
 		
 		sgallery_vo.setCno(1);
+		sgallery_vo.setMid("m001");
 		
-		
-		HttpSession session = request.getSession();
+		/*HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		
 		mid = memberVO.getMid();
-		sgallery_vo.setMid(mid);
+		
+		sgallery_vo.setMid(mid);;*/
 		
 		sgallery_service.sgallery_create(sgallery_vo); 
 		
@@ -135,7 +137,7 @@ public class CrewController {
 	@RequestMapping(value="/sgallery_detail", method=RequestMethod.GET)
 	public void sgallery_detail_GET(Model model) throws Exception {
 		
-		sGalleryVO vo = sgallery_service.sgallery_detail(92);
+		sGalleryVO vo = sgallery_service.sgallery_detail(1);
 		model.addAttribute("vo", vo);
 	}
 	
@@ -174,6 +176,7 @@ public class CrewController {
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		
 		mid = memberVO.getMid();
 		sboard_vo.setMid(mid);	
 		
@@ -223,7 +226,7 @@ public class CrewController {
 	@RequestMapping(value="/sboard_detail", method=RequestMethod.GET)
 	public void sboard_detail_GET(Model model) throws Exception {
 		
-		sBoardVO vo = sboard_service.sboard_detail(16);
+		sBoardVO vo = sboard_service.sboard_detail(3);
 		model.addAttribute("vo", vo);
 	}
 	
@@ -249,14 +252,14 @@ public class CrewController {
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	@RequestMapping(value="sboard_update", method=RequestMethod.GET)
+	@RequestMapping(value="/sboard_update", method=RequestMethod.GET)
 	public void sboard_update_GET(@RequestParam("sb_no") int sb_no, Model model) throws Exception{
 		sBoardVO vo = sboard_service.sboard_detail(sb_no);
 		model.addAttribute("vo", vo);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="sboard_update", method=RequestMethod.POST)
+	@RequestMapping(value="/sboard_update", method=RequestMethod.POST)
 	public String sboard_update_POST(sBoardVO sboard_vo, RedirectAttributes rttr) throws Exception{
 		sboard_service.sboard_update(sboard_vo);
 		
@@ -271,14 +274,19 @@ public class CrewController {
 	/*---------------------------------------------------------------------------------------*/
 	
 	@ResponseBody
-	@RequestMapping(value="sboard_datail_picture/{sb_no}")
+	@RequestMapping(value="/sboard_detail_picture/{sb_no}")
 	public String sboard_detail_picture(@PathVariable("sb_no") int sb_no) throws Exception{
-		String sg_pictue = sboard_service.sboard_detail_picture(sb_no);
-		return sg_pictue;
+		String sg_picture = sboard_service.sboard_detail_picture(sb_no);
+		
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(sg_picture);
+		
+		return sg_picture;
 	}
 	
 	
 	/*---------------------------------------------------------------------------------------*/
+
 	
 	
 	

@@ -41,7 +41,7 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">
 								<span>${vo.mid}</span><br>
-								<span> ${vo.sb_writeday}</span>
+								<span>${vo.sb_writeday}</span>
 							</h3>
 						</div>
 						<div class="panel-body">
