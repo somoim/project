@@ -275,7 +275,7 @@ public class CrewController {
 	/*---------------------------------------------------------------------------------------*/
 	
 	@ResponseBody
-	@RequestMapping(value="sboard_detail_picture/{sb_no}")
+	@RequestMapping(value="/sboard_detail_picture/{sb_no}")
 	public String sboard_detail_picture(@PathVariable("sb_no") int sb_no) throws Exception{
 		String sg_picture = sboard_service.sboard_detail_picture(sb_no);
 		
