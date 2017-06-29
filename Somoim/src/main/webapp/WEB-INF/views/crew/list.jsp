@@ -8,15 +8,18 @@
 <head>
 <style type="text/css">
 .navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
-.text-right{
-	text-align: right;
-}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".getCno").each(function(idx){
 			var cno = $(this).attr("data-cno");	
 			getsList(cno);
+		});
+		
+		// 상세보기
+		$(".crewList").click(function() {
+			var cno = $(this).attr("data-cno");
+			self.location="/crew/tab_list/"+cno;
 		});
 		
 		// 소모임 개설버튼
@@ -44,20 +47,18 @@
 <div id="mobile">
 	<div id="container">
 		<!-- 여기서부터 시작 -->
-		<div class="panel panel-warning" id="crew_list">
-			<c:forEach items="${list}" var="crewVO" >
+		<c:forEach items="${list}" var="crewVO" >
+			<div class="panel panel-warning crewList" data-cno="${crewVO.cno}">
 				<div class="panel-heading">
-					<span data-cno="${crewVO.cno}" class="getCno">No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="text-align"> ${crewVO.join_cnt} / ${crewVO.attend_cnt} 명</span>
+					<span data-cno="${crewVO.cno}" class="getCno">No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="pull-right"> ${crewVO.join_cnt} / ${crewVO.attend_cnt} 명</span>
 				</div>
-				
 				<div class="panel-body">
 					<p>${crewVO.region}</p>
 					<p>${crewVO.title}</p>
-					
 					<div class="next_sList${crewVO.cno}"></div>
 				</div>
-			</c:forEach>
-		</div>
+			</div>
+		</c:forEach>
 		<!-- 버튼 레이아웃 -->		
 		<div class="fixedBtn2">
 			<span><span class="glyphicon glyphicon-plus"></span></span>

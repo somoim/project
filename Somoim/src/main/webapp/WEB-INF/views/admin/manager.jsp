@@ -17,17 +17,15 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".attendDate").each(function(idx){
+		$(".birthDate").each(function(idx){
 			var date = $(this).attr("data-date");
 			
 			var year = date.substring(0, 4);
 			var month = date.substring(4, 6);
 			var day = date.substring(6, 8);
-			var hour = date.substring(8, 10);
-			var minute =date.substring(10, 12);
 			
-			var str = year + "/" + month + "/" + day + " " + hour + "시" + minute + "분";
-			$(".date"+date).html(str);
+			var newDate = year + "/" + month + "/" + day ;
+			$(".date"+date).html(newDate);
 		});
 		
 		// 소모임 삭제
@@ -273,7 +271,8 @@
 											<td>${memberVo.mid}</td>
 											<td>${memberVo.name}</td>
 											<td>${memberVo.gender}</td>
-											<td>${memberVo.birth}</td>
+											<td data-date="${memberVo.birth}" class="birthDate">
+												<span class="date${memberVo.birth}"></span> </td>
 											<td>${memberVo.address}</td>
 											<td><button class="btn active memberDeleteBtn" data-mid="${memberVo.mid}">삭제</button></td> 
 										</tr>
