@@ -4,10 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js" type="text/javascript"></script>
 <style type="text/css">
 .show_img{
 	text-align: center; 
 }
+#show_re_content{
+    background-color: transparent;
+    border: 0px;
+    border-radius: 0px; 
+ }
 </style>
 </head>
 <body>
@@ -53,7 +59,6 @@
 								<span class="glyphicon glyphicon-pencil"></span> 댓글
 							</button>
 
-
 							<button type="submit" class="btn btn-danger" id="delete_form">
 								<span class="glyphicon glyphicon-trash"></span> 삭제
 							</button>
@@ -83,9 +88,36 @@
 			
 			
 					
-			<div style="border: 1px solid red; height: 10px;" id="replies" class="row jump">
+			<div id="replies" class="row jump">
 				
 			</div>
+				
+				
+				<div class="row">
+			<div data-backdrop="static" class="modal fade" id="myModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+						 	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						 		<span aria-hidden="true">&times;</span>
+						 	</button>
+						 	<div>
+							 	re_no: <span id="modal_re_no"> </span>	
+						 	</div>
+						</div>
+						<div class="modal-body">
+							<p>내용을 수정하세요</p>
+							<input class="form-control" id="modal_re_content">
+						</div>
+						<div class="modal-fotter" align="right">
+							<button id="modal_update" type="button" class="btn btn-default" data-dismiss="modal">수정</button>
+							<button id="modal_delete" type="button" class="btn btn-warning" data-dismiss="modal">삭제</button>
+							<button id="modal_close" type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 				
 			
 			
@@ -93,11 +125,12 @@
 				{{#each.}}
 					<div class="panel panel-info">
 						<div class="panel-heading">
-							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span>{{mid}}</span><span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
+							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span>{{mid}}</span>
+							 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
 						</div>
 			
 						<div class="panel-body input-group">
-							<p data-re_no="{{re_no}}" id="showReplyText" class="input-group-addon">{{re_content}}</p>
+							<p data-re_no="{{re_no}}" id="show_re_content" class="input-group-addon">{{re_content}}</p>
 							<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
 								<span class="glyphicon glyphicon-check"></span> 수정/삭제
 								<span class="glyphicon glyphicon-trash"></span> </button>
@@ -110,6 +143,7 @@
 					$(document).ready(function() {
 						
 						var $form = $("form[role='form']");
+						
 						AllReplyLlst(1, 1);
 						
 						$("#tab_gallery_form").on("click", function() {
@@ -138,7 +172,7 @@
 							
 							$.ajax({
 								type : "post",
-								url : "/replies/",
+								url : "/replies/sgallery",
 								data : {
 									re_content : re_content
 								},
@@ -153,12 +187,95 @@
 						});
 						
 						
+						$("#reply_form").click(function() {
+							$("#myCollapsible").collapse("toggle");
+						});
+						
+					
+						$("#replyInsertBtn").on("click", function() {
+							var re_content = $("#re_content").val();
+							
+							$.ajax({
+								type : "post",
+								url : "/replies",
+								data : {
+									re_content : re_content
+								},
+								dataType : "text",
+								success : function(result) {
+									alert("댓글 입력 성공");
+									$("#re_content").val("");
+									$("#myCollapsible").collapse("toggle");
+									AllReplyLlst(1, 1);
+								}
+							});
+						});
+						
+						
+						$("#replies").on("click", ".callModal", function() {
+							var re_no = $(this).prev("p").attr("data-re_no");
+							var re_content = $(this).prev("p").text();
+							
+							$("#modal_re_no").text(re_no);
+							$("#modal_re_content").val(re_content);
+							
+							$("#myModal").modal("show");
+						});
+						
+						$("#modal_update").on("click", function() {
+							var re_no = $("#modal_re_no").text();
+							var re_content = $("#modal_re_content").val();
+							
+							$.ajax({
+								type:"put",
+								url: "/replies/"+re_no,
+								headers: {
+									"Content-Type":"application/json",
+									"X-HTTP-Method-Override":"PUT"
+								},
+								dataType: "text",
+								data: JSON.stringify({
+									re_content:re_content
+								}),
+								success: function(result) {
+									if(result=="UPDATE_SUCCESS"){
+										alert("댓글 수정 성공");
+										$("#myModal").modal("hide");
+										AllReplyLlst(1, 1);
+									}
+								}
+							});
+						});
+
+						$("#modal_delete").on("click", function() {
+							var re_no = $("#modal_re_no").html();
+						
+							$.ajax({
+								type:"delete",
+								url: "/replies/"+re_no,
+								headers:{
+									"Content-Type":"application/json",
+									"X-HTTP-Method-Override":"DELETE"
+								},
+								dataType: "text",
+								success: function(result) {
+									if(result=="DELETE_SUCCESS"){
+										alert("댓글 삭제 성공");
+										$("#myModal").modal("hide");
+										AllReplyLlst(1, 1);
+									}
+								}
+							});
+						});
+						
+						
+						
 						function AllReplyLlst(cno, sg_no) {
-							$.getJSON("/replies/"+cno+"/"+ sg_no, function(data) {
+							$.getJSON("/replies/sgallery/"+cno+"/"+ sg_no, function(data) {
 								var source = $("#source").html();
 								var template = Handlebars.compile(source);
-								var gab = data.list;
-								
+								console.log(template);
+								var gab = data;
 								$("#replies").html(template(gab));
 								
 							});

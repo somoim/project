@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +26,7 @@ public class ReplyController {
 	@Inject
 	private ReplyService reply_service;
 	
-	@RequestMapping(value="/", method=RequestMethod.POST)
+	@RequestMapping(value="/sgallery", method=RequestMethod.POST)
 	public ResponseEntity<String> create(ReplyVO reply_vo) throws Exception{
 		
 		ResponseEntity<String> entity=null;
@@ -42,7 +43,7 @@ public class ReplyController {
 	}	
 	
 	
-	@RequestMapping(value="/{cno}/{sg_no}", method=RequestMethod.GET)
+	@RequestMapping(value="/sgallery/{cno}/{sg_no}")
 	public ResponseEntity<List<ReplyVO>> reply_list_sgallery(@PathVariable("sg_no") Integer sg_no, @PathVariable("cno") Integer cno) throws Exception{
 		
 		ResponseEntity<List<ReplyVO>> entity=null;
@@ -56,6 +57,103 @@ public class ReplyController {
 		
 		return entity;
 	}
+	
+	
+	@RequestMapping(value="/sboard", method=RequestMethod.POST)
+	public ResponseEntity<String> create_sboard(ReplyVO reply_vo) throws Exception{
+		
+		ResponseEntity<String> entity=null;
+		
+		reply_vo.setMid("m001");
+		reply_vo.setSb_no(17);
+		
+		reply_service.reply_create_sboard(reply_vo);
+		
+		entity = new ResponseEntity<String>("INSERT_SUCCESS", HttpStatus.OK);
+		
+		return entity;
+		
+	}	
+	
+	
+	@RequestMapping(value="/sboard/{cno}/{sb_no}")
+	public ResponseEntity<List<ReplyVO>> reply_list_sboard(@PathVariable("sb_no") Integer sb_no, @PathVariable("cno") Integer cno) throws Exception{
+		
+		ResponseEntity<List<ReplyVO>> entity=null;
+		
+		List<ReplyVO> list = reply_service.reply_list_sboard(sb_no);
+		
+		entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.OK);
+		
+		System.out.println("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
+		System.out.println(entity);
+		
+		return entity;
+	}
+	
+	@RequestMapping(value="sboard/all/{sb_no}", method=RequestMethod.GET)
+	// 특정 글의 댓글을 모두 가져옴
+	public ResponseEntity<List<ReplyVO>> list_sboard(@PathVariable("sb_no") Integer sb_no){
+		
+		ResponseEntity<List<ReplyVO>> entity = null;
+
+		try {
+			List<ReplyVO> list = reply_service.reply_list_sboard(sb_no);
+			entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<List<ReplyVO>>(HttpStatus.BAD_REQUEST);
+		}	
+		return entity;
+	}
+	
+	@RequestMapping(value="sgallery/all/{sb_no}", method=RequestMethod.GET)
+	// 특정 글의 댓글을 모두 가져옴
+	public ResponseEntity<List<ReplyVO>> list_sgallery(@PathVariable("sg_no") Integer sg_no){
+		
+		ResponseEntity<List<ReplyVO>> entity = null;
+
+		try {
+			List<ReplyVO> list = reply_service.reply_list_sgallery(sg_no);
+			entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<List<ReplyVO>>(HttpStatus.BAD_REQUEST);
+		}	
+		return entity;
+	}
+	
+	
+	
+	@RequestMapping(value="/{re_no}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> delete(@PathVariable("re_no") Integer re_no){
+		ResponseEntity<String> entity = null;
+		try {
+			reply_service.reply_delete(re_no);
+			entity = new ResponseEntity<String>("DELETE_SUCCESS", HttpStatus.OK);
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@RequestMapping(value="/{re_no}", method={RequestMethod.PUT, RequestMethod.PATCH})
+	public ResponseEntity<String> update(@PathVariable("re_no") Integer re_no, @RequestBody ReplyVO vo){
+		ResponseEntity<String> entity = null;
+		vo.setRe_no(re_no);
+		try {
+			reply_service.reply_update(vo);
+			entity = new ResponseEntity<String>("UPDATE_SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	
 	
 
 

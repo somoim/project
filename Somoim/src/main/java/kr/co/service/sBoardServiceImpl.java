@@ -33,11 +33,9 @@ public class sBoardServiceImpl implements sBoardService {
 	@Override
 	public void sboard_update(sBoardVO sboard_vo) throws Exception {
 		// TODO Auto-generated method stub
-	
 		sboard_dao.sboard_update(sboard_vo);
-		/*sboard_dao.sboard_create(sboard_vo);
 		
-		String sb_picture = sboard_vo.getSb_picture();
+		/*String sb_picture = sboard_vo.getSb_picture();
 		if(sb_picture == null){
 			return;
 		}

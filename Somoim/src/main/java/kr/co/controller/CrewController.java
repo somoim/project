@@ -113,6 +113,7 @@ public class CrewController {
 		return list;
 	}
 	
+	///////////////////////////sGallery 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_gallery")
 	public void tab_gallery_GET(Model model) throws Exception {
 		List<sGalleryVO> list = sgallery_service.sgallery_list(1);
@@ -134,7 +135,7 @@ public class CrewController {
 	}
 	
 	
-	
+///////////////////////////sGallery 상세보기 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/sgallery_detail", method=RequestMethod.GET)
 	public void sgallery_detail_GET(Model model) throws Exception {
 		
@@ -174,12 +175,13 @@ public class CrewController {
 	public String sboard_create_POST(sBoardVO sboard_vo, String mid, RedirectAttributes rttr, HttpServletRequest request) throws Exception{ 	
 		
 		sboard_vo.setCno(1);
+		sboard_vo.setMid("m001");
 		
-		HttpSession session = request.getSession();
+	/*	HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		
 		mid = memberVO.getMid();
-		sboard_vo.setMid(mid);	
+		sboard_vo.setMid(mid);	*/
 		
 		sboard_service.sboard_create(sboard_vo); 
 		
@@ -191,8 +193,6 @@ public class CrewController {
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	
-	
 	@ResponseBody
 	@RequestMapping(value="/tab_board/{cno}")
 	public List<sBoardVO> sBoard(@PathVariable("cno") int cno, Model model) throws Exception{
@@ -203,6 +203,7 @@ public class CrewController {
 		return list;
 	}
 	
+	///////////////////////////tab_Board 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_board")
 	public void tab_board_GET(Model model) throws Exception {
 		List<sBoardVO> list = sboard_service.sboard_list(1);
@@ -223,11 +224,11 @@ public class CrewController {
 	}
 	
 	
-	
+	///////////////////////////sBoard 상세페이지 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/sboard_detail", method=RequestMethod.GET)
 	public void sboard_detail_GET(Model model) throws Exception {
 		
-		sBoardVO vo = sboard_service.sboard_detail(3);
+		sBoardVO vo = sboard_service.sboard_detail(17);
 		model.addAttribute("vo", vo);
 	}
 	
@@ -240,7 +241,7 @@ public class CrewController {
 		sboard_service.sboard_delete(sb_no);
 
 		String prefix = vo.getSb_picture().substring(0, 12);
-		String suffix = vo.getSb_picture().substring(14);
+		String suffix = vo.getSb_picture().substring(15);
 		
 		File f = new File(sboard_uploadPath+(prefix+suffix).replace('/', File.separatorChar));
 		f.delete();
@@ -254,38 +255,40 @@ public class CrewController {
 	/*---------------------------------------------------------------------------------------*/
 	
 	@RequestMapping(value="/sboard_update", method=RequestMethod.GET)
-	public void sboard_update_GET(@RequestParam("sb_no") int sb_no, Model model) throws Exception{
-		sBoardVO vo = sboard_service.sboard_detail(sb_no);
+	public sBoardVO sboard_update_GET(@RequestParam("sb_no") int sb_no, Model model) throws Exception{
+		sBoardVO vo =  sboard_service.sboard_detail(sb_no);
 		model.addAttribute("vo", vo);
+		return vo;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/sboard_update", method=RequestMethod.POST)
 	public String sboard_update_POST(sBoardVO sboard_vo, RedirectAttributes rttr) throws Exception{
-		sboard_service.sboard_update(sboard_vo);
 		
-		rttr.addFlashAttribute("msg", "UPDATE");
+		
+		
+		sboard_service.sboard_update(sboard_vo);
+	
+		
+		sboard_vo.setMid("m001");
+		
 		
 		rttr.addAttribute("cno", sboard_vo.getCno());
 		rttr.addAttribute("sb_no", sboard_vo.getSb_no());
+		
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(sboard_vo.getCno());
+		System.out.println(sboard_vo.getSb_no());
+		System.out.println(sboard_vo.getSb_content());
+		System.out.println(sboard_vo.getSb_picture());
+		System.out.println(sboard_vo.getSb_writeday());
 	
 		return "redirect:/crew/sboard_detail";
 	}
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	@ResponseBody
-	@RequestMapping(value="/sboard_detail_picture/{sb_no}")
-	public String sboard_detail_picture(@PathVariable("sb_no") int sb_no) throws Exception{
-		String sg_picture = sboard_service.sboard_detail_picture(sb_no);
 		
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(sg_picture);
-		
-		return sg_picture;
-	}
-	
-	
 	/*---------------------------------------------------------------------------------------*/
 
 	
