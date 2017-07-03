@@ -99,7 +99,7 @@
 		</div>
 	</header>
 	<ul class="sub_tab">
-		<li><a href="../crew/tab_list">정보</a></li>
+		<li><a href="../crew/tab_list?cno=${cno}">정보</a></li>
 		<li><a href="../crew/tab_board">게시판</a></li>
 		<li><a href="../crew/tab_gallery">사진첩</a></li>
 		<li class="act"><a href="../crew/tab_chat">채팅</a></li>

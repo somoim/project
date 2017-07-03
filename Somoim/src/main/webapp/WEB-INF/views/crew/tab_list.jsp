@@ -180,7 +180,6 @@
 					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
 					<button class="btn btn-success col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
 					</c:if>
-					<input value="${member.mid}" class="">
 				</h5>
 				<hr class="horizon">
 			</c:forEach>
