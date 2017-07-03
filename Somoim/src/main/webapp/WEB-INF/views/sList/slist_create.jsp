@@ -126,7 +126,7 @@
 					</div>	
 
 					<div class="form-group">
-						<label for="attend_date">정모 일시</label>
+						<label for="attend_date">정모 일시 <small>*정모 일시는 나중에 수정 할 수 없습니다.</small></label>
 						<div class="row">
 							<div class="col-sm-12">
 								<select name="attend_date1" id="attend_date1">

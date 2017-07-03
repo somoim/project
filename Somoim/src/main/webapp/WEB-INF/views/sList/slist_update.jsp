@@ -10,7 +10,7 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var cno=${cno};
+		var cno=${slistVo.cno};
 		var sl_no=${slistVo.sl_no};
 		
 		var date = "${slistVo.attend_date}";
@@ -22,14 +22,12 @@
 		var minute =date.substring(10, 12);
 		
 		var newDate = year + "/" + month + "/" + day + " " + hour + "시" + minute + "분";
-		// $("#attend_date_sub").html(newDate);
 		$("#attend_date_sub").val(newDate);
 		
 		// 정모 수정
 		$("#btn_update").on("click",function(event){
 			event.preventDefault();
 			writeCheck();
-			//$("#myForm").submit();
 		});
 		
 		// 정모 삭제
@@ -89,20 +87,17 @@
 		<!-- 여기서부터 시작 -->
 			<div class="row">
 				<form action="" method="post" class="formLayout" id="myForm" name="slistform">
-					<input type="hidden" name="cno" value="${cno}">
-					<input type="hidden" id="attend_date" name="attend_date" value="">
+					<input type="hidden" name="cno" value="${slistVo.cno}">
 					
 					<div class="form-group">
 						<label for="attend_title">(제목)정모 이름</label>
 						<input name="attend_title" id="attend_title" class="form-control" value="${slistVo.attend_title}">
 					</div>	
 
-
 					<div class="form-group">
 						<label for="attend_date">정모 일시</label>
 						<input type="hidden" name="attend_date" id="attend_date" class="form-control" value="${slistVo.attend_date}">
 						<input name="attend_date_sub" id="attend_date_sub" class="form-control" value="" readonly>
-						<!-- <p id="attend_date_sub"></p> -->
 					</div>
 					
 					<div class="form-group">
@@ -125,7 +120,6 @@
 								<%} %>
 							</select>
 						</div>
-						
 					</div>
 					
 					<div class="form-group text-right">

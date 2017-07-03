@@ -31,9 +31,8 @@ public class sListController {
 	}
 	
 	@RequestMapping(value="/slist_update", method=RequestMethod.GET)
-	public void slist_updateGet(@RequestParam("sl_no") int sl_no, @RequestParam("cno") int cno, Model model) throws Exception {
+	public void slist_updateGet(@RequestParam("sl_no") int sl_no, Model model) throws Exception {
 		sListVO slistVo = sList_service.slistBySlno(sl_no);
-		model.addAttribute("cno", cno);
 		model.addAttribute("slistVo", slistVo);
 	}
 	
