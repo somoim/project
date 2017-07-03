@@ -33,9 +33,12 @@
 		// 정모 삭제
 		$("#btn_delete").on("click",function(event){
 			event.preventDefault();
-			$("#myForm").attr("action", "/sList/slist_delete?cno="+cno+"&sl_no="+sl_no);
-			$("#myForm").attr("method", "post");
-			$("#myForm").submit();
+			var slistDelChack = confirm("해당 정모를 삭제하시겠습니까?");
+			if(slistDelChack) {
+				$("#myForm").attr("action", "/sList/slist_delete?cno="+cno+"&sl_no="+sl_no);
+				$("#myForm").attr("method", "post");
+				$("#myForm").submit();
+			}
 		});
 		
 		// 취소
