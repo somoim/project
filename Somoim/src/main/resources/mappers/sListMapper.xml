@@ -34,4 +34,10 @@
 	<select id="join_sList_member" resultType="StatusVO">
 		select s.SL_NO, m.NAME, m.mid from member m join (select sl_no,mid from status where cno = #{cno} and sl_no is not null order by sl_no) s on s.mid = m.mid
 	</select>
+	
+	<insert id="slist_create">
+		insert into sList(sl_no, cno, attend_title, attend_date, attend_region, attend_cnt, attend_money) 
+		 values(seq_sl_no.nextval, #{cno}, #{attend_title}, #{attend_date}, #{attend_region}, #{attend_cnt}, #{attend_money})
+	</insert>
+	
 </mapper>
