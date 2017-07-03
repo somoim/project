@@ -115,8 +115,9 @@ public class CrewController {
 	
 	///////////////////////////sGallery 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_gallery")
-	public void tab_gallery_GET(Model model) throws Exception {
-		List<sGalleryVO> list = sgallery_service.sgallery_list(1);
+	public void tab_gallery_GET(@RequestParam("cno") int cno, Model model) throws Exception {
+		List<sGalleryVO> list = sgallery_service.sgallery_list(cno);
+		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}
 	
@@ -205,8 +206,9 @@ public class CrewController {
 	
 	///////////////////////////tab_Board 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_board")
-	public void tab_board_GET(@RequestParam("cno")int cno,Model model) throws Exception {
-		List<sBoardVO> list = sboard_service.sboard_list(1);
+	public void tab_board_GET(@RequestParam("cno") int cno, Model model) throws Exception {
+		List<sBoardVO> list = sboard_service.sboard_list(cno);
+		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}
 	
@@ -362,12 +364,13 @@ public class CrewController {
 	
 	@Transactional
 	@ResponseBody
-	@RequestMapping(value="/update_s_join_cnt/{cno}") //정모 참석 누르기
-	public void update_MemberPower(int sl_no,@PathVariable("cno")int cno,String mid)throws Exception{
+	@RequestMapping(value="/update_s_join_cnt") //정모 참석 누르기
+	public void update_MemberPower(int sl_no,int cno,String mid)throws Exception{
 		sList_service.update_s_join_cnt(sl_no);
 		sList_service.join_sList_insert(cno, sl_no, mid);
 	}
 	
+	@Transactional
 	@ResponseBody
 	@RequestMapping(value="/delete_slist_member")
 	public void slist_update_member(int sl_no, String mid)throws Exception{

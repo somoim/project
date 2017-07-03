@@ -34,7 +34,7 @@
 			//alert(attend_date);
 			$("#attend_date").val(attend_date);
 			
-			writeCheck()
+			writeCheck();
 			//$("#myForm").submit();
 		});
 		
@@ -126,7 +126,7 @@
 					</div>	
 
 					<div class="form-group">
-						<label for="attend_date">정모 일시</label>
+						<label for="attend_date">정모 일시 <small>*정모 일시는 나중에 수정 할 수 없습니다.</small></label>
 						<div class="row">
 							<div class="col-sm-12">
 								<select name="attend_date1" id="attend_date1">
@@ -171,7 +171,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="attend_money">지참액</label>
+						<label for="attend_money">회비</label>
 						<input type="number" name="attend_money" id="attend_money" class="form-control" placeholder="15000">
 					</div>
 					
@@ -189,7 +189,7 @@
 					</div>
 					
 					<div class="form-group text-right">
-						<button class="btn btn-primary" type="submit" id="btn_create" onclick="javascript:writeCheck()">
+						<button class="btn btn-primary" type="submit" id="btn_create">
 							<span class="glyphicon glyphicon-check"></span> 정모 만들기
 						</button>
 						<button class="btn btn-info" type="button" id="btn_list">
