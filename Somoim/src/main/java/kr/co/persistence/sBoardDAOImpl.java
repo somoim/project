@@ -53,4 +53,10 @@ public class sBoardDAOImpl implements sBoardDAO {
 		return session.selectOne(NAMESPACE+".sboard_detail_picture", sb_no);
 	}
 
+	@Override
+	public String sboard_member_name(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE+".sboard_member_name", mid);
+	}
+
 }

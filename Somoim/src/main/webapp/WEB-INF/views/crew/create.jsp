@@ -22,10 +22,10 @@
 	<div id="container">
 		<div class="container">
 			<div class="row">
-				<form id="myForm" action="" method="post" class="formLayout">
+				<form id="myForm" action="create" method="post" class="formLayout">
 				
 					<div class="form-group">
-						<label for="title">(제목)소모임명</label>
+						<label for="title">소모임명</label>
 						<input name="title" id="title" class="form-control">
 					</div>	
 					
@@ -35,7 +35,7 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="content">(내용)소모임소개</label>
+						<label for="content">소모임소개</label>
 						<textarea name="content" id="content" class="form-control"></textarea>
 					</div>
 					
@@ -87,19 +87,29 @@
 						</div>
 					</div>
 					
-					<div class="form-group">
-						<label>업로드할 파일을 드랍시키세요</label>
-						<div class="fileDrop">
-							drag & drop
-						</div>
-					</div>
-					
-					<ul class="clearfix uploadedList">
+					<div class="row">
+						<ul class="clearfix uploadedList">
 						
-					</ul>
+						</ul>
+					</div>
+				
+					<script id="source" type="text/x-handlebars-template">
+	<li class="col-xs-3">
+		<span>
+			<img alt="첨부파일" src="{{imgsrc}}">
+		</span>
+		<div>
+			<a href="{{getLink}}">{{fileName}}</a>
+			<a href="{{picture}}" class="btn btn-default btn-xs pull-right delbtn">
+				<span class="glyphicon glyphicon-remove-circle"></span>
+			</a>
+		</div>
+	</li>
+	</script>
 					
-					
-					<div class="form-group text-right">
+				
+					<div class="filebox form-group text-right">
+						<input id="fileUpload" type="file" id="file">
 						<button class="btn btn-primary" type="submit" id="submit_form">
 							<span class="glyphicon glyphicon-check"></span> 등록
 						</button>
@@ -107,7 +117,7 @@
 							<span class="glyphicon glyphicon-list"></span> 목록
 						</button>
 					</div>
-					
+				
 				</form>
 
 			</div>	
@@ -116,57 +126,63 @@
 	
 	</div>
 </div>
-<script id="source" type="text/x-handlebars-template">
-	<li class="col-xs-3">
-		<span>
-			<img alt="첨부파일" src="{{imgsrc}}">
-		</span>
-		<div>
-			<a href="{{getLink}}">{{fileName}}</a>
-			<a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn">
-				<span class="glyphicon glyphicon-remove-circle"></span>
-			</a>
-		</div>
-	</li>
-</script>
-	
-<script type="text/javascript">
-	$(document).ready(function() {
 		
-		// 사진첨부
-		var source =$("#source").html();
-		var template = Handlebars.compile(source);
 			
-		$(".fileDrop").on("dragenter dragover", function(event) {
-			event.preventDefault();
-		});
+		<script type="text/javascript">
+			$(document).ready(function() {
 		
-		$(".fileDrop").on("drop", function(event) {
-			event.preventDefault();
-			var files = event.originalEvent.dataTransfer.files;
-						
-			var file = null;
-			for(var j=0; j<files.length;j++){
-				file = files[j];
-				var formData = new FormData();
-				formData.append("file", file);
+			// 사진첨부
+			var source = $("#source").html();
+			var template = Handlebars.compile(source);
+
+				$("input[type=file]").change(function(event) {
+					event.preventDefault();
+					var files = event.target.files;
+					var file = files[0];
+
+					var formData = new FormData();
+					formData.append("file",	file);
 					
-				$.ajax({
-					type:"post",
-					url: "/uploadAjax",
-					data: formData,
-					dataType: "text",
-					processData: false,
-					contentType: false,
-					success: function(result){
-						var data = getFileInfo(result);
-						var ht = template(data);
-						$(".uploadedList").append(ht);
-					}
+					$.ajax({
+						type : 'post',
+						url : '/uploadAjax/crew',
+						data : formData,
+						dataType : 'text',
+						processData : false,
+						contentType : false,
+						success : function(result) {
+							var data = crew_getFileInfo(result);
+							var ht = template(data);
+							
+							console.log(ht);
+							
+							$(".uploadedList").html(ht);
+						}
+					});
 				});
-			}
-		});
-		
+
+					
+				$(".uploadedList").on("click", "li div .delbtn", function(event) {
+					event.preventDefault();
+					var delBtn = $(this);
+					var delLi = $(this).parent("div").parent("li");
+					
+					$.ajax({
+						type:"post",
+						url:"/deleteFile",
+						data:{
+							fileName : delBtn.attr("href")
+						},
+						dataType: "text",
+						success: function(result) {
+							if(result == "DELETE_SUCCESS"){
+								delLi.remove();
+								alert("취소되었습니다.");	
+								$("input[type=file]").val("");
+							}
+						}
+					});
+				});
 		
 		// 소모임지역
 		var area0 = ["서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
@@ -207,40 +223,22 @@
         }
     }
 		
-	// 사진첨부 삭제
-	$(".uploadedList").on("click", "li div .delbtn", function(event) {
-		event.preventDefault();
-		var delBtn = $(this);
-		var delLi = $(this).parent("div").parent("li");
-		
-		$.ajax({
-			type:"post",
-			url:"/deleteFile",
-			data:{
-				fileName : delBtn.attr("href")
-			},
-			dataType: "text",
-			success: function(result) {
-				if(result == "DELETE_SUCCESS"){
-					delLi.remove();
-					alert("삭제가 완료 되었습니다.");	
-				}
-			}
-		});
-	});
-	
 	
 	$("#submit_form").on("click",function(event){
 
 		event.preventDefault();
+		var files = event.target.files; 
+		var formData = new FormData();
+		formData.append("file",	files);
+
 		var form = $("#myForm");
 		var str = "";
-		
-		$(".delbtn").each(function(index) {
-			str += "<input value='"+$(this).attr("href")+"' name='files["+index+"]' type='hidden'>";
-		});
-			form.append(str);
-			form.get(0).submit();
+
+			str += "<input value='"+$(".delbtn").attr("href")+"' name='picture' type='hidden'>";
+	
+		form.append(str);
+		form.get(0).submit();
+		alert("소모임이 개설되었습니다.");
 	});
 	
 	$("#list_form").click(function() {

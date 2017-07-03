@@ -132,18 +132,18 @@
 	</ul>
 	<div id="container" class="container">
 		<div class="row">
-			  <div class="col-xs-12 col-md-12">
-			    <a href="#" class="picture">
-			      <img src="../resources/img/mobile/images.jpg" alt="" width="100%;" height="120px">
-			    </a>
-			  </div>
+		  <div class="">
+		    <a href="#" class="picture">
+		      <img src="../resources/img/mobile/images.jpg" alt="" width="100%;" height="auto">
+		    </a>
+		  </div>
 		</div>
 		<div class="row">
 			 <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1" style="background-color: white;">${crewVO.category}</span>
-				  <input id="test" type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
-				  <input id="getCno" value="${crewVO.cno}" type="hidden">
-				  <input id="log" value="${login.mid}" type="hidden">
+			  <span class="input-group-addon" id="basic-addon1" style="background-color: white;">${crewVO.category}</span>
+			  <input id="test" type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
+			  <input id="getCno" value="${crewVO.cno}" type="hidden">
+			  <input id="log" value="${login.mid}" type="hidden">
 			</div>
 		</div>
 		<div class="row">

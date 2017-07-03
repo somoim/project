@@ -23,9 +23,10 @@
 			<!-- 여기서부터 시작 -->
 			
 			<form role="form" method="post">
-				<input value="${vo.cno}" name="cno"  type="hidden" >
-				<input value="${vo.sg_no}" name="sg_no"  type="hidden" >
-				<input value="${vo.sg_picture}" name="sg_picture"  type="hidden">
+				<input value="${sGalleryVO.cno}" name="cno"  type="hidden" >
+				<input value="${sGalleryVO.sg_no}" name="sg_no"  type="hidden" >
+				<input value="${sGalleryVO.sg_picture}" name="sg_picture"  type="hidden">
+				
 			</form>
 			
 			<div class="container">
@@ -43,11 +44,11 @@
 				<div class="row">
 					<div class="panel panel-warning">
 						<div class="panel-heading">
-							<h3 class="panel-title">이름 작성일</h3>
+							<h3 class="panel-title">${name}<br> ${sGalleryVO.sg_writeday}</h3>
 						</div>
 						<div class="panel-body">
 							<div class="show_img">
-								<img src="/displayFile?fileName=${vo.sg_picture}" alt="사진사진">
+								<img src="/displayFile?fileName=${sGalleryVO.sg_picture}" alt="사진사진">
 							</div>
 						</div>
 					</div>

@@ -39,4 +39,10 @@ public class sGalleryDAOImpl implements sGalleryDAO {
 		return session.selectOne(NAMESPACE+".sgallery_detail", sg_no);
 	}
 
+	@Override
+	public String sgallery_member_name(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE+".sgallery_member_name", mid);
+	}
+
 }

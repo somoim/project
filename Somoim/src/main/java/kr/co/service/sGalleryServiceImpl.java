@@ -39,5 +39,11 @@ public class sGalleryServiceImpl implements sGalleryService {
 		// TODO Auto-generated method stub
 		return sgallery_dao.sgallery_detail(sg_no);
 	}
+	
+	@Override
+	public String sgallery_member_name(String mid) throws Exception {
+		// TODO Auto-generated method stub
+		return sgallery_dao.sgallery_member_name(mid);
+	}
 
 }

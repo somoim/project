@@ -26,7 +26,7 @@
 					<form id="myForm" action="" method="post">
 						<div class="form-group">
 							<label>아이디</label>
-							<input class="form-control" name="mid" id="mid" readonly="readonly" placeholder="아이디가져오기">
+							<input class="form-control" name="mid" id="mid" value="${login.mid}" readonly="readonly" >
 						</div>
 						<div class="form-group">
 							<label>제목</label>
