@@ -54,4 +54,10 @@ public class sListServiceImpl implements sListService {
 		return sList_dao.join_sList_member(cno);
 	}
 
+	@Override
+	public void slist_create(sListVO slistVo) {
+		// TODO Auto-generated method stub
+		sList_dao.slist_create(slistVo);
+	}
+
 }

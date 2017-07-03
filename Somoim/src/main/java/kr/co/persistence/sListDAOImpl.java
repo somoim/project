@@ -59,4 +59,10 @@ public class sListDAOImpl implements sListDAO {
 		return session.selectList(NAMESPACE+".join_sList_member", cno);
 	}
 
+	@Override
+	public void slist_create(sListVO slistVo) {
+		// TODO Auto-generated method stub
+		session.insert(NAMESPACE+".slist_create", slistVo);
+	}
+
 }

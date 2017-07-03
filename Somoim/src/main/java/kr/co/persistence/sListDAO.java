@@ -12,4 +12,5 @@ public interface sListDAO {
 	public abstract void join_sList_insert(int cno,int sl_no,String mid)throws Exception;
 	public abstract List<StatusVO> join_sList_select(int sl_no)throws Exception;
 	public abstract List<StatusVO> join_sList_member(int cno)throws Exception;
+	public abstract void slist_create(sListVO slistVo);
 }
