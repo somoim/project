@@ -40,4 +40,17 @@
 		 values(seq_sl_no.nextval, #{cno}, #{attend_title}, #{attend_date}, #{attend_region}, #{attend_cnt}, #{attend_money})
 	</insert>
 	
+	<select id="slistBySlno" resultType="sListVO">
+		select * from slist where sl_no=#{sl_no}
+	</select>
+	
+	<update id="slist_update">
+		update slist set attend_title=#{attend_title}, attend_region=#{attend_region}, attend_cnt=#{attend_cnt}, attend_money=#{attend_money} 
+		 where sl_no=#{sl_no}
+	</update>
+	
+	<delete id="slist_delete">
+		delete from slist where sl_no=#{sl_no}
+	</delete>
+	
 </mapper>

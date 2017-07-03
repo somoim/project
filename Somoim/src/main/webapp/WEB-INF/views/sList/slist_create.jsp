@@ -34,7 +34,7 @@
 			//alert(attend_date);
 			$("#attend_date").val(attend_date);
 			
-			writeCheck()
+			writeCheck();
 			//$("#myForm").submit();
 		});
 		
@@ -171,7 +171,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="attend_money">지참액</label>
+						<label for="attend_money">회비</label>
 						<input type="number" name="attend_money" id="attend_money" class="form-control" placeholder="15000">
 					</div>
 					
@@ -189,7 +189,7 @@
 					</div>
 					
 					<div class="form-group text-right">
-						<button class="btn btn-primary" type="submit" id="btn_create" onclick="javascript:writeCheck()">
+						<button class="btn btn-primary" type="submit" id="btn_create">
 							<span class="glyphicon glyphicon-check"></span> 정모 만들기
 						</button>
 						<button class="btn btn-info" type="button" id="btn_list">

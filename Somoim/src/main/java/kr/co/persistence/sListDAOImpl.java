@@ -65,4 +65,22 @@ public class sListDAOImpl implements sListDAO {
 		session.insert(NAMESPACE+".slist_create", slistVo);
 	}
 
+	@Override
+	public sListVO slistBySlno(int sl_no) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE+".slistBySlno", sl_no);
+	}
+
+	@Override
+	public void slist_update(sListVO slistVo) {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".slist_update", slistVo);
+	}
+
+	@Override
+	public void slist_delete(int sl_no) {
+		// TODO Auto-generated method stub
+		session.delete(NAMESPACE+".slist_delete", sl_no);
+	}
+
 }
