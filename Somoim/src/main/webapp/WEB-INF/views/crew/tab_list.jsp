@@ -26,12 +26,15 @@
 		$(".btn-primary").hide();
 		var log = $("#log").val();
 		$(".sl_no").each(function(idx){
-			var mid=$(this).attr("data-mid");
-			if(log == mid){
-				
-				$(".btn-danger").hide();
-				$(".btn-primary").show();		
-			}
+			var sl_no=$(this).attr("data-sl_no");
+			$(".sl_no"+sl_no).each(function(){
+				var mid=$(this).attr("data-mid");
+				if(log == mid){
+					
+					$(".btn_join"+sl_no).hide();
+					$(".btn_cancel"+sl_no).show();		
+				}
+			});
 		});
 		
 		
@@ -41,7 +44,7 @@
 		});
 		
 		$(".sList").click(function(){
-			location.href="#"
+			location.href="/sList/slist_create?cno="+cno;
 		});
 		
 		$(".role").on("click","button",function(){
@@ -68,21 +71,36 @@
 			var cnt = $(this).attr("data-cnt");
 			var join = $(this).attr("data-join");
 			var mid = $(this).attr("data-mid");
+			var cno = $("#getCno").val();
 			if(cnt <= join){
 				alert("참석인원이 초과 하였습니다.");
 				return;
 			}
 			$.ajax({
 				type : "get",
-				url : "/crew/update_s_join_cnt",
+				url : "/crew/update_s_join_cnt/"+cno,
 				data : {
 					sl_no : sl_no,
-					cno : cno,
 					mid : mid
 				},
 				dataType : "text",
 				success:function(result){
-					self.location="/crew/tab_list";
+					self.location="/crew/tab_list?cno=${crewVO.cno}";
+				}
+			});
+		});
+		$(".btn-primary").on("click", function(){
+			var sl_no = $(this).attr("data-sl_no");
+			$.ajax({
+				type : "get",
+				url : "/crew/delete_slist_member",
+				data : {
+					sl_no : sl_no,
+					mid : log
+				},
+				dataType :"text",
+				success:function(result){
+					self.location="/crew/tab_list?cno=${crewVO.cno}";
 				}
 			});
 		});
@@ -122,10 +140,10 @@
 		</div>
 		<div class="row">
 			 <div class="input-group">
-			 	  <input id="log" value="${login.mid}" type="hidden">
 				  <span class="input-group-addon" id="basic-addon1" style="background-color: white;">${crewVO.category}</span>
 				  <input id="test" type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
 				  <input id="getCno" value="${crewVO.cno}" type="hidden">
+				  <input id="log" value="${login.mid}" type="hidden">
 			</div>
 		</div>
 		<div class="row">
@@ -141,9 +159,13 @@
 			  <!-- Default panel contents -->
 			  <c:forEach items="${sList_list}" var="sList">
 			  <div class="panel-heading">
-				  <span>${sList.attend_title} (${sList.attend_cnt}명)</span> 
-				  <button class="btn btn-danger col-xs-offset-8" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
-				  <button class="btn btn-primary col-xs-offset-8">참석취소</button>
+				  <span>${sList.attend_title} (${sList.attend_cnt}명)</span>
+				  <c:forEach items="${member_list}" var="member">
+					  <c:if test="${login.mid == member.mid}">
+					 	<button class="btn btn-danger col-xs-offset-8 btn_join${sList.sl_no}" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
+					  	<button class="btn btn-primary col-xs-offset-8 btn_cancel${sList.sl_no}" data-sl_no="${sList.sl_no}">참석취소</button>
+					  </c:if>
+				  </c:forEach>
 			  </div>
 			  <!-- List group -->
 			  <ul class="list-group">
@@ -157,7 +179,8 @@
 				  	<ul class="list-group">
 				  	<c:forEach items="${status}" var="status">
 				  		<c:if test="${sList.sl_no==status.sl_no}">
-							<li class="list-group-item sl_no" data-mid="${status.mid}">${status.name}</li>
+							<li class="list-group-item sl_no${status.sl_no}"data-log="${login.mid}" data-mid="${status.mid}">${status.name}</li>
+							<li class="sl_no" data-sl_no="${status.sl_no}" hidden="">
 						</c:if>		  
 				  	</c:forEach>
 				  	</ul>
@@ -180,18 +203,26 @@
 					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
 					<button class="btn btn-success col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
 					</c:if>
-					<input value="${member.mid}" class="">
 				</h5>
 				<hr class="horizon">
 			</c:forEach>
 		</div>
 	</div>
-		<!-- 버튼 레이아웃 -->		
-		<a href="#" class="fixedBtn">
-			<span><span class="glyphicon glyphicon-pencil"></span></span>
-			<span>글쓰기</span>
+		<!-- 버튼 레이아웃 -->
+	<c:forEach items="${member_list}" var="member">
+		<c:if test="${login.mid != member.mid }">
+			<a href="#" class="fixedBtn">
+			<span><span class="glyphicon glyphicon-plus"></span></span>
+			<span>가입</span>
 		</a>
-	
+		</c:if>
+		<c:if test="${login.mid == member.mid}">		
+			<a href="#" class="fixedBtn">
+				<span><span class="glyphicon glyphicon-pencil"></span></span>
+				<span>글쓰기</span>
+			</a>
+		</c:if>
+	</c:forEach>
 
 </div>
 

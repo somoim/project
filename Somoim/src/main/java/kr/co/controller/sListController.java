@@ -30,4 +30,24 @@ public class sListController {
 		return "redirect:/crew/tab_list?cno="+cno;
 	}
 	
+	@RequestMapping(value="/slist_update", method=RequestMethod.GET)
+	public void slist_updateGet(@RequestParam("sl_no") int sl_no, Model model) throws Exception {
+		sListVO slistVo = sList_service.slistBySlno(sl_no);
+		model.addAttribute("slistVo", slistVo);
+	}
+	
+	@RequestMapping(value="/slist_update", method=RequestMethod.POST)
+	public String slist_updatePost(sListVO slistVo) throws Exception {
+		sList_service.slist_update(slistVo);
+		int cno = slistVo.getCno();
+		return "redirect:/crew/tab_list?cno="+cno;
+	}
+	
+	@RequestMapping(value="/slist_delete", method=RequestMethod.POST)
+	public String slist_delete(@RequestParam("sl_no") int sl_no, @RequestParam("cno") int cno) throws Exception {
+		sList_service.slist_delete(sl_no);
+		
+		return "redirect:/crew/tab_list?cno="+cno;
+	}
+	
 }

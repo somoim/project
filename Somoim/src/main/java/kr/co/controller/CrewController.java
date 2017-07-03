@@ -113,7 +113,7 @@ public class CrewController {
 		return list;
 	}
 	
-
+	///////////////////////////sGallery 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_gallery")
 	public void tab_gallery_GET(@RequestParam("cno") int cno, Model model) throws Exception {
 		List<sGalleryVO> list = sgallery_service.sgallery_list(cno);
@@ -359,6 +359,13 @@ public class CrewController {
 		sList_service.join_sList_insert(cno, sl_no, mid);
 	}
 	
+	@Transactional
+	@ResponseBody
+	@RequestMapping(value="/delete_slist_member")
+	public void slist_update_member(int sl_no, String mid)throws Exception{
+		sList_service.delete_slist_member(sl_no, mid);
+		sList_service.update_slist_member(sl_no);
+	}
 	
 	///////////////////////// 진희
 	@RequestMapping(value="/list", method=RequestMethod.GET)
