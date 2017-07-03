@@ -378,6 +378,12 @@ public class CrewController {
 		sList_service.update_slist_member(sl_no);
 	}
 	
+	@RequestMapping(value="/join_Crew")
+	public String join_Crewo(@RequestParam("cno") int cno,@RequestParam("mid") String mid)throws Exception{
+		crew_service.join_Crew(cno, mid);
+		return "redirect:/crew/tab_list?cno="+cno;
+	}
+	
 	///////////////////////// 진희
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void crew_list(@ModelAttribute("cri") Criteria cri, Model model, String mid, HttpServletRequest request) throws Exception {

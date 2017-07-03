@@ -19,12 +19,15 @@
     .panel{margin-bottom: auto;}
     .power{color: red;}
     .horizon{border: solid 1px rgb(255,151,220);}
+    a:link a:visited a:active a:hover{text-decoration: none; color: white;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){	
 		var cno = $("#getCno").val();
-		$(".btn-primary").hide();
 		var log = $("#log").val();
+		var cMid = $("#getMid").val();
+		var role = $("#getRole").val();
+		$(".btn-primary").hide();
 		$(".sl_no").each(function(idx){
 			var sl_no=$(this).attr("data-sl_no");
 			$(".sl_no"+sl_no).each(function(){
@@ -104,6 +107,32 @@
 				}
 			});
 		});
+		$("#join").hide();
+		$(".ifmid").each(function(idx){
+			var mid=$(this).val();
+			if(log != mid){
+				$("#join").show();
+				$("#write").hide();
+			}
+			if(log == mid){
+				$("#join").hide();
+				$("#write").show();
+			}
+		});
+		
+			$(".panel-heading").each(function(idx){
+				var sl_no=$(this).next().next().attr("data-sl_no");
+				$(this).on("click",function(){
+					if(cMid == log || role == log){
+						self.location="/sList/slist_update?cno=${crewVO.cno}&sl_no="+sl_no;
+					} else{
+						return;
+					}
+					
+				});
+			});
+		
+		
 		
 	});
 </script>
@@ -144,6 +173,8 @@
 				  <input id="test" type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
 				  <input id="getCno" value="${crewVO.cno}" type="hidden">
 				  <input id="log" value="${login.mid}" type="hidden">
+				  <input id="getMid" value="${crewVO.mid}" type="hidden">
+				  <input id="getRole" value="${crewVO.role}" type="hidden">
 			</div>
 		</div>
 		<div class="row">
@@ -158,7 +189,7 @@
 			<div class="panel panel-default">
 			  <!-- Default panel contents -->
 			  <c:forEach items="${sList_list}" var="sList">
-			  <div class="panel-heading">
+			  <div class="panel-heading" >
 				  <span>${sList.attend_title} (${sList.attend_cnt}명)</span>
 				  <c:forEach items="${member_list}" var="member">
 					  <c:if test="${login.mid == member.mid}">
@@ -203,26 +234,23 @@
 					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
 					<button class="btn btn-success col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
 					</c:if>
+					<input class="ifmid" value="${member.mid}" type="hidden">
 				</h5>
 				<hr class="horizon">
 			</c:forEach>
 		</div>
 	</div>
 		<!-- 버튼 레이아웃 -->
-	<c:forEach items="${member_list}" var="member">
-		<c:if test="${login.mid != member.mid }">
-			<a href="#" class="fixedBtn">
+	
+		<a href="/crew/join_Crew?cno=${crewVO.cno}&mid=${login.mid}" class="fixedBtn" id="join">
 			<span><span class="glyphicon glyphicon-plus"></span></span>
 			<span>가입</span>
+		</a>	
+		<a href="#" class="fixedBtn" id="write">
+			<span><span class="glyphicon glyphicon-pencil"></span></span>
+			<span>글쓰기</span>
 		</a>
-		</c:if>
-		<c:if test="${login.mid == member.mid}">		
-			<a href="#" class="fixedBtn">
-				<span><span class="glyphicon glyphicon-pencil"></span></span>
-				<span>글쓰기</span>
-			</a>
-		</c:if>
-	</c:forEach>
+	
 
 </div>
 

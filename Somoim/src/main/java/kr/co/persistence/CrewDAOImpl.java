@@ -78,4 +78,13 @@ public class CrewDAOImpl implements CrewDAO {
 		
 	}
 
+	@Override
+	public void join_Crew(int cno, String mid) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cno", cno);
+		map.put("mid", mid);
+		session.insert(NAMESPACE+".join_Crew", map);
+	}
+
 }

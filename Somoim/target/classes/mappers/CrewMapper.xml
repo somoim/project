@@ -34,4 +34,8 @@
   	<select id="getId" resultType="Integer">
   		select max(picture) from crew
   	</select>
+  	
+  	<insert id="join_Crew">
+  		insert into status (sno,cno,sl_no,mid) values(seq_sno.nextval,#{cno},null,#{mid})
+  	</insert>
 </mapper>

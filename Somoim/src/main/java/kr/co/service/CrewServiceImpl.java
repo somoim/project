@@ -55,6 +55,12 @@ public class CrewServiceImpl implements CrewService {
 		
 	}
 
+	@Override
+	public void join_Crew(int cno, String mid) {
+		// TODO Auto-generated method stub
+		crew_dao.join_Crew(cno, mid);
+	}
+
 	
 
 }
