@@ -13,5 +13,7 @@ public interface sListService {
 	public abstract List<StatusVO> join_sList_select(int sl_no)throws Exception;
 	public abstract List<StatusVO> join_sList_member(int cno)throws Exception;
 	public abstract void slist_create(sListVO slistVo);
+	public abstract void update_slist_member(int sl_no);
+	public abstract void delete_slist_member(int sl_no,String mid);
 
 }

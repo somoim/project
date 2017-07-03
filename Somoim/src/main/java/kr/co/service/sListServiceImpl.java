@@ -60,4 +60,17 @@ public class sListServiceImpl implements sListService {
 		sList_dao.slist_create(slistVo);
 	}
 
+	@Override
+	public void update_slist_member(int sl_no) {
+		// TODO Auto-generated method stub
+		sList_dao.update_slist_member(sl_no);
+		
+	}
+
+	@Override
+	public void delete_slist_member(int sl_no, String mid) {
+		// TODO Auto-generated method stub
+		sList_dao.delete_slist_member(sl_no, mid);
+	}
+
 }

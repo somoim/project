@@ -205,7 +205,7 @@ public class CrewController {
 	
 	///////////////////////////tab_Board 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_board")
-	public void tab_board_GET(Model model) throws Exception {
+	public void tab_board_GET(@RequestParam("cno")int cno,Model model) throws Exception {
 		List<sBoardVO> list = sboard_service.sboard_list(1);
 		model.addAttribute("list", list);
 	}
@@ -362,12 +362,18 @@ public class CrewController {
 	
 	@Transactional
 	@ResponseBody
-	@RequestMapping(value="/update_s_join_cnt") //정모 참석 누르기
-	public void update_MemberPower(int sl_no,int cno,String mid)throws Exception{
+	@RequestMapping(value="/update_s_join_cnt/{cno}") //정모 참석 누르기
+	public void update_MemberPower(int sl_no,@PathVariable("cno")int cno,String mid)throws Exception{
 		sList_service.update_s_join_cnt(sl_no);
 		sList_service.join_sList_insert(cno, sl_no, mid);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/delete_slist_member")
+	public void slist_update_member(int sl_no, String mid)throws Exception{
+		sList_service.delete_slist_member(sl_no, mid);
+		sList_service.update_slist_member(sl_no);
+	}
 	
 	///////////////////////// 진희
 	@RequestMapping(value="/list", method=RequestMethod.GET)
