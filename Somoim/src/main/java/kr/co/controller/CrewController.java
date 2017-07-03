@@ -292,19 +292,8 @@ public class CrewController {
 	
 		
 	/*---------------------------------------------------------------------------------------*/
-
 	
 	
-	
-	@RequestMapping(value="/list_create", method=RequestMethod.GET) 
-	public void list_create() throws Exception{ 
-	} 
-	
-	@RequestMapping(value="/list") 
-	public void crew_list() throws Exception { 
-	
-		
-	} 
 	
 	///////////////////////// 정림
 	
