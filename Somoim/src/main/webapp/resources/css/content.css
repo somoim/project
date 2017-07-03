@@ -68,6 +68,7 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 .formLayout .cateGoup { background-color: #ffffff; border: 1px solid #ddd; padding: 10px; border-radius: 5px; box-shadow: inset 0px 0px 2px #999;}
 #list_form span { font-size: 12px;}
 #submit_form span { font-size: 12px;}
+.backCont { cursor: pointer;}
 
 /* setting */
 .managerMail { position:relative;}
@@ -92,4 +93,5 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 #accordionEtc .accordion_title { font-size: 13px; font-weight: bold}
 #accordionEtc .accordion_sub { font-size: 12px;}
 .panel-heading{ border-bottom: solid 1px #ddd; }
+#memberDelete { background-color:#493334; font-weight:bold; color:#ffffff; font-size: 16px; padding: 12px; margin-top:30px;} 
 

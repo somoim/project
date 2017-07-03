@@ -54,4 +54,41 @@ public class sListServiceImpl implements sListService {
 		return sList_dao.join_sList_member(cno);
 	}
 
+	@Override
+	public void slist_create(sListVO slistVo) {
+		// TODO Auto-generated method stub
+		sList_dao.slist_create(slistVo);
+	}
+
+	@Override
+	public void update_slist_member(int sl_no) {
+		// TODO Auto-generated method stub
+		sList_dao.update_slist_member(sl_no);
+		
+	}
+
+	@Override
+	public void delete_slist_member(int sl_no, String mid) {
+		// TODO Auto-generated method stub
+		sList_dao.delete_slist_member(sl_no, mid);
+	}
+
+		@Override
+	public sListVO slistBySlno(int sl_no) {
+		// TODO Auto-generated method stub
+		return sList_dao.slistBySlno(sl_no);
+	}
+
+	@Override
+	public void slist_update(sListVO slistVo) {
+		// TODO Auto-generated method stub
+		sList_dao.slist_update(slistVo);
+	}
+
+	@Override
+	public void slist_delete(int sl_no) {
+		// TODO Auto-generated method stub
+		sList_dao.slist_delete(sl_no);
+	}
+	
 }
