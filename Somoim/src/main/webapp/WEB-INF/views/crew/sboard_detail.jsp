@@ -24,9 +24,9 @@
 			<!-- 여기서부터 시작 -->
 			
 			<form role="form" method="post">
-				<input value="${vo.cno}" name="cno"  type="hidden" >
-				<input value="${vo.sb_no}" name="sb_no"  type="hidden" >
-				<input value="${vo.sb_picture}" name="sb_picture"  type="hidden">
+				<input value="${sBoardVO.cno}" name="cno"  type="hidden" >
+				<input value="${sBoardVO.sb_no}" name="sb_no"  type="hidden" >
+				<input value="${sBoardVO.sb_picture}" name="sb_picture"  type="hidden">
 			</form>
 			
 			<div class="container">
@@ -45,25 +45,23 @@
 					<div class="panel panel-warning">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								<span>${vo.mid}</span><br>
-								<span>${vo.sb_writeday}</span>
+								<span>${name}</span><br>
+								<span>${sBoardVO.sb_writeday}</span>
 							</h3>
 						</div>
 						<div class="panel-body">
 							<div class="show_title">
-								${vo.sb_title}
+								${sBoardVO.sb_title}
 							</div>
 							<br>
 							<br>
 								<div class="show_content">
-								${vo.sb_content}
+								${sBoardVO.sb_content}
 							</div>
 							
 								<div class="show_img">
-									<img src="/displayFile/sboard?fileName=${vo.sb_picture}" alt="사진사진">
+									<img src="/displayFile/sboard?fileName=${sBoardVO.sb_picture}" alt="사진사진">
 								</div>
-							 
-							
 						</div>
 					</div>
 
@@ -161,7 +159,7 @@
 					$(document).ready(function() {
 						
 						var $form = $("form[role='form']");
-						var sb_no = ${vo.sb_no};
+						var sb_no = ${sBoardVO.sb_no};
 						AllReplyLlst(1, 17);
 						
 						$("#tab_gallery_form").on("click", function() {
@@ -194,7 +192,7 @@
 							
 							$.ajax({
 								type : "post",
-								url : "/replies",
+								url : "/replies/sboard",
 								data : {
 									re_content : re_content
 								},

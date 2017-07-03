@@ -88,7 +88,6 @@
 							var result = $("input[name=sb_picture]").val();
 							var data = sBoard_getFileInfo(result);
 							var ht = template(data);
-							
 						
 							$(".uploadedList").html(ht);
 							

@@ -128,10 +128,11 @@ public class CrewController {
 	@RequestMapping(value="/sgallery_detail/{cno}/{sg_no}")
 	public sGalleryVO sgallery_detail(@PathVariable("cno") int cno, @PathVariable("sg_no") int sg_no, Model model) throws Exception{
 		
-		sGalleryVO vo = sgallery_service.sgallery_detail(sg_no);
-		model.addAttribute("vo", vo);
+		sGalleryVO sGalleryVO = sgallery_service.sgallery_detail(sg_no);
 		
-		return vo;
+		model.addAttribute("sGalleryVO", sGalleryVO);
+		
+		return sGalleryVO;
 	}
 	
 	
@@ -139,8 +140,12 @@ public class CrewController {
 	@RequestMapping(value="/sgallery_detail", method=RequestMethod.GET)
 	public void sgallery_detail_GET(Model model) throws Exception {
 		
-		sGalleryVO vo = sgallery_service.sgallery_detail(1);
-		model.addAttribute("vo", vo);
+		
+		sGalleryVO sGalleryVO = sgallery_service.sgallery_detail(4);
+		String name = sgallery_service.sgallery_member_name("m001");
+		
+		model.addAttribute("sGalleryVO", sGalleryVO);
+		model.addAttribute("name", name);
 	}
 	
 	/*---------------------------------------------------------------------------------------*/
@@ -208,6 +213,7 @@ public class CrewController {
 	public void tab_board_GET(Model model) throws Exception {
 		List<sBoardVO> list = sboard_service.sboard_list(1);
 		model.addAttribute("list", list);
+		
 	}
 	
 	
@@ -228,8 +234,12 @@ public class CrewController {
 	@RequestMapping(value="/sboard_detail", method=RequestMethod.GET)
 	public void sboard_detail_GET(Model model) throws Exception {
 		
-		sBoardVO vo = sboard_service.sboard_detail(17);
-		model.addAttribute("vo", vo);
+		sBoardVO sBoardVO = sboard_service.sboard_detail(17);
+		String name = sboard_service.sboard_member_name("m001");
+		
+		model.addAttribute("sBoardVO", sBoardVO);
+		model.addAttribute("name", name);
+		
 	}
 	
 	/*---------------------------------------------------------------------------------------*/
@@ -408,7 +418,7 @@ public class CrewController {
 		
 	}
 	
-	@RequestMapping(value="/create_post", method=RequestMethod.POST)
+	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public void crew_createPost(CrewVO crew_vo) throws Exception {
 		crew_service.crew_create(crew_vo);
 		

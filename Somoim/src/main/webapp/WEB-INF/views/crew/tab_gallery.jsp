@@ -105,18 +105,18 @@
 			<div class="container">
 		
 	
-				<div class="row">
+				<div class="row sgallery_list">
 				<c:forEach items="${list}"	var="sgallery_vo">
 					<div class="col-xs-6 col-sm-4">
 						<form role="form" method="post">
-							<input value="${sgallery_vo.sg_no}" name="sg_no"  type="hidden">
-							<input value="${sgallery_vo.cno}" name="cno"  type="hidden">
-						</form>
-						<a href="sgallery_detail" class="thumbnail">
+						<a href="#" class="thumbnail" data-sg_no="${sgallery_vo.sg_no}" data-cno="${sgallery_vo.cno}">
 							<img alt="sgallery"	src="/displayFile?fileName=${sgallery_vo.sg_picture}">
+							<input value="${sgallery_vo.sg_no}" name="sg_no" class="sg_no" type="hidden">
+							<input value="${sgallery_vo.cno}" name="cno"  type="hidden" >	
 						</a>
+						</form>
 					</div>
-					</c:forEach>
+				</c:forEach>
 				</div>
 
 
@@ -128,14 +128,16 @@
 
 				<script type="text/javascript">
 					$(document).ready(function() {
-						$(".thumbnail img").on("click", function(event) {
+						$(".sgallery_list").on("click","div .thumbnail", function(event) {
 							event.preventDefault();
-							var sg_no = $("input[name=sg_no]").val();
-							var cno = $("input[name=cno]").val();
-							alert(sg_no); 	
-							alert(cno); 	
+							
+							var sg_no = $(this).attr("data-sg_no");
+							var cno = $(this).attr("data-cno");
+							
+							alert("sg_no::: "+sg_no); 	
+							alert("cno::: "+cno); 	
 
-							self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;
+							self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;	
 						});
 					});
 					

@@ -31,16 +31,20 @@
 				</div>
 
 				<form id="myForm" action="sgallery_create" method="post">
-					<div class="filebox">
-						<input id="fileUpload" type="file" id="file">
-						<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
-						<a href="crew/tab_gallery">
-						<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button></a>
-					</div>
-
+				
 					<div class="row">
 						<ul class="clearfix uploadedList"></ul>
 					</div>
+					
+					
+						<div class="filebox">
+							<input id="fileUpload" type="file" id="file">
+							<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
+							<a href="crew/tab_gallery">
+							<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button></a>
+						</div>
+
+					
 				</form>
 
 
@@ -79,6 +83,7 @@
 								success : function(result) {
 									var data = sGallery_getFileInfo(result);
 									var ht = template(data);
+									
 									$(".uploadedList").html(ht);
 								}
 							});
