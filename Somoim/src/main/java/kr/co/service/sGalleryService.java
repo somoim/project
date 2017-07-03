@@ -12,4 +12,6 @@ public interface sGalleryService {
 
 	
 	abstract sGalleryVO sgallery_detail(int sg_no) throws Exception;
+	
+	abstract String sgallery_member_name(String mid) throws Exception;
 }

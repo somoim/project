@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="col-xs-10 col-xs-offset-1 loginBox">
 				
-				<form class="form-horizontal login_form" action="/user/loginPost" method="post">
+				<form class="form-horizontal login_form" method="post">
 				
 					<div class="form-group">
 						<label class="col-xs-2 control-label" for="id">ID</label>

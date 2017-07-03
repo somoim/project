@@ -19,4 +19,9 @@
 		delete from sGallery where sg_no=#{sg_no}	
 	</delete>
 	
+	
+	<select id="sgallery_member_name" resultType="String">
+		select name from sGallery sg join member m on sg.mid = m.mid
+	</select>
+	
 </mapper>

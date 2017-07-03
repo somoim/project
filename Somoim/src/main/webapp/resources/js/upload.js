@@ -52,3 +52,28 @@ function sBoard_getFileInfo(sb_picture) {
 		
 	return {fileName:fileName, imgsrc:imgsrc, getLink:getLink, sb_picture:sb_picture};
 }
+
+
+
+function crew_getFileInfo(picture) {
+	var fileName, imgsrc, getLink;
+	var fileLink; //UUID하고 원래 파일 이름하고 적용하는 애?
+	
+	if(checkImageType(picture)){
+		imgsrc = "/displayFile/crew?fileName="+picture;
+		fileLink = picture.substr(14); 
+		//'_' 다음부터의 이름 -> 나중에 보여줄 때 원래 이름만 보여주기 위해서 따로 잡음
+		var prefix = picture.substr(0,12);
+		var suffix = picture.substr(14);
+		getLink = "/displayFile/crew?fileName="+(prefix+suffix);
+	} else {
+		imgsrc="../resources/img/back.jpg";
+		fileLink = picture.substr(12);
+		getLink = "/displayFile/crew?fileName="+picture;
+	}
+	
+	fileName = fileLink.substr(fileLink.indexOf("_")+1);
+	
+	return {fileName:fileName, imgsrc:imgsrc, getLink:getLink, picture:picture};
+	
+}

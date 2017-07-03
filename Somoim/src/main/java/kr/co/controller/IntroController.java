@@ -36,7 +36,7 @@ public class IntroController {
 		}
 		model.addAttribute("MemberVO", vo);
 		System.out.println("로그인성공");
-		return "redirect:/crew/list";
+		return "redirect:/around/member_info";
 	}
 	
 	@RequestMapping(value="/loginfail", method=RequestMethod.GET)

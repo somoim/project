@@ -280,9 +280,8 @@
 			</div>
 		</div>
 		
-		<div class="infobar"></div>
-		<div class="row">
-			<button class="btn btn-block" id="memberDelete">회원 탈퇴</button>
+		<div class="form-group">
+			<div class="btn btn-block" id="memberDelete">회원 탈퇴</div>
 		</div>
 			
 	</div>
