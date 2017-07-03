@@ -84,12 +84,14 @@ public class CrewController {
 	public String sgallery_create_POST(sGalleryVO sgallery_vo, String mid, RedirectAttributes rttr, HttpServletRequest request) throws Exception{ 	
 		
 		sgallery_vo.setCno(1);
+		sgallery_vo.setMid("m001");
 		
-		
-		HttpSession session = request.getSession();
+		/*HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		
 		mid = memberVO.getMid();
-		sgallery_vo.setMid(mid);
+		
+		sgallery_vo.setMid(mid);;*/
 		
 		sgallery_service.sgallery_create(sgallery_vo); 
 		
@@ -111,6 +113,7 @@ public class CrewController {
 		return list;
 	}
 	
+	///////////////////////////sGallery 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_gallery")
 	public void tab_gallery_GET(Model model) throws Exception {
 		List<sGalleryVO> list = sgallery_service.sgallery_list(1);
@@ -132,11 +135,11 @@ public class CrewController {
 	}
 	
 	
-	
+///////////////////////////sGallery 상세보기 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/sgallery_detail", method=RequestMethod.GET)
 	public void sgallery_detail_GET(Model model) throws Exception {
 		
-		sGalleryVO vo = sgallery_service.sgallery_detail(92);
+		sGalleryVO vo = sgallery_service.sgallery_detail(1);
 		model.addAttribute("vo", vo);
 	}
 	
@@ -172,11 +175,13 @@ public class CrewController {
 	public String sboard_create_POST(sBoardVO sboard_vo, String mid, RedirectAttributes rttr, HttpServletRequest request) throws Exception{ 	
 		
 		sboard_vo.setCno(1);
+		sboard_vo.setMid("m001");
 		
-		HttpSession session = request.getSession();
+	/*	HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		
 		mid = memberVO.getMid();
-		sboard_vo.setMid(mid);	
+		sboard_vo.setMid(mid);	*/
 		
 		sboard_service.sboard_create(sboard_vo); 
 		
@@ -188,8 +193,6 @@ public class CrewController {
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	
-	
 	@ResponseBody
 	@RequestMapping(value="/tab_board/{cno}")
 	public List<sBoardVO> sBoard(@PathVariable("cno") int cno, Model model) throws Exception{
@@ -200,6 +203,7 @@ public class CrewController {
 		return list;
 	}
 	
+	///////////////////////////tab_Board 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_board")
 	public void tab_board_GET(Model model) throws Exception {
 		List<sBoardVO> list = sboard_service.sboard_list(1);
@@ -220,11 +224,11 @@ public class CrewController {
 	}
 	
 	
-	
+	///////////////////////////sBoard 상세페이지 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/sboard_detail", method=RequestMethod.GET)
 	public void sboard_detail_GET(Model model) throws Exception {
 		
-		sBoardVO vo = sboard_service.sboard_detail(16);
+		sBoardVO vo = sboard_service.sboard_detail(17);
 		model.addAttribute("vo", vo);
 	}
 	
@@ -237,7 +241,7 @@ public class CrewController {
 		sboard_service.sboard_delete(sb_no);
 
 		String prefix = vo.getSb_picture().substring(0, 12);
-		String suffix = vo.getSb_picture().substring(14);
+		String suffix = vo.getSb_picture().substring(15);
 		
 		File f = new File(sboard_uploadPath+(prefix+suffix).replace('/', File.separatorChar));
 		f.delete();
@@ -250,36 +254,43 @@ public class CrewController {
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	@RequestMapping(value="sboard_update", method=RequestMethod.GET)
-	public void sboard_update_GET(@RequestParam("sb_no") int sb_no, Model model) throws Exception{
-		sBoardVO vo = sboard_service.sboard_detail(sb_no);
+	@RequestMapping(value="/sboard_update", method=RequestMethod.GET)
+	public sBoardVO sboard_update_GET(@RequestParam("sb_no") int sb_no, Model model) throws Exception{
+		sBoardVO vo =  sboard_service.sboard_detail(sb_no);
 		model.addAttribute("vo", vo);
+		return vo;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="sboard_update", method=RequestMethod.POST)
+	@RequestMapping(value="/sboard_update", method=RequestMethod.POST)
 	public String sboard_update_POST(sBoardVO sboard_vo, RedirectAttributes rttr) throws Exception{
-		sboard_service.sboard_update(sboard_vo);
 		
-		rttr.addFlashAttribute("msg", "UPDATE");
+		
+		
+		sboard_service.sboard_update(sboard_vo);
+	
+		
+		sboard_vo.setMid("m001");
+		
 		
 		rttr.addAttribute("cno", sboard_vo.getCno());
 		rttr.addAttribute("sb_no", sboard_vo.getSb_no());
+		
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(sboard_vo.getCno());
+		System.out.println(sboard_vo.getSb_no());
+		System.out.println(sboard_vo.getSb_content());
+		System.out.println(sboard_vo.getSb_picture());
+		System.out.println(sboard_vo.getSb_writeday());
 	
 		return "redirect:/crew/sboard_detail";
 	}
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	@ResponseBody
-	@RequestMapping(value="sboard_detail_picture/{sb_no}")
-	public String sboard_detail_picture(@PathVariable("sb_no") int sb_no) throws Exception{
-		String sg_pictue = sboard_service.sboard_detail_picture(sb_no);
-		return sg_pictue;
-	}
-	
-	
+		
 	/*---------------------------------------------------------------------------------------*/
+
 	
 	
 	
@@ -297,14 +308,16 @@ public class CrewController {
 	
 	///////////////////////// 명재
 	@RequestMapping(value="/tab_chat")
-	public void sChat_GET(Model model) throws Exception {
-		List<ChattingVO> list = ch_service.msg_list(1);
+	public void sChat_GET(@RequestParam("cno")int cno,Model model) throws Exception {
+		List<ChattingVO> list = ch_service.msg_list(cno);
+		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}
 	@ResponseBody
 	@RequestMapping(value="/tab_chat/{cno}")
 	public List<ChattingVO> send_Chat(@PathVariable("cno")int cno ,Model model) throws Exception {
 		List<ChattingVO> list = ch_service.msg_list(cno);
+		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 		return list;
 	}
@@ -316,9 +329,9 @@ public class CrewController {
 		return "redirect:/crew/tab_chat";
 	} 
 	
+	
 	@RequestMapping(value="/tab_list") 
-	public void slist(Model model) throws Exception {
-		int cno =1;
+	public void slist(@RequestParam("cno") int cno ,Model model) throws Exception {
 		CrewVO crewVO=crew_service.crew_tab_list(cno);
 		List<sListVO> sList_list=sList_service.slist_tab_list(cno);
 		List<MemberVO> member_list=member_service.member_tab_list(cno);
@@ -341,11 +354,12 @@ public class CrewController {
 		model.addAttribute("member_list", member_list);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/update_Role/{cno}")	//소모임의 운영자 권한 주기
-	public void update_MemberPower(@PathVariable("cno")int cno,String mid)throws Exception{
+	
+	@RequestMapping(value="/update_Role")	//소모임의 운영자 권한 주기
+	public void update_MemberPower(@RequestParam("cno") int cno,@RequestParam("mid")String mid)throws Exception{
 		crew_service.crew_update_role(cno, mid);
 	}
+	
 	@Transactional
 	@ResponseBody
 	@RequestMapping(value="/update_s_join_cnt") //정모 참석 누르기
@@ -354,14 +368,6 @@ public class CrewController {
 		sList_service.join_sList_insert(cno, sl_no, mid);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/tab_list/{sl_no}")
-	public List<StatusVO> status_list(@PathVariable("sl_no")int sl_no,Model model )throws Exception{
-		List<StatusVO> status_list=sList_service.join_sList_select(sl_no);
-		model.addAttribute("status_list", status_list);
-		return status_list;
-		
-	}
 	
 	///////////////////////// 진희
 	@RequestMapping(value="/list", method=RequestMethod.GET)

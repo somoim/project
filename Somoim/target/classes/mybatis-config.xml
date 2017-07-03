@@ -11,6 +11,7 @@
 		<typeAlias alias="JoinSlistVO" type="kr.co.domain.JoinSlistVO"/>
 		<typeAlias alias="VisitorVO" type="kr.co.domain.VisitorVO"/>
 		<typeAlias alias="StatusVO" type="kr.co.domain.StatusVO"/>
+		<typeAlias alias="ReplyVO" type="kr.co.domain.ReplyVO"/>
 	</typeAliases>
 	
 </configuration>

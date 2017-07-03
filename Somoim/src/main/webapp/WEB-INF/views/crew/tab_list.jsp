@@ -22,13 +22,13 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){	
+		var cno = $("#getCno").val();
 		$(".btn-primary").hide();
 		var log = $("#log").val();
-		alert(log);
 		$(".sl_no").each(function(idx){
 			var mid=$(this).attr("data-mid");
 			if(log == mid){
-				alert(mid);
+				
 				$(".btn-danger").hide();
 				$(".btn-primary").show();		
 			}
@@ -44,18 +44,19 @@
 			location.href="#"
 		});
 		
-		var cno = $(".getCno").val();
 		$(".role").on("click","button",function(){
 			var mid=$(this).attr("data-mid");
+			
+			
 			$.ajax({
 				type : "get",
-				url : "/crew/update_Role/"+cno,
+				url : "/crew/update_Role?cno="+cno,
 				data : {
 					mid : mid
 				},
 				dataType : "text",
 				success:function(result){
-					self.location="/crew/tab_list";
+					self.location="/crew/tab_list?cno="+cno;
 				}
 			});
 		});
@@ -109,7 +110,7 @@
 		<li class="act"><a href="../crew/tab_list">정보</a></li>
 		<li><a href="../crew/tab_board">게시판</a></li>
 		<li><a href="../crew/tab_gallery">사진첩</a></li>
-		<li><a href="../crew/tab_chat">채팅</a></li>
+		<li><a href="../crew/tab_chat?cno=1">채팅</a></li>
 	</ul>
 	<div id="container" class="container">
 		<div class="row">
@@ -121,10 +122,10 @@
 		</div>
 		<div class="row">
 			 <div class="input-group">
-			 	  <input type="hidden" value="${login.mid}" class="log">
+			 	  <input id="log" value="${login.mid}" type="hidden">
 				  <span class="input-group-addon" id="basic-addon1" style="background-color: white;">${crewVO.category}</span>
-				  <input type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
-				  <input class="getCno" value="${crewVO.cno}" type="hidden">
+				  <input id="test" type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
+				  <input id="getCno" value="${crewVO.cno}" type="hidden">
 			</div>
 		</div>
 		<div class="row">
@@ -156,7 +157,7 @@
 				  	<ul class="list-group">
 				  	<c:forEach items="${status}" var="status">
 				  		<c:if test="${sList.sl_no==status.sl_no}">
-							<li class="list-group-item sl_no" data-mid="${status.mid}">${status.mid}</li>
+							<li class="list-group-item sl_no" data-mid="${status.mid}">${status.name}</li>
 						</c:if>		  
 				  	</c:forEach>
 				  	</ul>
@@ -179,6 +180,7 @@
 					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
 					<button class="btn btn-success col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
 					</c:if>
+					<input value="${member.mid}" class="">
 				</h5>
 				<hr class="horizon">
 			</c:forEach>

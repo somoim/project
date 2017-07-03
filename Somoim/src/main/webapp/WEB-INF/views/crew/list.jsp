@@ -19,7 +19,7 @@
 		// 상세보기
 		$(".crewList").click(function() {
 			var cno = $(this).attr("data-cno");
-			self.location="/crew/tab_list/"+cno;
+			self.location="/crew/tab_list?cno="+cno;
 		});
 		
 		// 소모임 개설버튼
