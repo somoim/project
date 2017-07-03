@@ -53,8 +53,8 @@
 					<span data-cno="${crewVO.cno}" class="getCno">No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="pull-right"> ${crewVO.join_cnt} / ${crewVO.attend_cnt} 명</span>
 				</div>
 				<div class="panel-body">
-					<p>${crewVO.region}</p>
-					<p>${crewVO.title}</p>
+					<p class="crewRegion">${crewVO.region}</p>
+					<p class="crewTitle">${crewVO.title}</p>
 					<div class="next_sList${crewVO.cno}"></div>
 				</div>
 			</div>
