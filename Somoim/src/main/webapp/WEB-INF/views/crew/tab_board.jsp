@@ -94,10 +94,10 @@
 			</div>
 		</header>
 		<ul class="sub_tab">
-			<li><a href="../crew/tab_list">정보</a></li>
-			<li class="act"><a href="../crew/tab_board">게시판</a></li>
-			<li><a href="../crew/tab_gallery">사진첩</a></li>
-			<li><a href="../crew/tab_chat">채팅</a></li>
+			<li><a href="../crew/tab_list?cno=${cno}">정보</a></li>
+			<li class="act"><a href="../crew/tab_board?cno=${cno}">게시판</a></li>
+			<li><a href="../crew/tab_gallery?cno=${cno}">사진첩</a></li>
+			<li><a href="../crew/tab_chat?cno=${cno}">채팅</a></li>
 		</ul>
 
 	<div id="container">

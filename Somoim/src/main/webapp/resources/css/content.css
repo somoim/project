@@ -68,6 +68,7 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 .formLayout .cateGoup { background-color: #ffffff; border: 1px solid #ddd; padding: 10px; border-radius: 5px; box-shadow: inset 0px 0px 2px #999;}
 #list_form span { font-size: 12px;}
 #submit_form span { font-size: 12px;}
+.backCont { cursor: pointer;}
 
 /* setting */
 .managerMail { position:relative;}

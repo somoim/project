@@ -113,10 +113,11 @@ public class CrewController {
 		return list;
 	}
 	
-	///////////////////////////sGallery 번호 지정 : 나중에 삭제
+
 	@RequestMapping(value="/tab_gallery")
-	public void tab_gallery_GET(Model model) throws Exception {
-		List<sGalleryVO> list = sgallery_service.sgallery_list(1);
+	public void tab_gallery_GET(@RequestParam("cno") int cno, Model model) throws Exception {
+		List<sGalleryVO> list = sgallery_service.sgallery_list(cno);
+		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}
 	
@@ -205,8 +206,9 @@ public class CrewController {
 	
 	///////////////////////////tab_Board 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_board")
-	public void tab_board_GET(Model model) throws Exception {
-		List<sBoardVO> list = sboard_service.sboard_list(1);
+	public void tab_board_GET(@RequestParam("cno") int cno, Model model) throws Exception {
+		List<sBoardVO> list = sboard_service.sboard_list(cno);
+		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}
 	
