@@ -50,7 +50,7 @@
 		<c:forEach items="${list}" var="crewVO" >
 			<div class="panel panel-warning crewList" data-cno="${crewVO.cno}">
 				<div class="panel-heading">
-					<span data-cno="${crewVO.cno}" class="getCno">No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="pull-right"> ${crewVO.join_cnt} / ${crewVO.attend_cnt} 명</span>
+					<span data-cno="${crewVO.cno}" class="getCno">No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="pull-right memberCount"> <span class="memberRight">${crewVO.join_cnt}</span> / ${crewVO.attend_cnt} 명</span>
 				</div>
 				<div class="panel-body">
 					<p class="crewRegion">${crewVO.region}</p>

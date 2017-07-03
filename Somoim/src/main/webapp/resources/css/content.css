@@ -72,6 +72,10 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 .getCno { font-weight:bold; font-size:12px;}
 .crewRegion { font-size: 12px; color:#888888;}
 .crewTitle { font-size:18px; color:#666666; font-weight:bold;}
+.crewList { margin-bottom:0 !important;}
+.memberCount { font-weight:bold;}
+.memberRight { color:#ff6533; font-size:13px;}
+
 
 /* setting */
 .managerMail { position:relative;}

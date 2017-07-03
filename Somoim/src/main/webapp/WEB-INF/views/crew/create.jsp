@@ -25,7 +25,7 @@
 				<form id="myForm" action="create" method="post" class="formLayout">
 				
 					<div class="form-group">
-						<label for="title">(제목)소모임명</label>
+						<label for="title">소모임명</label>
 						<input name="title" id="title" class="form-control">
 					</div>	
 					
@@ -35,7 +35,7 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="content">(내용)소모임소개</label>
+						<label for="content">소모임소개</label>
 						<textarea name="content" id="content" class="form-control"></textarea>
 					</div>
 					
