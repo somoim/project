@@ -12,5 +12,6 @@ public interface CrewService {
 	public abstract	void crew_create(CrewVO crew_vo)throws Exception;
 	public abstract	int getCno()throws Exception;
 	public abstract void join_Crew(int cno,String mid);
+	public abstract void crew_delete_role(int cno) throws Exception;
 
 }
