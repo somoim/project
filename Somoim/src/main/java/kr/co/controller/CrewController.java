@@ -137,7 +137,7 @@ public class CrewController {
 	
 		sGalleryVO vo = sgallery_service.sgallery_detail(sg_no);
 		sgallery_service.sgallery_delete(sg_no);
-
+		
 		String prefix = vo.getSg_picture().substring(0, 12);
 		String suffix = vo.getSg_picture().substring(14);
 		
@@ -178,7 +178,7 @@ public class CrewController {
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	@RequestMapping(value="/tab_board")
+	@RequestMapping(value="/tab_board", method=RequestMethod.GET)
 	public void  tab_board(@RequestParam("cno") int cno, Model model) throws Exception {
 		List<sBoardVO> list = sboard_service.sboard_list(cno);
 		model.addAttribute("cno", cno);

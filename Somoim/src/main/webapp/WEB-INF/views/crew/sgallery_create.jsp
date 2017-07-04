@@ -60,11 +60,13 @@
 							</div>
 					
 							<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
-							<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button>
 						</div>
 
 					
 				</form>
+							<a href="/crew/tab_gallery?cno=${cno}">
+							<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button>
+							</a>
 
 
 					<script id="source" type="text/x-handlebars-template"> 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="../index.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
@@ -26,6 +28,10 @@
 				<input value="${sGalleryVO.cno}" name="cno"  type="hidden" >
 				<input value="${sGalleryVO.sg_no}" name="sg_no" type="hidden" >
 				<input value="${sGalleryVO.sg_picture}" name="sg_picture"  type="hidden">
+				${sGalleryVO.mid}
+				${login.mid}
+				
+		
 			</form>
 			
 			<div class="container">
@@ -47,7 +53,7 @@
 						</div>
 						<div class="panel-body">
 							<div class="show_img">
-								<img src="/displayFile?fileName=${sGalleryVO.sg_picture}" alt="사진사진">
+								<img class="img-responsive" src="/displayFile?fileName=${sGalleryVO.sg_picture}" alt="사진사진">
 							</div>
 						</div>
 					</div>
@@ -58,11 +64,13 @@
 							<button type="submit" class="btn btn-primary" id="reply_form">
 								<span class="glyphicon glyphicon-pencil"></span> 댓글
 							</button>
-
-							<button type="submit" class="btn btn-danger" id="delete_form">
-								<span class="glyphicon glyphicon-trash"></span> 삭제
-							</button>
-
+							
+							<c:if test="${login.mid == sGalleryVO.mid}"> 
+								<button type="submit" class="btn btn-danger" id="delete_form">
+									<span class="glyphicon glyphicon-trash"></span> 삭제
+								</button>
+							</c:if>
+							
 							<button type="submit" class="btn btn-info" id="tab_gallery_form">
 								<span class="glyphicon glyphicon-align-justify"></span> 사진첩
 							</button>
@@ -74,7 +82,7 @@
 			<div class="row collapse" id="myCollapsible" >
 				<div class="form-group">
 					<label for="name">작성자 이름</label>
-					<input id="name" class="form-control" value="${login.mid}" readonly="readonly">
+					<input id="name" class="form-control" value="${sGalleryVO.mid}" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="re_content">내용</label>

@@ -67,6 +67,8 @@
 								<span class="glyphicon glyphicon-pencil"></span> 댓글
 							</button>
 
+
+						<c:if test="${login.mid == sBoardVO.mid}"> 
 							<button type="submit" class="btn btn-warning" id="update_form">
 								<span class="glyphicon glyphicon-edit"></span> 수정
 							</button>
@@ -74,8 +76,9 @@
 							<button type="submit" class="btn btn-danger" id="delete_form">
 								<span class="glyphicon glyphicon-trash"></span> 삭제
 							</button>
-
-							<button type="submit" class="btn btn-info" id="tab_board_form">
+						</c:if>
+						
+							<button class="btn btn-info" id="tab_board_form">
 								<span class="glyphicon glyphicon-align-justify"></span> 게시판
 							</button>
 						</div> <!-- form-group -->
@@ -161,9 +164,8 @@
 						AllReplyLlst(cno, sb_no);
 						
 						$("#tab_board_form").on("click", function() {
-							$form.attr("method", "get");
-							$form.attr("action", "/crew/tab_board");
-							$form.submit();
+							location.href = "/crew/tab_board?cno="+cno;
+							
 						});
 						
 						$("#delete_form").on("click", function() {

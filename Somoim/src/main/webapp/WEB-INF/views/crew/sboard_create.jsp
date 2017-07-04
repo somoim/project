@@ -66,9 +66,11 @@
 								<ul class="clearfix uploadedList"></ul>
 							</div>
 								<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
-								<button class="btn btn-danger form-control list_btn" id="list_btn">게시판으로 이동</button>
+							
 							</div>
 						</form>
+						
+							<a href="/crew/tab_board?cno=${cno}" class="btn btn-danger form-control list_btn">게시판으로 이동</a>
 
 
 					<script id="source" type="text/x-handlebars-template"> 
@@ -144,9 +146,6 @@
 							}
 						});
 
-						$("#list_btn").on("click",function() {
-							return "redirect:/crew/tab_board?cno=" + cno;
-						});
 	
 						$(".uploadedList").on("click", "li div .delbtn", function(event) {
 							event.preventDefault();
