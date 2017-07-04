@@ -7,10 +7,7 @@
 <html>
 <head>
 <style type="text/css">
-.thumbnail {
-	width: 200px;
-	height: 200px;
-}
+.thumbnail { 	width: 200px;height: 200px;}
 
 .thumbnail img {
 	width: 100%;

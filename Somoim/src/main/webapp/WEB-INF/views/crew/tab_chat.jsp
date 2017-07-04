@@ -78,7 +78,7 @@
 <script id="source" type="text/x-handlebars-template">
 {{#each.}}
 	{{#isVowel mid}}
-		<div class="pull-right">
+		<div class="pull-right chatMytext">
 			<p>{{mid}}</p>
 			<label class="mymsg">{{msg}}</label>
 			<h6>{{ch_date}}</h6>
@@ -116,7 +116,7 @@
 	</ul>
 	<div id="container" >
 		<div class="container">
-			<div class="row">
+			<div class="">
 				<div class="form-group">
 					<div id="replies">
 						
@@ -127,9 +127,7 @@
 			
 		</div>
 	</div>
-	<c:forEach items="${member_list}" var="member">
-		<input class="mid" value="${member}" type="hidden">
-	</c:forEach>
+	
 	<div class="input-group chattingBar">
 		<input name="mid" id="mid" value="${login.mid}" hidden="hidden">
 		<input name="cno" id="cno" value="${cno}" hidden="hidden">
