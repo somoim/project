@@ -281,8 +281,12 @@
 		</div>
 		
 		<div class="form-group">
-			<div class="btn btn-block" id="memberDelete">회원 탈퇴</div>
+			<div class="btn btn-block" id="logout">로그아웃</div>
+			<div class="btn btn-block" id="memberDelete">회원탈퇴</div>
 		</div>
+		
+		
+		
 			
 	</div>
 </div>

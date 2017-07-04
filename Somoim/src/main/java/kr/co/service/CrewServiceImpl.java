@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
+import kr.co.domain.MemberVO;
 import kr.co.persistence.CrewDAO;
 
 @Service
@@ -74,6 +75,18 @@ public class CrewServiceImpl implements CrewService {
 		crew_dao.crewJoincntSub(cno);
 		crew_dao.slistJoincntSub(cno, mid);
 		crew_dao.deleteStatus(cno, mid);
+	}
+
+	@Override
+	public MemberVO memberDetail(String mid) {
+		// TODO Auto-generated method stub
+		return crew_dao.memberDetail(mid);
+	}
+
+	@Override
+	public List<CrewVO> memberCrewList(String mid) {
+		// TODO Auto-generated method stub
+		return crew_dao.memberCrewList(mid);
 	}
 
 }

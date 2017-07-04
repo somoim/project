@@ -389,6 +389,24 @@ public class CrewController {
 		crew_service.delete_crewMember(cno, mid);
 	}
 	
+	// 소모임 멤버 상세보기
+	@RequestMapping(value="/memberDetail")
+	public void memberDetail(@RequestParam("cno") int cno, @RequestParam("mid") String mid, Model model)throws Exception{
+		MemberVO memberVo = crew_service.memberDetail(mid);
+		List<CrewVO> memberCrewList = crew_service.memberCrewList(mid);
+		
+		String birthDay = memberVo.getBirth();
+		String year = birthDay.substring(0, 4);
+		String month = birthDay.substring(4, 6);
+		String day = birthDay.substring(6, 8);
+		birthDay = year + "/" + month + "/" + day;
+		memberVo.setBirth(birthDay);
+		
+		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("memberCrewList", memberCrewList);
+		model.addAttribute("cno", cno);
+	}
+	
 	///////////////////////// 현근
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public void crew_createGet() throws Exception {

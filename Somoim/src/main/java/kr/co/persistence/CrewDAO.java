@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
+import kr.co.domain.MemberVO;
 
 public interface CrewDAO {
 	
@@ -18,5 +19,7 @@ public interface CrewDAO {
 	public abstract void crewJoincntSub(int cno);
 	public abstract void slistJoincntSub(int cno, String mid);
 	public abstract void deleteStatus(int cno, String mid);
+	public abstract MemberVO memberDetail(String mid);
+	public abstract List<CrewVO> memberCrewList(String mid);
 }
 

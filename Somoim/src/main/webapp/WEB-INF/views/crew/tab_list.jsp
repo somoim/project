@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -198,6 +197,14 @@
 		});
 		
 	});
+	
+	function memberDetail(mid) {
+		var cno = $("#getCno").val();
+		var loginMid = "${login.mid}";
+		if(mid != loginMid) {
+			self.location="/crew/memberDetail?cno="+cno+"&mid="+mid;
+		}
+	}
 </script>
 
 </head>
@@ -295,18 +302,18 @@
 		<div class="row role" >
 			<h3>모임 멤버</h3>
 			<c:forEach items="${member_list}" var="member">
-				<h5 class="col-xs-12 col-xs-offset-1 ">${member.name} 
+				<h5 class="col-xs-12 col-xs-offset-1 "><span onclick="memberDetail('${member.mid}')">${member.name}</span> 
 					<c:if test="${crewVO.role == member.mid}">
-						<span class="col-xs-offset-8 power">운영자</span>
+						<span class="col-xs-offset-7 power">운영자</span>
 					</c:if>
 					<c:if test="${crewVO.mid == member.mid}">
-						<span class="col-xs-offset-8 power">모임장</span>
+						<span class="col-xs-offset-7 power">모임장</span>
 					</c:if>
 					<c:if test="${crewVO.role == member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
 						<button class="btn btn-warning adminDismissBtn" data-mid="${member.mid}">운영자해임</button>
 					</c:if>
 					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
-						<button class="btn btn-success adminEntrustBtn col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
+						<button class="btn btn-success adminEntrustBtn col-xs-offset-7" data-mid="${member.mid}">운영자위임</button>
 						<button class="btn btn-warning memberDelBtn" data-mid="${member.mid}" data-name="${member.name}">강퇴</button>
 					</c:if>
 					<input class="ifmid" value="${member.mid}" type="hidden">

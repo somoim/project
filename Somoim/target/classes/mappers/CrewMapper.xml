@@ -59,5 +59,12 @@
   		delete from status where cno=#{cno} and mid=#{mid}
   	</delete>
   	
+  	<select id="memberDetail" resultType="MemberVO">
+  		select * from member where mid=#{mid}
+  	</select>
+
+  	<select id="memberCrewList" resultType="CrewVO">
+  		select * from crew where cno in (select distinct(cno) from status where mid=#{mid})
+  	</select>
   	
 </mapper>
