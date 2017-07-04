@@ -14,8 +14,8 @@
 			<!-- 여기서부터 시작 -->
 			
 			<form role="form" method="post">
-				<input value="${vo.cno}" name="cno"  >
-				<input value="${vo.sb_no}" name="sb_no"  >
+				<input value="${vo.cno}" name="cno" id="cno" >
+				<input value="${vo.sb_no}" name="sb_no" id="sb_no" >
 				<input value="${vo.sb_picture}" name="sb_picture"  >
 			</form>
 			
@@ -33,7 +33,7 @@
 					<form id="myForm" action="">
 						<div class="form-group">
 							<label>아이디</label>
-							<input class="form-control" name="mid" id="mid" readonly="readonly" placeholder="아이디가져오기">
+							<input class="form-control" name="mid" id="mid" value="${login.mid}" readonly="readonly" >
 						</div>
 						
 						<div class="form-group">
@@ -78,8 +78,9 @@
 				<script type="text/javascript">
 					$(document).ready(function() {
 						
-						var sb_no = ${vo.sb_no};
-						var cno = ${vo.cno};
+						var sb_no = $("#sb_no").val();
+						var cno = $("#cno").val();
+						
 						var source = $("#source").html();
 						var template = Handlebars.compile(source);
 						getPicture(sb_no);
@@ -118,7 +119,7 @@
 
 						 $("#submit_btn").on("click", function(event) {
 							event.preventDefault();
-							var sb_no = $("input[name=sb_no]").val();
+							
 							var files = event.target.files; 
 							var formData = new FormData();
 							formData.append("file",	files);
