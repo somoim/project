@@ -49,6 +49,11 @@
 			}
 		});
 		
+		// 로그아웃
+		$("#logout").on("click", function() {
+			self.location="/setting/logout";
+		});
+		
 		// 아코디언
 		$(".accordion_banner .accordion_title").click(function() {
             if($(this).next("div").is(":visible")){

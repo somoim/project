@@ -140,4 +140,12 @@ public class AdminController {
 		}
 		return entity;
 	}
+	
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception{
+		session.removeAttribute("login");
+		session.invalidate();
+		return "redirect:/intro/login";
+	}
 }
