@@ -105,4 +105,11 @@ public class SettingController {
 		setting_service.memberDelete(mid);
 	}
 	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception{
+		session.removeAttribute("login");
+		session.invalidate();
+		return "redirect:/intro/login";
+	}
+	
 }

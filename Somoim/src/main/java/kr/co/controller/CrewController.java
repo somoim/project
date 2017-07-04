@@ -209,7 +209,15 @@ public class CrewController {
 	public String sboard_delete(@RequestParam("sb_no") int sb_no, @RequestParam("cno") int cno, RedirectAttributes rttr) throws Exception{
 		sBoardVO vo = sboard_service.sboard_detail(sb_no);
 		sboard_service.sboard_delete(sb_no);
-
+		String sb_picture = vo.getSb_picture();
+		
+		if(sb_picture.equalsIgnoreCase("base")){
+			File s = new File(sboard_uploadPath+vo.getSb_picture().replace('/', File.separatorChar));
+			s.delete();
+			
+			return "redirect:/crew/tab_board?cno="+cno;
+		} 
+		
 		String prefix = vo.getSb_picture().substring(0, 12);
 		String suffix = vo.getSb_picture().substring(15);
 		
@@ -219,6 +227,7 @@ public class CrewController {
 		s.delete();
 		
 		return "redirect:/crew/tab_board?cno="+cno;
+		
 	
 	}
 	
@@ -418,7 +427,32 @@ public class CrewController {
 		return sList_vo;
 	}
 	
-	// 현근
+	// 모임멤버 강퇴 & 소모임 탈퇴
+	@ResponseBody
+	@RequestMapping(value="/delete_crewMember")
+	public void delete_crewMember(int cno, String mid)throws Exception{
+		crew_service.delete_crewMember(cno, mid);
+	}
+	
+	// 소모임 멤버 상세보기
+	@RequestMapping(value="/memberDetail")
+	public void memberDetail(@RequestParam("cno") int cno, @RequestParam("mid") String mid, Model model)throws Exception{
+		MemberVO memberVo = crew_service.memberDetail(mid);
+		List<CrewVO> memberCrewList = crew_service.memberCrewList(mid);
+		
+		String birthDay = memberVo.getBirth();
+		String year = birthDay.substring(0, 4);
+		String month = birthDay.substring(4, 6);
+		String day = birthDay.substring(6, 8);
+		birthDay = year + "/" + month + "/" + day;
+		memberVo.setBirth(birthDay);
+		
+		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("memberCrewList", memberCrewList);
+		model.addAttribute("cno", cno);
+	}
+	
+	///////////////////////// 현근
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public void crew_createGet() throws Exception {
 		

@@ -49,6 +49,11 @@
 			}
 		});
 		
+		// 로그아웃
+		$("#logout").on("click", function() {
+			self.location="/setting/logout";
+		});
+		
 		// 아코디언
 		$(".accordion_banner .accordion_title").click(function() {
             if($(this).next("div").is(":visible")){
@@ -281,8 +286,12 @@
 		</div>
 		
 		<div class="form-group">
-			<div class="btn btn-block" id="memberDelete">회원 탈퇴</div>
+			<div class="btn btn-block" id="logout">로그아웃</div>
+			<div class="btn btn-block" id="memberDelete">회원탈퇴</div>
 		</div>
+		
+		
+		
 			
 	</div>
 </div>

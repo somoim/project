@@ -58,10 +58,10 @@
 					 	</div>
 					</div>
 				
-				</li>	
+				</li>
 				
 					
-				<li class="aroundTitle">내 주변</li>
+				<li class="aroundTitle">내 주변 회원찾기</li>
 				<li class="list-group-item">
 					<c:forEach items="${list}" var="memberList">
 						<a href="/around/member_detail?mid=${memberList.mid}" class="aroundList">
