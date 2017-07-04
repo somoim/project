@@ -152,11 +152,14 @@
 		
 		// 모임멤버 강퇴
 		$(".memberDelBtn").on("click",function(){
+			var mid = $(this).attr("data-mid");
+			
 			$.ajax({
 				type : "get",
 				url : "/crew/delete_crewMember",
 				data :{
 					cno : cno
+					, mid : mid
 				},
 				taType : "text",
 				success:function(result){
