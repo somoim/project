@@ -381,14 +381,14 @@ public class CrewController {
 		return sList_vo;
 	}
 	
-	// 모임멤버 강퇴
+	// 모임멤버 강퇴 & 소모임 탈퇴
 	@ResponseBody
 	@RequestMapping(value="/delete_crewMember")
-	public void delete_crewMember(int cno)throws Exception{
-		//crew_service.delete_crewMember(cno);
+	public void delete_crewMember(int cno, String mid)throws Exception{
+		crew_service.delete_crewMember(cno, mid);
 	}
 	
-	// 현근
+	///////////////////////// 현근
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public void crew_createGet() throws Exception {
 		

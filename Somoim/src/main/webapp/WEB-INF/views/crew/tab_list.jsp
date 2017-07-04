@@ -153,19 +153,48 @@
 		// 모임멤버 강퇴
 		$(".memberDelBtn").on("click",function(){
 			var mid = $(this).attr("data-mid");
+			var name = $(this).attr("data-name");
 			
-			$.ajax({
-				type : "get",
-				url : "/crew/delete_crewMember",
-				data :{
-					cno : cno
-					, mid : mid
-				},
-				taType : "text",
-				success:function(result){
-					self.location="/crew/tab_list?cno="+cno;
-				}
-			});
+			var crewMemberDelChack = confirm("'"+name+"("+mid+")' 님을 정말로 강퇴하시겠습니까?");
+			
+			if(crewMemberDelChack) {
+				$.ajax({
+					type : "get",
+					url : "/crew/delete_crewMember",
+					data :{
+						cno : cno
+						, mid : mid
+					},
+					taType : "text",
+					success:function(result){
+						self.location="/crew/tab_list?cno="+cno;
+					}
+				});
+			}
+			
+		});
+		
+		// 회원 탈퇴
+		$("#crewMemberDel").on("click", function() {
+			var mid = '${login.mid}';
+			var name = '${login.name}';
+			var title = '${crewVO.title}';
+			
+			var memberDelChack = confirm(name+" 님, '"+title+"' 소모임을 탈퇴 하시겠습니까? \n탈퇴 시 작성했던 모든정보가 삭제됩니다");
+			if(memberDelChack) {
+				$.ajax({
+					type : "get",
+					url : "/crew/delete_crewMember",
+					data :{
+						cno : cno
+						, mid : mid
+					},
+					taType : "text",
+					success:function(result){
+						self.location="/crew/list";
+					}
+				});
+			}
 		});
 		
 	});
@@ -268,21 +297,30 @@
 			<c:forEach items="${member_list}" var="member">
 				<h5 class="col-xs-12 col-xs-offset-1 ">${member.name} 
 					<c:if test="${crewVO.role == member.mid}">
-						<span class="col-xs-offset-6 power">운영자</span>
-						<button class="btn btn-warning adminDismissBtn" data-mid="${member.mid}">운영자해임</button>
+						<span class="col-xs-offset-8 power">운영자</span>
 					</c:if>
 					<c:if test="${crewVO.mid == member.mid}">
-						<span class="col-xs-offset-6 power">모임장</span>
+						<span class="col-xs-offset-8 power">모임장</span>
+					</c:if>
+					<c:if test="${crewVO.role == member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
+						<button class="btn btn-warning adminDismissBtn" data-mid="${member.mid}">운영자해임</button>
 					</c:if>
 					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
-						<button class="btn btn-success adminEntrustBtn col-xs-offset-6" data-mid="${member.mid}">운영자위임</button>
-						<button class="btn btn-warning memberDelBtn" data-mid="${member.mid}">강퇴</button>
+						<button class="btn btn-success adminEntrustBtn col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
+						<button class="btn btn-warning memberDelBtn" data-mid="${member.mid}" data-name="${member.name}">강퇴</button>
 					</c:if>
 					<input class="ifmid" value="${member.mid}" type="hidden">
 				</h5>
 				<hr class="horizon">
 			</c:forEach>
+			
+			<c:if test="${login.mid == member.mid && login.mid != crewVO.mid && login.mid != crewVO.role}">
+				<div class="form-group">
+					<div class="btn btn-block" id="crewMemberDel">소모임 탈퇴</div>
+				</div>
+			</c:if>
 		</div>
+		
 		
 	</div>
 

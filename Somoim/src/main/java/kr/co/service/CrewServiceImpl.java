@@ -67,6 +67,13 @@ public class CrewServiceImpl implements CrewService {
 		crew_dao.crew_delete_role(cno);
 	}
 
-	
+	@Transactional
+	@Override
+	public void delete_crewMember(int cno, String mid) {
+		// TODO Auto-generated method stub
+		crew_dao.crewJoincntSub(cno);
+		crew_dao.slistJoincntSub(cno, mid);
+		crew_dao.deleteStatus(cno, mid);
+	}
 
 }
