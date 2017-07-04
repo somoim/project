@@ -113,17 +113,17 @@
 							<input value="${sboard_vo.cno}" name="cno"  type="hidden">
 						</form>
 						
-					<a herf="crew/sboard_detail" class="list-group-item">
-						<h4 class="list-group-item-heading">
-							<p>${sboard_vo.mid}</p>
-							<p>${sboard_vo.sb_writeday}</p>
-						</h4>
-						<hr>
-						<p class="list-group-item-text">
-							<p>${sboard_vo.sb_title}</p>
-							<p>${sboard_vo.sb_content}</p>
-						</p>
-					</a>	
+						<a herf="crew/sboard_detail" class="list-group-item">
+							<h4 class="list-group-item-heading">
+								<p>${sboard_vo.mid}</p>
+								<p>${sboard_vo.sb_writeday}</p>
+							</h4>
+							<hr>
+							<p class="list-group-item-text">
+								<p>${sboard_vo.sb_title}</p>
+								<p>${sboard_vo.sb_content}</p>
+							</p>
+						</a>	
 						</c:forEach>
 					</div>
 			</div>
@@ -144,6 +144,11 @@
 	
 					self.location="/crew/sboard_detail?cno="+cno+"&sb_no="+sb_no;
 				});
+			});
+			
+			// 뒤로가기
+			$(".backCont").click(function() {
+				self.location="/crew/list";
 			});
 		
 		</script>

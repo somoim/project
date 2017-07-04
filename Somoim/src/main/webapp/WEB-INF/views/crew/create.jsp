@@ -5,7 +5,8 @@
 <html>
 <head>
 <style type="text/css">
-	.formLayout { padding:20px 10px 0;}
+	.navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
+	
 	.formLayout textarea { min-height:200px }
 	.fileDrop{
 		width:100%;

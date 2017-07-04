@@ -17,8 +17,8 @@
 				<li class="list-group-item info_detail">
 				
 				 <div class="name"> 
-					 	<span>사용자 이미지</span> <label>아이디</label> <label id="birth"><small>생년월일</small></label>
-					 	<label class="pull-right">거주지</label>
+					 	<span>사용자 이미지</span> <label>${memberVo.mid}</label> <label id="birth"><small>${memberVo.birth}</small></label>
+					 	<label class="pull-right">${memberVo.address}</label>
 				 	<hr>
 					 	<div class="info">
 					 		<p>자기소개</p>
