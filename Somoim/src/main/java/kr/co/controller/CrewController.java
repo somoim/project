@@ -204,7 +204,6 @@ public class CrewController {
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	@ResponseBody
 	@RequestMapping(value="/sboard_delete", method=RequestMethod.POST)
 	public String sboard_delete(@RequestParam("sb_no") int sb_no, @RequestParam("cno") int cno, RedirectAttributes rttr) throws Exception{
 		sBoardVO vo = sboard_service.sboard_detail(sb_no);
@@ -223,7 +222,7 @@ public class CrewController {
 	}
 	
 	/*---------------------------------------------------------------------------------------*/
-	
+
 	@RequestMapping(value="/sboard_update", method=RequestMethod.GET)
 	public sBoardVO sboard_update_GET(@RequestParam("sb_no") int sb_no, Model model) throws Exception{
 		sBoardVO vo =  sboard_service.sboard_detail(sb_no);
@@ -231,20 +230,18 @@ public class CrewController {
 		return vo;
 	}
 	
-	@ResponseBody
 	@RequestMapping(value="/sboard_update", method=RequestMethod.POST)
-	public String sboard_update_POST(sBoardVO sboard_vo, RedirectAttributes rttr) throws Exception{
+	public String sboard_update_POST(@RequestParam("sb_no") int sb_no, @RequestParam("cno") int cno, Model model, sBoardVO sboard_vo, HttpServletRequest request) throws Exception{
 		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		
+		String mid = memberVO.getMid();
+		
+		sboard_vo.setMid(mid);
+		sboard_vo.setSb_no(sb_no);
 		
 		sboard_service.sboard_update(sboard_vo);
-	
-		
-		sboard_vo.setMid("m001");
-		
-		
-		rttr.addAttribute("cno", sboard_vo.getCno());
-		rttr.addAttribute("sb_no", sboard_vo.getSb_no());
 		
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println(sboard_vo.getCno());
@@ -253,7 +250,7 @@ public class CrewController {
 		System.out.println(sboard_vo.getSb_picture());
 		System.out.println(sboard_vo.getSb_writeday());
 	
-		return "redirect:/crew/sboard_detail";
+		return "redirect:/crew/sboard_detail?cno="+cno+"&sb_no="+sb_no;
 	}
 	
 	/*---------------------------------------------------------------------------------------*/
@@ -266,9 +263,13 @@ public class CrewController {
 	///////////////////////// 정림
 	
 	///////////////////////// 명재
+	@Transactional
+	@ResponseBody
 	@RequestMapping(value="/tab_chat")
 	public void sChat_GET(@RequestParam("cno")int cno,Model model) throws Exception {
 		List<ChattingVO> list = ch_service.msg_list(cno);
+		List<MemberVO> member_list=member_service.member_tab_list(cno);
+		model.addAttribute("member_list", member_list);
 		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}
