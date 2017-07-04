@@ -61,6 +61,12 @@ public class CrewServiceImpl implements CrewService {
 		crew_dao.join_Crew(cno, mid);
 	}
 
+	@Override
+	public void crew_delete_role(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		crew_dao.crew_delete_role(cno);
+	}
+
 	
 
 }

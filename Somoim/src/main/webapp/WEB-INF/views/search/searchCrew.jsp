@@ -7,9 +7,6 @@
 <html>
 <head>
 <style type="text/css">
-.text-right{
-	text-align: right;
-}
 .navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 </style>
 <script type="text/javascript">

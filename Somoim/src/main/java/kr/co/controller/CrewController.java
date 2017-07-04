@@ -1,6 +1,8 @@
 package kr.co.controller;
 
 import java.io.File;
+
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -337,28 +339,31 @@ public class CrewController {
 		List<sListVO> sList_list=sList_service.slist_tab_list(cno);
 		List<MemberVO> member_list=member_service.member_tab_list(cno);
 		List<StatusVO> status = sList_service.join_sList_member(cno);
-		System.out.println(member_list);
-		int i = 0;
-		for(sListVO list: sList_list){
-			String str1=list.getAttend_date().substring(0, 4)+"년";
-			String str2=list.getAttend_date().substring(4, 6)+"월";
-			String str3=list.getAttend_date().substring(6, 8)+"일";
-			String str4=list.getAttend_date().substring(8, 10)+":";
-			String str5=list.getAttend_date().substring(10);
-			String str = str1+str2+str3+str4+str5;
-			list.setAttend_date(str);
-			i++;
-		}	// 정모 날자 잘라서 년월일 : 붙여주는 코드
+        
+			for(sListVO list: sList_list){
+				String str1=list.getAttend_date().substring(0, 4)+"년";
+				String str2=list.getAttend_date().substring(4, 6)+"월";
+				String str3=list.getAttend_date().substring(6, 8)+"일";
+				String str4=list.getAttend_date().substring(8, 10)+":";
+				String str5=list.getAttend_date().substring(10);
+				String str = str1+str2+str3+str4+str5;
+				list.setAttend_date(str);
+			}	// 정모 날자 잘라서 년월일 : 붙여주는 코드
 		model.addAttribute("status", status);
 		model.addAttribute("crewVO", crewVO);
 		model.addAttribute("sList_list", sList_list);
 		model.addAttribute("member_list", member_list);
 	}
 	
-	
+	@ResponseBody
 	@RequestMapping(value="/update_Role")	//소모임의 운영자 권한 주기
-	public void update_MemberPower(@RequestParam("cno") int cno,@RequestParam("mid")String mid)throws Exception{
+	public void update_MemberPower(@RequestParam("cno") int cno,String mid)throws Exception{
 		crew_service.crew_update_role(cno, mid);
+	}
+	@ResponseBody
+	@RequestMapping(value="/delete_Role")	//소모임의 운영자 권한 해지
+	public void delete_MemberPower(int cno)throws Exception{
+		crew_service.crew_delete_role(cno);
 	}
 	
 	@Transactional

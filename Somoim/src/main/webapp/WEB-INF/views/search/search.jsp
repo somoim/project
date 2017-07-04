@@ -14,6 +14,7 @@
 		var keyword=$("#keyword").val();
 		
 		$("#searchBtn").on("click", function() {
+			keyword=$("#keyword").val();
 			self.location="/search/searchCrew?searchType=title&keyword="+keyword;
 		});
 		
@@ -25,17 +26,19 @@
 			}	
 		});
 		
+		// 카테고리 리스트보이기
+		$("#keyword").onkeydown = function() {
+			myFunction()
+		};
+		
 	});
 	
-	// 카테고리 리스트보이기
-	$("#keyword").onkeydown = function() {myFunction()};
 	function myFunction() {
 		$("#category_list").slideDown("slow");
 	}
 	
 	function searchCategory(categoryKey) {
 		event.preventDefault();
-		
 		self.location="/search/searchCrew?searchType=category&keyword="+categoryKey;
 	}
 </script>

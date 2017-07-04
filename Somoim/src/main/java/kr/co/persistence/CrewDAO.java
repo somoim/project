@@ -14,5 +14,6 @@ public interface CrewDAO {
 	public abstract	int getCno()throws Exception;
 	public abstract void addAttach(String fullName, int cno);
 	public abstract void join_Crew(int cno,String mid);
+	public abstract void crew_delete_role(int cno);
 }
 

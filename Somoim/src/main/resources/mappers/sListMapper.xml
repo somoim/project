@@ -16,7 +16,9 @@
 	</select>
 	
 	<select id="slist_tab_list" resultType="sListVO">
-		select * from slist where cno = #{cno} order by sl_no
+	<![CDATA[
+		select * from slist where (select to_number(to_char(sysdate, 'yyyymmdd')) from dual) <= to_number(substr(attend_date, 0,8)) and cno = #{cno} order by attend_date
+		 ]]>
 	</select>
 	
 	<update id="update_s_join_cnt">
