@@ -15,6 +15,13 @@
 			var cno = $(this).attr("data-cno");	
 			getsList(cno);
 		});
+		
+		// 상세보기
+		$(".crewList").click(function() {
+			var cno = $(this).attr("data-cno");
+			self.location="/crew/tab_list?cno="+cno;
+		});
+		
 	});
 	
 	function getsList(cno){
@@ -37,7 +44,7 @@
 	<div id="container">
 		<!-- 여기서부터 시작 -->
 		<c:forEach items="${searchCrewList}" var="crewVO" >
-			<div class="panel panel-warning crewList" id="crew_list">
+			<div class="panel panel-warning crewList" data-cno="${crewVO.cno}">
 				
 				<div class="panel-heading">
 					<span data-cno="${crewVO.cno}" class="getCno">No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="pull-right memberCount"> <span class="memberRight">${crewVO.join_cnt}</span> / ${crewVO.attend_cnt} 명</span>
