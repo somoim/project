@@ -208,7 +208,15 @@ public class CrewController {
 	public String sboard_delete(@RequestParam("sb_no") int sb_no, @RequestParam("cno") int cno, RedirectAttributes rttr) throws Exception{
 		sBoardVO vo = sboard_service.sboard_detail(sb_no);
 		sboard_service.sboard_delete(sb_no);
-
+		String sb_picture = vo.getSb_picture();
+		
+		if(sb_picture.equalsIgnoreCase("base")){
+			File s = new File(sboard_uploadPath+vo.getSb_picture().replace('/', File.separatorChar));
+			s.delete();
+			
+			return "redirect:/crew/tab_board?cno="+cno;
+		} 
+		
 		String prefix = vo.getSb_picture().substring(0, 12);
 		String suffix = vo.getSb_picture().substring(15);
 		
@@ -218,6 +226,7 @@ public class CrewController {
 		s.delete();
 		
 		return "redirect:/crew/tab_board?cno="+cno;
+		
 	
 	}
 	

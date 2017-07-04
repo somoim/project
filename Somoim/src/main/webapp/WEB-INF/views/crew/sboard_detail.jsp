@@ -26,7 +26,7 @@
 			<form role="form" method="post">
 				<input value="${sBoardVO.cno}" name="cno" id="cno"  type="hidden">
 				<input value="${sBoardVO.sb_no}" name="sb_no"  type="hidden" >
-				<input value="${sBoardVO.sb_picture}" name="sb_picture"  type="hidden">
+				<input value="${sBoardVO.sb_picture}" name="sb_picture"  id="sb_picture" type="hidden">
 			</form>
 			
 			<div class="container">
@@ -39,8 +39,6 @@
 					</div>
 				</div>
 
-
-
 				<div class="row">
 					<div class="panel panel-warning">
 						<div class="panel-heading">
@@ -48,24 +46,22 @@
 								<span>${name}</span><br>
 								<span>${sBoardVO.sb_writeday}</span>
 							</h3>
-						</div>
+						</div> <!-- panel-heading -->
 						<div class="panel-body">
-							<div class="show_title">
-								${sBoardVO.sb_title}
-							</div>
-							<br>
-							<br>
-								<div class="show_content">
-								${sBoardVO.sb_content}
-							</div>
+							<div class="show_title"> ${sBoardVO.sb_title}</div><br><br>						
+							<div class="show_content"> ${sBoardVO.sb_content}</div>
+
+								<c:set value="base" var="base">	</c:set>
+								<c:if test="${sBoardVO.sb_picture != base}">
+									<div class="show_img">
+										<img src="/displayFile/sboard?fileName=${sBoardVO.sb_picture}" alt="사진있음">
+									</div>
+								</c:if>
+					
 							
-								<div class="show_img">
-									<img src="/displayFile/sboard?fileName=${sBoardVO.sb_picture}" alt="사진사진">
-								</div>
-						</div>
-					</div>
-
-
+						</div> <!-- panel-body -->
+					</div> <!-- panel panel-warning -->
+			
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary" id="reply_form">
 								<span class="glyphicon glyphicon-pencil"></span> 댓글
@@ -82,8 +78,8 @@
 							<button type="submit" class="btn btn-info" id="tab_board_form">
 								<span class="glyphicon glyphicon-align-justify"></span> 게시판
 							</button>
-						</div>
-				</div>
+						</div> <!-- form-group -->
+				</div> <!-- class="row" -->
 				
 					
 				<!-- 댓글 작성 -->		
@@ -109,30 +105,30 @@
 				</div>
 				
 				<div class="row">
-			<div data-backdrop="static" class="modal fade" id="myModal">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-						 	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						 		<span aria-hidden="true">&times;</span>
-						 	</button>
-						 	<div>
-							 	re_no: <span id="modal_re_no"> </span>	
-						 	</div>
-						</div>
-						<div class="modal-body">
-							<p>내용을 수정하세요</p>
-							<input class="form-control" id="modal_re_content">
-						</div>
-						<div class="modal-fotter" align="right">
-							<button id="modal_update" type="button" class="btn btn-default" data-dismiss="modal">수정</button>
-							<button id="modal_delete" type="button" class="btn btn-warning" data-dismiss="modal">삭제</button>
-							<button id="modal_close" type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+					<div data-backdrop="static" class="modal fade" id="myModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+								 	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								 		<span aria-hidden="true">&times;</span>
+								 	</button>
+								 	<div>
+									 	re_no: <span id="modal_re_no"> </span>	
+								 	</div>
+								</div>
+								<div class="modal-body">
+									<p>내용을 수정하세요</p>
+									<input class="form-control" id="modal_re_content">
+								</div>
+								<div class="modal-fotter" align="right">
+									<button id="modal_update" type="button" class="btn btn-default" data-dismiss="modal">수정</button>
+									<button id="modal_delete" type="button" class="btn btn-warning" data-dismiss="modal">삭제</button>
+									<button id="modal_close" type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
 					
 					
 			<script id="source" type="text/x-handlebars-template">
@@ -269,7 +265,6 @@
 						
 						function AllReplyLlst(cno, sb_no) {
 							$.getJSON("/replies/sboard/"+cno+"/"+ sb_no, function(data) {
-								console.log(data);
 								var source = $("#source").html();
 								var template = Handlebars.compile(source);
 								var gab = data;
