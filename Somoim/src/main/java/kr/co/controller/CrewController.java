@@ -297,15 +297,16 @@ public class CrewController {
 		List<MemberVO> member_list=member_service.member_tab_list(cno);
 		List<StatusVO> status = sList_service.join_sList_member(cno);
 
-			for(sListVO list: sList_list){
-				String str1=list.getAttend_date().substring(0, 4)+"년";
-				String str2=list.getAttend_date().substring(4, 6)+"월";
-				String str3=list.getAttend_date().substring(6, 8)+"일";
-				String str4=list.getAttend_date().substring(8, 10)+":";
-				String str5=list.getAttend_date().substring(10);
-				String str = str1+str2+str3+str4+str5;
-				list.setAttend_date(str);
-			}	// 정모 날자 잘라서 년월일 : 붙여주는 코드
+		for(sListVO list: sList_list){
+			String str1=list.getAttend_date().substring(0, 4)+"년";
+			String str2=list.getAttend_date().substring(4, 6)+"월";
+			String str3=list.getAttend_date().substring(6, 8)+"일";
+			String str4=list.getAttend_date().substring(8, 10)+":";
+			String str5=list.getAttend_date().substring(10);
+			String str = str1+str2+str3+str4+str5;
+			list.setAttend_date(str);
+		}	// 정모 날자 잘라서 년월일 : 붙여주는 코드
+		
 		model.addAttribute("status", status);
 		model.addAttribute("crewVO", crewVO);
 		model.addAttribute("sList_list", sList_list);
@@ -317,6 +318,7 @@ public class CrewController {
 	public void update_MemberPower(@RequestParam("cno") int cno,String mid)throws Exception{
 		crew_service.crew_update_role(cno, mid);
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/delete_Role")	//소모임의 운영자 권한 해지
 	public void delete_MemberPower(int cno)throws Exception{
@@ -377,7 +379,14 @@ public class CrewController {
 		return sList_vo;
 	}
 	
-	// 현근
+	// 모임멤버 강퇴 & 소모임 탈퇴
+	@ResponseBody
+	@RequestMapping(value="/delete_crewMember")
+	public void delete_crewMember(int cno, String mid)throws Exception{
+		crew_service.delete_crewMember(cno, mid);
+	}
+	
+	///////////////////////// 현근
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public void crew_createGet() throws Exception {
 		

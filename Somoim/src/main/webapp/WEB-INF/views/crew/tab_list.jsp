@@ -28,7 +28,8 @@
 		var cMid = $("#getMid").val();
 		var role = $("#getRole").val();
 		var think = 0;
-		$(".btn-primary").hide();
+		
+		$(".cancelBtn").hide();
 		$(".sl_no").each(function(idx){
 			var sl_no=$(this).attr("data-sl_no");
 			$(".sl_no"+sl_no).each(function(){
@@ -51,7 +52,8 @@
 			location.href="/sList/slist_create?cno="+cno;
 		});
 		
-		$(".btn-success").on("click",function(){
+		// 운영자 위임
+		$(".adminEntrustBtn").on("click",function(){
 			var mid=$(this).attr("data-mid");
 			$.ajax({
 				type : "get",
@@ -66,7 +68,8 @@
 			});
 		});
 		
-		$(".btn-danger").on("click", function(){
+		// 정모 참여
+		$(".joinBtn").on("click", function(){
 			var sl_no =$(this).attr("data-sl_no");
 			var cnt = $(this).attr("data-cnt");
 			var join = $(this).attr("data-join");
@@ -90,7 +93,9 @@
 				}
 			});
 		});
-		$(".btn-primary").on("click", function(){
+		
+		// 참석 취소
+		$(".cancelBtn").on("click", function(){
 			var sl_no = $(this).attr("data-sl_no");
 			$.ajax({
 				type : "get",
@@ -105,6 +110,7 @@
 				}
 			});
 		});
+		
 		$("#join").hide();
 		$(".ifmid").each(function(idx){
 			var mid=$(this).val();
@@ -128,7 +134,9 @@
 					self.location="/sList/slist_update?cno=${crewVO.cno}&sl_no="+sl_no;
 			});
 		});
-		$(".btn-warning").on("click",function(){
+		
+		//운영자 해임
+		$(".adminDismissBtn").on("click",function(){
 			$.ajax({
 				type : "get",
 				url : "/crew/delete_Role",
@@ -142,7 +150,52 @@
 			});
 		});
 		
+		// 모임멤버 강퇴
+		$(".memberDelBtn").on("click",function(){
+			var mid = $(this).attr("data-mid");
+			var name = $(this).attr("data-name");
+			
+			var crewMemberDelChack = confirm("'"+name+"("+mid+")' 님을 정말로 강퇴하시겠습니까?");
+			
+			if(crewMemberDelChack) {
+				$.ajax({
+					type : "get",
+					url : "/crew/delete_crewMember",
+					data :{
+						cno : cno
+						, mid : mid
+					},
+					taType : "text",
+					success:function(result){
+						self.location="/crew/tab_list?cno="+cno;
+					}
+				});
+			}
+			
+		});
 		
+		// 회원 탈퇴
+		$("#crewMemberDel").on("click", function() {
+			var mid = '${login.mid}';
+			var name = '${login.name}';
+			var title = '${crewVO.title}';
+			
+			var memberDelChack = confirm(name+" 님, '"+title+"' 소모임을 탈퇴 하시겠습니까? \n탈퇴 시 작성했던 모든정보가 삭제됩니다");
+			if(memberDelChack) {
+				$.ajax({
+					type : "get",
+					url : "/crew/delete_crewMember",
+					data :{
+						cno : cno
+						, mid : mid
+					},
+					taType : "text",
+					success:function(result){
+						self.location="/crew/list";
+					}
+				});
+			}
+		});
 		
 	});
 </script>
@@ -169,6 +222,7 @@
 		<li><a href="../crew/tab_gallery?cno=${crewVO.cno}">사진첩</a></li>
 		<li><a href="../crew/tab_chat?cno=${crewVO.cno}">채팅</a></li>
 	</ul>
+	
 	<div id="container" class="container">
 		<div class="row">
 			  <div class="col-xs-12 col-md-12">
@@ -195,79 +249,90 @@
 		</div>
 		<div class="row">
 			<c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
-			<button class="form-control sList"><span class="glyphicon glyphicon-plus"></span>새로운 정모 만들기</button>
+				<button class="form-control sList"><span class="glyphicon glyphicon-plus"></span>새로운 정모 만들기</button>
 			</c:if>
 			<c:if test="${sList_list.size() != 0}">
-			<div class="panel panel-default">
-			  <!-- Default panel contents -->
-			  <c:forEach items="${sList_list}" var="sList">
-			  <div class="panel-heading" >
-				  <span>${sList.attend_title} (${sList.attend_cnt}명)</span>
-				  <c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
-				  	<button class="btn btn-info updel col-xs-offset-7">수정 삭제</button>
-				  </c:if>
-				  <c:forEach items="${member_list}" var="member">
-					  <c:if test="${login.mid == member.mid}">
-					 	<button class="btn btn-danger  btn_join${sList.sl_no}" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
-					  	<button class="btn btn-primary  btn_cancel${sList.sl_no}" data-sl_no="${sList.sl_no}">참석취소</button>
-					  </c:if>
-				  </c:forEach>
-			  </div>
-			  <!-- List group -->
-			  <ul class="list-group">
-			    <li class="list-group-item">정모 날자: ${sList.attend_date}</li>
-			    <li class="list-group-item">정모 장소: ${sList.attend_region}</li>
-			    <li class="list-group-item">회비 : ${sList.attend_money}</li>
-			  </ul>
-			  <button class="btn btn-default form-control" type="button" data-toggle="collapse" data-target="#midshow${sList.sl_no}" aria-expanded="false" aria-controls="midshow${sList.sl_no}" data-sl_no="${sList.sl_no}">참석 인원 보기(현재 참석인원${sList.s_join_cnt}/${sList.attend_cnt})</button>
-			  	<div class="collapse" id="midshow${sList.sl_no}">
-				  <div class="well">
-				  	<ul class="list-group">
-				  	<c:forEach items="${status}" var="status">
-				  		<c:if test="${sList.sl_no==status.sl_no}">
-							<li class="list-group-item sl_no${status.sl_no}"data-log="${login.mid}" data-mid="${status.mid}">${status.name}</li>
-							<li class="sl_no" data-sl_no="${status.sl_no}" hidden="">
-						</c:if>		  
-				  	</c:forEach>
-				  	</ul>
-				  </div>
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<c:forEach items="${sList_list}" var="sList">
+						<div class="panel-heading" >
+							<span>${sList.attend_title} (${sList.attend_cnt}명)</span>
+							<c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
+								<button class="btn btn-info updel col-xs-offset-7">수정 삭제</button>
+							</c:if>
+							<c:forEach items="${member_list}" var="member">
+								<c:if test="${login.mid == member.mid}">
+									<button class="btn btn-danger joinBtn btn_join${sList.sl_no}" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
+									<button class="btn btn-primary cancelBtn btn_cancel${sList.sl_no}" data-sl_no="${sList.sl_no}">참석취소</button>
+								</c:if>
+							</c:forEach>
+						</div>
+						<!-- List group -->
+						<ul class="list-group">
+							<li class="list-group-item">정모 날자: ${sList.attend_date}</li>
+							<li class="list-group-item">정모 장소: ${sList.attend_region}</li>
+							<li class="list-group-item">회비 : ${sList.attend_money}</li>
+						</ul>
+						<button class="btn btn-default form-control" type="button" data-toggle="collapse" data-target="#midshow${sList.sl_no}" aria-expanded="false" aria-controls="midshow${sList.sl_no}" data-sl_no="${sList.sl_no}">참석 인원 보기(현재 참석인원${sList.s_join_cnt}/${sList.attend_cnt})</button>
+						<div class="collapse" id="midshow${sList.sl_no}">
+							<div class="well">
+								<ul class="list-group">
+									<c:forEach items="${status}" var="status">
+										<c:if test="${sList.sl_no==status.sl_no}">
+											<li class="list-group-item sl_no${status.sl_no}"data-log="${login.mid}" data-mid="${status.mid}">${status.name}</li>
+											<li class="sl_no" data-sl_no="${status.sl_no}" hidden="">
+										</c:if>		  
+									</c:forEach>
+								</ul>
+							</div>
+						</div>
+						<hr>
+					</c:forEach>
 				</div>
-			  <hr>
-			  </c:forEach>
-			</div>
 			</c:if>
-			
 		</div>
+		
 		<div class="row role" >
+			<h3>모임 멤버</h3>
 			<c:forEach items="${member_list}" var="member">
 				<h5 class="col-xs-12 col-xs-offset-1 ">${member.name} 
 					<c:if test="${crewVO.role == member.mid}">
-					<span class="col-xs-offset-8 power">운영자</span>
-					<button class="btn btn-warning" data-mid="${member.mid}">운영자해임</button>
+						<span class="col-xs-offset-8 power">운영자</span>
 					</c:if>
 					<c:if test="${crewVO.mid == member.mid}">
-					<span class="col-xs-offset-8 power">모임장</span>
+						<span class="col-xs-offset-8 power">모임장</span>
+					</c:if>
+					<c:if test="${crewVO.role == member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
+						<button class="btn btn-warning adminDismissBtn" data-mid="${member.mid}">운영자해임</button>
 					</c:if>
 					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
-					<button class="btn btn-success col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
+						<button class="btn btn-success adminEntrustBtn col-xs-offset-8" data-mid="${member.mid}">운영자위임</button>
+						<button class="btn btn-warning memberDelBtn" data-mid="${member.mid}" data-name="${member.name}">강퇴</button>
 					</c:if>
 					<input class="ifmid" value="${member.mid}" type="hidden">
 				</h5>
 				<hr class="horizon">
 			</c:forEach>
+			
+			<c:if test="${login.mid == member.mid && login.mid != crewVO.mid && login.mid != crewVO.role}">
+				<div class="form-group">
+					<div class="btn btn-block" id="crewMemberDel">소모임 탈퇴</div>
+				</div>
+			</c:if>
 		</div>
+		
+		
 	</div>
-		<!-- 버튼 레이아웃 -->
-	
-		<a href="/crew/join_Crew?cno=${crewVO.cno}&mid=${login.mid}" class="fixedBtn" id="join">
-			<span><span class="glyphicon glyphicon-plus"></span></span>
-			<span>가입</span>
-		</a>	
-		<a href="#" class="fixedBtn" id="write">
-			<span><span class="glyphicon glyphicon-pencil"></span></span>
-			<span>글쓰기</span>
-		</a>
-	
+
+	<!-- 버튼 레이아웃 -->
+	<a href="/crew/join_Crew?cno=${crewVO.cno}&mid=${login.mid}" class="fixedBtn" id="join">
+		<span><span class="glyphicon glyphicon-plus"></span></span>
+		<span>가입</span>
+	</a>	
+	<a href="#" class="fixedBtn" id="write">
+		<span><span class="glyphicon glyphicon-pencil"></span></span>
+		<span>글쓰기</span>
+	</a>
 
 </div>
 

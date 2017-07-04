@@ -15,5 +15,8 @@ public interface CrewDAO {
 	public abstract void addAttach(String fullName, int cno);
 	public abstract void join_Crew(int cno,String mid);
 	public abstract void crew_delete_role(int cno);
+	public abstract void crewJoincntSub(int cno);
+	public abstract void slistJoincntSub(int cno, String mid);
+	public abstract void deleteStatus(int cno, String mid);
 }
 
