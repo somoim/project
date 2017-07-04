@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="../index.jsp"></jsp:include>
@@ -6,6 +5,21 @@
 <html>
 <head>
 <style type="text/css">
+#fileUpload{
+ margin-bottom: 10px;
+}
+#list_btn{
+ margin-top: 3px;
+}
+.imgsize{
+	
+	max-height: 150px;
+	max-width: 150px;
+}
+
+.imgshow{
+	margin-left: 250px;
+}
 </style>
 </head>
 <body>
@@ -15,6 +29,11 @@
 			<!-- 여기서부터 시작 -->
 			<div class="container">
 
+			<form role="form" method="post">
+				<input value="${cno}" name="cno" type="hidden">
+			</form>
+
+		
 				<div class="row">
 					<div class="page-header">
 						<h1>
@@ -26,19 +45,19 @@
 				<div class="row">
 					<form class="form-group">
 						<label>아이디</label> <input class="form-control" type="text"
-							name="name" id="name" readonly="readonly" placeholder="아이디가져오기">
+							name="name" id="name" readonly="readonly" value="${login.mid}">
 					</form>
 				</div>
 
-				<form id="myForm" action="sgallery_create" method="post">
+				<form id="myForm" action="sgallery_create?cno=${cno}" method="post">
 				
-					<div class="row">
+					
+						<div class="filebox">
+							<input id="fileUpload" type="file">
+					<div class="row" >
 						<ul class="clearfix uploadedList"></ul>
 					</div>
 					
-					
-						<div class="filebox">
-							<input id="fileUpload" type="file" id="file">
 							<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
 							<a href="crew/tab_gallery">
 							<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button></a>
@@ -49,8 +68,8 @@
 
 
 					<script id="source" type="text/x-handlebars-template"> 
-						<li class="col-xs-3"> 
-							<span><img alt="첨부파일" src="{{imgsrc}}"></span> 
+						<li class="col-xs-3 imgshow"> 
+							<span><img class="imgsize" alt="첨부파일" src="{{imgsrc}}"></span> 
 						<div> 
 							<a href="{{getLink}}">{{fileName}}</a> 
 							<a href="{{sg_picture}}" class="btn btn-default btn-xs pull-right delbtn"> 

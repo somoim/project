@@ -15,5 +15,5 @@ public interface sBoardService {
 	
 	abstract String sboard_detail_picture(int sb_no) throws Exception;
 	
-	abstract String sboard_member_name(String mid) throws Exception;
+	abstract String sboard_member_name(int sb_no) throws Exception;
 }

@@ -76,44 +76,28 @@ public class CrewController {
 	/*---------------------------------------------------------------------------------------*/
 	
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.GET) 
-	public void sgallery_create_GET(){ 
+	public void sgallery_create_GET(@ModelAttribute("cno") int cno){
+		
 	} 
 	
-	@ResponseBody
 	@RequestMapping(value="/sgallery_create", method=RequestMethod.POST) 
-	public String sgallery_create_POST(sGalleryVO sgallery_vo, String mid, RedirectAttributes rttr, HttpServletRequest request) throws Exception{ 	
+	public String sgallery_create_POST(@RequestParam("cno") int cno, Model model, sGalleryVO sgallery_vo, String mid, HttpServletRequest request) throws Exception{ 	
 		
-		sgallery_vo.setCno(1);
-		sgallery_vo.setMid("m001");
-		
-		/*HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		
-		mid = memberVO.getMid();
+		mid = memberVO.getMid(); 
+		cno = sgallery_vo.getCno();
 		
-		sgallery_vo.setMid(mid);;*/
-		
+		sgallery_vo.setMid(mid);
+		sgallery_vo.setCno(cno);
 		sgallery_service.sgallery_create(sgallery_vo); 
-		
-		rttr.addAttribute("cno", sgallery_vo.getCno());
 	
-		return "redirect:/crew/tab_gallery";
+		return "redirect:/crew/tab_gallery?cno="+cno;	
 	} 
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	
-	@ResponseBody
-	@RequestMapping(value="/tab_gallery/{cno}")
-	public List<sGalleryVO> sGallery(@PathVariable("cno") int cno, Model model) throws Exception{
-		
-		List<sGalleryVO> list = sgallery_service.sgallery_list(cno);
-		model.addAttribute("list", list);
-		
-		return list;
-	}
-	
-	///////////////////////////sGallery 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_gallery")
 	public void tab_gallery_GET(@RequestParam("cno") int cno, Model model) throws Exception {
 		List<sGalleryVO> list = sgallery_service.sgallery_list(cno);
@@ -121,39 +105,33 @@ public class CrewController {
 		model.addAttribute("list", list);
 	}
 	
-	
 	/*---------------------------------------------------------------------------------------*/
 	
 	
-	@ResponseBody
-	@RequestMapping(value="/sgallery_detail/{cno}/{sg_no}")
-	public sGalleryVO sgallery_detail(@PathVariable("cno") int cno, @PathVariable("sg_no") int sg_no, Model model) throws Exception{
+	@RequestMapping(value="/sgallery_detail")
+	public void sgallery_detail(@RequestParam("cno") int cno, @RequestParam("sg_no") int sg_no, Model model, HttpServletRequest request) throws Exception{
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		
+		String mid = memberVO.getMid(); 
+		System.out.println("########################################################################");
+		System.out.println(sg_no);
 		
 		sGalleryVO sGalleryVO = sgallery_service.sgallery_detail(sg_no);
+		String name = sgallery_service.sgallery_member_name(sg_no);
 		
-		model.addAttribute("sGalleryVO", sGalleryVO);
-		
-		return sGalleryVO;
-	}
 	
-	
-///////////////////////////sGallery 상세보기 번호 지정 : 나중에 삭제
-	@RequestMapping(value="/sgallery_detail", method=RequestMethod.GET)
-	public void sgallery_detail_GET(Model model) throws Exception {
-		
-		
-		sGalleryVO sGalleryVO = sgallery_service.sgallery_detail(4);
-		String name = sgallery_service.sgallery_member_name("m001");
-		
 		model.addAttribute("sGalleryVO", sGalleryVO);
 		model.addAttribute("name", name);
 	}
-	
+
 	/*---------------------------------------------------------------------------------------*/
 	
-	@ResponseBody
 	@RequestMapping(value="/sgallery_delete", method=RequestMethod.POST)
-	public String sgallery_delete(@RequestParam("sg_no") int sg_no, @RequestParam("cno") int cno, RedirectAttributes rttr) throws Exception{
+	public String sgallery_delete(@RequestParam("sg_no") int sg_no, @RequestParam("cno") int cno) throws Exception{
+	
 		sGalleryVO vo = sgallery_service.sgallery_detail(sg_no);
 		sgallery_service.sgallery_delete(sg_no);
 
@@ -173,71 +151,49 @@ public class CrewController {
 	
 	
 	@RequestMapping(value="/sboard_create", method=RequestMethod.GET) 
-	public void sboard_create_GET(){ 
+	public void sboard_create_GET(@ModelAttribute("cno") int cno){
 	} 
 	
-	@ResponseBody
+	
 	@RequestMapping(value="/sboard_create", method=RequestMethod.POST) 
-	public String sboard_create_POST(sBoardVO sboard_vo, String mid, RedirectAttributes rttr, HttpServletRequest request) throws Exception{ 	
+	public String sboard_create_POST(@RequestParam("cno") int cno, Model model, sBoardVO sboard_vo, String mid, HttpServletRequest request) throws Exception{ 	
 		
-		sboard_vo.setCno(1);
-		sboard_vo.setMid("m001");
-		
-	/*	HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		
-		mid = memberVO.getMid();
-		sboard_vo.setMid(mid);	*/
+		mid = memberVO.getMid(); 
+		cno = sboard_vo.getCno();
+		
+		sboard_vo.setMid(mid);
+		sboard_vo.setCno(cno);
 		
 		sboard_service.sboard_create(sboard_vo); 
 		
-		rttr.addAttribute("cno", sboard_vo.getCno());
-	
-		return "redirect:/crew/tab_board";
+		return "redirect:/crew/tab_board?cno="+cno;
 	} 
 	
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	@ResponseBody
-	@RequestMapping(value="/tab_board/{cno}")
-	public List<sBoardVO> sBoard(@PathVariable("cno") int cno, Model model) throws Exception{
-		
-		List<sBoardVO> list = sboard_service.sboard_list(cno);
-		model.addAttribute("list", list);
-		
-		return list;
-	}
-	
-	///////////////////////////tab_Board 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/tab_board")
-	public void tab_board_GET(@RequestParam("cno") int cno, Model model) throws Exception {
+	public void  tab_board(@RequestParam("cno") int cno, Model model) throws Exception {
 		List<sBoardVO> list = sboard_service.sboard_list(cno);
 		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
-		
 	}
-	
 	
 	/*---------------------------------------------------------------------------------------*/
 	
-	@ResponseBody
-	@RequestMapping(value="/sboard_detail/{cno}/{sb_no}")
-	public sBoardVO sboard_detail(@PathVariable("cno") int cno, @PathVariable("sb_no") int sb_no, Model model) throws Exception{
-		
-		sBoardVO vo = sboard_service.sboard_detail(sb_no);
-		model.addAttribute("vo", vo);
-		
-		return vo;
-	}
-	
-	
-	///////////////////////////sBoard 상세페이지 번호 지정 : 나중에 삭제
 	@RequestMapping(value="/sboard_detail", method=RequestMethod.GET)
-	public void sboard_detail_GET(Model model) throws Exception {
+	public void sboard_detail_GET(@RequestParam("cno") int cno, @RequestParam("sb_no") int sb_no, Model model, HttpServletRequest request) throws Exception {
 		
-		sBoardVO sBoardVO = sboard_service.sboard_detail(17);
-		String name = sboard_service.sboard_member_name("m001");
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		
+		String mid = memberVO.getMid();
+		
+		sBoardVO sBoardVO = sboard_service.sboard_detail(sb_no);
+		String name = sboard_service.sboard_member_name(sb_no);
 		
 		model.addAttribute("sBoardVO", sBoardVO);
 		model.addAttribute("name", name);
@@ -333,10 +289,14 @@ public class CrewController {
 	
 	@RequestMapping(value="/tab_list") 
 	public void slist(@RequestParam("cno") int cno ,Model model) throws Exception {
+		
+		//소모임 대문 사진 가져오기
 		CrewVO crewVO=crew_service.crew_tab_list(cno);
+
 		List<sListVO> sList_list=sList_service.slist_tab_list(cno);
 		List<MemberVO> member_list=member_service.member_tab_list(cno);
 		List<StatusVO> status = sList_service.join_sList_member(cno);
+		
 		System.out.println(member_list);
 		int i = 0;
 		for(sListVO list: sList_list){

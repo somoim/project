@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.domain.MemberVO;
 import kr.co.domain.ReplyVO;
 import kr.co.service.ReplyService;
 
@@ -27,12 +31,19 @@ public class ReplyController {
 	private ReplyService reply_service;
 	
 	@RequestMapping(value="/sgallery", method=RequestMethod.POST)
-	public ResponseEntity<String> create(ReplyVO reply_vo) throws Exception{
+	public ResponseEntity<String> create(@RequestParam("sg_no") int sg_no, ReplyVO reply_vo, HttpServletRequest request) throws Exception{
+		
+		System.out.println("!!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(sg_no);
 		
 		ResponseEntity<String> entity=null;
 		
-		reply_vo.setMid("m001");
-		reply_vo.setSg_no(1);
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		String mid = memberVO.getMid(); 
+		
+		reply_vo.setMid(mid);
+		reply_vo.setSg_no(sg_no);
 		
 		reply_service.reply_create_sgallery(reply_vo);
 		
@@ -60,12 +71,16 @@ public class ReplyController {
 	
 	
 	@RequestMapping(value="/sboard", method=RequestMethod.POST)
-	public ResponseEntity<String> create_sboard(ReplyVO reply_vo) throws Exception{
+	public ResponseEntity<String> create_sboard(@RequestParam("sb_no") int sb_no, ReplyVO reply_vo, HttpServletRequest request) throws Exception{
 		
 		ResponseEntity<String> entity=null;
 		
-		reply_vo.setMid("m001");
-		reply_vo.setSb_no(17);
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		String mid = memberVO.getMid(); 
+		
+		reply_vo.setMid(mid);
+		reply_vo.setSb_no(sb_no);
 		
 		reply_service.reply_create_sboard(reply_vo);
 		

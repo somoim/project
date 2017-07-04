@@ -24,7 +24,7 @@
 	</delete>
 	
 	<select id="sboard_member_name" resultType="String">
-		select name from sBoard sb join member m on sb.mid = m.mid
+		select m.name from sBoard sb join member m on sb.mid = m.mid where sb_no=#{sb_no}
 	</select>
 	
 	

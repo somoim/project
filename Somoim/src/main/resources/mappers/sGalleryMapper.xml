@@ -21,7 +21,7 @@
 	
 	
 	<select id="sgallery_member_name" resultType="String">
-		select name from sGallery sg join member m on sg.mid = m.mid
+		select m.name from sGallery sg join member m on sg.mid = m.mid where sg_no=#{sg_no}
 	</select>
 	
 </mapper>

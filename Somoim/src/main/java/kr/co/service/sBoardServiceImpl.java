@@ -61,9 +61,9 @@ public class sBoardServiceImpl implements sBoardService {
 	}
 
 	@Override
-	public String sboard_member_name(String mid) throws Exception {
+	public String sboard_member_name(int sb_no) throws Exception {
 		// TODO Auto-generated method stub
-		return sboard_dao.sboard_member_name(mid);
+		return sboard_dao.sboard_member_name(sb_no);
 	}
 
 }
