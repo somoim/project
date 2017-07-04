@@ -72,6 +72,15 @@ public class CrewServiceImpl implements CrewService {
 		// TODO Auto-generated method stub
 		crew_dao.update_crew_cnt(cno);
 	}
+	
+	@Transactional
+	@Override
+	public void delete_crewMember(int cno, String mid) {
+		// TODO Auto-generated method stub
+		crew_dao.crewJoincntSub(cno);
+		crew_dao.slistJoincntSub(cno, mid);
+		crew_dao.deleteStatus(cno, mid);
+	}
 
 	
 

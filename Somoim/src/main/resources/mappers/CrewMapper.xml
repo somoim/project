@@ -50,4 +50,16 @@
   	<update id="update_crew_cnt">
   		update crew set read_cnt = read_cnt + 1  where cno = #{cno}
   	</update>
+  	
+  	<update id="crewJoincntSub">
+  		update crew set join_cnt=join_cnt-1 where cno=#{cno}
+  	</update>
+
+  	<update id="slistJoincntSub">
+  		update slist set s_join_cnt=s_join_cnt-1 where sl_no in (select sl_no from status where cno=#{cno} and mid=#{mid})
+  	</update>
+  	
+  	<delete id="deleteStatus">
+  		delete from status where cno=#{cno} and mid=#{mid}
+  	</delete>
 </mapper>

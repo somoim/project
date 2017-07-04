@@ -99,5 +99,27 @@ public class CrewDAOImpl implements CrewDAO {
 		session.update(NAMESPACE+".update_crew_cnt", cno);
 		
 	}
+	@Override
+	public void crewJoincntSub(int cno) {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".crewJoincntSub", cno);
+	}
 
+	@Override
+	public void slistJoincntSub(int cno, String mid) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cno", cno);
+		map.put("mid", mid);
+		session.update(NAMESPACE+".slistJoincntSub", map);
+	}
+
+	@Override
+	public void deleteStatus(int cno, String mid) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cno", cno);
+		map.put("mid", mid);
+		session.delete(NAMESPACE+".deleteStatus", map);
+	}
 }
