@@ -3,9 +3,11 @@ package kr.co.service;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import kr.co.domain.MemberVO;
 import kr.co.domain.sGalleryVO;
 import kr.co.persistence.sGalleryDAO;
 
@@ -41,9 +43,9 @@ public class sGalleryServiceImpl implements sGalleryService {
 	}
 	
 	@Override
-	public String sgallery_member_name(String mid) throws Exception {
+	public String sgallery_member_name(int sg_no) throws Exception {
 		// TODO Auto-generated method stub
-		return sgallery_dao.sgallery_member_name(mid);
+		return sgallery_dao.sgallery_member_name(sg_no);
 	}
 
 }

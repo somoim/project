@@ -121,7 +121,7 @@
 
 
 				<!-- 버튼 레이아웃 -->
-				<a href="sgallery_create" class="fixedBtn"> <span><span
+				<a href="sgallery_create?cno=${cno}" class="fixedBtn"> <span><span
 						class="glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
 				</a>
 

@@ -24,9 +24,8 @@
 			
 			<form role="form" method="post">
 				<input value="${sGalleryVO.cno}" name="cno"  type="hidden" >
-				<input value="${sGalleryVO.sg_no}" name="sg_no"  type="hidden" >
+				<input value="${sGalleryVO.sg_no}" name="sg_no" type="hidden" >
 				<input value="${sGalleryVO.sg_picture}" name="sg_picture"  type="hidden">
-				
 			</form>
 			
 			<div class="container">
@@ -75,7 +74,7 @@
 			<div class="row collapse" id="myCollapsible" >
 				<div class="form-group">
 					<label for="name">작성자 이름</label>
-					<input id="name" class="form-control" readonly="readonly">
+					<input id="name" class="form-control" value="${login.mid}" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="re_content">내용</label>
@@ -124,12 +123,11 @@
 			
 			<script id="source" type="text/x-handlebars-template">
 				{{#each.}}
-					<div class="panel panel-info">
+					<div class="panel panel-info">	
 						<div class="panel-heading">
 							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span>{{mid}}</span>
 							 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
 						</div>
-			
 						<div class="panel-body input-group">
 							<p data-re_no="{{re_no}}" id="show_re_content" class="input-group-addon">{{re_content}}</p>
 							<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
@@ -144,8 +142,10 @@
 					$(document).ready(function() {
 						
 						var $form = $("form[role='form']");
+						var sg_no = ${sGalleryVO.sg_no};
+						var cno = ${sGalleryVO.cno};
 						
-						AllReplyLlst(1, 1);
+						AllReplyLlst(cno, sg_no);
 						
 						$("#tab_gallery_form").on("click", function() {
 							$form.attr("method", "get");
@@ -175,6 +175,7 @@
 								type : "post",
 								url : "/replies/sgallery",
 								data : {
+									sg_no : sg_no,
 									re_content : re_content
 								},
 								dataType : "text",
@@ -182,7 +183,7 @@
 									alert("댓글 입력 성공");
 									$("#re_content").val("");
 									$("#myCollapsible").collapse("toggle");
-									AllReplyLlst(1, 1);
+									AllReplyLlst(cno, sg_no);
 								}
 							});
 						});
@@ -207,7 +208,7 @@
 									alert("댓글 입력 성공");
 									$("#re_content").val("");
 									$("#myCollapsible").collapse("toggle");
-									AllReplyLlst(1, 1);
+									AllReplyLlst(cno, sg_no);
 								}
 							});
 						});
@@ -242,7 +243,7 @@
 									if(result=="UPDATE_SUCCESS"){
 										alert("댓글 수정 성공");
 										$("#myModal").modal("hide");
-										AllReplyLlst(1, 1);
+										AllReplyLlst(cno, sg_no);
 									}
 								}
 							});
@@ -263,7 +264,7 @@
 									if(result=="DELETE_SUCCESS"){
 										alert("댓글 삭제 성공");
 										$("#myModal").modal("hide");
-										AllReplyLlst(1, 1);
+										AllReplyLlst(cno, sg_no);
 									}
 								}
 							});

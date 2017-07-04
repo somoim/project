@@ -109,27 +109,27 @@
 					
 					<c:forEach items="${list}" var="sboard_vo">
 						<form role="form" method="post">
-							<input value="${sboard_vo.sb_no}" name="sb_no" 	>
+							<input value="${sboard_vo.sb_no}" name="sb_no" type="hidden">
 							<input value="${sboard_vo.cno}" name="cno"  type="hidden">
 						</form>
 						
-						<a herf="crew/sboard_detail" class="list-group-item">
-							<h4 class="list-group-item-heading">
-								<p>${sboard_vo.mid}</p>
-								<p>${sboard_vo.sb_writeday}</p>
-							</h4>
-							<hr>
-							<p class="list-group-item-text">
-								<p>${sboard_vo.sb_title}</p>
-								<p>${sboard_vo.sb_content}</p>
-							</p>
-						</a>	
+					<a href="crew/sboard_detail" class="list-group-item" data-sb_no="${sboard_vo.sb_no}" data-cno="${sboard_vo.cno}">
+						<h4 class="list-group-item-heading">
+							<p>${sboard_vo.mid}</p>
+							<p>${sboard_vo.sb_writeday}</p>
+						</h4>
+						<hr>
+						<p class="list-group-item-text">
+							<p>${sboard_vo.sb_title}</p>
+							<p>${sboard_vo.sb_content}</p>
+						</p>
+					</a>	
 						</c:forEach>
 					</div>
 			</div>
 	
 		<!-- 버튼 레이아웃 -->
-		<a href="sboard_create" class="fixedBtn"> <span><span
+		<a href="/crew/sboard_create?cno=${cno}" class="fixedBtn"> <span><span
 				class="glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
 		</a>
 
@@ -137,11 +137,13 @@
 			$(document).ready(function() {
 				$(".list-group-item").on("click", function(event) {
 					event.preventDefault();
-					var sb_no = $("input[name=sb_no]").val();
-					var cno = $("input[name=cno]").val();
-					alert(sb_no); 	
-					alert(cno); 	
-	
+					
+					var sb_no = $(this).attr("data-sb_no");
+					var cno = $(this).attr("data-cno");
+					
+					alert("sb_no::: "+sb_no); 	
+					alert("cno::: "+cno); 
+					
 					self.location="/crew/sboard_detail?cno="+cno+"&sb_no="+sb_no;
 				});
 			});
