@@ -64,10 +64,24 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 .formLayout select { height: 34px; border-radius: 4px; border: 1px solid #d2d2d2;}
 .formLayout input[type=tel] { height: 34px; border-radius: 4px; border: 1px solid #d2d2d2; padding:0 10px; width:55px}
 
+
+/* home */
+.name { position: relative; padding: 10px 0 10px 0;}
+.name span { display:inline-block; margin-right:10px; }
+.name img { width:70px;}
+.name .aroundName { font-size:20px;}
+.name .aroundBirth { font-size: 12px; font-weight:normal; color:#888888; letter-spacing:-0.5px;}
+.name .aroundAddress { position: absolute; top: 50%; right: 0; font-size: 15px; margin-top: -15px;}
+.name+.category { padding:10px; border-top: 1px solid #ddd;}
+.name+.category span { margin-right:5px;}
+.name+.category img { width:25px;}
+
+
 /* crew */
 .formLayout .cateGoup { background-color: #ffffff; border: 1px solid #ddd; padding: 10px; border-radius: 5px; box-shadow: inset 0px 0px 2px #999;}
 #list_form span { font-size: 12px;}
 #submit_form span { font-size: 12px;}
+.formLayout { padding:20px 10px 0;}
 .backCont { cursor: pointer;}
 .getCno { font-weight:bold; font-size:12px;}
 .crewRegion { font-size: 12px; color:#888888;}
@@ -76,6 +90,13 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 .memberCount { font-weight:bold;}
 .memberRight { color:#ff6533; font-size:13px;}
 
+/* search */
+#searchBtn { cursor: pointer;}
+#searchBtn span { vertical-align:middle;}
+#category_list .panel-heading { padding:15px 10px;}
+#category_list .panel-heading .panel-title { font-weight:bold; font-size:14px; color:#555555;}
+#category_list .panel-body { border-bottom:1px solid #dddddd;}
+#category_list .panel-body .panel-title { font-size: 14px; cursor: pointer; color:#666666}
 
 /* setting */
 .managerMail { position:relative;}

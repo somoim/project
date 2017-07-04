@@ -7,13 +7,14 @@
 <html>
 <head>
 <style type="text/css">
-
+.navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var keyword=$("#keyword").val();
 		
 		$("#searchBtn").on("click", function() {
+			keyword=$("#keyword").val();
 			self.location="/search/searchCrew?searchType=title&keyword="+keyword;
 		});
 		
@@ -25,17 +26,19 @@
 			}	
 		});
 		
+		// 카테고리 리스트보이기
+		$("#keyword").onkeydown = function() {
+			myFunction()
+		};
+		
 	});
 	
-	// 카테고리 리스트보이기
-	$("#keyword").onkeydown = function() {myFunction()};
 	function myFunction() {
 		$("#category_list").slideDown("slow");
 	}
 	
 	function searchCategory(categoryKey) {
 		event.preventDefault();
-		
 		self.location="/search/searchCrew?searchType=category&keyword="+categoryKey;
 	}
 </script>
@@ -48,7 +51,8 @@
 		<div class="input-group">
 			<input class="form-control" id="keyword" name="keyword" placeholder="모임명을 입력하세요" onkeydown="myFunction()">
 			<span class="input-group-addon" id="searchBtn">
-				검색 <span class="glyphicon glyphicon-search"></span>
+				<span>검색</span>
+				<span class="glyphicon glyphicon-search"></span>
 			</span>
 		</div>
 		

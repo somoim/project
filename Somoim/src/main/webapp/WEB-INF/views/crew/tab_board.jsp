@@ -147,6 +147,11 @@
 					self.location="/crew/sboard_detail?cno="+cno+"&sb_no="+sb_no;
 				});
 			});
+			
+			// 뒤로가기
+			$(".backCont").click(function() {
+				self.location="/crew/list";
+			});
 		
 		</script>
 				

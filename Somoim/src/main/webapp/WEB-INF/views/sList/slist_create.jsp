@@ -113,15 +113,16 @@
 <body>
 <!-- 모바일 Layout -->
 <div id="mobile">
-	<div class="container" id="container">
+	<div id="container">
 		<!-- 여기서부터 시작 -->
-			<div class="row">
+			<div class="container">
+				<div class="row">
 				<form action="" method="post" class="formLayout" id="myForm" name="slistform">
 					<input type="hidden" name="cno" value="${cno}">
 					<input type="hidden" id="attend_date" name="attend_date" value="">
 					
 					<div class="form-group">
-						<label for="attend_title">(제목)정모 이름</label>
+						<label for="attend_title">정모명</label>
 						<input name="attend_title" id="attend_title" class="form-control" placeholder="정모의 이름을 정해주세요">
 					</div>	
 
@@ -140,20 +141,20 @@
 									<%for(int i=1; i<=12; i++){ %>
 									<option value="<%=i %>"><%=i %></option>
 									<%} %>
-								</select>월
+								</select>월 &nbsp;
 								<select name="attend_date3" id="attend_date3">
 									<option value="">일</option>
 									<%for(int i=1; i<=31; i++){ %>
 									<option value="<%=i %>"><%=i %></option>
 									<%} %>
-								</select>일 &nbsp;&nbsp;&nbsp;
+								</select>일 &nbsp;&nbsp;
 								
 								<select name="attend_date4" id="attend_date4">
 									<option value="">시</option>
 									<%for(int i=1; i<=24; i++){ %>
 									<option value="<%=i %>"><%=i %></option>
 									<%} %>
-								</select>시
+								</select>시 &nbsp;
 								<select name="attend_date5" id="attend_date5">
 									<option value="">분</option>
 									<%for(int i=0; i<60; i++){ %>
@@ -197,7 +198,7 @@
 						</button>
 					</div>
 				</form>
-				
+				</div>
 			</div>
 		<!--  -->
 	</div>

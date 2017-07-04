@@ -27,6 +27,7 @@
 		var log = $("#log").val();
 		var cMid = $("#getMid").val();
 		var role = $("#getRole").val();
+		var think = 0;
 		$(".btn-primary").hide();
 		$(".sl_no").each(function(idx){
 			var sl_no=$(this).attr("data-sl_no");
@@ -50,10 +51,8 @@
 			location.href="/sList/slist_create?cno="+cno;
 		});
 		
-		$(".role").on("click","button",function(){
+		$(".btn-success").on("click",function(){
 			var mid=$(this).attr("data-mid");
-			
-			
 			$.ajax({
 				type : "get",
 				url : "/crew/update_Role?cno="+cno,
@@ -66,9 +65,7 @@
 				}
 			});
 		});
-		$(".role").on("click", function(){
-			location.href="#"
-		});
+		
 		$(".btn-danger").on("click", function(){
 			var sl_no =$(this).attr("data-sl_no");
 			var cnt = $(this).attr("data-cnt");
@@ -81,9 +78,10 @@
 			}
 			$.ajax({
 				type : "get",
-				url : "/crew/update_s_join_cnt/"+cno,
+				url : "/crew/update_s_join_cnt",
 				data : {
 					sl_no : sl_no,
+					cno : cno,
 					mid : mid
 				},
 				dataType : "text",
@@ -110,27 +108,39 @@
 		$("#join").hide();
 		$(".ifmid").each(function(idx){
 			var mid=$(this).val();
-			if(log != mid){
-				$("#join").show();
-				$("#write").hide();
-			}
 			if(log == mid){
 				$("#join").hide();
 				$("#write").show();
+				think = 1;
+				
+			}
+			if(think == 0){
+				if(log != mid){
+					$("#join").show();
+					$("#write").hide();
+				}
 			}
 		});
 		
-			$(".panel-heading").each(function(idx){
-				var sl_no=$(this).next().next().attr("data-sl_no");
-				$(this).on("click",function(){
-					if(cMid == log || role == log){
-						self.location="/sList/slist_update?cno=${crewVO.cno}&sl_no="+sl_no;
-					} else{
-						return;
-					}
-					
-				});
+		$(".updel").each(function(idx){
+			var sl_no=$(this).next().attr("data-sl_no");
+			$(this).on("click",function(){
+					self.location="/sList/slist_update?cno=${crewVO.cno}&sl_no="+sl_no;
 			});
+		});
+		$(".btn-warning").on("click",function(){
+			$.ajax({
+				type : "get",
+				url : "/crew/delete_Role",
+				data :{
+					cno : cno
+				},
+				taType : "text",
+				success:function(result){
+					self.location="/crew/tab_list?cno="+cno;
+				}
+			});
+		});
 		
 		
 		
@@ -180,21 +190,26 @@
 		<div class="row">
 			<div class="content">
 				${crewVO.content}
+				${Today}
 			</div>
 		</div>
 		<div class="row">
 			<c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
 			<button class="form-control sList"><span class="glyphicon glyphicon-plus"></span>새로운 정모 만들기</button>
 			</c:if>
+			<c:if test="${sList_list.size() != 0}">
 			<div class="panel panel-default">
 			  <!-- Default panel contents -->
 			  <c:forEach items="${sList_list}" var="sList">
 			  <div class="panel-heading" >
 				  <span>${sList.attend_title} (${sList.attend_cnt}명)</span>
+				  <c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
+				  	<button class="btn btn-info updel col-xs-offset-7">수정 삭제</button>
+				  </c:if>
 				  <c:forEach items="${member_list}" var="member">
 					  <c:if test="${login.mid == member.mid}">
-					 	<button class="btn btn-danger col-xs-offset-8 btn_join${sList.sl_no}" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
-					  	<button class="btn btn-primary col-xs-offset-8 btn_cancel${sList.sl_no}" data-sl_no="${sList.sl_no}">참석취소</button>
+					 	<button class="btn btn-danger  btn_join${sList.sl_no}" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
+					  	<button class="btn btn-primary  btn_cancel${sList.sl_no}" data-sl_no="${sList.sl_no}">참석취소</button>
 					  </c:if>
 				  </c:forEach>
 			  </div>
@@ -220,6 +235,7 @@
 			  <hr>
 			  </c:forEach>
 			</div>
+			</c:if>
 			
 		</div>
 		<div class="row role" >
@@ -227,6 +243,7 @@
 				<h5 class="col-xs-12 col-xs-offset-1 ">${member.name} 
 					<c:if test="${crewVO.role == member.mid}">
 					<span class="col-xs-offset-8 power">운영자</span>
+					<button class="btn btn-warning" data-mid="${member.mid}">운영자해임</button>
 					</c:if>
 					<c:if test="${crewVO.mid == member.mid}">
 					<span class="col-xs-offset-8 power">모임장</span>

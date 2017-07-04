@@ -87,4 +87,10 @@ public class CrewDAOImpl implements CrewDAO {
 		session.insert(NAMESPACE+".join_Crew", map);
 	}
 
+	@Override
+	public void crew_delete_role(int cno) {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".crew_delete_role", cno);
+	}
+
 }
