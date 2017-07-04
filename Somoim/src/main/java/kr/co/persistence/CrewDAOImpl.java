@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
+import kr.co.domain.MemberVO;
 
 @Repository
 public class CrewDAOImpl implements CrewDAO {
@@ -94,6 +95,12 @@ public class CrewDAOImpl implements CrewDAO {
 	}
 
 	@Override
+	public void update_crew_cnt(int cno) {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".update_crew_cnt", cno);
+		
+	}
+	@Override
 	public void crewJoincntSub(int cno) {
 		// TODO Auto-generated method stub
 		session.update(NAMESPACE+".crewJoincntSub", cno);
@@ -115,6 +122,24 @@ public class CrewDAOImpl implements CrewDAO {
 		map.put("cno", cno);
 		map.put("mid", mid);
 		session.delete(NAMESPACE+".deleteStatus", map);
+	}
+
+	@Override
+	public MemberVO memberDetail(String mid) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE+".memberDetail", mid);
+	}
+
+	@Override
+	public List<CrewVO> memberCrewList(String mid) {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE+".memberCrewList", mid);
+	}
+
+	@Override
+	public void update_join_cnt(int cno) {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".update_join_cnt", cno);
 	}
 
 }

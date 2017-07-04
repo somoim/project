@@ -6,13 +6,13 @@
 <head>
 <style type="text/css">
 #fileUpload{
- margin-bottom: 10px;
+ margin-bottom: 5px;
 }
 #list_btn{
- margin-top: 3px;
+ margin-top: 1px;
 }
+
 .imgsize{
-	
 	max-height: 150px;
 	max-width: 150px;
 }
@@ -54,13 +54,13 @@
 					
 						<div class="filebox">
 							<input id="fileUpload" type="file">
-					<div class="row" >
-						<ul class="clearfix uploadedList"></ul>
-					</div>
+			
+							<div class="row" >
+								<ul class="clearfix uploadedList"></ul>
+							</div>
 					
 							<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
-							<a href="crew/tab_gallery">
-							<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button></a>
+							<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button>
 						</div>
 
 					
@@ -118,13 +118,21 @@
 							var str = "";
 
 								str += "<input value='"+$(".delbtn").attr("href")+"' name='sg_picture' type='hidden'>";
-						
-							form.append(str);
-							form.get(0).submit();
-							alert("사진이 업로드되었습니다.");
 							
+							if (!$('.imgshow').length) {
+								alert("사진을 선택해주세요");
+								return;
+							} else if ($('.imgshow').length){
+								form.append(str);
+								form.get(0).submit();
+								alert("사진이 업로드되었습니다.");
+							}
 						});
 						 
+						 
+						 $("#list_btn").on("click", function() {
+							return "redirect:/crew/tab_gallery?cno="+cno;
+						});
 							
 						$(".uploadedList").on("click", "li div .delbtn", function(event) {
 							event.preventDefault();

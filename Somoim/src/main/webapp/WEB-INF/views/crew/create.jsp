@@ -95,7 +95,7 @@
 					</div>
 				
 					<script id="source" type="text/x-handlebars-template">
-	<li class="col-xs-3">
+	<li class="col-xs-3 imgshow">
 		<span>
 			<img alt="첨부파일" src="{{imgsrc}}">
 		</span>
@@ -237,9 +237,14 @@
 
 			str += "<input value='"+$(".delbtn").attr("href")+"' name='picture' type='hidden'>";
 	
-		form.append(str);
-		form.get(0).submit();
-		alert("소모임이 개설되었습니다.");
+		if (!$('.imgshow').length) {
+			alert("사진을 선택해주세요");
+			return;
+		} else if ($('.imgshow').length){
+			form.append(str);
+			form.get(0).submit();
+			alert("사진이 업로드되었습니다.");
+		}
 	});
 	
 	$("#list_form").click(function() {

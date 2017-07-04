@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
+import kr.co.domain.MemberVO;
 import kr.co.persistence.CrewDAO;
 
 @Service
@@ -54,11 +55,13 @@ public class CrewServiceImpl implements CrewService {
 		crew_dao.addAttach(fullName, crew_vo.getCno());
 		
 	}
-
+	
+	@Transactional
 	@Override
 	public void join_Crew(int cno, String mid) {
 		// TODO Auto-generated method stub
 		crew_dao.join_Crew(cno, mid);
+		crew_dao.update_join_cnt(cno);
 	}
 
 	@Override
@@ -67,6 +70,12 @@ public class CrewServiceImpl implements CrewService {
 		crew_dao.crew_delete_role(cno);
 	}
 
+	@Override
+	public void update_crew_cnt(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		crew_dao.update_crew_cnt(cno);
+	}
+	
 	@Transactional
 	@Override
 	public void delete_crewMember(int cno, String mid) {
@@ -74,6 +83,18 @@ public class CrewServiceImpl implements CrewService {
 		crew_dao.crewJoincntSub(cno);
 		crew_dao.slistJoincntSub(cno, mid);
 		crew_dao.deleteStatus(cno, mid);
+	}
+
+	@Override
+	public MemberVO memberDetail(String mid) {
+		// TODO Auto-generated method stub
+		return crew_dao.memberDetail(mid);
+	}
+
+	@Override
+	public List<CrewVO> memberCrewList(String mid) {
+		// TODO Auto-generated method stub
+		return crew_dao.memberCrewList(mid);
 	}
 
 }

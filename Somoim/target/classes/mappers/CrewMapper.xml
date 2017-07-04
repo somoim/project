@@ -47,6 +47,10 @@
   		update crew set join_cnt=join_cnt + 1 where cno = #{cno}
   	</update>
   	
+  	<update id="update_crew_cnt">
+  		update crew set read_cnt = read_cnt + 1  where cno = #{cno}
+  	</update>
+  	
   	<update id="crewJoincntSub">
   		update crew set join_cnt=join_cnt-1 where cno=#{cno}
   	</update>
@@ -59,5 +63,12 @@
   		delete from status where cno=#{cno} and mid=#{mid}
   	</delete>
   	
+  	<select id="memberDetail" resultType="MemberVO">
+  		select * from member where mid=#{mid}
+  	</select>
+
+  	<select id="memberCrewList" resultType="CrewVO">
+  		select * from crew where cno in (select distinct(cno) from status where mid=#{mid})
+  	</select>
   	
 </mapper>
