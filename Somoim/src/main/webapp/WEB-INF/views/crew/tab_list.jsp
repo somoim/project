@@ -173,7 +173,7 @@
 		<div class="row">
 			  <div class="col-xs-12 col-md-12">
 			    <a href="#" class="picture">
-			      <img src="../resources/img/mobile/images.jpg" alt="" width="100%;" height="120px">
+			      <img src="/displayFile/crew?fileName=${crewVO.picture}" alt="" width="100%;" height="120px">
 			    </a>
 			  </div>
 		</div>

@@ -24,8 +24,8 @@
 			<!-- 여기서부터 시작 -->
 			
 			<form role="form" method="post">
-				<input value="${sBoardVO.cno}" name="cno"  type="hidden" >
-				<input value="${sBoardVO.sb_no}" name="sb_no"  type="hidden" >
+				<input value="${sBoardVO.cno}" name="cno"  >
+				<input value="${sBoardVO.sb_no}" name="sb_no" >
 				<input value="${sBoardVO.sb_picture}" name="sb_picture"  type="hidden">
 			</form>
 			
@@ -79,8 +79,8 @@
 								<span class="glyphicon glyphicon-trash"></span> 삭제
 							</button>
 
-							<button type="submit" class="btn btn-info" id="tab_gallery_form">
-								<span class="glyphicon glyphicon-align-justify"></span> 사진첩
+							<button type="submit" class="btn btn-info" id="tab_board_form">
+								<span class="glyphicon glyphicon-align-justify"></span> 게시판
 							</button>
 						</div>
 				</div>
@@ -90,7 +90,7 @@
 				<div class="row collapse" id="myCollapsible" >
 					<div class="form-group">
 						<label for="name">작성자 이름</label>
-						<input id="name" class="form-control" readonly="readonly">
+						<input id="name" class="form-control" value="${login.mid}" readonly="readonly">
 					</div>
 					<div class="form-group">
 						<label for="re_content">내용</label>
@@ -159,10 +159,12 @@
 					$(document).ready(function() {
 						
 						var $form = $("form[role='form']");
-						var sb_no = ${sBoardVO.sb_no};
-						AllReplyLlst(1, 17);
+						var $sb_no = ${sBoardVO.sb_no};
+						var $cno = ${sBoardVO.cno};
 						
-						$("#tab_gallery_form").on("click", function() {
+						AllReplyLlst(cno, sb_no);
+						
+						$("#tab_board_form").on("click", function() {
 							$form.attr("method", "get");
 							$form.attr("action", "/crew/tab_board");
 							$form.submit();
@@ -201,7 +203,7 @@
 									alert("댓글 입력 성공");
 									$("#re_content").val("");
 									$("#myCollapsible").collapse("toggle");
-									AllReplyLlst(1, 17);
+									AllReplyLlst(cno, sb_no);
 								}
 							});
 						});
@@ -236,7 +238,7 @@
 									if(result=="UPDATE_SUCCESS"){
 										alert("댓글 수정 성공");
 										$("#myModal").modal("hide");
-										AllReplyLlst(1, 17);
+										AllReplyLlst(cno, sb_no);
 									}
 								}
 							});
@@ -257,7 +259,7 @@
 									if(result=="DELETE_SUCCESS"){
 										alert("댓글 삭제 성공");
 										$("#myModal").modal("hide");
-										AllReplyLlst(1, 17);
+										AllReplyLlst(cno, sb_no);
 									}
 								}
 							});

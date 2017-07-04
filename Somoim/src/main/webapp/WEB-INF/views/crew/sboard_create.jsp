@@ -14,6 +14,11 @@
 		<div id="container">
 			<!-- 여기서부터 시작 -->
 			<div class="container">
+			
+				<form role="form" method="post">
+					<input value="${cno}" name="cno" type="hidden">
+				</form>
+				
 				<div class="row">
 					<div class="page-header">
 						<h1>
@@ -23,7 +28,7 @@
 				</div>
 
 				<div class="row">
-					<form id="myForm" action="" method="post">
+					<form id="myForm" action="/crew/sboard_create?cno=${cno}" method="post">
 						<div class="form-group">
 							<label>아이디</label>
 							<input class="form-control" name="mid" id="mid" value="${login.mid}" readonly="readonly" >
@@ -37,6 +42,10 @@
 							<textarea rows="10" cols="3" class="form-control" name="sb_content" id="sb_content"  placeholder="글을 작성해주세요"></textarea>
 						</div>
 	
+						<div class="row">
+							<ul class="clearfix uploadedList"></ul>
+						</div>
+
 						<div class="filebox">
 							<input id="fileUpload" type="file" id="file">
 							<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
@@ -44,9 +53,6 @@
 							<button class="btn btn-danger form-control list_btn" id="list_btn">게시판으로 이동</button></a>
 						</div>
 		
-						<div class="row">
-							<ul class="clearfix uploadedList"></ul>
-						</div>
 					</form>
 
 
@@ -103,7 +109,7 @@
 								
 							form.append(str);
 							form.get(0).submit();
-							alert("사진이 업로드되었습니다.");
+							alert("게시글이 작성되었습니다.");
 							
 						});
 						 
