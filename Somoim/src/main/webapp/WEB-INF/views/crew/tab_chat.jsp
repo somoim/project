@@ -26,10 +26,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-		
-		
-		var cno = 1;
+		var cno = $("#cno").val();
 		getChatList(cno);
 		setInterval("getChatList("+cno+")", 5000);
 		$(".send").click(function(){
@@ -81,7 +78,7 @@
 <script id="source" type="text/x-handlebars-template">
 {{#each.}}
 	{{#isVowel mid}}
-		<div class="pull-right">
+		<div class="pull-right chatMytext">
 			<p>{{mid}}</p>
 			<label class="mymsg">{{msg}}</label>
 			<h6>{{ch_date}}</h6>
@@ -119,7 +116,7 @@
 	</ul>
 	<div id="container" >
 		<div class="container">
-			<div class="row">
+			<div class="">
 				<div class="form-group">
 					<div id="replies">
 						

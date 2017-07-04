@@ -7,13 +7,15 @@
 <html>
 <head>
 <style type="text/css">
-	.navAct04 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
+	.navAct01 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 	#container { padding-bottom:20px;}
 	.info_detail{ height: 200px; }
 	#birth{ color: gray; }
 	.panel-heading{ border-bottom: solid 1px #ddd;}
 	.table { font-size:11px; text-align: center;}
 	.table th { text-align: center;}
+	#header { display: none; }
+	#footer { display: none; }
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -69,9 +71,9 @@
             }
         });
 		
-		// 마이페이지이동
-		$(".mypageGo").click(function () {
-			self.location="/setting/mypage";
+		// 뒤로가기
+		$(".backCont").click(function() {
+			self.location="/around/member_info";
 		});
 		
 	});
@@ -81,14 +83,23 @@
 <!-- 모바일 Layout -->
 <div id="mobile">
 	<div id="container">
+		<header id="header2">
+			<div class="backCont">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</div>
+			<div class="titleCont">정보</div>
+			<div class="snsCont">
+				<span class="glyphicon glyphicon-new-window"></span> <span
+					class="glyphicon glyphicon-option-vertical"></span>
+			</div>
+		</header>
 		<div class="panel panel-info managerMail"> 
-			<a href="mailto:name@email.com" class="panel-info">
-				<div class="panel-heading">
-					<h4 class="panel-title">운영자 e-mail</h4>
-					<small> 소모임 삭제를 원하면 메일주세요.</small>
-					<span class="glyphicon glyphicon-envelope"></span>
-				</div>
-			</a>
+			
+			<div class="panel-heading">
+				<h4 class="panel-title">회원정보</h4>
+				<small>주변 지역의 회원정보입니다.</small>
+			</div>
+			
 		</div>
 		<div class="infobar"></div>
 		<div class="panel userInfo">
@@ -100,7 +111,6 @@
 			<div class="panel-body">
 				<div class="category">
 					<span><b>관심 카테고리</b> &nbsp;:&nbsp; ${memberVo.category}</span> 
-					<button class="pull-right mypageGo">설정</button>
 				</div>
 			</div>
 		</div>
@@ -217,76 +227,6 @@
 				
 			</div>
 		</div>
-		
-		<div class="infobar"></div>
-		<div class="panel-group" id="accordionEtc" >	
-			<div class="panel panel-default accordion_banner">
-				<div class="panel-heading basicTitle">
-					<p>기본정보</p>
-				</div>
-				<div class="panel-body basicSub collapse">
-				
-					<div class="">
-						<h4 class="panel-heading panel-title accordion_title">공지사항</h4>
-						<div id="etc_notice" class="panel-collapse collapse accordion_sub">
-							<div class="panel-body">공지사항 내용 입니다</div>
-						</div>
-					</div>
-					
-					<div class="">
-						<h4 class="panel-heading panel-title accordion_title">도움말</h4>
-						<div id="etc_info" class="panel-collapse collapse accordion_sub">
-							<div class="panel-body">도움말 내용입니다</div>
-						</div>
-					</div>
-					
-					<div class="">
-						<h4 class="panel-heading panel-title accordion_title">버전정보</h4>
-						<div id="etc_version" class="panel-collapse collapse accordion_sub">
-							<div class="panel-body">버전정보 : 1.0.0</div>
-						</div>
-					</div>
-					
-				</div>
-				
-				<div class="panel-heading basicTitle">
-					<p>알림설정</p>
-				</div>
-				<div class="panel-body basicSub collapse">
-					
-					<div class="">
-						<h4 class="panel-heading panel-title accordion_title">채팅 알림 설정</h4>
-						<div id="etc_chat" class="panel-collapse collapse accordion_sub">
-							<div class="panel-body">채팅 알림 설정 내용 입니다</div>
-						</div>
-					</div>
-					
-					<div class="">
-						<h4 class="panel-heading panel-title accordion_title">게시글 알림 설정</h4>
-						<div id="etc_board" class="panel-collapse collapse accordion_sub">
-							<div class="panel-body">게시글 알림 설정 내용 입니다</div>
-						</div>
-					</div>
-					
-					<div class="">
-						<h4 class="panel-heading panel-title accordion_title">태그 메시지 알림 설정</h4>
-						<div id="etc_tag" class="panel-collapse collapse accordion_sub">
-							<div class="panel-body">태그 메시지 알림 설정 내용 입니다</div>
-						</div>
-					</div>
-
-				</div>
-				
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<div class="btn btn-block" id="logout">로그아웃</div>
-			<div class="btn btn-block" id="memberDelete">회원탈퇴</div>
-		</div>
-		
-		
-		
 			
 	</div>
 </div>
