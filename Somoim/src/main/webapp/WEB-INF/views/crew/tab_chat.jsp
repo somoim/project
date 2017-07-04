@@ -21,6 +21,7 @@
     #replies p { font-weight:bold;  margin: 0 0 5px; }
     #replies h6 { margin:5px 0 15px;}
     .msg{ background-color: white; padding:0 5px; font-weight:normal; border-radius: 3px;}
+    .mymsg{background-color: yellow; padding:0 5px; font-weight:normal; border-radius: 3px;}
 </style>
 
 <script type="text/javascript">
@@ -61,23 +62,35 @@
 	function getChatList(cno) {
 		console.log(cno);
 		$.getJSON("/crew/tab_chat/"+cno, function(data) {
-			
 			var source = $("#source").html();
 			var template = Handlebars.compile(source);
 			$("#replies").html(template(data));
-
 		});
 	}
+	Handlebars.registerHelper('isVowel', function(mid,options) {
+		  var regexp = $("#mid").val();
+		  if (regexp == mid) {
+		    return options.fn(this);
+		  } else {
+		    return options.inverse(this);
+		  }
+		});
 	
 </script>
 
 <script id="source" type="text/x-handlebars-template">
 {{#each.}}
-	
-	<p>{{mid}}</p>
-	<label class="msg">{{msg}}</label>
-	<h6>{{ch_date}}</h6>
-	
+	{{#isVowel mid}}
+		<div class="pull-right">
+			<p>{{mid}}</p>
+			<label class="mymsg">{{msg}}</label>
+			<h6>{{ch_date}}</h6>
+		<div>
+	{{else}}
+		<p>{{mid}}</p>
+		<label class="msg">{{msg}}</label>
+		<h6>{{ch_date}}</h6>
+	{{/isVowel}}
 {{/each}}
 </script>
 </head>
@@ -107,7 +120,7 @@
 	<div id="container" >
 		<div class="container">
 			<div class="row">
-				<div class="form-group col-xs-10">
+				<div class="form-group">
 					<div id="replies">
 						
 					</div>
