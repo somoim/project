@@ -24,8 +24,8 @@
 			<!-- 여기서부터 시작 -->
 			
 			<form role="form" method="post">
-				<input value="${sBoardVO.cno}" name="cno"  >
-				<input value="${sBoardVO.sb_no}" name="sb_no" >
+				<input value="${sBoardVO.cno}" name="cno" id="cno"  type="hidden">
+				<input value="${sBoardVO.sb_no}" name="sb_no"  type="hidden" >
 				<input value="${sBoardVO.sb_picture}" name="sb_picture"  type="hidden">
 			</form>
 			
@@ -159,8 +159,8 @@
 					$(document).ready(function() {
 						
 						var $form = $("form[role='form']");
-						var $sb_no = ${sBoardVO.sb_no};
-						var $cno = ${sBoardVO.cno};
+						var sb_no = ${sBoardVO.sb_no};
+						var cno = $("#cno").val();
 						
 						AllReplyLlst(cno, sb_no);
 						
@@ -196,6 +196,7 @@
 								type : "post",
 								url : "/replies/sboard",
 								data : {
+									sb_no :sb_no,
 									re_content : re_content
 								},
 								dataType : "text",

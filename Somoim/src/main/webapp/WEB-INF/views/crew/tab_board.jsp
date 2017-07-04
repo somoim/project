@@ -113,7 +113,7 @@
 							<input value="${sboard_vo.cno}" name="cno"  type="hidden">
 						</form>
 						
-					<a href="crew/sboard_detail" class="list-group-item" data-sb_no="${sboard_vo.sb_no}" data-cno="${sboard_vo.cno}">
+					<a href="#" class="list-group-item" data-sb_no="${sboard_vo.sb_no}" data-cno="${sboard_vo.cno}">
 						<h4 class="list-group-item-heading">
 							<p>${sboard_vo.mid}</p>
 							<p>${sboard_vo.sb_writeday}</p>
