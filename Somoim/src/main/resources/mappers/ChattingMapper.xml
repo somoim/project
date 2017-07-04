@@ -3,11 +3,14 @@
 <mapper namespace="kr.co.mapper.ChattingMapper">
 
 	<select id="msg_list" resultType="ChattingVO">
-		select * from chatting where cno = #{cno} order by ch_date
+		select c.*, m.name from chatting c join member m on c.mid = m.mid where cno = #{cno}
 	</select>
 	
 	<insert id="insert_msg">
 		insert into chatting(ch_no,mid,cno,msg) values(seq_ch_no.nextval, #{mid}, #{cno}, #{msg})
 	</insert>
 	
+	<select id="msg_member" resultType="String">
+		select distinct(mid) from status where cno = #{cno}
+	</select>
 </mapper>
