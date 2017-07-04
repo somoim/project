@@ -26,10 +26,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-		
-		
-		var cno = 1;
+		var cno = $("#cno").val();
 		getChatList(cno);
 		setInterval("getChatList("+cno+")", 5000);
 		$(".send").click(function(){
@@ -130,7 +127,9 @@
 			
 		</div>
 	</div>
-	
+	<c:forEach items="${member_list}" var="member">
+		<input class="mid" value="${member}" type="hidden">
+	</c:forEach>
 	<div class="input-group chattingBar">
 		<input name="mid" id="mid" value="${login.mid}" hidden="hidden">
 		<input name="cno" id="cno" value="${cno}" hidden="hidden">

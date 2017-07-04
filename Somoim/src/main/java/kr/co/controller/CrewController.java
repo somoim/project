@@ -266,9 +266,13 @@ public class CrewController {
 	///////////////////////// 정림
 	
 	///////////////////////// 명재
+	@Transactional
+	@ResponseBody
 	@RequestMapping(value="/tab_chat")
 	public void sChat_GET(@RequestParam("cno")int cno,Model model) throws Exception {
 		List<ChattingVO> list = ch_service.msg_list(cno);
+		List<MemberVO> member_list=member_service.member_tab_list(cno);
+		model.addAttribute("member_list", member_list);
 		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}
