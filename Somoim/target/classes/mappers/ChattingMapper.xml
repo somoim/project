@@ -3,7 +3,7 @@
 <mapper namespace="kr.co.mapper.ChattingMapper">
 
 	<select id="msg_list" resultType="ChattingVO">
-		select * from chatting where cno = #{cno}
+		select * from chatting where cno = #{cno} order by ch_date
 	</select>
 	
 	<insert id="insert_msg">

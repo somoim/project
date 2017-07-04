@@ -42,4 +42,8 @@
   	<insert id="join_Crew">
   		insert into status (sno,cno,sl_no,mid) values(seq_sno.nextval,#{cno},null,#{mid})
   	</insert>
+  	
+  	<update id="update_join_cnt">
+  		update crew set join_cnt=join_cnt + 1 where cno = #{cno}
+  	</update>
 </mapper>

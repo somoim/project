@@ -324,7 +324,7 @@ public class CrewController {
 		model.addAttribute("list", list);
 		return list;
 	}
-	
+	@ResponseBody
 	@RequestMapping(value="/tab_chat", method=RequestMethod.POST)
 	public String sChat_POST(ChattingVO chat_vo) throws Exception {
 		ch_service.insert_msg(chat_vo);
