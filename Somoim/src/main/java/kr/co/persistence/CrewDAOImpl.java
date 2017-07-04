@@ -122,4 +122,12 @@ public class CrewDAOImpl implements CrewDAO {
 		map.put("mid", mid);
 		session.delete(NAMESPACE+".deleteStatus", map);
 	}
+
+	@Override
+	public void update_join_cnt(int cno) {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".update_join_cnt", cno);
+	}
+	
+
 }

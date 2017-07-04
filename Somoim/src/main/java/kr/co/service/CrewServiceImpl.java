@@ -54,11 +54,13 @@ public class CrewServiceImpl implements CrewService {
 		crew_dao.addAttach(fullName, crew_vo.getCno());
 		
 	}
-
+	
+	@Transactional
 	@Override
 	public void join_Crew(int cno, String mid) {
 		// TODO Auto-generated method stub
 		crew_dao.join_Crew(cno, mid);
+		crew_dao.update_join_cnt(cno);
 	}
 
 	@Override

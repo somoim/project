@@ -19,5 +19,6 @@ public interface CrewDAO {
 	public abstract void crewJoincntSub(int cno);
 	public abstract void slistJoincntSub(int cno, String mid);
 	public abstract void deleteStatus(int cno, String mid);
+	public abstract void update_join_cnt(int cno);
 }
 

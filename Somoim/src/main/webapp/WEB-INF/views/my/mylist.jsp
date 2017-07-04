@@ -19,13 +19,13 @@
 		// 상세보기 - 가입list
 		$(".joinCrewList").click(function() {
 			var cno = $(this).attr("data-cno");	
-			self.location="/crew/tab_list?cno="+cno;
+			self.location="/crew/bread?cno="+cno;
 		});
 		
 		// 상세보기 - 추천list
 		$(".selCrewList").click(function() {
 			var cno = $(this).attr("data-cno");	
-			self.location="/crew/tab_list?cno="+cno;
+			self.location="/crew/bread?cno="+cno;
 		});
 		
 	});
