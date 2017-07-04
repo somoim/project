@@ -10,6 +10,7 @@
 .text-right{
 	text-align: right;
 }
+.navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -38,20 +39,22 @@
 <div id="mobile">
 	<div id="container">
 		<!-- 여기서부터 시작 -->
-		<div class="panel panel-warning" id="crew_list">
-			<c:forEach items="${searchCrewList}" var="crewVO" >
+		<c:forEach items="${searchCrewList}" var="crewVO" >
+			<div class="panel panel-warning crewList" id="crew_list">
+				
 				<div class="panel-heading">
-					<span data-cno="${crewVO.cno}" class="getCno">No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="text-align"> ${crewVO.join_cnt} / ${crewVO.attend_cnt} 명</span>
+					<span data-cno="${crewVO.cno}" class="getCno">No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="pull-right memberCount"> <span class="memberRight">${crewVO.join_cnt}</span> / ${crewVO.attend_cnt} 명</span>
 				</div>
 				
 				<div class="panel-body">
-					<p>${crewVO.region}</p>
-					<p>${crewVO.title}</p>
+					<p class="crewRegion">${crewVO.region}</p>
+					<p class="crewTitle">${crewVO.title}</p>
 					
 					<div class="next_sList${crewVO.cno}"></div>
 				</div>
-			</c:forEach>
-		</div>
+				
+			</div>
+		</c:forEach>
 		<!--  -->
 	</div>
 </div>

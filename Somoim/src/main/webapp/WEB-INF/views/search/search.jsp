@@ -7,7 +7,7 @@
 <html>
 <head>
 <style type="text/css">
-
+.navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -48,7 +48,8 @@
 		<div class="input-group">
 			<input class="form-control" id="keyword" name="keyword" placeholder="모임명을 입력하세요" onkeydown="myFunction()">
 			<span class="input-group-addon" id="searchBtn">
-				검색 <span class="glyphicon glyphicon-search"></span>
+				<span>검색</span>
+				<span class="glyphicon glyphicon-search"></span>
 			</span>
 		</div>
 		
