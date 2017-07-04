@@ -46,4 +46,8 @@
   	<update id="update_join_cnt">
   		update crew set join_cnt=join_cnt + 1 where cno = #{cno}
   	</update>
+  	
+  	<update id="update_crew_cnt">
+  		update crew set read_cnt = read_cnt + 1  where cno = #{cno}
+  	</update>
 </mapper>

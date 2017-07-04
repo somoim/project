@@ -93,4 +93,11 @@ public class CrewDAOImpl implements CrewDAO {
 		session.update(NAMESPACE+".crew_delete_role", cno);
 	}
 
+	@Override
+	public void update_crew_cnt(int cno) {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".update_crew_cnt", cno);
+		
+	}
+
 }
