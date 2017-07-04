@@ -95,6 +95,12 @@ public class CrewDAOImpl implements CrewDAO {
 	}
 
 	@Override
+	public void update_crew_cnt(int cno) {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".update_crew_cnt", cno);
+		
+	}
+	@Override
 	public void crewJoincntSub(int cno) {
 		// TODO Auto-generated method stub
 		session.update(NAMESPACE+".crewJoincntSub", cno);
@@ -128,6 +134,12 @@ public class CrewDAOImpl implements CrewDAO {
 	public List<CrewVO> memberCrewList(String mid) {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE+".memberCrewList", mid);
+	}
+
+	@Override
+	public void update_join_cnt(int cno) {
+		// TODO Auto-generated method stub
+		session.update(NAMESPACE+".update_join_cnt", cno);
 	}
 
 }

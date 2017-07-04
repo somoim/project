@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -264,12 +265,10 @@ public class CrewController {
 	
 	///////////////////////// 명재
 	@Transactional
-	@ResponseBody
 	@RequestMapping(value="/tab_chat")
 	public void sChat_GET(@RequestParam("cno")int cno,Model model) throws Exception {
 		List<ChattingVO> list = ch_service.msg_list(cno);
-		List<MemberVO> member_list=member_service.member_tab_list(cno);
-		model.addAttribute("member_list", member_list);
+		
 		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}
@@ -299,29 +298,63 @@ public class CrewController {
 		List<sListVO> sList_list=sList_service.slist_tab_list(cno);
 		List<MemberVO> member_list=member_service.member_tab_list(cno);
 		List<StatusVO> status = sList_service.join_sList_member(cno);
-
-		for(sListVO list: sList_list){
-			String str1=list.getAttend_date().substring(0, 4)+"년";
-			String str2=list.getAttend_date().substring(4, 6)+"월";
-			String str3=list.getAttend_date().substring(6, 8)+"일";
-			String str4=list.getAttend_date().substring(8, 10)+":";
-			String str5=list.getAttend_date().substring(10);
-			String str = str1+str2+str3+str4+str5;
-			list.setAttend_date(str);
-		}	// 정모 날자 잘라서 년월일 : 붙여주는 코드
-		
+			for(sListVO list: sList_list){
+				String str1=list.getAttend_date().substring(0, 4)+"년";
+				String str2=list.getAttend_date().substring(4, 6)+"월";
+				String str3=list.getAttend_date().substring(6, 8)+"일";
+				String str4=list.getAttend_date().substring(8, 10)+":";
+				String str5=list.getAttend_date().substring(10);
+				String str = str1+str2+str3+str4+str5;
+				list.setAttend_date(str);
+			}	// 정모 날자 잘라서 년월일 : 붙여주는 코드
 		model.addAttribute("status", status);
 		model.addAttribute("crewVO", crewVO);
 		model.addAttribute("sList_list", sList_list);
 		model.addAttribute("member_list", member_list);
 	}
 	
+	// 조회수 증가 방지 - 쿠키 이용
+	   @RequestMapping("bread")
+	   public String newRead(HttpServletRequest request, HttpServletResponse response,@RequestParam int cno, RedirectAttributes rttr) throws Exception {
+	      Cookie[] cookies = request.getCookies();
+	      Cookie cookie = null;
+	      
+	      if(cookies!=null && cookies.length>0) {
+	         System.out.println("cookies[]");
+	         
+	         for(int i=0; i<cookies.length; i++) {
+	            if(cookies[i].getName().equals("cookie")) {
+	               cookie = cookies[i];
+	            }
+	         }
+	      }
+	      
+	      if(cookie == null) {
+	         cookie = new Cookie("cookie", "|"+ cno +"|");
+	         response.addCookie(cookie);
+	         crew_service.update_crew_cnt(cno);
+	      } else {
+	         String value = cookie.getValue();
+	         if(value.indexOf("|"+ cno +"|")<0) {
+	            value = value + "|"+ cno +"|";
+	            cookie.setValue(value);
+	            response.addCookie(cookie);
+	            crew_service.update_crew_cnt(cno);
+	         }
+	      }
+	      System.out.println("#############################################");
+	      System.out.println(cookies);
+	      System.out.println(cookie);
+	      rttr.addAttribute("cno", cno);
+	      
+	      return "redirect:/crew/tab_list?cno="+cno;
+	   }
+	
 	@ResponseBody
 	@RequestMapping(value="/update_Role")	//소모임의 운영자 권한 주기
 	public void update_MemberPower(@RequestParam("cno") int cno,String mid)throws Exception{
 		crew_service.crew_update_role(cno, mid);
 	}
-	
 	@ResponseBody
 	@RequestMapping(value="/delete_Role")	//소모임의 운영자 권한 해지
 	public void delete_MemberPower(int cno)throws Exception{
