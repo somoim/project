@@ -20,6 +20,10 @@
 		update crew set role=#{mid} where cno = #{cno}
 	</update>
 	
+	<update id="crew_delete_role">
+		update crew set role=null where cno = #{cno}
+	</update>
+	
 	<insert id="crew_create">
 		insert into crew
 		(cno, mid, region, title, content, attend_cnt, picture, category)
