@@ -29,4 +29,10 @@ public class ChattingServiceImpl implements ChattingService{
 		return dao.msg_list(cno);
 	}
 
+	@Override
+	public List<String> msg_member(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.msg_member(cno);
+	}
+
 }

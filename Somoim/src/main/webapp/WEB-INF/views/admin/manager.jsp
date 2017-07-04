@@ -100,6 +100,11 @@
             }
         });
 		
+		// 로그아웃
+		$("#logout").on("click", function() {
+			self.location="/setting/logout";
+		});
+		
 	});
 	
 	function getCrewList() {
@@ -376,6 +381,10 @@
 				</div>
 				
 			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="btn btn-block" id="logout">로그아웃</div>
 		</div>
 			
 	</div>

@@ -30,4 +30,10 @@ private final String NAMESPACE = "kr.co.mapper.ChattingMapper";
 		return session.selectList(NAMESPACE+".msg_list", cno);
 	}
 
+	@Override
+	public List<String> msg_member(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE+".msg_member", cno);
+	}
+
 }

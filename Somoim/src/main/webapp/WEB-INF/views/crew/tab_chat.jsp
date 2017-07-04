@@ -26,7 +26,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		var log = $("#mid").val();
 		var cno = $("#cno").val();
+		var list = 0;
+		chat(log,cno,list);
 		getChatList(cno);
 		setInterval("getChatList("+cno+")", 5000);
 		$(".send").click(function(){
@@ -72,14 +75,29 @@
 		    return options.inverse(this);
 		  }
 		});
-	
+	function chat(log,cno,list){
+		$(".mid").each(function(idx){
+			var mid = $(this).val();
+			if(log==mid){
+				list = list - 1;
+			}
+			if(log!=mid){
+				list = list + 1;
+			}
+			
+			if($(".size").val() == list){
+				alert("소모임 가입후 이용해 주세요");
+				self.location="/crew/tab_list?cno="+cno;
+			}
+		});
+	}
 </script>
 
 <script id="source" type="text/x-handlebars-template">
 {{#each.}}
 	{{#isVowel mid}}
 		<div class="pull-right chatMytext">
-			<p>{{mid}}</p>
+			<p>{{name}}</p>
 			<label class="mymsg">{{msg}}</label>
 			<h6>{{ch_date}}</h6>
 		<div>
@@ -127,7 +145,10 @@
 			
 		</div>
 	</div>
-	
+	<c:forEach items="${mid_list}" var="mid" varStatus="">
+		<input class="mid" value="${mid}" type="hidden">
+	</c:forEach>
+	<input class="size" value="${size}"type="hidden">
 	<div class="input-group chattingBar">
 		<input name="mid" id="mid" value="${login.mid}" hidden="hidden">
 		<input name="cno" id="cno" value="${cno}" hidden="hidden">
