@@ -93,7 +93,7 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 .chatMytext { text-align:right;}
 .picture { width: 100%; height: auto}
 .picture img { width:100%; height:auto; max-width:100%; max-height:200px;}
-.listTitle { height:35px; line-height:34px; border-bottom: 1px solid #ddd; width: 100%; background-color:#ffffff;}
+.listTitle { height:35px; line-height:34px; border-bottom: 1px solid #ddd; border-top: 1px solid #ddd; width: 100%; background-color:#ffffff;}
 .listTitleCate { font-size:12px; margin:0 15px 0 10px; color:#777777;}
 .listTitleName { font-size: 14px; font-weight:bold;}
 .content { padding:10px; background-color: #ffffff; font-size:13px; border-bottom: 1px solid #ddd; margin-bottom:20px;}
