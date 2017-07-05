@@ -74,6 +74,8 @@
 			var join = $(this).attr("data-join");
 			var mid = $(this).attr("data-mid");
 			var cno = $("#getCno").val();
+			
+			
 			if(cnt <= join){
 				alert("참석인원이 초과 하였습니다.");
 				return;
@@ -135,7 +137,7 @@
 		});
 		
 		//운영자 해임
-		$(".adminDismissBtn").on("click",function(){
+		$(".adminDismissBtn").on("click", function(){
 			$.ajax({
 				type : "get",
 				url : "/crew/delete_Role",
@@ -150,7 +152,7 @@
 		});
 		
 		// 모임멤버 강퇴
-		$(".memberDelBtn").on("click",function(){
+		$(".memberDelBtn").on("click", function(){
 			var mid = $(this).attr("data-mid");
 			var name = $(this).attr("data-name");
 			
@@ -173,12 +175,12 @@
 			
 		});
 		
-		// 회원 탈퇴
-		$("#crewMemberDel").on("click", function() {
+		// 소모임 탈퇴
+		$(".crewMemberDel").on("click", function() {
 			var mid = '${login.mid}';
 			var name = '${login.name}';
 			var title = '${crewVO.title}';
-			
+						
 			var memberDelChack = confirm(name+" 님, '"+title+"' 소모임을 탈퇴 하시겠습니까? \n탈퇴 시 작성했던 모든정보가 삭제됩니다");
 			if(memberDelChack) {
 				$.ajax({
@@ -195,7 +197,16 @@
 				});
 			}
 		});
-		
+		$("#join").click(function(){
+			var join = $("#getJoin_cnt").val();
+			var ajoin = $("#getAttend_cnt").val();
+			
+			if(ajoin <= join){
+				alert("모임 인원이 가득 찼습니다.");
+				return;
+			}
+			self.location="/crew/join_Crew?cno=${crewVO.cno}&mid=${login.mid}"
+		});
 	});
 	
 	function memberDetail(mid) {
@@ -248,12 +259,13 @@
 				  <input id="log" value="${login.mid}" type="hidden">
 				  <input id="getMid" value="${crewVO.mid}" type="hidden">
 				  <input id="getRole" value="${crewVO.role}" type="hidden">
+				  <input id="getAttend_cnt" value="${crewVO.attend_cnt}" type="hidden">
+				  <input id="getJoin_cnt" value="${crewVO.join_cnt}" type="hidden">
 			</div>
 		</div>
 		<div class="row">
 			<div class="content">
 				${crewVO.content}
-				${Today}
 			</div>
 		</div>
 		<div class="row">
@@ -323,18 +335,18 @@
 				<hr class="horizon">
 			</c:forEach>
 			
-			<c:if test="${login.mid == member.mid && login.mid != crewVO.mid && login.mid != crewVO.role}">
-				<div class="form-group">
-					<div class="btn btn-block" id="crewMemberDel">소모임 탈퇴</div>
-				</div>
-			</c:if>
+			<c:forEach items="${member_list}" var="member">
+				<c:if test="${(login.mid == member.mid) && (login.mid != crewVO.mid) && (login.mid != crewVO.role)}">
+					<div class="btn btn-block crewMemberDel">소모임 탈퇴</div>
+				</c:if>
+			</c:forEach>
 		</div>
 		
 		
 	</div>
 
 	<!-- 버튼 레이아웃 -->
-	<a href="/crew/join_Crew?cno=${crewVO.cno}&mid=${login.mid}" class="fixedBtn" id="join">
+	<a href="#" class="fixedBtn" id="join">
 		<span><span class="glyphicon glyphicon-plus"></span></span>
 		<span>가입</span>
 	</a>	

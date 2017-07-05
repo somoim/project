@@ -1,5 +1,8 @@
 package kr.co.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,11 @@ public class IntroController {
 	@RequestMapping(value="/login_post", method=RequestMethod.POST)
 	public String member_loginPost(MemberVO member_vo, Model model) throws Exception{
 		MemberVO vo = service.member_login(member_vo);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Calendar c1 = Calendar.getInstance();
+        String Today = sdf.format(c1.getTime());
+        service.update_visit(Today);
+
 		if (vo == null) {
 			return "redirect:/intro/loginfail"; 
 		}
