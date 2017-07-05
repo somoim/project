@@ -472,11 +472,13 @@ public class CrewController {
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		
 		mid = memberVO.getMid(); 
+
+		crew_service.crew_create(crew_vo);
 		int cno = crew_service.getCno();
+
 		crew_vo.setMid(mid);
 		crew_vo.setCno(cno);
 		
-		crew_service.crew_create(crew_vo);
 		return "redirect:/crew/tab_list?cno="+cno;
 	}
 }
