@@ -22,8 +22,9 @@
 <div id="mobile">
 	<div id="container">
 		<div class="container">
+			
 			<div class="row">
-				<form id="myForm" action="create" method="post" class="formLayout">
+				<form id="myForm" action="/crew/create" method="post" class="formLayout">
 				
 					<div class="form-group">
 						<label for="title">소모임명</label>
@@ -107,7 +108,6 @@
 		</div>
 	</li>
 	</script>
-					
 				
 					<div class="filebox form-group text-right">
 						<input id="fileUpload" type="file" id="file">
@@ -243,7 +243,7 @@
 		} else if ($('.imgshow').length){
 			form.append(str);
 			form.get(0).submit();
-			alert("사진이 업로드되었습니다.");
+			alert("소모임이 개설되었습니다.");
 		}
 	});
 	

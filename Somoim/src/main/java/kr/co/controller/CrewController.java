@@ -32,6 +32,7 @@ import kr.co.domain.ChattingVO;
 import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
 import kr.co.domain.MemberVO;
+import kr.co.domain.ReplyVO;
 import kr.co.domain.StatusVO;
 import kr.co.domain.sBoardVO;
 import kr.co.domain.sListVO;
@@ -39,6 +40,7 @@ import kr.co.domain.sGalleryVO;
 import kr.co.service.ChattingService;
 import kr.co.service.CrewService;
 import kr.co.service.MemberService;
+import kr.co.service.ReplyService;
 import kr.co.service.sBoardService;
 import kr.co.service.sListService;
 import kr.co.service.sGalleryService;
@@ -75,6 +77,9 @@ public class CrewController {
 	
 	@Inject
 	private sBoardService sboard_service;
+	
+	@Inject
+	private ReplyService reply_service;
 	
 	/*---------------------------------------------------------------------------------------*/
 	
@@ -195,6 +200,7 @@ public class CrewController {
 		
 		String mid = memberVO.getMid();
 		
+		List<ReplyVO> replyVO = reply_service.reply_list_sboard(sb_no);
 		sBoardVO sBoardVO = sboard_service.sboard_detail(sb_no);
 		String name = sboard_service.sboard_member_name(sb_no);
 		
@@ -428,7 +434,7 @@ public class CrewController {
 	}
 	
 	// 모임멤버 강퇴 & 소모임 탈퇴
-	@ResponseBody
+@ResponseBody
 	@RequestMapping(value="/delete_crewMember")
 	public void delete_crewMember(int cno, String mid)throws Exception{
 		crew_service.delete_crewMember(cno, mid);
@@ -460,10 +466,19 @@ public class CrewController {
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public void crew_createPost(CrewVO crew_vo) throws Exception {
-		crew_service.crew_create(crew_vo);
+	public String crew_createPost(String mid, CrewVO crew_vo,  HttpServletRequest request) throws Exception {
+	
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		
+		mid = memberVO.getMid(); 
+
+		crew_service.crew_create(crew_vo);
+		int cno = crew_service.getCno();
+
+		crew_vo.setMid(mid);
+		crew_vo.setCno(cno);
+		
+		return "redirect:/crew/tab_list?cno="+cno;
 	}
-	
-	
 }

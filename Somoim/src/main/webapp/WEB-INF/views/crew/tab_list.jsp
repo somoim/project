@@ -135,7 +135,7 @@
 		});
 		
 		//운영자 해임
-		$(".adminDismissBtn").on("click",function(){
+		$(".adminDismissBtn").on("click", function(){
 			$.ajax({
 				type : "get",
 				url : "/crew/delete_Role",
@@ -150,7 +150,7 @@
 		});
 		
 		// 모임멤버 강퇴
-		$(".memberDelBtn").on("click",function(){
+		$(".memberDelBtn").on("click", function(){
 			var mid = $(this).attr("data-mid");
 			var name = $(this).attr("data-name");
 			
@@ -173,12 +173,12 @@
 			
 		});
 		
-		// 회원 탈퇴
-		$("#crewMemberDel").on("click", function() {
+		// 소모임 탈퇴
+		$(".crewMemberDel").on("click", function() {
 			var mid = '${login.mid}';
 			var name = '${login.name}';
 			var title = '${crewVO.title}';
-			
+						
 			var memberDelChack = confirm(name+" 님, '"+title+"' 소모임을 탈퇴 하시겠습니까? \n탈퇴 시 작성했던 모든정보가 삭제됩니다");
 			if(memberDelChack) {
 				$.ajax({
@@ -232,16 +232,18 @@
 	
 	<div id="container" class="container">
 		<div class="row">
-			  <div class="col-xs-12 col-md-12">
+			  <div class="">
 			    <a href="#" class="picture">
-			      <img src="/displayFile/crew?fileName=${crewVO.picture}" alt="" width="100%;" height="120px">
+			      <img src="/displayFile/crew?fileName=${crewVO.picture}" alt="" width="100%;" height="auto">
 			    </a>
 			  </div>
 		</div>
 		<div class="row">
-			 <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1" style="background-color: white;">${crewVO.category}</span>
-				  <input id="test" type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
+			 <div class="">
+			 	<div class="listTitle">
+				  <span class="listTitleCate" id="basic-addon1">${crewVO.category}</span>
+				  <span class="listTitleName" id="test" >${crewVO.title}</span>
+				</div>
 				  <input id="getCno" value="${crewVO.cno}" type="hidden">
 				  <input id="log" value="${login.mid}" type="hidden">
 				  <input id="getMid" value="${crewVO.mid}" type="hidden">
@@ -256,7 +258,7 @@
 		</div>
 		<div class="row">
 			<c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
-				<button class="form-control sList"><span class="glyphicon glyphicon-plus"></span>새로운 정모 만들기</button>
+				<button class="sList_create"><span class="glyphicon glyphicon-plus"></span> <span>새로운 정모 만들기</span></button>
 			</c:if>
 			<c:if test="${sList_list.size() != 0}">
 				<div class="panel panel-default">
@@ -321,11 +323,11 @@
 				<hr class="horizon">
 			</c:forEach>
 			
-			<c:if test="${login.mid == member.mid && login.mid != crewVO.mid && login.mid != crewVO.role}">
-				<div class="form-group">
-					<div class="btn btn-block" id="crewMemberDel">소모임 탈퇴</div>
-				</div>
-			</c:if>
+			<c:forEach items="${member_list}" var="member">
+				<c:if test="${(login.mid == member.mid) && (login.mid != crewVO.mid) && (login.mid != crewVO.role)}">
+					<div class="btn btn-block crewMemberDel">소모임 탈퇴</div>
+				</c:if>
+			</c:forEach>
 		</div>
 		
 		
