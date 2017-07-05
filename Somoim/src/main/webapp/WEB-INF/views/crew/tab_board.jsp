@@ -106,8 +106,9 @@
 					
 					<c:forEach items="${list}" var="sboard_vo">
 						<form role="form" method="post">
-							<input value="${sboard_vo.sb_no}" name="sb_no" type="hidden">
-							<input value="${sboard_vo.cno}" name="cno"  type="hidden">
+							<input value="${sboard_vo.sb_no}" name="sb_no" class="sb_no" type="hidden">
+							<input value="${sboard_vo.cno}" name="cno" class="cno" type="hidden">
+							<input value="${login.mid}" name="mid" class="mid" type="hidden" >	
 						</form>
 						
 					<a href="#" class="list-group-item" data-sb_no="${sboard_vo.sb_no}" data-cno="${sboard_vo.cno}">
@@ -134,16 +135,42 @@
 			$(document).ready(function() {
 				$(".list-group-item").on("click", function(event) {
 					event.preventDefault();
+					var loginMid = $(".mid").val();
 					
 					var sb_no = $(this).attr("data-sb_no");
 					var cno = $(this).attr("data-cno");
 					
 					alert("sb_no::: "+sb_no); 	
 					alert("cno::: "+cno); 
+					checkMid();
 					
-					self.location="/crew/sboard_detail?cno="+cno+"&sb_no="+sb_no;
 				});
 			});
+			
+			 function checkMid(){
+					var loginMid = $(".mid").val();
+					
+					$.ajax({
+						type : "post",
+						url: "/crew/checkMid/",
+						data : {  
+							mid : loginMid
+						},
+						success : function(data) {
+						 if(data == null){ // 회원정보가 소모임에 없는 경우
+							 var cno = $(".cno").val();
+							 alert("소모임에 가입을 해주세요");
+							 self.location="/crew/sboard_detail?cno="+cno;
+							 
+						 }  else if(data != null){
+							 var cno = $(".cno").val();
+							 var sb_no = $(".sb_no").val();
+							 self.location="/crew/sboard_detail?cno="+cno+"&sb_no="+sb_no;	
+						 }
+						  console.log(check);
+						}
+					});
+				} 
 			
 			// 뒤로가기
 			$(".backCont").click(function() {
