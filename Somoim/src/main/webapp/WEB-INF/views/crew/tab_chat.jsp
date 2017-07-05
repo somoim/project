@@ -96,15 +96,19 @@
 <script id="source" type="text/x-handlebars-template">
 {{#each.}}
 	{{#isVowel mid}}
-		<div class="pull-right chatMytext">
-			<p>{{name}}</p>
-			<label class="mymsg">{{msg}}</label>
-			<h6>{{ch_date}}</h6>
-		<div>
+		<div class="row">
+			<div class="pull-right chatMytext">
+				<p>{{name}}</p>
+				<label class="mymsg">{{msg}}</label>
+				<h6>{{ch_date}}</h6>
+			</div>
+		</div>
 	{{else}}
-		<p>{{mid}}</p>
-		<label class="msg">{{msg}}</label>
-		<h6>{{ch_date}}</h6>
+		<div class="row">
+			<p>{{name}}</p>
+			<label class="msg">{{msg}}</label>
+			<h6>{{ch_date}}</h6>
+		</div>
 	{{/isVowel}}
 {{/each}}
 </script>
