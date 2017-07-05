@@ -7,7 +7,6 @@
 <html>
 <head>
 <style type="text/css">
-
 .thumbnail_list {
 	margin-top: 20px;
 }
@@ -99,8 +98,8 @@
 				<div class="row sgallery_list">
 				<c:forEach items="${list}"	var="sgallery_vo">
 					<div class="col-xs-6 col-sm-4">
-						<form role="form" method="post" class="thumbnail">
-						<a href="#" class="thumb" data-sg_no="${sgallery_vo.sg_no}" data-cno="${sgallery_vo.cno}">
+						<form role="form" method="post">
+						<a href="#" class="thumbnail" data-sg_no="${sgallery_vo.sg_no}" data-cno="${sgallery_vo.cno}">
 							<img alt="sgallery"	src="/displayFile?fileName=${sgallery_vo.sg_picture}">
 							<input value="${sgallery_vo.sg_no}" name="sg_no" class="sg_no" type="hidden">
 							<input value="${sgallery_vo.cno}" name="cno"  type="hidden" >	
@@ -119,23 +118,44 @@
 
 				<script type="text/javascript">
 					$(document).ready(function() {
-						$(".sgallery_list").on("click","div .thumb", function(event) {
-							event.preventDefault();
-							
-							var sg_no = $(this).attr("data-sg_no");
-							var cno = $(this).attr("data-cno");
-							
-							alert("sg_no::: "+sg_no); 	
-							alert("cno::: "+cno); 	
-
-							self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;	
-						});
+						
+					$(".sgallery_list").on("click","div .thumbnail", function(event) {
+						event.preventDefault();
+						/* checkMid(); */
+						var sg_no = $(this).attr("data-sg_no");
+						var cno = $(this).attr("data-cno");
+						alert("sg_no::: "+sg_no); 	
+						alert("cno::: "+cno); 	
+						self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;	
 					});
+					
+					// 소모임 회원 여부 확인
+					/*  function checkMid(){
+						$.ajax({
+							url: "/crew/checkMid",
+							type : "post",
+							data : {  
+								mid : ${login.mid} 
+							},
+							success : function okID(data) {
+								 if(data.mid == null){ // 회원정보가 소모임에 없는 경우
+									 alert("소모임에 가입을 해주세요");
+								 } else {
+								    return;
+								 }
+								  console.log(check);
+								},
+							error : function(error) {
+								alert(error.statusText);
+							}
+						});
+					} */
 					
 					// 뒤로가기
 					$(".backCont").click(function() {
 						self.location="/crew/list";
 					});
+				});
 				</script>
 
 			</div>
