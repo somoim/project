@@ -21,6 +21,19 @@
 	<select id="member_tab_list" resultType="MemberVO">
 		select m.mid, m.name, m.POWER from member m join status s on m.mid = s.mid where cno = #{cno} and sl_no is null
 	</select>
+	
+	<select id="visitday_check" resultType="int">
+		select nvl(max(count),0) from visitor where to_char(visit_day, 'yyyymmdd') = #{date}
+	</select>
+	
+	<insert id="insert_visit">
+		insert into visitor (count) values(1)
+	</insert>
+	
+	<update id="update_visit">
+		update visitor set count = count + 1 where to_char(visit_day, 'yyyymmdd') = #{date}
+	</update>
+	
 
 	
 </mapper>
