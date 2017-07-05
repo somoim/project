@@ -48,7 +48,7 @@
 				success: function(result) {
 						$("#msg").val("");
 						getChatList(cno);
-						$("label").last().focus();
+						$("body").scrollTop("#container");
 				}
 			});
 		});
@@ -97,15 +97,15 @@
 <script id="source" type="text/x-handlebars-template">
 {{#each.}}
 	{{#isVowel mid}}
-		<div class="row">
-			<div class="pull-right chatMytext">
+		<div class="">
+			<div class="chatMytext">
 				<p>{{name}}</p>
 				<label class="mymsg">{{msg}}</label>
 				<h6>{{ch_date}}</h6>
 			</div>
 		</div>
 	{{else}}
-		<div class="row">
+		<div class="">
 			<p>{{name}}</p>
 			<label class="msg">{{msg}}</label>
 			<h6>{{ch_date}}</h6>
