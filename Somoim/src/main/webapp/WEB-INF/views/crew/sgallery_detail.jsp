@@ -10,7 +10,7 @@
 <style type="text/css">
 .navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 .show_img{ text-align: center;}
-.show_img img{width:100%; }
+.show_img img{    max-width: 100%;max-height: 100%; width: auto; height: auto; display: inline-block; }
 #show_re_content{ background-color: transparent; border: 0px; border-radius: 0px; }
 .picTitle { margin-bottom:20px !important;}
 .detailTtile { font-size:18px; font-weight:bold; margin-bottom:5px;}
@@ -27,8 +27,6 @@
 				<input value="${sGalleryVO.cno}" name="cno"  type="hidden" >
 				<input value="${sGalleryVO.sg_no}" name="sg_no" type="hidden" >
 				<input value="${sGalleryVO.sg_picture}" name="sg_picture"  type="hidden">
-				<%-- ${sGalleryVO.mid}
-				${login.mid} --%>
 
 			</form>
 			
@@ -73,7 +71,7 @@
 							</c:if>
 							
 							<button type="submit" class="btn btn-info" id="tab_gallery_form">
-								<span class="glyphicon glyphicon-align-justify"></span> 사진첩
+								<span class="glyphicon glyphicon-align-justify"></span> 목록
 							</button>
 						</div>
 				</div>
@@ -140,12 +138,12 @@
 						<div class="panel-body input-group">
 							<p data-re_no="{{re_no}}" id="show_re_content" class="input-group-addon">{{re_content}}</p>
 
-							
+							{{#checkMid mid}}
 								<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
 									<span class="glyphicon glyphicon-check"></span> 수정/삭제
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
-								
+							{{/checkMid}}
 						</div>
 					</div>
 				{{/each}}
@@ -158,14 +156,19 @@
 						var sg_no = ${sGalleryVO.sg_no};
 						var cno = ${sGalleryVO.cno};
 						
+						
+						
 						AllReplyLlst(cno, sg_no);
 						
-						/* Handlebars.registerHelper("checkMid", function(options) {
-							if("${login_mid} == {{mid}}"){
-								options.fn(this);		
-							} 
-						}); */
-						
+						Handlebars.registerHelper('checkMid', function(mid, options) {
+							var loginMid = "${login.mid}";
+							if(loginMid == mid){
+								return options.fn(this);		
+							} else {
+								return options.inverse(this);
+							}
+						}); 
+					
 						$("#tab_gallery_form").on("click", function() {
 							$form.attr("method", "get");
 							$form.attr("action", "/crew/tab_gallery");
@@ -197,8 +200,9 @@
 							
 							$.ajax({
 								type : "post",
-								url : "/replies",
-								data : {
+								url : "/replies/sgallery",
+								data : {	
+									sg_no :sg_no,
 									re_content : re_content
 								},
 								dataType : "text",

@@ -32,6 +32,17 @@
 		chat(log,cno,list);
 		getChatList(cno);
 		setInterval("getChatList("+cno+")", 5000);
+		
+		
+		function getChatList(cno) {
+			console.log(cno);
+			$.getJSON("/crew/tab_chat/"+cno, function(data) {
+				var source = $("#source").html();
+				var template = Handlebars.compile(source);
+				$("#replies").html(template(data));
+			});
+		}
+		
 		$(".send").click(function(){
 			var mid = $("#mid").val();
 			var cno = $("#cno").val();
@@ -49,6 +60,7 @@
 						$("#msg").val("");
 						getChatList(cno);
 						$("body").scrollTop("#container");
+						setTimeout(function() {$("body").scrollTop($("#container").height())}, 100);
 				}
 			});
 		});
@@ -60,14 +72,7 @@
 		
 		
 	});
-	function getChatList(cno) {
-		console.log(cno);
-		$.getJSON("/crew/tab_chat/"+cno, function(data) {
-			var source = $("#source").html();
-			var template = Handlebars.compile(source);
-			$("#replies").html(template(data));
-		});
-	}
+	
 	Handlebars.registerHelper('isVowel', function(mid,options) {
 		  var regexp = $("#mid").val();
 		  if (regexp == mid) {
