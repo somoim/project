@@ -316,38 +316,50 @@
 		<div class="row role" >
 			<h3>모임 멤버</h3>
 			<c:forEach items="${member_list}" var="member">
-				<a href="/around/member_detail?mid=${member.mid}" class="aroundList">
-							<div class="name"> 
-							 	<span>
-							 		<script type="text/javascript">
-								 		function random_image() {
-											var myimages = new Array();
-											myimages[0] = "../resources/img/mobile/user01.png";
-											myimages[1] = "../resources/img/mobile/user02.png";
-											myimages[2] = "../resources/img/mobile/user03.png";
-											myimages[3] = "../resources/img/mobile/user04.png";
-											myimages[4] = "../resources/img/mobile/user05.png";
-											myimages[5] = "../resources/img/mobile/user06.png";
-											myimages[6] = "../resources/img/mobile/user07.png";
-											myimages[7] = "../resources/img/mobile/user08.png";
-											myimages[8] = "../resources/img/mobile/user09.png";
-											myimages[9] = "../resources/img/mobile/user10.png";
-											myimages[10] = "../resources/img/mobile/user11.png";
-											myimages[11] = "../resources/img/mobile/user12.png";
-											var ry = Math.floor( Math.random() * (myimages.length-1) );
-											document.write('<img src="' + myimages[ry] + '" border=0>');
-										}
-								 		random_image();
-							 		</script>
-		
-							 	</span> 
-							 	<label class="aroundName">${member.name}</label> 
-							 	<label class="aroundBirth" id="birth">
-							 		<small>${member.birth}</small>
-							 	</label>
-							 	<label class="aroundAddress">${member.address}</label>
-						 	</div>
-						 </a>
+				<div class="name"> 
+					 	<span>
+					 		<script type="text/javascript">
+						 		function random_image() {
+									var myimages = new Array();
+									myimages[0] = "../resources/img/mobile/user01.png";
+									myimages[1] = "../resources/img/mobile/user02.png";
+									myimages[2] = "../resources/img/mobile/user03.png";
+									myimages[3] = "../resources/img/mobile/user04.png";
+									myimages[4] = "../resources/img/mobile/user05.png";
+									myimages[5] = "../resources/img/mobile/user06.png";
+									myimages[6] = "../resources/img/mobile/user07.png";
+									myimages[7] = "../resources/img/mobile/user08.png";
+									myimages[8] = "../resources/img/mobile/user09.png";
+									myimages[9] = "../resources/img/mobile/user10.png";
+									myimages[10] = "../resources/img/mobile/user11.png";
+									myimages[11] = "../resources/img/mobile/user12.png";
+									var ry = Math.floor( Math.random() * (myimages.length-1) );
+									document.write('<img src="' + myimages[ry] + '" border=0>');
+								}
+						 		random_image();
+					 		</script>
+
+					 	</span> 
+					 	<label class="aroundName" onclick="memberDetail('${member.mid}')">${member.name}</label> 
+						<c:if test="${crewVO.role == member.mid}">
+							<span class="col-xs-offset-7 power">운영자</span>
+						</c:if>
+						<c:if test="${crewVO.mid == member.mid}">
+							<span class="col-xs-offset-7 power">모임장</span>
+						</c:if>
+						<c:if test="${crewVO.role == member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
+							<button class="btn btn-warning adminDismissBtn" data-mid="${member.mid}">운영자해임</button>
+						</c:if>
+						<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
+							<button class="btn btn-success adminEntrustBtn col-xs-offset-7" data-mid="${member.mid}">운영자위임</button>
+							<button class="btn btn-warning memberDelBtn" data-mid="${member.mid}" data-name="${member.name}">강퇴</button>
+						</c:if>
+						<input class="ifmid" value="${member.mid}" type="hidden">
+				 	</div>
+				
+					
+				
+				<hr class="horizon">
 			</c:forEach>
 			
 			<c:forEach items="${member_list}" var="member">
