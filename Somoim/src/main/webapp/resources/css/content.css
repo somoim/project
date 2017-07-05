@@ -100,11 +100,11 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 .sList_create { background-color:#f77973; font-weight:bold; color:#ffffff; font-size: 16px; padding: 10px; width:100%; border-radius: 10px;}
 .sList_create span { vertical-align: middle;}
 .sgallery_list { padding:30px 10px;}
-.picTitle { padding: 10px 0 10px 0; margin-bottom: 20px; text-align: center; background-color: lightblue;}
+.picTitle { padding: 10px 0 10px 0; margin-bottom: 20px; text-align: center; background-color: lightblue; color:dimgrey;}
 .picTitle h6 { font-size:18px; font-weight:bold}
 .picTitle h6 small { font-size:12px;}
 
-.thumbnail { background-color:salmon !important; padding:3px !important;} 
+.thumbnail { background-color:salmon !important; padding:3px !important; box-shadow: 3px 3px 10px #666;} 
 .thumb { position: relative; width: 100%; height: 0; overflow: hidden; padding-bottom:90% !important; }
 .thumb img { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important}
 

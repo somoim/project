@@ -5,7 +5,9 @@
 <html>
 <head>
 <style type="text/css">
-	.formLayout { padding:20px 0;}
+	#header { display:none;}
+	#footer { display:none;}
+	#container { margin-bottom:0; padding-top:0;}
 	.idcheck1 { display: none; color:blue;}
 	.idcheck2 { display: none; color:red;}
 </style>

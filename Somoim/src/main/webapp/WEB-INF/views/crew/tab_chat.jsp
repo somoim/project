@@ -6,7 +6,7 @@
 <html>
 <head>
 <style type="text/css">
-	/* html, body, #mobile { height:100%;} */
+	html, body, #mobile { height:100%;}
 	#header { display:none;}
 	#footer { display:none;}
 	#container { margin-top:0; padding:95px 0 33px 0; margin-bottom:0; min-height:100%; background-color: #9bc0d2}
