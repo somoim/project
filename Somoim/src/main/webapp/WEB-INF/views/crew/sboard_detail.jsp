@@ -14,7 +14,7 @@
     background-color: transparent;
     border: 0px;
     border-radius: 0px; 
- }
+}
 </style>
 </head>
 <body>
@@ -72,6 +72,7 @@
 							<button type="submit" class="btn btn-warning" id="update_form">
 								<span class="glyphicon glyphicon-edit"></span> 수정
 							</button>
+						
 							
 							<button type="submit" class="btn btn-danger" id="delete_form">
 								<span class="glyphicon glyphicon-trash"></span> 삭제
@@ -144,10 +145,12 @@
 			
 						<div class="panel-body input-group">
 							<p data-re_no="{{re_no}}" id="show_re_content" class="input-group-addon">{{re_content}}</p>
+							<c:if test="${login.mid} == {{mid}}">
 							<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
 								<span class="glyphicon glyphicon-check"></span> 수정/삭제
 								<span class="glyphicon glyphicon-trash"></span> </button>
-						</div>
+							</c:if>					
+							</div>
 					</div>
 				{{/each}}
 			</script>

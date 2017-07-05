@@ -31,9 +31,9 @@
 		(seq_cno.nextval,#{mid},#{region},#{title},#{content},#{attend_cnt},#{picture},#{category})
 	</insert>
 	
-	<!-- <select id="getCno" resultType="Integer">
+	<select id="getCno" resultType="Integer">
   		select max(cno) from crew
-  	</select> -->
+  	</select> 
   	
   	<select id="getId" resultType="Integer">
   		select max(picture) from crew
