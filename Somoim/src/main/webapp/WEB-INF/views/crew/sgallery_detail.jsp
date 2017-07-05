@@ -73,7 +73,7 @@
 							</c:if>
 							
 							<button type="submit" class="btn btn-info" id="tab_gallery_form">
-								<span class="glyphicon glyphicon-align-justify"></span> 사진첩
+								<span class="glyphicon glyphicon-align-justify"></span> 목록
 							</button>
 						</div>
 				</div>
