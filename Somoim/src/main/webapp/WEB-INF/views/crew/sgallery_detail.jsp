@@ -29,6 +29,7 @@
 				<input value="${sGalleryVO.sg_picture}" name="sg_picture"  type="hidden">
 				<%-- ${sGalleryVO.mid}
 				${login.mid} --%>
+
 			</form>
 			
 			<div class="container">
@@ -133,14 +134,18 @@
 				{{#each.}}
 					<div class="panel panel-info">	
 						<div class="panel-heading">
-							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span>{{mid}}</span>
+							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span>{{mid}}//${login.mid}</span>
 							 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
 						</div>
 						<div class="panel-body input-group">
 							<p data-re_no="{{re_no}}" id="show_re_content" class="input-group-addon">{{re_content}}</p>
-							<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
-								<span class="glyphicon glyphicon-check"></span> 수정/삭제
-								<span class="glyphicon glyphicon-trash"></span> </button>
+
+							
+								<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
+									<span class="glyphicon glyphicon-check"></span> 수정/삭제
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+								
 						</div>
 					</div>
 				{{/each}}
@@ -154,6 +159,12 @@
 						var cno = ${sGalleryVO.cno};
 						
 						AllReplyLlst(cno, sg_no);
+						
+						/* Handlebars.registerHelper("checkMid", function(options) {
+							if("${login_mid} == {{mid}}"){
+								options.fn(this);		
+							} 
+						}); */
 						
 						$("#tab_gallery_form").on("click", function() {
 							$form.attr("method", "get");
@@ -176,27 +187,6 @@
 						});
 						
 					
-						$("#replyInsertBtn").on("click", function() {
-							var re_content = $("#re_content").val();
-							
-							$.ajax({
-								type : "post",
-								url : "/replies/sgallery",
-								data : {
-									sg_no : sg_no,
-									re_content : re_content
-								},
-								dataType : "text",
-								success : function(result) {
-									alert("댓글 입력 성공");
-									$("#re_content").val("");
-									$("#myCollapsible").collapse("toggle");
-									AllReplyLlst(cno, sg_no);
-								}
-							});
-						});
-						
-						
 						$("#reply_form").click(function() {
 							$("#myCollapsible").collapse("toggle");
 						});
@@ -290,6 +280,9 @@
 								
 							});
 						}
+						
+						
+						
 						
 					});
 				</script>

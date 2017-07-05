@@ -5,15 +5,19 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.domain.MemberVO;
 import kr.co.persistence.MemberDAO;
+import kr.co.persistence.Visitor;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 	
 	@Inject
 	MemberDAO dao;
+	@Inject
+	Visitor visit_dao;
 	
 	@Override
 	public void member_join(MemberVO member_vo) throws Exception {
@@ -35,6 +39,19 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> member_tab_list(int cno) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.member_tab_list(cno);
+	}
+	@Transactional
+	@Override
+	public void update_visit(String date) throws Exception {
+		// TODO Auto-generated method stub
+		int check=visit_dao.visitday_check(date);
+		if(check == 0){
+			visit_dao.insert_visit();
+		}else{
+			visit_dao.update_visit(date);
+		}
+		
+		
 	}
 	
 

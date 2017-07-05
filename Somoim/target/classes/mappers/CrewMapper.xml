@@ -34,7 +34,7 @@
 	<select id="getCno" resultType="Integer">
   		select max(cno) from crew
   	</select>
-
+  	
   	<select id="getId" resultType="Integer">
   		select max(picture) from crew
   	</select>
