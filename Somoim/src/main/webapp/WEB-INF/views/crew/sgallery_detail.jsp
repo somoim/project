@@ -8,14 +8,13 @@
 <head>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js" type="text/javascript"></script>
 <style type="text/css">
-.show_img{
-	text-align: center; 
-}
-#show_re_content{
-    background-color: transparent;
-    border: 0px;
-    border-radius: 0px; 
- }
+.navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
+.show_img{ text-align: center;}
+.show_img img{width:100%; }
+#show_re_content{ background-color: transparent; border: 0px; border-radius: 0px; }
+.picTitle { margin-bottom:20px !important;}
+.detailTtile { font-size:18px; font-weight:bold; margin-bottom:5px;}
+.detailDate { font-size:14px;}
 </style>
 </head>
 <body>
@@ -28,24 +27,30 @@
 				<input value="${sGalleryVO.cno}" name="cno"  type="hidden" >
 				<input value="${sGalleryVO.sg_no}" name="sg_no" type="hidden" >
 				<input value="${sGalleryVO.sg_picture}" name="sg_picture"  type="hidden">
+				<%-- ${sGalleryVO.mid}
+				${login.mid} --%>
+
 			</form>
 			
 			<div class="container">
 
 				<div class="row">
-					<div class="page-header">
-						<h1>
-							사진보기 <small>사진을 확인합니다.</small>
-						</h1>
+					<div class="picTitle">
+						<h6>
+							상세보기 <small>사진을 확인합니다.</small>
+						</h6>
 					</div>
 				</div>
 
 
 
-				<div class="row">
+				<div class="">
 					<div class="panel panel-warning">
 						<div class="panel-heading">
-							<h3 class="panel-title">${name}<br> ${sGalleryVO.sg_writeday}</h3>
+							<h3 class="panel-title">
+								<p class="detailTtile">${name}</p> 
+								<p class="detailDate">${sGalleryVO.sg_writeday}</p>
+							</h3>
 						</div>
 						<div class="panel-body">
 							<div class="show_img">

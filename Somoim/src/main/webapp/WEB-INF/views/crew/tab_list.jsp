@@ -200,7 +200,7 @@
 		$("#join").click(function(){
 			var join = $("#getJoin_cnt").val();
 			var ajoin = $("#getAttend_cnt").val();
-			alert(ajoin+"<="+join);
+			
 			if(ajoin <= join){
 				alert("모임 인원이 가득 찼습니다.");
 				return;
