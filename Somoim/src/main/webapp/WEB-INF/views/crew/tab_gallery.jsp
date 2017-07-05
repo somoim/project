@@ -7,15 +7,6 @@
 <html>
 <head>
 <style type="text/css">
-.thumbnail{
-	width:200px;
-	height:200px;
-} 
-
-.thumbnail img{
-	width:100%;
-	height:100%;
-}
 
 .thumbnail_list {
 	margin-top: 20px;
@@ -108,8 +99,8 @@
 				<div class="row sgallery_list">
 				<c:forEach items="${list}"	var="sgallery_vo">
 					<div class="col-xs-6 col-sm-4">
-						<form role="form" method="post">
-						<a href="#" class="thumbnail" data-sg_no="${sgallery_vo.sg_no}" data-cno="${sgallery_vo.cno}">
+						<form role="form" method="post" class="thumbnail">
+						<a href="#" class="thumb" data-sg_no="${sgallery_vo.sg_no}" data-cno="${sgallery_vo.cno}">
 							<img alt="sgallery"	src="/displayFile?fileName=${sgallery_vo.sg_picture}">
 							<input value="${sgallery_vo.sg_no}" name="sg_no" class="sg_no" type="hidden">
 							<input value="${sgallery_vo.cno}" name="cno"  type="hidden" >	
@@ -128,7 +119,7 @@
 
 				<script type="text/javascript">
 					$(document).ready(function() {
-						$(".sgallery_list").on("click","div .thumbnail", function(event) {
+						$(".sgallery_list").on("click","div .thumb", function(event) {
 							event.preventDefault();
 							
 							var sg_no = $(this).attr("data-sg_no");

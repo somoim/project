@@ -5,21 +5,16 @@
 <html>
 <head>
 <style type="text/css">
-#fileUpload{
- margin-bottom: 5px;
-}
-#list_btn{
- margin-top: 1px;
-}
-
-.imgsize{
-	max-height: 150px;
-	max-width: 150px;
-}
-
-.imgshow{
-	margin-left: 250px;
-}
+.navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
+#fileUpload{ margin-bottom: 5px;}
+#list_btn{ margin-top: 5px;}
+.imgsize{ max-height:100%; max-width:100%;}
+.uploadedList { margin: 20px 0 30px 0; min-height:150px; background-color: #fff; padding: 20px; border-radius: 10px; border: 1px solid #ddd;}
+.imgshow { width: 25%;}
+.imgshow>div,.imgshow>span { display:inline-block; width: 100%;}
+.imgshow div a:first-child { width: 80%; display:inline-block;}
+.delbtn { padding: 2px 4px; border-radius: 5px; background-color: #fff; display: inline-block;}
+.delbtn:hover { padding: 2px 4px; border-radius: 5px; background-color: #fff; display: inline-block;}
 </style>
 </head>
 <body>
@@ -29,20 +24,20 @@
 			<!-- 여기서부터 시작 -->
 			<div class="container">
 
-			<form role="form" method="post">
-				<input value="${cno}" name="cno" type="hidden">
-			</form>
+				<form role="form" method="post">
+					<input value="${cno}" name="cno" type="hidden">
+				</form>
 
 		
 				<div class="row">
-					<div class="page-header">
-						<h1>
+					<div class="picTitle">
+						<h6>
 							사진올리기 <small>사진을 업로드합니다.</small>
-						</h1>
+						</h6>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="">
 					<form class="form-group">
 						<label>아이디</label> <input class="form-control" type="text"
 							name="name" id="name" readonly="readonly" value="${login.mid}">
@@ -50,33 +45,30 @@
 				</div>
 
 				<form id="myForm" action="sgallery_create?cno=${cno}" method="post">
-				
-					
-						<div class="filebox">
-							<input id="fileUpload" type="file">
-			
-							<div class="row" >
-								<ul class="clearfix uploadedList"></ul>
-							</div>
-					
-							<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
+					<div class="filebox">
+						<input id="fileUpload" type="file">
+		
+						<div class="" >
+							<ul class="clearfix uploadedList"></ul>
 						</div>
-
-					
+				
+						<input class="btn btn-primary form-control submit_form" value="업로드" id="submit_btn" type="submit">
+					</div>
+				
 				</form>
-							<a href="/crew/tab_gallery?cno=${cno}">
-							<button class="btn btn-danger form-control list_btn" id="list_btn">사진첩으로 이동</button>
-							</a>
+				<a href="/crew/tab_gallery?cno=${cno}">
+					<button class="btn btn-danger form-control list_btn" id="list_btn">뒤로가기</button>
+				</a>
 
-
+		
 					<script id="source" type="text/x-handlebars-template"> 
-						<li class="col-xs-3 imgshow"> 
+						<li class="imgshow"> 
 							<span><img class="imgsize" alt="첨부파일" src="{{imgsrc}}"></span> 
-						<div> 
-							<a href="{{getLink}}">{{fileName}}</a> 
-							<a href="{{sg_picture}}" class="btn btn-default btn-xs pull-right delbtn"> 
-							<span class="glyphicon glyphicon-remove-circle"></span> </a> 
-						</div> 
+						    <div> 
+						    	<a href="{{getLink}}">{{fileName}}</a> 
+						    	<a href="{{sg_picture}}" class="delbtn"> 
+						    	<span class="glyphicon glyphicon-remove-circle"></span> </a> 
+						    </div> 
 						</li> 
 					</script>
 
