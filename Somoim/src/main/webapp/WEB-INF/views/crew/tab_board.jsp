@@ -30,6 +30,7 @@
 	height: 100%;
 	margin-top: 95px;
 	margin-bottom: 0;
+	padding-top:0;
 }
 
 .sub_tab {
