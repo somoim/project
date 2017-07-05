@@ -475,6 +475,7 @@ public class CrewController {
 
 		crew_service.crew_create(crew_vo);
 		int cno = crew_service.getCno();
+
 		crew_vo.setMid(mid);
 		crew_vo.setCno(cno);
 		
