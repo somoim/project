@@ -6,7 +6,7 @@
 <html>
 <head>
 <style type="text/css">
-	html, body, #mobile { height:100%;}
+	/* html, body, #mobile { height:100%;} */
 	#header { display:none;}
 	#footer { display:none;}
 	#container { margin-top:0; padding:95px 0 33px 0; margin-bottom:0; min-height:100%; background-color: #9bc0d2}
@@ -32,6 +32,17 @@
 		chat(log,cno,list);
 		getChatList(cno);
 		setInterval("getChatList("+cno+")", 5000);
+		
+		
+		function getChatList(cno) {
+			console.log(cno);
+			$.getJSON("/crew/tab_chat/"+cno, function(data) {
+				var source = $("#source").html();
+				var template = Handlebars.compile(source);
+				$("#replies").html(template(data));
+			});
+		}
+		
 		$(".send").click(function(){
 			var mid = $("#mid").val();
 			var cno = $("#cno").val();
@@ -48,6 +59,7 @@
 				success: function(result) {
 						$("#msg").val("");
 						getChatList(cno);
+						setTimeout(function() {$("body").scrollTop($("#container").height())}, 100);
 				}
 			});
 		});
@@ -59,14 +71,7 @@
 		
 		
 	});
-	function getChatList(cno) {
-		console.log(cno);
-		$.getJSON("/crew/tab_chat/"+cno, function(data) {
-			var source = $("#source").html();
-			var template = Handlebars.compile(source);
-			$("#replies").html(template(data));
-		});
-	}
+	
 	Handlebars.registerHelper('isVowel', function(mid,options) {
 		  var regexp = $("#mid").val();
 		  if (regexp == mid) {
@@ -91,20 +96,22 @@
 			}
 		});
 	}
+	
+	
 </script>
 
 <script id="source" type="text/x-handlebars-template">
 {{#each.}}
 	{{#isVowel mid}}
-		<div class="row">
-			<div class="pull-right chatMytext">
+		<div class="">
+			<div class="chatMytext">
 				<p>{{name}}</p>
 				<label class="mymsg">{{msg}}</label>
 				<h6>{{ch_date}}</h6>
 			</div>
 		</div>
 	{{else}}
-		<div class="row">
+		<div class="">
 			<p>{{name}}</p>
 			<label class="msg">{{msg}}</label>
 			<h6>{{ch_date}}</h6>

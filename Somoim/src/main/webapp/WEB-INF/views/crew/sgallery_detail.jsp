@@ -10,7 +10,7 @@
 <style type="text/css">
 .navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 .show_img{ text-align: center;}
-.show_img img{width:100%; }
+.show_img img{    max-width: 100%;max-height: 100%; width: auto; height: auto; display: inline-block; }
 #show_re_content{ background-color: transparent; border: 0px; border-radius: 0px; }
 .picTitle { margin-bottom:20px !important;}
 .detailTtile { font-size:18px; font-weight:bold; margin-bottom:5px;}
@@ -71,7 +71,7 @@
 							</c:if>
 							
 							<button type="submit" class="btn btn-info" id="tab_gallery_form">
-								<span class="glyphicon glyphicon-align-justify"></span> 사진첩
+								<span class="glyphicon glyphicon-align-justify"></span> 목록
 							</button>
 						</div>
 				</div>
