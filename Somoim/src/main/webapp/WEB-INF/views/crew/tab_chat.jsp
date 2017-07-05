@@ -48,6 +48,7 @@
 				success: function(result) {
 						$("#msg").val("");
 						getChatList(cno);
+						$("label").last().focus();
 				}
 			});
 		});
