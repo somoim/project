@@ -135,7 +135,7 @@
 		});
 		
 		//운영자 해임
-		$(".adminDismissBtn").on("click",function(){
+		$(".adminDismissBtn").on("click", function(){
 			$.ajax({
 				type : "get",
 				url : "/crew/delete_Role",
@@ -150,7 +150,7 @@
 		});
 		
 		// 모임멤버 강퇴
-		$(".memberDelBtn").on("click",function(){
+		$(".memberDelBtn").on("click", function(){
 			var mid = $(this).attr("data-mid");
 			var name = $(this).attr("data-name");
 			
@@ -173,12 +173,12 @@
 			
 		});
 		
-		// 회원 탈퇴
-		$("#crewMemberDel").on("click", function() {
+		// 소모임 탈퇴
+		$(".crewMemberDel").on("click", function() {
 			var mid = '${login.mid}';
 			var name = '${login.name}';
 			var title = '${crewVO.title}';
-			
+						
 			var memberDelChack = confirm(name+" 님, '"+title+"' 소모임을 탈퇴 하시겠습니까? \n탈퇴 시 작성했던 모든정보가 삭제됩니다");
 			if(memberDelChack) {
 				$.ajax({
@@ -323,11 +323,11 @@
 				<hr class="horizon">
 			</c:forEach>
 			
-			<c:if test="${login.mid == member.mid && login.mid != crewVO.mid && login.mid != crewVO.role}">
-				<div class="form-group">
-					<div class="btn btn-block" id="crewMemberDel">소모임 탈퇴</div>
-				</div>
-			</c:if>
+			<c:forEach items="${member_list}" var="member">
+				<c:if test="${(login.mid == member.mid) && (login.mid != crewVO.mid) && (login.mid != crewVO.role)}">
+					<div class="btn btn-block crewMemberDel">소모임 탈퇴</div>
+				</c:if>
+			</c:forEach>
 		</div>
 		
 		
