@@ -314,8 +314,10 @@
 		</div>
 		
 		<div class="row role" >
-			<h3>모임 멤버</h3>
+			<div class="sListMtitle">모임 멤버</div>
+			<div class="list-group-item">
 			<c:forEach items="${member_list}" var="member">
+<<<<<<< HEAD
 				<div class="name"> 
 					 	<span>
 					 		<script type="text/javascript">
@@ -360,11 +362,47 @@
 					
 				
 				<hr class="horizon">
+=======
+				
+				<a href="/around/member_detail?mid=${member.mid}" class="aroundList">
+							<div class="name"> 
+							 	<span>
+							 		<script type="text/javascript">
+								 		function random_image() {
+											var myimages = new Array();
+											myimages[0] = "../resources/img/mobile/user01.png";
+											myimages[1] = "../resources/img/mobile/user02.png";
+											myimages[2] = "../resources/img/mobile/user03.png";
+											myimages[3] = "../resources/img/mobile/user04.png";
+											myimages[4] = "../resources/img/mobile/user05.png";
+											myimages[5] = "../resources/img/mobile/user06.png";
+											myimages[6] = "../resources/img/mobile/user07.png";
+											myimages[7] = "../resources/img/mobile/user08.png";
+											myimages[8] = "../resources/img/mobile/user09.png";
+											myimages[9] = "../resources/img/mobile/user10.png";
+											myimages[10] = "../resources/img/mobile/user11.png";
+											myimages[11] = "../resources/img/mobile/user12.png";
+											var ry = Math.floor( Math.random() * (myimages.length-1) );
+											document.write('<img src="' + myimages[ry] + '" border=0>');
+										}
+								 		random_image();
+							 		</script>
+		
+							 	</span> 
+							 	<label class="aroundName">${member.name}</label> 
+							 	<label class="aroundBirth" id="birth">
+							 		<small>${member.birth}</small>
+							 	</label>
+							 	<label class="aroundAddress">${member.address}</label>
+						 	</div>
+						 </a>
+					
+>>>>>>> branch 'master' of https://github.com/somoim/project
 			</c:forEach>
-			
+			</div>
 			<c:forEach items="${member_list}" var="member">
 				<c:if test="${(login.mid == member.mid) && (login.mid != crewVO.mid) && (login.mid != crewVO.role)}">
-					<div class="btn btn-block crewMemberDel">소모임 탈퇴</div>
+					<button class="btn-block crewMemberDel">소모임 탈퇴</button>
 				</c:if>
 			</c:forEach>
 		</div>
