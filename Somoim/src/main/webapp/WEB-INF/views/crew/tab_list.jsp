@@ -336,7 +336,7 @@
 		<span><span class="glyphicon glyphicon-plus"></span></span>
 		<span>가입</span>
 	</a>	
-	<a href="#" class="fixedBtn" id="write">
+	<a href="/crew/sboard_create?cno=${crewVO.cno}" class="fixedBtn" id="write">
 		<span><span class="glyphicon glyphicon-pencil"></span></span>
 		<span>글쓰기</span>
 	</a>
