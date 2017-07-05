@@ -112,17 +112,42 @@
 							<input value="${login.mid}" name="mid" class="mid" type="hidden" >	
 						</form>
 						
-					<a href="#" class="list-group-item" data-sb_no="${sboard_vo.sb_no}" data-cno="${sboard_vo.cno}">
-						<h4 class="list-group-item-heading">
-							<p>${sboard_vo.mid}</p>
-							<p>${sboard_vo.sb_writeday}</p>
-						</h4>
-						<hr>
-						<p class="list-group-item-text">
-							<p>${sboard_vo.sb_title}</p>
-							<p>${sboard_vo.sb_content}</p>
-						</p>
-					</a>	
+						<a href="#" class="list-group-item" data-sb_no="${sboard_vo.sb_no}" data-cno="${sboard_vo.cno}">
+							<div class="sboardListTop">
+								<div class="boardThumb">
+									<span>
+								 		<script type="text/javascript">
+									 		function random_image() {
+												var myimages = new Array();
+												myimages[0] = "../resources/img/mobile/user01.png";
+												myimages[1] = "../resources/img/mobile/user02.png";
+												myimages[2] = "../resources/img/mobile/user03.png";
+												myimages[3] = "../resources/img/mobile/user04.png";
+												myimages[4] = "../resources/img/mobile/user05.png";
+												myimages[5] = "../resources/img/mobile/user06.png";
+												myimages[6] = "../resources/img/mobile/user07.png";
+												myimages[7] = "../resources/img/mobile/user08.png";
+												myimages[8] = "../resources/img/mobile/user09.png";
+												myimages[9] = "../resources/img/mobile/user10.png";
+												myimages[10] = "../resources/img/mobile/user11.png";
+												myimages[11] = "../resources/img/mobile/user12.png";
+												var ry = Math.floor( Math.random() * (myimages.length-1) );
+												document.write('<img src="' + myimages[ry] + '" border=0>');
+											}
+									 		random_image();
+								 		</script>
+								 	</span>
+								 	<span>
+								 		<p class="sboardMid">${sboard_vo.mid}</p>
+										<p class="sboardDate">${sboard_vo.sb_writeday}</p>
+									</span>
+								</div>
+							</div>
+							<div class="sboardListBottom">
+								<p class="sboardTitle">${sboard_vo.sb_title}</p>
+								<p class="sboardCont">${sboard_vo.sb_content}</p>
+							</div>
+						</a>	
 						</c:forEach>
 					</div>
 			</div>

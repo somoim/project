@@ -314,8 +314,10 @@
 		</div>
 		
 		<div class="row role" >
-			<h3>모임 멤버</h3>
+			<div class="sListMtitle">모임 멤버</div>
+			<div class="list-group-item">
 			<c:forEach items="${member_list}" var="member">
+				
 				<a href="/around/member_detail?mid=${member.mid}" class="aroundList">
 							<div class="name"> 
 							 	<span>
@@ -348,11 +350,12 @@
 							 	<label class="aroundAddress">${member.address}</label>
 						 	</div>
 						 </a>
+					
 			</c:forEach>
-			
+			</div>
 			<c:forEach items="${member_list}" var="member">
 				<c:if test="${(login.mid == member.mid) && (login.mid != crewVO.mid) && (login.mid != crewVO.role)}">
-					<div class="btn btn-block crewMemberDel">소모임 탈퇴</div>
+					<button class="btn-block crewMemberDel">소모임 탈퇴</button>
 				</c:if>
 			</c:forEach>
 		</div>
