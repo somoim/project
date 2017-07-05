@@ -316,7 +316,7 @@
 		<div class="row role" >
 			<h3>모임 멤버</h3>
 			<c:forEach items="${member_list}" var="member">
-				<a href="/around/member_detail?mid=${memberList.mid}" class="aroundList">
+				<a href="/around/member_detail?mid=${member.mid}" class="aroundList">
 							<div class="name"> 
 							 	<span>
 							 		<script type="text/javascript">
