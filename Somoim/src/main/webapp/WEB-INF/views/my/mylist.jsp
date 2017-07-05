@@ -49,7 +49,7 @@
 	<div id="container">
 		<!-- 여기서부터 시작 -->
 		<div class="panel panel-default">
-			<div class="aroundTitle">
+			<div class="myTitle">
 				<p>가입한 모임</p>
 			</div>
 			<c:forEach items="${attend_list}" var="join">
@@ -60,17 +60,17 @@
 			</c:forEach>
 		</div>
 		<div class="panel panel-default">
-			<div class="aroundTitle">
+			<div class="myTitle">
 				<p>맞춤 추천 모임</p>
 			</div>
 			<c:forEach items="${sel_list}" var="sel">
-				<div class="panel-body selCrewList" data-cno="${sel.cno}" style="border: 1px dotted gray;">
+				<div class="panel-body selCrewList" data-cno="${sel.cno}">
 						<div class="next_sList${sel.cno}"></div>
-						<p data-cno="${sel.cno}" class="getCno">
+						<p data-cno="${sel.cno}" class="myCno">
 							<span>${sel.region}</span> |  
 							<span>${sel.title}</span>
 						</p>
-						<p><span class="text-right">${sel.join_cnt} / ${sel.attend_cnt} 명</span></p>
+						<p class="myMember"><span class="text-right">${sel.join_cnt} / ${sel.attend_cnt} 명</span></p>
 				</div>
 			</c:forEach>
 		</div>

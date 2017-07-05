@@ -32,25 +32,6 @@
 			$(".date"+date).html(newDate);
 		});
 		
-		// 회원 탈퇴
-		$("#memberDelete").on("click", function() {
-			var mid = '${login.mid}';
-			var name = '${login.name}';
-			
-			var memberDelChack = confirm(name+" 님 정말로 탈퇴 하시겠습니까? \n회원탈퇴시 모든정보가 삭제됩니다");
-			if(memberDelChack) {
-				$.ajax({
-					type: "delete"
-					, url: "/setting/memberDelete/"+mid
-					, dataType: "text"
-					, success: function(result) {
-						alert("탈퇴가 완료되었습니다");
-						self.location="/intro/login";
-					}
-				});
-			}
-		});
-		
 		// 아코디언
 		$(".accordion_banner .accordion_title").click(function() {
             if($(this).next("div").is(":visible")){
@@ -87,7 +68,7 @@
 			<div class="backCont">
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</div>
-			<div class="titleCont">정보</div>
+			<div class="titleCont">회원찾기</div>
 			<div class="snsCont">
 				<span class="glyphicon glyphicon-new-window"></span> <span
 					class="glyphicon glyphicon-option-vertical"></span>

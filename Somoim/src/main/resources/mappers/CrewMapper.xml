@@ -33,7 +33,11 @@
 	
 	<select id="getCno" resultType="Integer">
   		select max(cno) from crew
+<<<<<<< HEAD
+  	</select>
+=======
   	</select> 
+>>>>>>> branch 'master' of https://github.com/somoim/project
   	
   	<select id="getId" resultType="Integer">
   		select max(picture) from crew

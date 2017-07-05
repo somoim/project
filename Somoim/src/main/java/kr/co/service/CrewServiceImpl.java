@@ -11,6 +11,7 @@ import kr.co.domain.CrewVO;
 import kr.co.domain.Criteria;
 import kr.co.domain.MemberVO;
 import kr.co.persistence.CrewDAO;
+import kr.co.persistence.sListDAO;
 
 @Service
 public class CrewServiceImpl implements CrewService {
@@ -47,7 +48,10 @@ public class CrewServiceImpl implements CrewService {
 	public void crew_create(CrewVO crew_vo) throws Exception {
 		// TODO Auto-generated method stub
 		crew_dao.crew_create(crew_vo);
+		crew_dao.join_Crew(getCno(), crew_vo.getMid());
+		
 		String files = crew_vo.getFiles();
+		
 		if(files == null){
 			return;
 		}
