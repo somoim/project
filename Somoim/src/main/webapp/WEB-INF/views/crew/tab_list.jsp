@@ -317,7 +317,6 @@
 			<div class="sListMtitle">모임 멤버</div>
 			<div class="list-group-item">
 			<c:forEach items="${member_list}" var="member">
-<<<<<<< HEAD
 				<div class="name"> 
 					 	<span>
 					 		<script type="text/javascript">
@@ -358,12 +357,7 @@
 						</c:if>
 						<input class="ifmid" value="${member.mid}" type="hidden">
 				 	</div>
-				
-					
-				
 				<hr class="horizon">
-=======
-				
 				<a href="/around/member_detail?mid=${member.mid}" class="aroundList">
 							<div class="name"> 
 							 	<span>
