@@ -73,6 +73,7 @@
 <body>
 	<!-- 모바일 Layout -->
 	<div id="mobile">
+					<input value="${login.mid}" name="mid" class="mid" type="hidden" >	
 		<header id="header2">
 			<div class="backCont">
 				<span class="glyphicon glyphicon-chevron-left"></span>
@@ -102,7 +103,8 @@
 						<a href="#" class="thumb"  data-sg_no="${sgallery_vo.sg_no}" data-cno="${sgallery_vo.cno}">
 							<img alt="sgallery"	src="/displayFile?fileName=${sgallery_vo.sg_picture}">
 							<input value="${sgallery_vo.sg_no}" name="sg_no" class="sg_no" type="hidden">
-							<input value="${sgallery_vo.cno}" name="cno"  type="hidden" >	
+							<input value="${sgallery_vo.cno}" name="cno"  class="cno" type="hidden" >	
+							
 						</a>
 						</form>
 					</div>
@@ -121,35 +123,40 @@
 						
 					$(".sgallery_list").on("click","div .thumb", function(event) {
 						event.preventDefault();
-						/* checkMid(); */
+						var loginMid = $(".mid").val();
+						
 						var sg_no = $(this).attr("data-sg_no");
 						var cno = $(this).attr("data-cno");
 						alert("sg_no::: "+sg_no); 	
-						alert("cno::: "+cno); 	
-						self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;	
+						alert("cno::: "+cno); 
+						
+						checkMid();
+						
 					});
 					
 					// 소모임 회원 여부 확인
-					/*  function checkMid(){
+					 function checkMid(){
+						var loginMid = $(".mid").val();
+						
 						$.ajax({
-							url: "/crew/checkMid",
 							type : "post",
+							url: "/crew/checkMid/",
 							data : {  
-								mid : ${login.mid} 
+								mid : loginMid
 							},
-							success : function okID(data) {
-								 if(data.mid == null){ // 회원정보가 소모임에 없는 경우
-									 alert("소모임에 가입을 해주세요");
-								 } else {
-								    return;
-								 }
-								  console.log(check);
-								},
-							error : function(error) {
-								alert(error.statusText);
+							success : function(data) {
+							 if(data == null){ // 회원정보가 소모임에 없는 경우
+								 var cno = $(".cno").val();
+								 alert("소모임에 가입을 해주세요");
+								 self.location="/crew/sgallery_detail?cno="+cno;	
+							 }  else if(data != null){
+								var cno = $(".cno").val();
+								var sg_no = $(".sg_no").val();
+								self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;	
+							 }
 							}
 						});
-					} */
+					}
 					
 					// 뒤로가기
 					$(".backCont").click(function() {

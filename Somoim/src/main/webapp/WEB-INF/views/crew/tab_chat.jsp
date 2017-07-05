@@ -59,6 +59,7 @@
 				success: function(result) {
 						$("#msg").val("");
 						getChatList(cno);
+						$("body").scrollTop("#container");
 						setTimeout(function() {$("body").scrollTop($("#container").height())}, 100);
 				}
 			});
@@ -96,8 +97,6 @@
 			}
 		});
 	}
-	
-	
 </script>
 
 <script id="source" type="text/x-handlebars-template">
