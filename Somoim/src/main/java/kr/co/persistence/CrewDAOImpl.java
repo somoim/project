@@ -56,7 +56,7 @@ public class CrewDAOImpl implements CrewDAO {
 		if (maxCno == null) {
 			maxCno = 0;
 		}
-		return maxCno+1;
+		return maxCno;
 	}
 	
 	private int getId(){

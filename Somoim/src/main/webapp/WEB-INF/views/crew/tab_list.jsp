@@ -232,16 +232,18 @@
 	
 	<div id="container" class="container">
 		<div class="row">
-			  <div class="col-xs-12 col-md-12">
+			  <div class="">
 			    <a href="#" class="picture">
-			      <img src="/displayFile/crew?fileName=${crewVO.picture}" alt="" width="100%;" height="120px">
+			      <img src="/displayFile/crew?fileName=${crewVO.picture}" alt="" width="100%;" height="auto">
 			    </a>
 			  </div>
 		</div>
 		<div class="row">
-			 <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1" style="background-color: white;">${crewVO.category}</span>
-				  <input id="test" type="text" value="${crewVO.title}" class="form-control" aria-describedby="basic-addon1" readonly="readonly" style="background-color: white;">
+			 <div class="">
+			 	<div class="listTitle">
+				  <span class="listTitleCate" id="basic-addon1">${crewVO.category}</span>
+				  <span class="listTitleName" id="test" >${crewVO.title}</span>
+				</div>
 				  <input id="getCno" value="${crewVO.cno}" type="hidden">
 				  <input id="log" value="${login.mid}" type="hidden">
 				  <input id="getMid" value="${crewVO.mid}" type="hidden">
@@ -256,7 +258,7 @@
 		</div>
 		<div class="row">
 			<c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
-				<button class="form-control sList"><span class="glyphicon glyphicon-plus"></span>새로운 정모 만들기</button>
+				<button class="sList_create"><span class="glyphicon glyphicon-plus"></span> <span>새로운 정모 만들기</span></button>
 			</c:if>
 			<c:if test="${sList_list.size() != 0}">
 				<div class="panel panel-default">
