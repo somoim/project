@@ -41,16 +41,52 @@
 		<beans:constructor-arg value="C:\\somoim\crew\upload"></beans:constructor-arg>
 	</beans:bean>
 	
-	<context:component-scan base-package="kr.co.somoim" />
-	<context:component-scan base-package="kr.co.controller" />
 	<context:component-scan base-package="kr.co.*" />
 	
 	<beans:bean class="kr.co.interceptor.LoginInterceptor" id="loginInterceptor"></beans:bean>
+	<beans:bean class="kr.co.interceptor.PowerInterceptor" id="PowerInterceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
 			<mapping path="/intro/login_post"/>
 			<beans:ref bean="loginInterceptor"/>	
+		</interceptor>
+	</interceptors>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/crew/*"/>
+			<beans:ref bean="PowerInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/admin/*"/>
+			<beans:ref bean="PowerInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/around/*"/>
+			<beans:ref bean="PowerInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/my/*"/>
+			<beans:ref bean="PowerInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/search/*"/>
+			<beans:ref bean="PowerInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/setting/*"/>
+			<beans:ref bean="PowerInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/sList/*"/>
+			<beans:ref bean="PowerInterceptor"/>
 		</interceptor>
 	</interceptors>
 

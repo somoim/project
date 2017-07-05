@@ -6,22 +6,14 @@
 <html>
 <head>
 <style type="text/css">
-#fileUpload {
-	margin-bottom: 5px;
-}
+#fileUpload { margin-bottom: 5px;}
+.list_btn { margin-top: 5px; margin-bottom:30px;}
 
-#list_btn {
-	margin-top: 1px;
-}
-
-.imgsize {
-	max-height: 150px;
-	max-width: 150px;
-}
-
-.imgshow {
-	margin-left: 250px;
-}
+.imgsize{ max-height:100%; max-width:100%;}
+.uploadedList { margin: 20px 0 30px 0; border-radius: 10px;}
+.imgshow { width: 25%;}
+.imgshow>div,.imgshow>span { display:inline-block; width: 100%;}
+.imgshow div a:first-child { width: 80%; display:inline-block;}
 </style>
 </head>
 <body>
@@ -36,14 +28,14 @@
 				</form>
 
 				<div class="row">
-					<div class="page-header">
-						<h1>
+					<div class="picTitle">
+						<h6>
 							게시글 올리기 <small>글을 작성합니다.</small>
-						</h1>
+						</h6>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="">
 					<form id="myForm" action="/crew/sboard_create?cno=${cno}"
 						method="post">
 						<div class="form-group">
@@ -62,19 +54,19 @@
 
 						<div class="filebox">
 							<input id="fileUpload" type="file" id="file">
-							<div class="row">
+							<div class="">
 								<ul class="clearfix uploadedList"></ul>
 							</div>
-								<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
+								<input class="btn btn-primary form-control submit_form" value="글쓰기" id="submit_btn" type="submit">
 							
 							</div>
 						</form>
 						
-							<a href="/crew/tab_board?cno=${cno}" class="btn btn-danger form-control list_btn">게시판으로 이동</a>
+							<a href="/crew/tab_board?cno=${cno}" class="btn btn-danger form-control list_btn">뒤로가기</a>
 
 
 					<script id="source" type="text/x-handlebars-template"> 
-						<li class="col-xs-3 imgshow"> 
+						<li class="imgshow"> 
 							<span><img class="imgsize" alt="첨부파일" src="{{imgsrc}}"></span> 
 						<div> 
 							<a href="{{getLink}}">{{fileName}}</a> 
