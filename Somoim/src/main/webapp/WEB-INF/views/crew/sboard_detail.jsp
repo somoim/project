@@ -145,11 +145,12 @@
 			
 						<div class="panel-body input-group">
 							<p data-re_no="{{re_no}}" id="show_re_content" class="input-group-addon">{{re_content}}</p>
-							<c:if test="${login.mid} == {{mid}}">
+						
+						{{#checkMid mid}}
 							<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
 								<span class="glyphicon glyphicon-check"></span> 수정/삭제
 								<span class="glyphicon glyphicon-trash"></span> </button>
-							</c:if>					
+						{{/checkMid}}				
 							</div>
 					</div>
 				{{/each}}
@@ -165,6 +166,16 @@
 						var cno = $("#cno").val();
 						
 						AllReplyLlst(cno, sb_no);
+						
+						
+						Handlebars.registerHelper('checkMid', function(mid, options) {
+							var loginMid = "${login.mid}";
+							if(loginMid == mid){
+								return options.fn(this);		
+							} else {
+								return options.inverse(this);
+							}
+						}); 
 						
 						$("#tab_board_form").on("click", function() {
 							location.href = "/crew/tab_board?cno="+cno;

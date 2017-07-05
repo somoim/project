@@ -27,8 +27,6 @@
 				<input value="${sGalleryVO.cno}" name="cno"  type="hidden" >
 				<input value="${sGalleryVO.sg_no}" name="sg_no" type="hidden" >
 				<input value="${sGalleryVO.sg_picture}" name="sg_picture"  type="hidden">
-				<%-- ${sGalleryVO.mid}
-				${login.mid} --%>
 
 			</form>
 			
@@ -140,12 +138,12 @@
 						<div class="panel-body input-group">
 							<p data-re_no="{{re_no}}" id="show_re_content" class="input-group-addon">{{re_content}}</p>
 
-							
+							{{#checkMid mid}}
 								<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
 									<span class="glyphicon glyphicon-check"></span> 수정/삭제
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
-								
+							{{/checkMid}}
 						</div>
 					</div>
 				{{/each}}
@@ -158,14 +156,19 @@
 						var sg_no = ${sGalleryVO.sg_no};
 						var cno = ${sGalleryVO.cno};
 						
+						
+						
 						AllReplyLlst(cno, sg_no);
 						
-						/* Handlebars.registerHelper("checkMid", function(options) {
-							if("${login_mid} == {{mid}}"){
-								options.fn(this);		
-							} 
-						}); */
-						
+						Handlebars.registerHelper('checkMid', function(mid, options) {
+							var loginMid = "${login.mid}";
+							if(loginMid == mid){
+								return options.fn(this);		
+							} else {
+								return options.inverse(this);
+							}
+						}); 
+					
 						$("#tab_gallery_form").on("click", function() {
 							$form.attr("method", "get");
 							$form.attr("action", "/crew/tab_gallery");
@@ -197,8 +200,9 @@
 							
 							$.ajax({
 								type : "post",
-								url : "/replies",
-								data : {
+								url : "/replies/sgallery",
+								data : {	
+									sg_no :sg_no,
 									re_content : re_content
 								},
 								dataType : "text",
