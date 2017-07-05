@@ -271,6 +271,14 @@ public class CrewController {
 	
 	/*---------------------------------------------------------------------------------------*/
 	
+	@RequestMapping(value="/checkMid", method=RequestMethod.POST)
+	public @ResponseBody Object checkMid(@ModelAttribute("mid") String mid)throws Exception{
+		List<CrewVO> resultVO = crew_service.memberCrewList(mid);
+		System.out.println("========================++++checkMid+++++++++++=============================");
+		System.out.println(resultVO);
+		return resultVO;
+		
+	}
 		
 	/*---------------------------------------------------------------------------------------*/
 	
