@@ -73,7 +73,7 @@
 <body>
 	<!-- 모바일 Layout -->
 	<div id="mobile">
-					<input value="${login.mid}" name="mid" class="mid" type="hidden" >	
+				
 		<header id="header2">
 			<div class="backCont">
 				<span class="glyphicon glyphicon-chevron-left"></span>
@@ -94,6 +94,8 @@
 		<div id="container">
 			<!-- 여기서부터 시작 -->
 			<div class="container">
+				<input value="${cno}" name="cno"  class="cno" type="hidden" >	
+				<input value="${login.mid}" name="mid" class="mid" type="hidden" >	
 		
 	
 				<div class="row sgallery_list">
@@ -103,8 +105,6 @@
 						<a href="#" class="thumb"  data-sg_no="${sgallery_vo.sg_no}" data-cno="${sgallery_vo.cno}">
 							<img alt="sgallery"	src="/displayFile?fileName=${sgallery_vo.sg_picture}">
 							<input value="${sgallery_vo.sg_no}" name="sg_no" class="sg_no" type="hidden">
-							<input value="${sgallery_vo.cno}" name="cno"  class="cno" type="hidden" >	
-							
 						</a>
 						</form>
 					</div>
@@ -113,50 +113,63 @@
 
 
 				<!-- 버튼 레이아웃 -->
-				<a href="sgallery_create?cno=${cno}" class="fixedBtn"> <span><span
-						class="glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
+				
+			
+				<a href="#" class="fixedBtn">
+					<span><span class="create glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
 				</a>
-
+			
 
 				<script type="text/javascript">
 					$(document).ready(function() {
+						var loginMid = $(".mid").val();
+						var cno = $(".cno").val();
+						
+					$(".create").on("click", function(event) {
+						event.preventDefault();
+						console.log("loginMid:::"+loginMid);
+						alert(cno);
+						$.ajax({
+							type : "post",
+							url: "/crew/checkMid",
+							data: {
+								mid : loginMid,
+								cno : cno
+							},
+							dataType: "text",
+							success : function(data) {
+							 if(data == "NO"){ // 회원정보가 소모임에 없는 경우
+								alert("소모임에 가입을 해주세요");
+							 }  else if(data == "isOK"){
+								self.location="sgallery_create?cno="+cno;	
+							 }
+							}
+						});
+					}); 
 						
 					$(".sgallery_list").on("click","div .thumb", function(event) {
 						event.preventDefault();
-						var loginMid = $(".mid").val();
-						
 						var sg_no = $(this).attr("data-sg_no");
-						var cno = $(this).attr("data-cno");
-						alert("sg_no::: "+sg_no); 	
-						alert("cno::: "+cno); 
-						
-						checkMid();
-						
-					});
-					
-					// 소모임 회원 여부 확인
-					 function checkMid(){
-						var loginMid = $(".mid").val();
+						console.log("loginMid:::"+loginMid);
 						
 						$.ajax({
 							type : "post",
-							url: "/crew/checkMid/",
-							data : {  
-								mid : loginMid
+							url: "/crew/checkMid",
+							data: {
+								mid : loginMid,
+								cno : cno
 							},
+							dataType: "text",
 							success : function(data) {
-							 if(data == null){ // 회원정보가 소모임에 없는 경우
-								 var cno = $(".cno").val();
-								 alert("소모임에 가입을 해주세요");
-								 self.location="/crew/sgallery_detail?cno="+cno;	
-							 }  else if(data != null){
-								var cno = $(".cno").val();
-								var sg_no = $(".sg_no").val();
+							 if(data == "NO"){ // 회원정보가 소모임에 없는 경우
+								alert("소모임에 가입을 해주세요");
+							 }  else if(data == "isOK"){
 								self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;	
 							 }
 							}
 						});
-					}
+					});
+						
 					
 					// 뒤로가기
 					$(".backCont").click(function() {

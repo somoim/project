@@ -102,13 +102,13 @@
 		<div class="container">
 		
 			<div class="row">
+					<input value="${cno}" name="cno" class="cno" type="hidden">
 				
 					<div class="list-group">
 					
 					<c:forEach items="${list}" var="sboard_vo">
 						<form role="form" method="post">
 							<input value="${sboard_vo.sb_no}" name="sb_no" class="sb_no" type="hidden">
-							<input value="${sboard_vo.cno}" name="cno" class="cno" type="hidden">
 							<input value="${login.mid}" name="mid" class="mid" type="hidden" >	
 						</form>
 						
@@ -153,56 +153,69 @@
 			</div>
 	
 		<!-- 버튼 레이아웃 -->
-		<a href="/crew/sboard_create?cno=${cno}" class="fixedBtn"> <span><span
-				class="glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
+		<a href="#" class="fixedBtn"> <span><span
+				class="create glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
 		</a>
+	
 
 		<script type="text/javascript">
 			$(document).ready(function() {
+				var cno = $(".cno").val();
+				var loginMid = $(".mid").val();
+				
+				$(".create").on("click", function(event) {
+					event.preventDefault();
+					console.log("loginMid:::"+loginMid);
+					$.ajax({
+						type : "post",
+						url: "/crew/checkMid",
+						data: {
+							mid : loginMid,
+							cno : cno
+						},
+						dataType: "text",
+						success : function(data) {
+						 if(data == "NO"){ // 회원정보가 소모임에 없는 경우
+							alert("소모임에 가입을 해주세요");
+						 }  else if(data == "isOK"){
+							self.location="sboard_create?cno="+cno;	
+						 }
+						}
+					});
+				}); 
+				
+				
+				
 				$(".list-group-item").on("click", function(event) {
 					event.preventDefault();
-					var loginMid = $(".mid").val();
-					
 					var sb_no = $(this).attr("data-sb_no");
-					var cno = $(this).attr("data-cno");
-					
-					alert("sb_no::: "+sb_no); 	
-					alert("cno::: "+cno); 
-					checkMid();
-					
-				});
-			});
-			
-			 function checkMid(){
-					var loginMid = $(".mid").val();
+					console.log("loginMid:::"+loginMid);
 					
 					$.ajax({
 						type : "post",
-						url: "/crew/checkMid/",
-						data : {  
-							mid : loginMid
+						url: "/crew/checkMid",
+						data: {
+							mid : loginMid,
+							cno : cno
 						},
+						dataType: "text",
 						success : function(data) {
-						 if(data == null){ // 회원정보가 소모임에 없는 경우
-							 var cno = $(".cno").val();
+						 if(data == "NO"){ // 회원정보가 소모임에 없는 경우
 							 alert("소모임에 가입을 해주세요");
-							 self.location="/crew/sboard_detail?cno="+cno;
-							 
-						 }  else if(data != null){
-							 var cno = $(".cno").val();
-							 var sb_no = $(".sb_no").val();
-							 self.location="/crew/sboard_detail?cno="+cno+"&sb_no="+sb_no;	
-						 }
-						  console.log(check);
+						 }  else if(data == "isOK"){
+							self.location="/crew/sboard_detail?cno="+cno+"&sb_no="+sb_no;	
+							 }
 						}
 					});
-				} 
+				});
+			
+		
 			
 			// 뒤로가기
 			$(".backCont").click(function() {
 				self.location="/crew/list";
 			});
-		
+		});
 		</script>
 				
 			</div>

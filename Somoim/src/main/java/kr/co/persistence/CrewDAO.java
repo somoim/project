@@ -23,6 +23,7 @@ public interface CrewDAO {
 	public abstract MemberVO memberDetail(String mid);
 	public abstract List<CrewVO> memberCrewList(String mid);
 	public abstract void update_join_cnt(int cno);
-
+	public abstract List<CrewVO> memberMidCheck(int cno);
+	
 }
 

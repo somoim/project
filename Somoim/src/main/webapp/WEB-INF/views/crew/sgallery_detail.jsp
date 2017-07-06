@@ -132,7 +132,7 @@
 				{{#each.}}
 					<div class="panel panel-info">	
 						<div class="panel-heading">
-							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span>{{mid}}//${login.mid}</span>
+							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span> {{mid}}</span>
 							 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
 						</div>
 						<div class="panel-body input-group">

@@ -71,4 +71,8 @@
   		select * from crew where cno in (select distinct(cno) from status where mid=#{mid})
   	</select>
   	
+  	<select id="memberMidCheck" resultType="CrewVO">
+	  	select * from status where cno=#{cno}
+  	</select>
+  	
 </mapper>

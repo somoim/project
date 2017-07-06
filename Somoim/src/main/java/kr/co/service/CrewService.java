@@ -18,5 +18,5 @@ public interface CrewService {
 	public abstract void delete_crewMember(int cno, String mid);
 	public abstract MemberVO memberDetail(String mid);
 	public abstract List<CrewVO> memberCrewList(String mid);
-
+	public abstract List<CrewVO> memberMidCheck(int cno);
 }

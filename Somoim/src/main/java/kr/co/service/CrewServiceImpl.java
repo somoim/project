@@ -101,4 +101,10 @@ public class CrewServiceImpl implements CrewService {
 		return crew_dao.memberCrewList(mid);
 	}
 
+	@Override
+	public List<CrewVO> memberMidCheck(int cno) {
+		// TODO Auto-generated method stub
+		return crew_dao.memberMidCheck(cno);
+	}
+
 }

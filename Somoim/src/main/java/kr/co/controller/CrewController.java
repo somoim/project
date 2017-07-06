@@ -12,20 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.domain.ChattingVO;
@@ -44,7 +39,6 @@ import kr.co.service.ReplyService;
 import kr.co.service.sBoardService;
 import kr.co.service.sListService;
 import kr.co.service.sGalleryService;
-import kr.co.util.MediaUtils;
 
 @Controller
 @RequestMapping("/crew")
@@ -118,15 +112,11 @@ public class CrewController {
 	
 	@RequestMapping(value="/sgallery_detail")
 	public void sgallery_detail(@RequestParam("cno") int cno, @RequestParam("sg_no") int sg_no, Model model, HttpServletRequest request) throws Exception{
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		
 		String mid = memberVO.getMid(); 
-		System.out.println("########################################################################");
-		System.out.println(sg_no);
-		
 		sGalleryVO sGalleryVO = sgallery_service.sgallery_detail(sg_no);
 		String name = sgallery_service.sgallery_member_name(sg_no);
 		
@@ -270,15 +260,22 @@ public class CrewController {
 	}
 	
 	/*---------------------------------------------------------------------------------------*/
-	
+	@ResponseBody
 	@RequestMapping(value="/checkMid", method=RequestMethod.POST)
-	public @ResponseBody Object checkMid(@ModelAttribute("mid") String mid)throws Exception{
-		List<CrewVO> resultVO = crew_service.memberCrewList(mid);
-		System.out.println("========================++++checkMid+++++++++++=============================");
-		System.out.println(resultVO);
-		return resultVO;
+	public String checkMid(@ModelAttribute("mid") String mid,@ModelAttribute("cno") int cno)throws Exception{
 		
+		List<CrewVO> resultVO = crew_service.memberCrewList(mid);
+		
+		int indexSize = resultVO.size();	
+	
+		for(int i = 0; i < indexSize; i++){
+			if(cno == resultVO.get(i).getCno() ){
+				return "isOK";
+			}
+		}
+		return "NO";
 	}
+		
 		
 	/*---------------------------------------------------------------------------------------*/
 	
@@ -442,7 +439,7 @@ public class CrewController {
 	}
 	
 	// 모임멤버 강퇴 & 소모임 탈퇴
-@ResponseBody
+	@ResponseBody
 	@RequestMapping(value="/delete_crewMember")
 	public void delete_crewMember(int cno, String mid)throws Exception{
 		crew_service.delete_crewMember(cno, mid);

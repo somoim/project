@@ -142,4 +142,10 @@ public class CrewDAOImpl implements CrewDAO {
 		session.update(NAMESPACE+".update_join_cnt", cno);
 	}
 
+	@Override
+	public List<CrewVO> memberMidCheck(int cno) {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE+".memberMidCheck", cno);
+	}
+
 }
