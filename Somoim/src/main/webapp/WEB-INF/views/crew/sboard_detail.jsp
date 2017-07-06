@@ -17,6 +17,7 @@
 	.detailTtile { font-size:18px; font-weight:bold; margin-bottom:5px;}
 	.detailName { font-size:14px; font-weight:bold;}
 	.detailDate { font-size:14px;}
+	.textposition { text-align: left }
 </style>
 </head>
 <body>
@@ -144,18 +145,18 @@
 					<div class="panel panel-info">
 						<div class="panel-heading">
 							<span> 작성자: <span class="glyphicon glyphicon-user"></span> {{mid}}</span>
-							 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
+							<span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
 						</div>
 			
 						<div class="panel-body input-group">
-							<p data-re_no="{{re_no}}" id="show_re_content" class="input-group-addon">{{re_content}}</p>
-						
+							<p data-re_no="{{re_no}}" id="show_re_content" class="input-group-addon textposition">{{re_content}}</p>
+							
 						{{#checkMid mid}}
 							<button class="btn btn-default btn-sm btn-group-addon pull-right callModal">
 								<span class="glyphicon glyphicon-check"></span> 수정/삭제
 								<span class="glyphicon glyphicon-trash"></span> </button>
 						{{/checkMid}}				
-							</div>
+						</div>
 					</div>
 				{{/each}}
 			</script>

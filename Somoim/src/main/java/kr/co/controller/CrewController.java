@@ -176,6 +176,7 @@ public class CrewController {
 	@RequestMapping(value="/tab_board", method=RequestMethod.GET)
 	public void  tab_board(@RequestParam("cno") int cno, Model model) throws Exception {
 		List<sBoardVO> list = sboard_service.sboard_list(cno);
+		
 		model.addAttribute("cno", cno);
 		model.addAttribute("list", list);
 	}

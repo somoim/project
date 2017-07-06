@@ -80,7 +80,7 @@
 							 		</script>
 								 </span>
 								<span>
-							 		<p class="sboardMid">${name}</p>
+							 		<p class="sboardMid">${sboard_vo.mid}</p>
 									<p class="sboardDate">${sboard_vo.sb_writeday}</p>
 								</span>
 							</div>
