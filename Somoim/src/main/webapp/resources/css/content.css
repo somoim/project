@@ -83,6 +83,8 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 #list_form span { font-size: 12px;}
 #submit_form span { font-size: 12px;}
 .formLayout { padding:20px 10px 0;}
+.slist_btn { margin:16px 0 0 10px; }
+.power { position: absolute; right: 0; top: 50%; margin: -16px 0 0 0; font-weight: bold; font-size: 18px; color: lightcoral !important;}
 .backCont { cursor: pointer;}
 .getCno { font-weight:bold; font-size:12px;}
 .crewRegion { font-size: 12px; color:#888888; margin-bottom:5px;}
@@ -94,7 +96,7 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 .picture { width: 100%; height: auto}
 .picture img { width:100%; height:auto; max-width:100%; max-height:200px;}
 .sListMtitle { background: #493334; color: #ffffff; padding: 10px 15px; margin: 20px 0 0 0; font-size:12px; font-weight: bold;}
-.listTitle { height:35px; line-height:34px; border-bottom: 1px solid #ddd; border-top: 1px solid #ddd; width: 100%; background-color:#ffffff;}
+.listTitle { height:35px; line-height:34px; border-bottom: 1px solid #ddd; border-top: 1px solid #ddd; width: 100%; background-color:lavender;}
 .listTitleCate { font-size:12px; margin:0 15px 0 10px; color:#777777;}
 .listTitleName { font-size: 14px; font-weight:bold;}
 .content { padding:10px; background-color: #ffffff; font-size:13px; border-bottom: 1px solid #ddd; margin-bottom:20px;}
@@ -117,7 +119,7 @@ html, body, #mobile { min-height:100%; background-color:bisque; }
 .sboardTitle { font-size:18px; font-weight: bold; margin-top:5px;}
 
 /* my */
-.myTitle { color:teal; background-color:lightblue; border-bottom:1px solid #faebcc; padding: 10px 15px; font-size:12px; font-weight: bold;}
+.myTitle { color:#777777; background-color:gainsboro; box-shadow:0px 1px 5px #999; padding: 10px 15px; font-size:12px; font-weight: bold;}
 .joinCrewList { border-bottom:1px solid #dddddd; color:#555555;}
 .joinCrewList:last-child { border-bottom:none;}
 .selCrewList { border-bottom:1px solid #dddddd; color:#555555;}

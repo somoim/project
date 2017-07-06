@@ -317,8 +317,9 @@
 			<div class="sListMtitle">모임 멤버</div>
 			<div class="list-group-item">
 			<c:forEach items="${member_list}" var="member">
-				<div class="name"> 
-					 	<span>
+				<div class="aroundList">
+					<div class="name"> 
+					 	<span class="">
 					 		<script type="text/javascript">
 						 		function random_image() {
 									var myimages = new Array();
@@ -343,22 +344,21 @@
 					 	</span> 
 					 	<label class="aroundName" onclick="memberDetail('${member.mid}')">${member.name}</label> 
 						<c:if test="${crewVO.role == member.mid}">
-							<span class="col-xs-offset-7 power">운영자</span>
+							<span class="power">운영자</span>
 						</c:if>
 						<c:if test="${crewVO.mid == member.mid}">
-							<span class="col-xs-offset-7 power">모임장</span>
+							<span class="power">모임장</span>
 						</c:if>
 						<c:if test="${crewVO.role == member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
 							<button class="btn btn-warning adminDismissBtn" data-mid="${member.mid}">운영자해임</button>
 						</c:if>
 						<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
-							<button class="btn btn-success adminEntrustBtn col-xs-offset-7" data-mid="${member.mid}">운영자위임</button>
-							<button class="btn btn-warning memberDelBtn" data-mid="${member.mid}" data-name="${member.name}">강퇴</button>
+							<button class="btn btn-warning memberDelBtn slist_btn pull-right" data-mid="${member.mid}" data-name="${member.name}">강퇴</button>
+							<button class="btn btn-success adminEntrustBtn slist_btn pull-right" data-mid="${member.mid}">운영자위임</button>
 						</c:if>
 						<input class="ifmid" value="${member.mid}" type="hidden">
 				 	</div>
-				<hr class="horizon">
-						
+				</div>		
 			</c:forEach>
 			</div>
 			<c:forEach items="${member_list}" var="member">
