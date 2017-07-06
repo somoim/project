@@ -10,7 +10,7 @@ function checkImageType(fileName) {
 
 function sGallery_getFileInfo(sg_picture) {
 	var fileName, imgsrc, getLink;
-	var fileLink; //UUID하고 원래 파일 이름하고 적용하는 애?
+	var fileLink; //UUID하고 원래 파일 이름하고 적용
 	
 	if(checkImageType(sg_picture)){
 		imgsrc = "/displayFile?fileName="+sg_picture;
@@ -20,9 +20,8 @@ function sGallery_getFileInfo(sg_picture) {
 		var suffix = sg_picture.substr(14);
 		getLink = "/displayFile?fileName="+(prefix+suffix);
 	} else {
-		imgsrc="../resources/img/back.jpg";
-		fileLink = sg_picture.substr(12);
-		getLink = "/displayFile?fileName="+sg_picture;
+		alert("이미지 파일을 업로드 해주세요(jpg, png, jpeg, gif)");
+		$("input[type=file]").val("");
 	}
 	
 	fileName = fileLink.substr(fileLink.indexOf("_")+1);
@@ -43,9 +42,8 @@ function sBoard_getFileInfo(sb_picture) {
 		var suffix = sb_picture.substr(14);
 		getLink = "/displayFile/sboard?fileName="+(prefix+suffix);
 	} else {
-		imgsrc="../resources/img/back.jpg";
-		fileLink = sb_picture.substr(12);
-		getLink = "/displayFile/sboard?fileName="+sb_picture;
+		alert("이미지 파일을 업로드 해주세요(jpg, png, jpeg, gif)");
+		$("input[type=file]").val("");
 	}
 	
 	fileName = fileLink.substr(fileLink.indexOf("_")+1);
@@ -67,9 +65,8 @@ function crew_getFileInfo(picture) {
 		var suffix = picture.substr(14);
 		getLink = "/displayFile/crew?fileName="+(prefix+suffix);
 	} else {
-		imgsrc="../resources/img/back.jpg";
-		fileLink = picture.substr(12);
-		getLink = "/displayFile/crew?fileName="+picture;
+		alert("이미지 파일을 업로드 해주세요(jpg, png, jpeg, gif)");
+		$("input[type=file]").val("");
 	}
 	
 	fileName = fileLink.substr(fileLink.indexOf("_")+1);

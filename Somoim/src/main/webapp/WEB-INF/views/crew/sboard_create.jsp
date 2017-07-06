@@ -44,7 +44,7 @@
 						</div>
 						<div class="form-group">
 							<label>제목</label>
-							<input class="form-control sb_title" name="sb_title"	id="sb_title" placeholder="제목(10자)">
+							<input class="form-control sb_title" name="sb_title" id="sb_title" placeholder="제목(10자)">
 						</div>
 						<div class="form-group">
 							<label>내용</label>
@@ -105,8 +105,25 @@
 							});
 						});
 	
+							
 						$("#submit_btn").on("click",function(event) {
 							event.preventDefault();
+							var sb_title = $("#sb_title").val();
+							var sb_content = $("#sb_content").val();
+						
+							// 입력 내용 체크
+							 if (!sb_title.length) {	
+								alert("제목을 작성해주세요");
+								form.sb_title.focus();
+								return;
+							} 
+							
+							if(!sb_content.length) {
+								alert("내용을 작성해주세요");
+								form.sb_content.focus();
+								return;
+							}	 
+							
 							var files = event.target.files;
 							var formData = new FormData();
 							formData.append("file",files);
@@ -114,11 +131,6 @@
 							var str = "";
 							var img = $(".delbtn").attr("href");
 							
-							if (!$('.sb_title').length) {	
-								alert("제목을 작성해주세요");
-							} else if(!$('.sb_content').length) {
-								alert("내용을 작성해주세요");
-							}
 							
 							
 							if(img == null) {

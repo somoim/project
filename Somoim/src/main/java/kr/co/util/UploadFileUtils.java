@@ -18,7 +18,7 @@ public class UploadFileUtils {
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception{
 		UUID uid = UUID.randomUUID();
 		String savedName = uid.toString()+"_"+originalName;
-		savedName.replaceAll(" ","");
+		savedName.replaceAll(" ",""); // 띄어쓰기 있는 이름 처리
 		
 		String savedPath = calcPath(uploadPath);
 		File target = new File(uploadPath+savedPath, savedName);
@@ -31,9 +31,7 @@ public class UploadFileUtils {
 		
 		if(MediaUtils.getMediaType(formatname) != null){
 			uploadedFileName = makeThumbnail(uploadPath, savedPath, savedName);
-		} else {
-			uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
-		}
+		} 
 		return uploadedFileName;
 	}
 	

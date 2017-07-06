@@ -121,11 +121,7 @@ public class UploadController {
 			
 			if(mType != null){	//이미지 파일이면,	
 				headers.setContentType(mType);
-			} else {
-				fileName = fileName.substring(fileName.indexOf("_")+1);
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-				headers.add("Content-Disposition", "attachment; filename = \""+ new String (fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
-			}
+			} 
 			
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.CREATED);
 			
@@ -152,11 +148,7 @@ public class UploadController {
 			
 			if(mType != null){	//이미지 파일이면,	
 				headers.setContentType(mType);
-			} else {
-				fileName = fileName.substring(fileName.indexOf("_")+1);
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-				headers.add("Content-Disposition", "attachment; filename = \""+ new String (fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
-			}
+			} 
 			
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.CREATED);
 			
@@ -185,12 +177,7 @@ public class UploadController {
 			
 			if(mType != null){	//이미지 파일이면,	
 				headers.setContentType(mType);
-			} else {
-				fileName = fileName.substring(fileName.indexOf("_")+1);
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-				headers.add("Content-Disposition", "attachment; filename = \""+ new String (fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
-			}
-			
+			} 
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.CREATED);
 			
 		} catch (Exception e) {
@@ -258,31 +245,5 @@ public class UploadController {
 	@RequestMapping(value="/uploadAjax/crew", method=RequestMethod.GET)
 	public void uploadAjax_crew(){
 	}
- 	
-	
- 	
- 	
-/*	@RequestMapping(value="/uploadForm", method=RequestMethod.POST)
-	public String uploadFormPost(MultipartFile file, Model model) throws Exception{
-		System.out.println("+++++++++++++++++++++++++++++");
-		System.out.println("originalFilename: "+file.getOriginalFilename());
-		//파일 이름이 같을 경우 그냥 덮어씌워버림
-		System.out.println("size: "+file.getSize());
-		System.out.println("contentType: "+file.getContentType());
-		System.out.println("+++++++++++++++++++++++++++++");
-	
-		UUID uid = UUID.randomUUID();
-		String savedName = uid.toString()+"_"+file.getOriginalFilename();
-		
-		File target = new File(uploadPath, savedName);
-		//파일 객체 생성 - 완벽하게 unique하지는 않지만 비슷하게 나옴
-		FileCopyUtils.copy(file.getBytes(), target);
-		model.addAttribute("savedName", savedName);
-		
-		return "uploadResult";
-	}*/
-	
-	
-	
 	
 }
