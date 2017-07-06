@@ -21,8 +21,6 @@
 	<select id="reply_list_sboard" resultType="ReplyVO">
 		select * from Reply where sb_no=#{sb_no} order by re_no desc
 	</select>
-	
-
 
 	<update id="reply_update">
 		update Reply set re_content=#{re_content} where re_no=#{re_no}

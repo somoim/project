@@ -1,7 +1,6 @@
 package kr.co.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -9,15 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.domain.MemberVO;
 import kr.co.domain.ReplyVO;
@@ -33,11 +29,9 @@ public class ReplyController {
 	@RequestMapping(value="/sgallery", method=RequestMethod.POST)
 	public ResponseEntity<String> create(@RequestParam("sg_no") int sg_no, ReplyVO reply_vo, HttpServletRequest request) throws Exception{
 		
-		System.out.println("!!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(sg_no);
-		
 		ResponseEntity<String> entity=null;
 		
+		// 로그인 정보 가져오기
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		String mid = memberVO.getMid(); 
@@ -45,9 +39,11 @@ public class ReplyController {
 		reply_vo.setMid(mid);
 		reply_vo.setSg_no(sg_no);
 		
+				
 		reply_service.reply_create_sgallery(reply_vo);
 		
 		entity = new ResponseEntity<String>("INSERT_SUCCESS", HttpStatus.OK);
+		
 		
 		return entity;
 		
@@ -60,6 +56,7 @@ public class ReplyController {
 		ResponseEntity<List<ReplyVO>> entity=null;
 		
 		List<ReplyVO> list = reply_service.reply_list_sgallery(sg_no);
+		
 		
 		entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.OK);
 		
@@ -80,7 +77,6 @@ public class ReplyController {
 		String mid = memberVO.getMid(); 
 		
 		reply_vo.setMid(mid);
-		reply_vo.setSb_no(sb_no);
 		
 		reply_service.reply_create_sboard(reply_vo);
 		

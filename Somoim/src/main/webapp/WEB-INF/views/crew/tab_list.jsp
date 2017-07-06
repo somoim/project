@@ -198,14 +198,15 @@
 			}
 		});
 		$("#join").click(function(){
-			var join = $("#getJoin_cnt").val();
-			var ajoin = $("#getAttend_cnt").val();
+			var ajoin = ${crewVO.attend_cnt};
+			var join = ${crewVO.join_cnt};
 			
 			if(ajoin <= join){
 				alert("모임 인원이 가득 찼습니다.");
 				return;
 			}
 			self.location="/crew/join_Crew?cno=${crewVO.cno}&mid=${login.mid}"
+			
 		});
 	});
 	

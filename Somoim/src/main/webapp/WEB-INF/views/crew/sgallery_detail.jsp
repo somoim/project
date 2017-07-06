@@ -13,7 +13,7 @@
 .show_img img{    max-width: 100%;max-height: 100%; width: auto; height: auto; display: inline-block; }
 #show_re_content{ background-color: transparent; border: 0px; border-radius: 0px; }
 .picTitle { margin-bottom:20px !important;}
-.detailTtile { font-size:18px; font-weight:bold; margin-bottom:5px;}
+.detailTitle { font-size:18px; font-weight:bold; margin-bottom:5px;}
 .detailDate { font-size:14px;}
 </style>
 </head>
@@ -46,7 +46,7 @@
 					<div class="panel panel-warning">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								<p class="detailTtile">${name}</p> 
+								<p class="detailTitle">${name}</p> 
 								<p class="detailDate">${sGalleryVO.sg_writeday}</p>
 							</h3>
 						</div>
@@ -81,7 +81,7 @@
 			<div class="row collapse" id="myCollapsible" >
 				<div class="form-group">
 					<label for="name">작성자 이름</label>
-					<input id="name" class="form-control" value="${sGalleryVO.mid}" readonly="readonly">
+					<input id="name" class="form-control" value="${name}" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="re_content">내용</label>
@@ -109,7 +109,7 @@
 						 		<span aria-hidden="true">&times;</span>
 						 	</button>
 						 	<div>
-							 	re_no: <span id="modal_re_no"> </span>	
+						 		댓글 수정 및 삭제<input id="modal_re_no" type="hidden">
 						 	</div>
 						</div>
 						<div class="modal-body">
@@ -132,7 +132,7 @@
 				{{#each.}}
 					<div class="panel panel-info">	
 						<div class="panel-heading">
-							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span> {{mid}}</span>
+							<span> 작성자: <span class="glyphicon glyphicon-user"></span> {{mid}}</span>
 							 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
 						</div>
 						<div class="panel-body input-group">
@@ -203,7 +203,8 @@
 								url : "/replies/sgallery",
 								data : {	
 									sg_no :sg_no,
-									re_content : re_content
+									re_content : re_content,
+									name : name
 								},
 								dataType : "text",
 								success : function(result) {
@@ -220,14 +221,14 @@
 							var re_no = $(this).prev("p").attr("data-re_no");
 							var re_content = $(this).prev("p").text();
 							
-							$("#modal_re_no").text(re_no);
+							$("#modal_re_no").val(re_no);
 							$("#modal_re_content").val(re_content);
 							
 							$("#myModal").modal("show");
 						});
 						
 						$("#modal_update").on("click", function() {
-							var re_no = $("#modal_re_no").text();
+							var re_no = $("#modal_re_no").val();
 							var re_content = $("#modal_re_content").val();
 							
 							$.ajax({
@@ -252,7 +253,7 @@
 						});
 
 						$("#modal_delete").on("click", function() {
-							var re_no = $("#modal_re_no").html();
+							var re_no = $("#modal_re_no").val();
 						
 							$.ajax({
 								type:"delete",

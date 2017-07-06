@@ -7,16 +7,16 @@
 <html>
 <head>
 <style type="text/css">
-.navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
-.show_img{	text-align: center; }
-#show_re_content{ background-color: transparent; border: 0px; border-radius: 0px;}
-.sboard_title:after { content:""; display: block; clear: both;}
-.sboard_title span { vertical-align: middle;}
-.sboard_left { float: left}
-.sboard_right { float: right}
-.detailTtile { font-size:18px; font-weight:bold; margin-bottom:5px;}
-.detailName { font-size:14px; font-weight:bold;}
-.detailDate { font-size:14px;}
+	.navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
+	.show_img{	text-align: center; }
+	#show_re_content{ background-color: transparent; border: 0px; border-radius: 0px;}
+	.sboard_title:after { content:""; display: block; clear: both;}
+	.sboard_title span { vertical-align: middle;}
+	.sboard_left { float: left}
+	.sboard_right { float: right}
+	.detailTtile { font-size:18px; font-weight:bold; margin-bottom:5px;}
+	.detailName { font-size:14px; font-weight:bold;}
+	.detailDate { font-size:14px;}
 </style>
 </head>
 <body>
@@ -94,7 +94,7 @@
 				<div class="row collapse" id="myCollapsible" >
 					<div class="form-group">
 						<label for="name">작성자 이름</label>
-						<input id="name" class="form-control" value="${login.mid}" readonly="readonly">
+						<input id="name" class="form-control" value="${name}" readonly="readonly">
 					</div>
 					<div class="form-group">
 						<label for="re_content">내용</label>
@@ -121,8 +121,8 @@
 								 		<span aria-hidden="true">&times;</span>
 								 	</button>
 								 	<div>
-									 	re_no: <span id="modal_re_no"> </span>	
-								 	</div>
+							 			댓글 수정 및 삭제<input id="modal_re_no" type="hidden">	
+						 			</div>
 								</div>
 								<div class="modal-body">
 									<p>내용을 수정하세요</p>
@@ -143,7 +143,7 @@
 				{{#each.}}
 					<div class="panel panel-info">
 						<div class="panel-heading">
-							<span>re_no: {{re_no}}, 작성자: <span class="glyphicon glyphicon-user"></span> {{mid}}</span>
+							<span> 작성자: <span class="glyphicon glyphicon-user"></span> {{mid}}</span>
 							 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
 						</div>
 			
@@ -230,14 +230,14 @@
 							var re_no = $(this).prev("p").attr("data-re_no");
 							var re_content = $(this).prev("p").text();
 							
-							$("#modal_re_no").text(re_no);
+							$("#modal_re_no").val(re_no);
 							$("#modal_re_content").val(re_content);
 							
 							$("#myModal").modal("show");
 						});
 						
 						$("#modal_update").on("click", function() {
-							var re_no = $("#modal_re_no").text();
+							var re_no = $("#modal_re_no").val();
 							var re_content = $("#modal_re_content").val();
 							
 							$.ajax({
@@ -262,7 +262,7 @@
 						});
 
 						$("#modal_delete").on("click", function() {
-							var re_no = $("#modal_re_no").html();
+							var re_no = $("#modal_re_no").val();
 						
 							$.ajax({
 								type:"delete",

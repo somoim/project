@@ -56,5 +56,4 @@ public class ReplyDAOImpl implements ReplyDAO {
 		// TODO Auto-generated method stub
 		session.delete(NAMESPACE+".reply_delete", re_no);
 	}
-
 }

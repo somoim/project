@@ -73,17 +73,17 @@
 <body>
 	<!-- 모바일 Layout -->
 	<div id="mobile">
-				
 		<header id="header2">
 			<div class="backCont">
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</div>
 			<div class="titleCont">사진첩탭</div>
 			<div class="snsCont">
-				<span class="glyphicon glyphicon-new-window"></span> <span
-					class="glyphicon glyphicon-option-vertical"></span>
+				<span class="glyphicon glyphicon-new-window"></span> 
+				<span class="glyphicon glyphicon-option-vertical"></span>
 			</div>
 		</header>
+		
 		<ul class="sub_tab">
 			<li><a href="../crew/tab_list?cno=${cno}">정보</a></li>
 			<li><a href="../crew/tab_board?cno=${cno}">게시판</a></li>
@@ -96,39 +96,35 @@
 			<div class="container">
 				<input value="${cno}" name="cno"  class="cno" type="hidden" >	
 				<input value="${login.mid}" name="mid" class="mid" type="hidden" >	
-		
-	
-				<div class="row sgallery_list">
+			<!-- 사진첩 리스트 불러오기 -->
+			<div class="row sgallery_list">
 				<c:forEach items="${list}"	var="sgallery_vo">
 					<div class="col-xs-6 col-sm-4">
 						<form role="form" class="thumbnail" method="post">
-						<a href="#" class="thumb"  data-sg_no="${sgallery_vo.sg_no}" data-cno="${sgallery_vo.cno}">
-							<img alt="sgallery"	src="/displayFile?fileName=${sgallery_vo.sg_picture}">
-							<input value="${sgallery_vo.sg_no}" name="sg_no" class="sg_no" type="hidden">
-						</a>
+							<a href="#" class="thumb"  data-sg_no="${sgallery_vo.sg_no}" data-cno="${sgallery_vo.cno}">
+								<img alt="sgallery"	src="/displayFile?fileName=${sgallery_vo.sg_picture}">
+								<input value="${sgallery_vo.sg_no}" name="sg_no" class="sg_no" type="hidden">
+							</a>
 						</form>
 					</div>
 				</c:forEach>
-				</div>
+			</div>
 
 
-				<!-- 버튼 레이아웃 -->
-				
+			<!-- 버튼 레이아웃 -->
+			<a href="#" class="fixedBtn">
+				<span><span class="create glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
+			</a>
 			
-				<a href="#" class="fixedBtn">
-					<span><span class="create glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
-				</a>
-			
-
-				<script type="text/javascript">
-					$(document).ready(function() {
-						var loginMid = $(".mid").val();
-						var cno = $(".cno").val();
-						
+			<script type="text/javascript">
+				$(document).ready(function() {
+					var loginMid = $(".mid").val();
+					var cno = $(".cno").val();
+					
+					// 갤러리 글쓰기 : 회원 여부 확인
 					$(".create").on("click", function(event) {
 						event.preventDefault();
 						console.log("loginMid:::"+loginMid);
-						alert(cno);
 						$.ajax({
 							type : "post",
 							url: "/crew/checkMid",
@@ -138,15 +134,16 @@
 							},
 							dataType: "text",
 							success : function(data) {
-							 if(data == "NO"){ // 회원정보가 소모임에 없는 경우
-								alert("소모임에 가입을 해주세요");
-							 }  else if(data == "isOK"){
-								self.location="sgallery_create?cno="+cno;	
-							 }
+								if(data == "NO"){ // 회원정보가 소모임에 없는 경우
+									alert("소모임에 가입을 해주세요");
+								}  else if(data == "isOK"){
+									self.location="sgallery_create?cno="+cno;	
+							 	}
 							}
 						});
 					}); 
-						
+					
+					// 갤러리 상세보기 : 회원 여부 확인
 					$(".sgallery_list").on("click","div .thumb", function(event) {
 						event.preventDefault();
 						var sg_no = $(this).attr("data-sg_no");
@@ -161,16 +158,15 @@
 							},
 							dataType: "text",
 							success : function(data) {
-							 if(data == "NO"){ // 회원정보가 소모임에 없는 경우
-								alert("소모임에 가입을 해주세요");
-							 }  else if(data == "isOK"){
-								self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;	
-							 }
+								if(data == "NO"){ // 회원정보가 소모임에 없는 경우
+									alert("소모임에 가입을 해주세요");
+							 	}  else if(data == "isOK"){
+									self.location="/crew/sgallery_detail?cno="+cno+"&sg_no="+sg_no;	
+							 	}
 							}
 						});
 					});
 						
-					
 					// 뒤로가기
 					$(".backCont").click(function() {
 						self.location="/crew/list";
@@ -178,10 +174,7 @@
 				});
 				</script>
 
-			</div>
-			<!-- class="container" -->
-		</div>
-		<!-- id="container" -->
-	</div>
-	<!-- mobile -->
+			</div>	<!-- class="container" -->
+		</div>	<!-- id="container" -->
+	</div>	<!-- mobile -->
 </body>
