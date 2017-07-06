@@ -7,6 +7,7 @@
 <html>
 <head>
 <style type="text/css">
+.navAct02 { color:#493334 !important; font-weight:bold; background-color:#eeeeee;}
 .show_img{	text-align: center; }
 #show_re_content{ background-color: transparent; border: 0px; border-radius: 0px;}
 .sboard_title:after { content:""; display: block; clear: both;}
