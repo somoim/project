@@ -314,30 +314,56 @@
 		</div>
 		
 		<div class="row role" >
-			<h3>모임 멤버</h3>
+			<div class="sListMtitle">모임 멤버</div>
+			<div class="list-group-item">
 			<c:forEach items="${member_list}" var="member">
-				<h5 class="col-xs-12 col-xs-offset-1 "><span onclick="memberDetail('${member.mid}')">${member.name}</span> 
-					<c:if test="${crewVO.role == member.mid}">
-						<span class="col-xs-offset-7 power">운영자</span>
-					</c:if>
-					<c:if test="${crewVO.mid == member.mid}">
-						<span class="col-xs-offset-7 power">모임장</span>
-					</c:if>
-					<c:if test="${crewVO.role == member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
-						<button class="btn btn-warning adminDismissBtn" data-mid="${member.mid}">운영자해임</button>
-					</c:if>
-					<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
-						<button class="btn btn-success adminEntrustBtn col-xs-offset-7" data-mid="${member.mid}">운영자위임</button>
-						<button class="btn btn-warning memberDelBtn" data-mid="${member.mid}" data-name="${member.name}">강퇴</button>
-					</c:if>
-					<input class="ifmid" value="${member.mid}" type="hidden">
-				</h5>
-				<hr class="horizon">
+				<div class="aroundList">
+					<div class="name"> 
+					 	<span class="">
+					 		<script type="text/javascript">
+						 		function random_image() {
+									var myimages = new Array();
+									myimages[0] = "../resources/img/mobile/user01.png";
+									myimages[1] = "../resources/img/mobile/user02.png";
+									myimages[2] = "../resources/img/mobile/user03.png";
+									myimages[3] = "../resources/img/mobile/user04.png";
+									myimages[4] = "../resources/img/mobile/user05.png";
+									myimages[5] = "../resources/img/mobile/user06.png";
+									myimages[6] = "../resources/img/mobile/user07.png";
+									myimages[7] = "../resources/img/mobile/user08.png";
+									myimages[8] = "../resources/img/mobile/user09.png";
+									myimages[9] = "../resources/img/mobile/user10.png";
+									myimages[10] = "../resources/img/mobile/user11.png";
+									myimages[11] = "../resources/img/mobile/user12.png";
+									var ry = Math.floor( Math.random() * (myimages.length-1) );
+									document.write('<img src="' + myimages[ry] + '" border=0>');
+								}
+						 		random_image();
+					 		</script>
+
+					 	</span> 
+					 	<label class="aroundName" onclick="memberDetail('${member.mid}')">${member.name}</label> 
+						<c:if test="${crewVO.role == member.mid}">
+							<span class="power">운영자</span>
+						</c:if>
+						<c:if test="${crewVO.mid == member.mid}">
+							<span class="power">모임장</span>
+						</c:if>
+						<c:if test="${crewVO.role == member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
+							<button class="btn btn-warning adminDismissBtn" data-mid="${member.mid}">운영자해임</button>
+						</c:if>
+						<c:if test="${crewVO.role != member.mid && crewVO.mid == login.mid && crewVO.mid != member.mid}">
+							<button class="btn btn-warning memberDelBtn slist_btn pull-right" data-mid="${member.mid}" data-name="${member.name}">강퇴</button>
+							<button class="btn btn-success adminEntrustBtn slist_btn pull-right" data-mid="${member.mid}">운영자위임</button>
+						</c:if>
+						<input class="ifmid" value="${member.mid}" type="hidden">
+				 	</div>
+				</div>		
 			</c:forEach>
-			
+			</div>
 			<c:forEach items="${member_list}" var="member">
 				<c:if test="${(login.mid == member.mid) && (login.mid != crewVO.mid) && (login.mid != crewVO.role)}">
-					<div class="btn btn-block crewMemberDel">소모임 탈퇴</div>
+					<button class="btn-block crewMemberDel">소모임 탈퇴</button>
 				</c:if>
 			</c:forEach>
 		</div>

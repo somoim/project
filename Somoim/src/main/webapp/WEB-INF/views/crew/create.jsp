@@ -22,10 +22,16 @@
 <div id="mobile">
 	<div id="container">
 		<div class="container">
-			
+			<div class="row">
+				<div class="picTitle">
+					<h6>
+						소모임개설 <small>소모임을 개설해주세요.</small>
+					</h6>
+				</div>
+			</div>
 			<div class="row">
 				<form id="myForm" action="/crew/create" method="post" class="formLayout">
-				
+					
 					<div class="form-group">
 						<label for="title">소모임명</label>
 						<input name="title" id="title" class="form-control">

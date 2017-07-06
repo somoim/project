@@ -7,14 +7,15 @@
 <html>
 <head>
 <style type="text/css">
-.show_img{
-	text-align: center; 
-}
-#show_re_content{
-    background-color: transparent;
-    border: 0px;
-    border-radius: 0px; 
-}
+.show_img{	text-align: center; }
+#show_re_content{ background-color: transparent; border: 0px; border-radius: 0px;}
+.sboard_title:after { content:""; display: block; clear: both;}
+.sboard_title span { vertical-align: middle;}
+.sboard_left { float: left}
+.sboard_right { float: right}
+.detailTtile { font-size:18px; font-weight:bold; margin-bottom:5px;}
+.detailName { font-size:14px; font-weight:bold;}
+.detailDate { font-size:14px;}
 </style>
 </head>
 <body>
@@ -32,23 +33,25 @@
 			<div class="container">
 
 				<div class="row">
-					<div class="page-header">
-						<h1>
-							게시글보기 <small>게시글을 확인합니다.</small>
-						</h1>
+					<div class="picTitle">
+						<h6>
+							게시글 상세보기
+						</h6>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="">
 					<div class="panel panel-warning">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span>${name}</span><br>
-								<span>${sBoardVO.sb_writeday}</span>
-							</h3>
+						<div class="panel-heading sboard_title">
+							
+							<span class="detailTtile sboard_left"> ${sBoardVO.sb_title}</span>		
+							<span class="sboard_right">
+								<p class="detailName">${name}</p>
+								<p class="detailDate">${sBoardVO.sb_writeday}</p>
+							</span>
 						</div> <!-- panel-heading -->
 						<div class="panel-body">
-							<div class="show_title"> ${sBoardVO.sb_title}</div><br><br>						
+											
 							<div class="show_content"> ${sBoardVO.sb_content}</div>
 
 								<c:set value="base" var="base">	</c:set>
@@ -80,7 +83,7 @@
 						</c:if>
 						
 							<button class="btn btn-info" id="tab_board_form">
-								<span class="glyphicon glyphicon-align-justify"></span> 게시판
+								<span class="glyphicon glyphicon-align-justify"></span> 목록
 							</button>
 						</div> <!-- form-group -->
 				</div> <!-- class="row" -->

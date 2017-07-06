@@ -70,7 +70,7 @@
 							<span>${sel.region}</span> |  
 							<span>${sel.title}</span>
 						</p>
-						<p class="myMember"><span class="text-right">${sel.join_cnt} / ${sel.attend_cnt} 명</span></p>
+						<p class="myMember"><span class="text-right memberCount"><span class="memberRight">${sel.join_cnt}</span> / ${sel.attend_cnt} 명</span></p>
 				</div>
 			</c:forEach>
 		</div>
