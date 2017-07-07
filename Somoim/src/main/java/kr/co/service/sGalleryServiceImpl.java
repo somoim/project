@@ -41,11 +41,12 @@ public class sGalleryServiceImpl implements sGalleryService {
 		// TODO Auto-generated method stub
 		return sgallery_dao.sgallery_detail(sg_no);
 	}
-	
+
 	@Override
-	public String sgallery_member_name(int sg_no) throws Exception {
+	public String sgallery_detail_member(int sg_no) throws Exception {
 		// TODO Auto-generated method stub
-		return sgallery_dao.sgallery_member_name(sg_no);
+		return sgallery_dao.sgallery_detail_member(sg_no);
 	}
+	
 
 }

@@ -47,7 +47,8 @@
 			self.location="/crew/list";
 		});
 		
-		$(".sList").click(function(){
+		$(".sList_create").click(function(){
+			alert("!!!!!!!!");
 			location.href="/sList/slist_create?cno="+cno;
 		});
 		
@@ -281,7 +282,7 @@
 							<span>${sList.attend_title} (${sList.attend_cnt}명)</span>
 							<c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
 								<button class="btn btn-info updel col-xs-offset-7">수정 삭제</button>
-							</c:if>
+							</c:if> 
 							<c:forEach items="${member_list}" var="member">
 								<c:if test="${login.mid == member.mid}">
 									<button class="btn btn-danger joinBtn btn_join${sList.sl_no}" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>

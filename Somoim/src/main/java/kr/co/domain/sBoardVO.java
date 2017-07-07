@@ -10,38 +10,16 @@ public class sBoardVO {
 	private String sb_content;
 	private String sb_writeday;
 	private String sb_picture;
+	private String name;
 	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + sb_no;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		sBoardVO other = (sBoardVO) obj;
-		if (sb_no != other.sb_no)
-			return false;
-		return true;
-	}
-
 	@Override
 	public String toString() {
 		return "sBoardVO [sb_no=" + sb_no + ", cno=" + cno + ", mid=" + mid + ", sb_title=" + sb_title + ", sb_content="
-				+ sb_content + ", sb_writeday=" + sb_writeday + ", sb_picture=" + sb_picture + "]";
+				+ sb_content + ", sb_writeday=" + sb_writeday + ", sb_picture=" + sb_picture + ", name=" + name + "]";
 	}
 
 	public sBoardVO(int sb_no, int cno, String mid, String sb_title, String sb_content, String sb_writeday,
-			String sb_picture) {
+			String sb_picture, String name) {
 		super();
 		this.sb_no = sb_no;
 		this.cno = cno;
@@ -50,6 +28,7 @@ public class sBoardVO {
 		this.sb_content = sb_content;
 		this.sb_writeday = sb_writeday;
 		this.sb_picture = sb_picture;
+		this.name = name;
 	}
 
 	public sBoardVO() {
@@ -111,7 +90,14 @@ public class sBoardVO {
 	public void setSb_picture(String sb_picture) {
 		this.sb_picture = sb_picture;
 	}
-	
-	
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 }

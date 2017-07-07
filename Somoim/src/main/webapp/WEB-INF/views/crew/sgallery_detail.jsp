@@ -40,8 +40,6 @@
 					</div>
 				</div>
 
-
-
 				<div class="">
 					<div class="panel panel-warning">
 						<div class="panel-heading">
@@ -81,7 +79,7 @@
 			<div class="row collapse" id="myCollapsible" >
 				<div class="form-group">
 					<label for="name">작성자 이름</label>
-					<input id="name" class="form-control" value="${name}" readonly="readonly">
+					<input id="name" class="form-control" value="${login.name}" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="re_content">내용</label>
@@ -132,7 +130,7 @@
 				{{#each.}}
 					<div class="panel panel-info">	
 						<div class="panel-heading">
-							<span> 작성자: <span class="glyphicon glyphicon-user"></span> {{mid}}</span>
+							<span> 작성자: <span class="glyphicon glyphicon-user"></span> {{name}}</span>
 							 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{re_writeday}}</span>
 						</div>
 						<div class="panel-body input-group">

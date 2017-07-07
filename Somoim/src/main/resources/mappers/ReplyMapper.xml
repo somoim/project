@@ -15,11 +15,11 @@
 		
 	
 	<select id="reply_list_sgallery" resultType="ReplyVO">
-		select * from Reply where sg_no=#{sg_no} order by re_no desc
+		select r.*, m.name from Reply r join member m on r.mid = m.mid  where sg_no=#{sg_no} order by re_no desc
 	</select>
 	
 	<select id="reply_list_sboard" resultType="ReplyVO">
-		select * from Reply where sb_no=#{sb_no} order by re_no desc
+		select r.*, m.name from Reply r join member m on r.mid = m.mid  where sb_no=#{sb_no} order by re_no desc
 	</select>
 
 	<update id="reply_update">

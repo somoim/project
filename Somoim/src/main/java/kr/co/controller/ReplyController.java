@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,18 +28,20 @@ public class ReplyController {
 	private ReplyService reply_service;
 	
 	@RequestMapping(value="/sgallery", method=RequestMethod.POST)
-	public ResponseEntity<String> create(@RequestParam("sg_no") int sg_no, ReplyVO reply_vo, HttpServletRequest request) throws Exception{
+	public ResponseEntity<String> create(@RequestParam("sg_no") int sg_no, ReplyVO reply_vo, Model model, HttpServletRequest request) throws Exception{
 		
 		ResponseEntity<String> entity=null;
 		
 		// 로그인 정보 가져오기
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		List<ReplyVO> list = reply_service.reply_list_sgallery(sg_no);
+		
 		String mid = memberVO.getMid(); 
 		
 		reply_vo.setMid(mid);
 		reply_vo.setSg_no(sg_no);
-		
+		model.addAttribute("list", list);
 				
 		reply_service.reply_create_sgallery(reply_vo);
 		
@@ -68,7 +71,7 @@ public class ReplyController {
 	
 	
 	@RequestMapping(value="/sboard", method=RequestMethod.POST)
-	public ResponseEntity<String> create_sboard(@RequestParam("sb_no") int sb_no, ReplyVO reply_vo, HttpServletRequest request) throws Exception{
+	public ResponseEntity<String> create_sboard(@RequestParam("sb_no") int sb_no, ReplyVO reply_vo, Model model, HttpServletRequest request) throws Exception{
 		
 		ResponseEntity<String> entity=null;
 		
@@ -77,6 +80,10 @@ public class ReplyController {
 		String mid = memberVO.getMid(); 
 		
 		reply_vo.setMid(mid);
+		
+		List<ReplyVO> list = reply_service.reply_list_sboard(sb_no);
+		model.addAttribute("list", list);
+		
 		
 		reply_service.reply_create_sboard(reply_vo);
 		

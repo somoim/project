@@ -12,15 +12,11 @@
 	<div id="mobile">
 		<div id="container">
 			<!-- 여기서부터 시작 -->
-			
-			<form role="form" method="post">
-				<input value="${vo.cno}" name="cno" id="cno" >
-				<input value="${vo.sb_no}" name="sb_no" id="sb_no" >
-				<input value="${vo.sb_picture}" name="sb_picture"  >
-			</form>
-			
-			
 			<div class="container">
+				<input value="${vo.cno}" name="cno" id="cno" type="hidden">
+				<input value="${vo.sb_no}" name="sb_no" id="sb_no" type="hidden">
+				<input value="	${vo.sb_picture}" name="sb_picture" type="hidden" >
+			
 				<div class="row">
 					<div class="page-header">
 						<h1>
@@ -47,19 +43,23 @@
 						</div>
 
 						<div class="row">
-							<label for="uploadedList">첨부파일</label>
-							<ul class="clearfix uploadedList"></ul>
-						</div>
-
-						<div class="row">
 							<div class="filebox">
 								<input id="fileUpload" type="file" id="file">
-								<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
-								<a href="crew/tab_board?cno="${vo.cno}>
-								<button class="btn btn-danger form-control list_btn" id="list_btn">게시판으로 이동</button></a>
+								<div class="form-group">
+									<ul id="uploadedList" class="clearfix uploadedList">
+									
+									</ul>	
+								</div>
 							</div>
 						</div>
+						
+						<div class="row">
+							<input class="btn btn-primary form-control submit_form"	id="submit_btn" type="submit">
+						</div>
 					</form>
+						<a href="crew/tab_board?cno="${vo.cno}>
+							<button class="btn btn-danger form-control list_btn" id="list_btn">게시판으로 이동</button>
+						</a>
 
 
 					<script id="source" type="text/x-handlebars-template"> 
@@ -78,8 +78,6 @@
 				<script type="text/javascript">
 					$(document).ready(function() {
 						
-						var sb_no = $("#sb_no").val();
-						var cno = $("#cno").val();
 						
 						var source = $("#source").html();
 						var template = Handlebars.compile(source);
@@ -93,6 +91,32 @@
 							$(".uploadedList").html(ht);
 							
 						}
+						
+						 $("#submit_btn").on("click", function() {
+							var sb_no = $("#sb_no").val();
+							var cno = $("#cno").val();	
+							 
+							 
+							var files = event.target.files; 
+							var formData = new FormData();
+							formData.append("file",	files);
+
+							var form = $("#myForm");
+							var str = "";
+
+								str += "<input value='"+$(".delbtn").attr("href")+"' name='sb_picture' type='hidden'>";
+								
+								console.log(str);
+							
+							form.append(str);
+						 	form.attr("method", "post");
+							form.attr("action", "/crew/sboard_update?cno="+cno+"&sb_no="+sb_no);
+							form.get(0).submit(); 
+							alert("게시글이 수정되었습니다.");
+							
+						});
+						 
+						
 						
 						$("input[type=file]").change(function(event) {
 							event.preventDefault();
@@ -117,27 +141,7 @@
 							});
 						});
 
-						 $("#submit_btn").on("click", function(event) {
-							event.preventDefault();
-							
-							var files = event.target.files; 
-							var formData = new FormData();
-							formData.append("file",	files);
-
-							var form = $("#myForm");
-							var str = "";
-
-								str += "<input value='"+$(".delbtn").attr("href")+"' name='sb_picture' type='hidden'>";
-								
-								console.log(str);
-							
-							form.append(str);
-						 	form.attr("method", "post");
-							form.attr("action", "/crew/sboard_update?cno="+cno+"&sb_no="+sb_no);
-							form.get(0).submit(); 
-							
-						});
-						 
+						
 							
 						$(".uploadedList").on("click", "li div .delbtn", function(event) {
 							event.preventDefault();

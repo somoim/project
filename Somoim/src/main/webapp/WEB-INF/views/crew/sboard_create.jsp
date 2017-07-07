@@ -58,7 +58,6 @@
 								<ul class="clearfix uploadedList"></ul>
 							</div>
 								<input class="btn btn-primary form-control submit_form" value="글쓰기" id="submit_btn" type="submit">
-							
 							</div>
 						</form>
 						

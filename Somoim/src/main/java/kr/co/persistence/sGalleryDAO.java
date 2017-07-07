@@ -11,7 +11,6 @@ public interface sGalleryDAO {
 	abstract void sgallery_delete(int sg_no) throws Exception;
 	
 	abstract sGalleryVO sgallery_detail(int sg_no) throws Exception;
-	
-	abstract String sgallery_member_name(int sg_no) throws Exception;
+	abstract String sgallery_detail_member(int sg_no) throws Exception;
 }
 

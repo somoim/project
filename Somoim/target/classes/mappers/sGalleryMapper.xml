@@ -8,11 +8,15 @@
 	</insert>
 	
 	<select id="sgallery_list" resultType="sGalleryVO">
-		select * from sGallery where cno=#{cno} order by sg_no desc
+		select sg.*, m.name from sGallery sg join member m on sg.mid = m.mid where cno=#{cno} order by sg_no desc
 	</select>
 	
 	<select id="sgallery_detail" resultType="sGalleryVO">
 		select * from sGallery where sg_no=#{sg_no} 
+	</select>
+	
+	<select id="sgallery_detail_member" resultType="String">
+		select name from member where mid = (select mid from sGallery where sg_no=#{sg_no})
 	</select>
 
 	<delete id="sgallery_delete">

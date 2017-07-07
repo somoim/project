@@ -34,6 +34,7 @@ function sBoard_getFileInfo(sb_picture) {
 	var fileName, imgsrc, getLink;
 	var fileLink; //UUID하고 원래 파일 이름하고 적용하는 애?
 	
+	// 이미지 파일일 경우
 	if(checkImageType(sb_picture)){
 		imgsrc = "/displayFile/sboard?fileName="+sb_picture;
 		fileLink = sb_picture.substr(14); 
@@ -41,6 +42,13 @@ function sBoard_getFileInfo(sb_picture) {
 		var prefix = sb_picture.substr(0,12);
 		var suffix = sb_picture.substr(14);
 		getLink = "/displayFile/sboard?fileName="+(prefix+suffix);
+	
+	// 이미지 파일이 없을 경우
+	} else if(checkImageType(base)){
+		imgsrc = "/displayFile/sboard?fileName="+base;
+		getLink = "/displayFile/sboard?fileName="+base;
+	
+	// 이미지 파일이 아닌 경우
 	} else {
 		alert("이미지 파일을 업로드 해주세요(jpg, png, jpeg, gif)");
 		$("input[type=file]").val("");
@@ -64,12 +72,12 @@ function crew_getFileInfo(picture) {
 		var prefix = picture.substr(0,12);
 		var suffix = picture.substr(14);
 		getLink = "/displayFile/crew?fileName="+(prefix+suffix);
+		fileName = fileLink.substr(fileLink.indexOf("_")+1);
 	} else {
 		alert("이미지 파일을 업로드 해주세요(jpg, png, jpeg, gif)");
 		$("input[type=file]").val("");
 	}
 	
-	fileName = fileLink.substr(fileLink.indexOf("_")+1);
 	
 	return {fileName:fileName, imgsrc:imgsrc, getLink:getLink, picture:picture};
 	

@@ -47,7 +47,8 @@
 		<!-- 여기서부터 시작 -->
 		<div class="container">
 			<input value="${cno}" name="cno" class="cno" type="hidden">
-			<input value="${login.mid}" name="mid" class="mid" type="hidden" >	
+			<input value="${login.mid}" name="mid" class="mid" type="hidden" >
+				
 		<div class="row">
 			<div class="list-group">
 				<c:forEach items="${list}" var="sboard_vo">
@@ -80,8 +81,9 @@
 							 		</script>
 								 </span>
 								<span>
-							 		<p class="sboardMid">${sboard_vo.mid}</p>
-									<p class="sboardDate">${sboard_vo.sb_writeday}</p>
+										<p class="sboardName">${sboard_vo.name}</p>
+										<p class="sboardDate">${sboard_vo.sb_writeday}</p>
+									
 								</span>
 							</div>
 						</div>

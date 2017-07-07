@@ -113,16 +113,14 @@ public class CrewController {
 	@RequestMapping(value="/sgallery_detail")
 	public void sgallery_detail(@RequestParam("cno") int cno, @RequestParam("sg_no") int sg_no, Model model, HttpServletRequest request) throws Exception{
 		
-		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("login");
-		
-		String mid = memberVO.getMid(); 
+		 
 		sGalleryVO sGalleryVO = sgallery_service.sgallery_detail(sg_no);
-		String name = sgallery_service.sgallery_member_name(sg_no);
+		List<sGalleryVO> list = sgallery_service.sgallery_list(cno);
+		String name = sgallery_service.sgallery_detail_member(sg_no);
 		
-	
-		model.addAttribute("sGalleryVO", sGalleryVO);
 		model.addAttribute("name", name);
+		model.addAttribute("list", list);
+		model.addAttribute("sGalleryVO", sGalleryVO);
 	}
 
 	/*---------------------------------------------------------------------------------------*/
@@ -186,17 +184,13 @@ public class CrewController {
 	@RequestMapping(value="/sboard_detail", method=RequestMethod.GET)
 	public void sboard_detail_GET(@RequestParam("cno") int cno, @RequestParam("sb_no") int sb_no, Model model, HttpServletRequest request) throws Exception {
 		
-		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("login");
-		
-		String mid = memberVO.getMid();
-		
 		List<ReplyVO> replyVO = reply_service.reply_list_sboard(sb_no);
 		sBoardVO sBoardVO = sboard_service.sboard_detail(sb_no);
-		String name = sboard_service.sboard_member_name(sb_no);
+		String name = sboard_service.sboard_detail_member(sb_no);
 		
-		model.addAttribute("sBoardVO", sBoardVO);
+		model.addAttribute("replyVO",replyVO);
 		model.addAttribute("name", name);
+		model.addAttribute("sBoardVO", sBoardVO);
 		
 	}
 	

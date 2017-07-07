@@ -8,38 +8,13 @@ public class ReplyVO {
 	private int	sb_no;
 	private String re_content;
 	private String re_writeday;
+	private String name;
 	
-	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + re_no;
-		return result;
+	public ReplyVO() {
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ReplyVO other = (ReplyVO) obj;
-		if (re_no != other.re_no)
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ReplyVO [re_no=" + re_no + ", mid=" + mid + ", sg_no=" + sg_no + ", sb_no=" + sb_no + ", re_content="
-				+ re_content + ", re_writeday=" + re_writeday + "]";
-	}
-
-	public ReplyVO(int re_no, String mid, int sg_no, int sb_no, String re_content, String re_writeday) {
+	public ReplyVO(int re_no, String mid, int sg_no, int sb_no, String re_content, String re_writeday, String name) {
 		super();
 		this.re_no = re_no;
 		this.mid = mid;
@@ -47,10 +22,7 @@ public class ReplyVO {
 		this.sb_no = sb_no;
 		this.re_content = re_content;
 		this.re_writeday = re_writeday;
-	}
-
-	public ReplyVO() {
-		// TODO Auto-generated constructor stub
+		this.name = name;
 	}
 
 	public int getRe_no() {
@@ -100,6 +72,19 @@ public class ReplyVO {
 	public void setRe_writeday(String re_writeday) {
 		this.re_writeday = re_writeday;
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "ReplyVO [re_no=" + re_no + ", mid=" + mid + ", sg_no=" + sg_no + ", sb_no=" + sb_no + ", re_content="
+				+ re_content + ", re_writeday=" + re_writeday + ", name=" + name + "]";
+	}
 	
 }
