@@ -22,6 +22,17 @@
 					<div class="name"> 
 					 	<span>
 					 		<script type="text/javascript">
+							 		
+							 	// 마우스 오버, 아웃 설정
+								$(".aroundList").mouseover(function() {
+									$(this).css("background-color", "#ddd");
+								});
+								
+								$(".aroundList").mouseout(function() {
+									$(this).css("background-color", "white");
+								});	
+							 			
+					 		
 						 		function random_image() {
 									var myimages = new Array();
 									myimages[0] = "../resources/img/mobile/user01.png";
@@ -43,11 +54,11 @@
 					 		</script>
 
 					 	</span> 
-					 	<label class="aroundName">${memberVo.mid}</label> 
+					 	<label class="aroundName">${memberVo.name}</label> 
 					 	<label class="aroundBirth" id="birth">
 					 		<small>${memberVo.birth}</small>
 					 	</label>
-					 	<label class="aroundAddress">${memberVo.address}</label>
+					 		<label class="aroundAddress"><span class="glyphicon glyphicon-map-marker"></span> ${memberVo.address}</label>
 				 	</div>
 					<div class="category">
 					 	<div>
@@ -89,11 +100,11 @@
 							 		</script>
 		
 							 	</span> 
-							 	<label class="aroundName">${memberList.mid}</label> 
+							 	<label class="aroundName">${memberList.name}</label> 
 							 	<label class="aroundBirth" id="birth">
 							 		<small>${memberList.birth}</small>
 							 	</label>
-							 	<label class="aroundAddress">${memberList.address}</label>
+							 	<label class="aroundAddress"><span class="glyphicon glyphicon-map-marker"></span>${memberList.address}</label>
 						 	</div>
 						 </a>
 					 </c:forEach>

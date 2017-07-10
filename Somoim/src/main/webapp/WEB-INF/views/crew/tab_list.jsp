@@ -9,6 +9,8 @@
 	#header { display:none;}
 	#footer { display:none;}
 	#container { height:100%; padding-top:95px; margin-bottom:0;}
+	.panel-heading:after { content: ""; display: block; clear: both;}
+	.btn-info {margin-left:3px;}
 	.sub_tab { display:table; width:100%; position: fixed; top:55px;}
 	.sub_tab li { display: table-cell; width:25%; text-align:center; height:40px; line-height:39px; background-color: #ffffff; font-size:14px; font-weight:bold; color:#929292; border-bottom:1px solid #929292;}
 	.sub_tab li a { display:block; color:inherit;}
@@ -18,207 +20,209 @@
     .panel{margin-bottom: auto;}
     .power{color: red;}
     .horizon{border: solid 1px rgb(255,151,220);}
+    .adminDismissBtn{margin-left: 10px;}
     a:link a:visited a:active a:hover{text-decoration: none; color: white;}
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){	
-		var cno = $("#getCno").val();
-		var log = $("#log").val();
-		var cMid = $("#getMid").val();
-		var role = $("#getRole").val();
-		var think = 0;
-		
-		$(".cancelBtn").hide();
-		$(".sl_no").each(function(idx){
-			var sl_no=$(this).attr("data-sl_no");
-			$(".sl_no"+sl_no).each(function(){
-				var mid=$(this).attr("data-mid");
-				if(log == mid){
-					
-					$(".btn_join"+sl_no).hide();
-					$(".btn_cancel"+sl_no).show();		
-				}
-			});
-		});
-		
-		
-		// 뒤로가기
-		$(".backCont").click(function() {
-			self.location="/crew/list";
-		});
-		
-		$(".sList_create").click(function(){
-			alert("!!!!!!!!");
-			location.href="/sList/slist_create?cno="+cno;
-		});
-		
-		// 운영자 위임
-		$(".adminEntrustBtn").on("click",function(){
-			var mid=$(this).attr("data-mid");
-			$.ajax({
-				type : "get",
-				url : "/crew/update_Role?cno="+cno,
-				data : {
-					mid : mid
-				},
-				dataType : "text",
-				success:function(result){
-					self.location="/crew/tab_list?cno="+cno;
-				}
-			});
-		});
-		
-		// 정모 참여
-		$(".joinBtn").on("click", function(){
-			var sl_no =$(this).attr("data-sl_no");
-			var cnt = $(this).attr("data-cnt");
-			var join = $(this).attr("data-join");
-			var mid = $(this).attr("data-mid");
-			var cno = $("#getCno").val();
-			
-			
-			if(cnt <= join){
-				alert("참석인원이 초과 하였습니다.");
-				return;
-			}
-			$.ajax({
-				type : "get",
-				url : "/crew/update_s_join_cnt",
-				data : {
-					sl_no : sl_no,
-					cno : cno,
-					mid : mid
-				},
-				dataType : "text",
-				success:function(result){
-					self.location="/crew/tab_list?cno=${crewVO.cno}";
-				}
-			});
-		});
-		
-		// 참석 취소
-		$(".cancelBtn").on("click", function(){
-			var sl_no = $(this).attr("data-sl_no");
-			$.ajax({
-				type : "get",
-				url : "/crew/delete_slist_member",
-				data : {
-					sl_no : sl_no,
-					mid : log
-				},
-				dataType :"text",
-				success:function(result){
-					self.location="/crew/tab_list?cno=${crewVO.cno}";
-				}
-			});
-		});
-		
-		$("#join").hide();
-		$(".ifmid").each(function(idx){
-			var mid=$(this).val();
-			if(log == mid){
-				$("#join").hide();
-				$("#write").show();
-				think = 1;
-				
-			}
-			if(think == 0){
-				if(log != mid){
-					$("#join").show();
-					$("#write").hide();
-				}
-			}
-		});
-		
-		$(".updel").each(function(idx){
-			var sl_no=$(this).next().attr("data-sl_no");
-			$(this).on("click",function(){
-					self.location="/sList/slist_update?cno=${crewVO.cno}&sl_no="+sl_no;
-			});
-		});
-		
-		//운영자 해임
-		$(".adminDismissBtn").on("click", function(){
-			$.ajax({
-				type : "get",
-				url : "/crew/delete_Role",
-				data :{
-					cno : cno
-				},
-				taType : "text",
-				success:function(result){
-					self.location="/crew/tab_list?cno="+cno;
-				}
-			});
-		});
-		
-		// 모임멤버 강퇴
-		$(".memberDelBtn").on("click", function(){
-			var mid = $(this).attr("data-mid");
-			var name = $(this).attr("data-name");
-			
-			var crewMemberDelChack = confirm("'"+name+"("+mid+")' 님을 정말로 강퇴하시겠습니까?");
-			
-			if(crewMemberDelChack) {
-				$.ajax({
-					type : "get",
-					url : "/crew/delete_crewMember",
-					data :{
-						cno : cno
-						, mid : mid
-					},
-					taType : "text",
-					success:function(result){
-						self.location="/crew/tab_list?cno="+cno;
-					}
-				});
-			}
-			
-		});
-		
-		// 소모임 탈퇴
-		$(".crewMemberDel").on("click", function() {
-			var mid = '${login.mid}';
-			var name = '${login.name}';
-			var title = '${crewVO.title}';
-						
-			var memberDelChack = confirm(name+" 님, '"+title+"' 소모임을 탈퇴 하시겠습니까? \n탈퇴 시 작성했던 모든정보가 삭제됩니다");
-			if(memberDelChack) {
-				$.ajax({
-					type : "get",
-					url : "/crew/delete_crewMember",
-					data :{
-						cno : cno
-						, mid : mid
-					},
-					taType : "text",
-					success:function(result){
-						self.location="/crew/list";
-					}
-				});
-			}
-		});
-		$("#join").click(function(){
-			var ajoin = ${crewVO.attend_cnt};
-			var join = ${crewVO.join_cnt};
-			
-			if(ajoin <= join){
-				alert("모임 인원이 가득 찼습니다.");
-				return;
-			}
-			self.location="/crew/join_Crew?cno=${crewVO.cno}&mid=${login.mid}"
-			
-		});
-	});
-	
-	function memberDetail(mid) {
-		var cno = $("#getCno").val();
-		var loginMid = "${login.mid}";
-		if(mid != loginMid) {
-			self.location="/crew/memberDetail?cno="+cno+"&mid="+mid;
-		}
-	}
+   $(document).ready(function(){   
+      var cno = $("#getCno").val();
+      var log = $("#log").val();
+      var cMid = $("#getMid").val();
+      var role = $("#getRole").val();
+      var think = 0;
+      
+      $(".cancelBtn").hide();
+      $(".sl_no").each(function(idx){
+         var sl_no=$(this).attr("data-sl_no");
+         $(".sl_no"+sl_no).each(function(){
+            var mid=$(this).attr("data-mid");
+            if(log == mid){
+               
+               $(".btn_join"+sl_no).hide();
+               $(".btn_cancel"+sl_no).show();      
+            }
+         });
+      });
+      
+      
+      // 뒤로가기
+      $(".backCont").click(function() {
+         self.location="/crew/list";
+      });
+      
+      $(".sList_create").click(function(){
+         alert("!!!!!!!!");
+         location.href="/sList/slist_create?cno="+cno;
+      });
+      
+      // 운영자 위임
+      $(".adminEntrustBtn").on("click",function(){
+         var mid=$(this).attr("data-mid");
+         $.ajax({
+            type : "get",
+            url : "/crew/update_Role?cno="+cno,
+            data : {
+               mid : mid
+            },
+            dataType : "text",
+            success:function(result){
+               self.location="/crew/tab_list?cno="+cno;
+            }
+         });
+      });
+      
+      // 정모 참여
+      $(".joinBtn").on("click", function(){
+         var sl_no =$(this).attr("data-sl_no");
+         var cnt = Number($(this).attr("data-cnt"));
+         var join = Number($(this).attr("data-join"));
+         var mid = $(this).attr("data-mid");
+         var cno = $("#getCno").val();
+         
+         
+         if(cnt <= join){
+            alert("참석인원이 초과 하였습니다.");
+            return;
+         }
+         $.ajax({
+            type : "get",
+            url : "/crew/update_s_join_cnt",
+            data : {
+               sl_no : sl_no,
+               cno : cno,
+               mid : mid
+            },
+            dataType : "text",
+            success:function(result){
+               self.location="/crew/tab_list?cno=${crewVO.cno}";
+            }
+         });
+      });
+      
+      // 참석 취소
+      $(".cancelBtn").on("click", function(){
+         var sl_no = $(this).attr("data-sl_no");
+         $.ajax({
+            type : "get",
+            url : "/crew/delete_slist_member",
+            data : {
+               sl_no : sl_no,
+               mid : log
+            },
+            dataType :"text",
+            success:function(result){
+               self.location="/crew/tab_list?cno=${crewVO.cno}";
+            }
+         });
+      });
+      
+      $("#join").hide();
+      $(".ifmid").each(function(idx){
+         var mid=$(this).val();
+         if(log == mid){
+            $("#join").hide();
+            $("#write").show();
+            think = 1;
+            
+         }
+         if(think == 0){
+            if(log != mid){
+               $("#join").show();
+               $("#write").hide();
+            }
+         }
+      });
+      
+      $(".updel").each(function(idx){
+         var sl_no=$(this).next().attr("data-sl_no");
+         $(this).on("click",function(){
+               self.location="/sList/slist_update?cno=${crewVO.cno}&sl_no="+sl_no;
+         });
+      });
+      
+      //운영자 해임
+      $(".adminDismissBtn").on("click", function(){
+         $.ajax({
+            type : "get",
+            url : "/crew/delete_Role",
+            data :{
+               cno : cno
+            },
+            taType : "text",
+            success:function(result){
+               self.location="/crew/tab_list?cno="+cno;
+            }
+         });
+      });
+      
+      // 모임멤버 강퇴
+      $(".memberDelBtn").on("click", function(){
+         var mid = $(this).attr("data-mid");
+         var name = $(this).attr("data-name");
+         
+         var crewMemberDelChack = confirm("'"+name+"("+mid+")' 님을 정말로 강퇴하시겠습니까?");
+         
+         if(crewMemberDelChack) {
+            $.ajax({
+               type : "get",
+               url : "/crew/delete_crewMember",
+               data :{
+                  cno : cno
+                  , mid : mid
+               },
+               taType : "text",
+               success:function(result){
+                  self.location="/crew/tab_list?cno="+cno;
+               }
+            });
+         }
+         
+      });
+      
+      // 소모임 탈퇴
+      $(".crewMemberDel").on("click", function() {
+         var mid = '${login.mid}';
+         var name = '${login.name}';
+         var title = '${crewVO.title}';
+                  
+         var memberDelChack = confirm(name+" 님, '"+title+"' 소모임을 탈퇴 하시겠습니까? \n탈퇴 시 작성했던 모든정보가 삭제됩니다");
+         if(memberDelChack) {
+            $.ajax({
+               type : "get",
+               url : "/crew/delete_crewMember",
+               data :{
+                  cno : cno
+                  , mid : mid
+               },
+               taType : "text",
+               success:function(result){
+                  self.location="/crew/list";
+               }
+            });
+         }
+      });
+      $("#join").click(function(){
+         var ajoin = ${crewVO.attend_cnt};
+         var join = ${crewVO.join_cnt};
+         
+         if(ajoin <= join){
+            alert("모임 인원이 가득 찼습니다.");
+            return;
+         }
+         self.location="/crew/join_Crew?cno=${crewVO.cno}&mid=${login.mid}"
+         
+      });
+   });
+   
+   function memberDetail(mid) {
+      var cno = $("#getCno").val();
+      var loginMid = "${login.mid}";
+      if(mid != loginMid) {
+         self.location="/crew/memberDetail?cno="+cno+"&mid="+mid;
+      }
+   }
 </script>
+
 
 </head>
 <body>
@@ -278,15 +282,15 @@
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
 					<c:forEach items="${sList_list}" var="sList">
-						<div class="panel-heading" >
+						<div class="panel-heading ">
 							<span>${sList.attend_title} (${sList.attend_cnt}명)</span>
 							<c:if test="${crewVO.mid == login.mid || crewVO.role == login.mid }">
-								<button class="btn btn-info updel col-xs-offset-7">수정 삭제</button>
+								<button class="btn btn-info updel pull-right">수정 삭제</button>
 							</c:if> 
 							<c:forEach items="${member_list}" var="member">
 								<c:if test="${login.mid == member.mid}">
-									<button class="btn btn-danger joinBtn btn_join${sList.sl_no}" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
-									<button class="btn btn-primary cancelBtn btn_cancel${sList.sl_no}" data-sl_no="${sList.sl_no}">참석취소</button>
+									<button class="btn btn-danger pull-right joinBtn btn_join${sList.sl_no}" data-sl_no="${sList.sl_no}" data-cnt="${sList.attend_cnt}" data-join="${sList.s_join_cnt}" data-mid="${login.mid}">참석</button>
+									<button class="btn btn-primary pull-right cancelBtn btn_cancel${sList.sl_no}" data-sl_no="${sList.sl_no}">참석취소</button>
 								</c:if>
 							</c:forEach>
 						</div>

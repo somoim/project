@@ -100,12 +100,12 @@
 			<div class="panel-heading">
 				<label class="userName"><span class="glyphicon glyphicon-user"></span>${memberVo.name}</label>
 				<label class="userBirth" id="birth"><small>${memberVo.birth}</small></label>
-			 	<label class="pull-right userAddress">${memberVo.address}</label>
+			 	<label class="pull-right userAddress"><span class="glyphicon glyphicon-map-marker"></span> ${memberVo.address}</label>
 			</div>
 			<div class="panel-body">
 				<div class="category">
 					<span><b>관심 카테고리</b> &nbsp;:&nbsp; ${memberVo.category}</span> 
-					<button class="pull-right mypageGo">설정</button>
+					<button class="btn btn-default btn-xs pull-right mypageGo">설정</button>
 				</div>
 			</div>
 		</div>

@@ -16,11 +16,30 @@
 			getsList(cno);
 		});
 		
+		// 마우스 오버, 아웃 설정
+		$(".joinCrewList").mouseover(function() {
+			$(this).css("background-color", "#ddd");
+		});
+		
+		$(".joinCrewList").mouseout(function() {
+			$(this).css("background-color", "white");
+		});	
+		
 		// 상세보기 - 가입list
 		$(".joinCrewList").click(function() {
 			var cno = $(this).attr("data-cno");	
 			self.location="/crew/bread?cno="+cno;
 		});
+		
+		
+		// 마우스 오버, 아웃 설정
+		$(".selCrewList").mouseover(function() {
+			$(this).css("background-color", "#ddd");
+		});
+		
+		$(".selCrewList").mouseout(function() {
+			$(this).css("background-color", "white");
+		});	
 		
 		// 상세보기 - 추천list
 		$(".selCrewList").click(function() {

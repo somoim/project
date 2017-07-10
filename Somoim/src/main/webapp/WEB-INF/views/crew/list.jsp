@@ -16,6 +16,15 @@
 			getsList(cno);
 		});
 		
+		// 마우스 오버, 아웃 설정
+		$(".crewList").mouseover(function() {
+			$(this).css("background-color", "#ddd");
+		});
+		
+		$(".crewList").mouseout(function() {
+			$(this).css("background-color", "white");
+		});	
+		
 		// 상세보기
 		$(".crewList").click(function() {
 			var cno = $(this).attr("data-cno");
@@ -53,7 +62,7 @@
 					<span data-cno="${crewVO.cno}" class="getCno">No. ${crewVO.cno} </span> &nbsp;&nbsp; <span class="pull-right memberCount"> <span class="memberRight">${crewVO.join_cnt}</span> / ${crewVO.attend_cnt} 명</span>
 				</div>
 				<div class="panel-body">
-					<p class="crewRegion">${crewVO.region}</p>
+					<p class="crewRegion"><span class="glyphicon glyphicon-map-marker"></span> ${crewVO.region}</p>
 					<p class="crewTitle">${crewVO.title}</p>
 					<div class="next_sList${crewVO.cno}"></div>
 				</div>

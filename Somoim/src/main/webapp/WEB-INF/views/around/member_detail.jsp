@@ -87,7 +87,7 @@
 			<div class="panel-heading">
 				<label class="userName"><span class="glyphicon glyphicon-user"></span>${memberVo.name}</label>
 				<label class="userBirth" id="birth"><small>${memberVo.birth}</small></label>
-			 	<label class="pull-right userAddress">${memberVo.address}</label>
+				<label class="userAddress pull-right"><span class="glyphicon glyphicon-map-marker"></span> ${memberVo.address}</label>
 			</div>
 			<div class="panel-body">
 				<div class="category">
