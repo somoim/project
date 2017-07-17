@@ -149,9 +149,7 @@ public class UploadController {
 			if(mType != null){	//이미지 파일이면,	
 				headers.setContentType(mType);
 			} 
-			
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.CREATED);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);

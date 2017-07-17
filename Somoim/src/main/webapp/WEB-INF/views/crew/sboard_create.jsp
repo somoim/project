@@ -8,12 +8,13 @@
 <style type="text/css">
 #fileUpload { margin-bottom: 5px;}
 .list_btn { margin-top: 5px; margin-bottom:30px;}
-
+.uploadedList { margin: 20px 0 30px 0; min-height:150px; background-color: #fff; padding: 20px; border-radius: 10px; border: 1px solid #ddd;}
 .imgsize{ max-height:100%; max-width:100%;}
-.uploadedList { margin: 20px 0 30px 0; border-radius: 10px;}
 .imgshow { width: 25%;}
 .imgshow>div,.imgshow>span { display:inline-block; width: 100%;}
 .imgshow div a:first-child { width: 80%; display:inline-block;}
+.delbtn { border: 0px; padding: 2px 4px; border-radius: 5px; background-color: #fff; display: inline-block;}
+.delbtn:hover { padding: 2px 4px; border-radius: 5px; background-color: #fff; display: inline-block;}
 </style>
 </head>
 <body>
@@ -36,8 +37,7 @@
 				</div>
 
 				<div class="">
-					<form id="myForm" action="/crew/sboard_create?cno=${cno}"
-						method="post">
+					<form id="myForm" action="/crew/sboard_create?cno=${cno}" method="post">
 						<div class="form-group">
 							<label>아이디</label>
 							<input class="form-control" name="mid"	id="mid" value="${login.mid}" readonly="readonly">
@@ -69,7 +69,7 @@
 							<span><img class="imgsize" alt="첨부파일" src="{{imgsrc}}"></span> 
 						<div> 
 							<a href="{{getLink}}">{{fileName}}</a> 
-							<a href="{{sb_picture}}" class="btn btn-default btn-xs pull-right delbtn"> 
+							<a href="{{sb_picture}}" class="btn btn-default btn-xs delbtn"> 
 							<span class="glyphicon glyphicon-remove-circle"></span> </a> 
 						</div> 
 						</li> 
@@ -133,7 +133,8 @@
 							
 							
 							if(img == null) {
-								img = "base";
+							// 이미지가 없을 경우 임의로 이름을 
+								img = "base.jpg";
 								str += "<input value='"+ img + "' name='sb_picture' type='hidden'>";
 								
 								form.append(str);

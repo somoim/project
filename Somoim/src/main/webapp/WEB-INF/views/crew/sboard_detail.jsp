@@ -54,14 +54,15 @@
 						</div> <!-- panel-heading -->
 						<div class="panel-body">
 											
+							
 							<div class="show_content"> ${sBoardVO.sb_content}</div>
-
-							<c:set value="base" var="base">	</c:set>
-								<c:if test="${sBoardVO.sb_picture != base}">
+							
+						<c:set var="base" value="base.jpg"/> 
+							 <c:if test="${sBoardVO.sb_picture != base}"> 
 									<div class="show_img">
 										<img src="/displayFile/sboard?fileName=${sBoardVO.sb_picture}" alt="사진있음">
 									</div>
-								</c:if>
+							 </c:if> 
 					
 							
 						</div> <!-- panel-body -->
