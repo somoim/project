@@ -37,7 +37,8 @@ function sBoard_getFileInfo(sb_picture) {
 	// 이미지 파일일 경우
 	if(checkImageType(sb_picture)){
 		imgsrc = "/displayFile/sboard?fileName="+sb_picture;
-		fileLink = sb_picture.substr(14); 
+		fileLink = sb_picture.substr(14);
+		
 		//'_' 다음부터의 이름 -> 나중에 보여줄 때 원래 이름만 보여주기 위해서 따로 잡음
 		var prefix = sb_picture.substr(0,12);
 		var suffix = sb_picture.substr(14);
@@ -47,7 +48,6 @@ function sBoard_getFileInfo(sb_picture) {
 		alert("이미지 파일을 업로드 해주세요(jpg, png, jpeg, gif)");
 		$("input[type=file]").val("");
 	}
-	
 	fileName = fileLink.substr(fileLink.indexOf("_")+1);
 		
 	return {fileName:fileName, imgsrc:imgsrc, getLink:getLink, sb_picture:sb_picture};

@@ -31,7 +31,7 @@
 		var list = 0;
 		chat(log,cno,list);
 		getChatList(cno);
-		setInterval("getChatList("+cno+")", 5000);
+		setInterval("getChatList("+cno+")", 2000);
 		
 		
 		function getChatList(cno) {

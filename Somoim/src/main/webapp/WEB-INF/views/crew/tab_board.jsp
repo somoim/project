@@ -97,7 +97,7 @@
 		</div>
 	
 		<!-- 버튼 레이아웃 -->
-		<a href="#" class="fixedBtn">
+		<a href="/crew/sboard_create?cno=${cno}" class="fixedBtn">
 			<span><span class="create glyphicon glyphicon-pencil"></span></span> <span>글쓰기</span>
 		</a>
 	

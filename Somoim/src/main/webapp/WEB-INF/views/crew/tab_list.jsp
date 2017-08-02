@@ -51,8 +51,7 @@
       });
       
       $(".sList_create").click(function(){
-         alert("!!!!!!!!");
-         location.href="/sList/slist_create?cno="+cno;
+    	  location.href="/sList/slist_create?cno="+cno;
       });
       
       // 운영자 위임

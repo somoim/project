@@ -69,7 +69,7 @@
 							<span><img class="imgsize" alt="첨부파일" src="{{imgsrc}}"></span> 
 						   <div> 
 						    	<a href="{{getLink}}">{{fileName}}</a> 
-						    	<a href="{{sg_picture}}" class="delbtn"> 
+						    	<a href="{{sb_picture}}" class="delbtn"> 
 						    	<span class="glyphicon glyphicon-remove-circle"></span> </a> 
 						  </div>
 						</li> 
@@ -83,18 +83,15 @@
 						
 						var source = $("#source").html();
 						var template = Handlebars.compile(source);
-						getPicture(sb_no);
+						var result = $("input[name=sb_picture]").val();
+						if(result == "base"){getPicture(sb_no);}
+						
 						
 						function getPicture(sb_no) {
-							var result = $("input[name=sb_picture]").val();
-							
-							alert(result);
-							
-							if(result != "base.jpg"){
-								var data = sBoard_getFileInfo(result);
-								var ht = template(data);
-								$(".uploadedList").html(ht);
-							} 
+							var data = sBoard_getFileInfo(result);
+							var ht = template(data);
+							$(".uploadedList").html(ht);
+
 						}
 						
 						 $("#submit_btn").on("click", function() {
@@ -111,11 +108,11 @@
 							
 							var img = $(".delbtn").attr("href");
 							
-							alert(img);
+							
 							
 							str += "<input value='"+$(".delbtn").attr("href")+"' name='sb_picture' type='hidden'>";
 							
-							alert(str);
+							
 						
 							form.append(str);
 						 	form.attr("method", "post");

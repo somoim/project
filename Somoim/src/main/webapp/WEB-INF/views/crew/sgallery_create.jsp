@@ -113,10 +113,10 @@
 
 								str += "<input value='"+$(".delbtn").attr("href")+"' name='sg_picture' type='hidden'>";
 							
-							if (!$('.imgshow').length) {
+							if (!$('.imgsize').length) {
 								alert("사진을 선택해주세요");
 								return;
-							} else if ($('.imgshow').length){
+							} else if ($('.imgsize').length){
 								form.append(str);
 								form.get(0).submit();
 								alert("사진이 업로드되었습니다.");
